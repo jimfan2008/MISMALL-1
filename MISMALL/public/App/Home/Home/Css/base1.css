@@ -1,0 +1,554 @@
+/***
+ * 基础样式
+ * 2014-9-24
+ ***/
+@charset "utf-8";
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, textarea, input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+body {
+	text-align: center;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	background: #fff;
+	color: #333;
+}
+* {margin0;
+	padding: 0
+}
+html, body {
+	width: 100%;
+	height: 100%;
+}
+div {
+	text-align: left;
+	margin: 0px auto;
+}
+ol, ul, li {
+	list-style: none;
+}
+img {
+	border: 0;
+	vertical-align: middle;
+}
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+em {
+	font-style: normal;
+}
+a {
+	color: #333;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #0a70a7;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: bold;
+	font-size: 14px;
+}
+:focus, *:focus {
+	outline: 0;
+}
+
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+	clear: right;
+}
+.fn {
+	float: none;
+}
+.al {
+	text-align: left;
+}
+.ac {
+	text-align: center;
+}
+.ar {
+	text-align: right;
+}
+.clear {
+	height: 0;
+	font-size: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	clear: both;
+	display: block;
+	visibility: hidden;
+}
+.rlBlank5 {
+	margin: 0 5px;
+}
+
+/*登陆样式（ user） */
+#loginmodal {
+	float: left;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 11000;
+	top: 0px;
+	left: 0px;
+	padding-top: 110px;
+}
+#loginmodal .layer {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1;
+	top: 0px;
+	left: 0px;
+	background: #000;
+	opacity: 0.3;
+	filter: Alpha(Opacity=30);
+}
+#loginmodal .container {
+	margin: 0 auto;
+	width: 360px;
+	padding: 15px 20px;
+	background: #f3f6fa;
+	border-radius: 6px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+	overflow-y: auto;
+	position: relative;
+}
+#loginmodal .container .close {
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: url(../images/black-x.png);
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+#loginmodal .container .loginform {
+	float: left;
+	width: 360px;
+	margin-top: 20px;
+	color: #000;
+}
+#loginmodal .container .loginform li {
+	float: left;
+	width: 100%;
+	position: relative;
+	padding: 2px 0;
+}
+#loginmodal .container .loginform li h1 {
+	float: left;
+	font-size: 32px;
+	font-weight: bold;
+}
+#loginmodal .container .loginform li span.lr {
+	float: right;
+	color: #F7600A;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 10px;
+}
+#loginmodal .container .loginform li span.lr:hover {
+	text-decoration: underline;
+}
+#loginmodal .container .loginform li div.error {
+	float: left;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	position: absolute;
+	z-index: 1;
+	left: 0px;
+	bottom: -15px;
+	text-align: center;
+	color: #FF0000;
+	padding: 0px;
+	margin: 0px;
+}
+#loginmodal .container .loginform li input.input {
+	float: left;
+	width: 300px;
+	padding: 10px 30px;
+	font-family: 'Helvetica Neue', Helvetica, Verdana, sans-serif;
+	color: #7988a3;
+	font-size: 14px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+	background-color: #fff;
+	margin-top: 20px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-linear-gradient(top,#edf3f9,#fff);
+	background-image: -moz-linear-gradient(top,#edf3f9,#fff);
+	background-image: -ms-linear-gradient(top,#edf3f9,#fff);
+	background-image: -o-linear-gradient(top,#edf3f9,#fff);
+	background-image: linear-gradient(top,#edf3f9,#fff);
+	border: 1px solid;
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+#loginmodal .container .loginform li input.input:focus {
+	outline: none;
+	color: #525864;
+	border-color: #84c0ee;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+}
+#loginmodal .container .loginform li label {
+	float: left;
+	padding: 10px 4px;
+	color: #777;
+}
+#loginmodal .container .loginform li button {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	outline: 0;
+	border: 0;
+	width: 360px;
+	color: #edf4f9;
+	text-decoration: none;
+	background-color: #4f94cf;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	font-size: 22px;
+	font-weight: bold;
+	padding: 8px 26px 8px 26px;
+	margin-bottom: 15px;
+	margin-top: 20px;
+	line-height: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+#loginmodal .container .loginform li button:hover {
+	background-color: #519dde;
+}
+#loginmodal .container .active-email-style {
+	font-size: 14px;
+	text-align: center;
+	color: #333;
+}
+#loginmodal .container .active-email-style .active-email-href {
+	color: #999;
+	margin: 10px;
+}
+#loginmodal .container .active-email-style .active-email-href a {
+	color: #F7600A;
+	text-decoration: underline;
+}
+#loginmodal .container .active-email-style input {
+	float: left;
+	width: 300px;
+	padding: 10px 30px;
+	font-family: 'Helvetica Neue', Helvetica, Verdana, sans-serif;
+	color: #7988a3;
+	font-size: 14px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+	background-color: #fff;
+	margin-top: 20px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-linear-gradient(top,#edf3f9,#fff);
+	background-image: -moz-linear-gradient(top,#edf3f9,#fff);
+	background-image: -ms-linear-gradient(top,#edf3f9,#fff);
+	background-image: -o-linear-gradient(top,#edf3f9,#fff);
+	background-image: linear-gradient(top,#edf3f9,#fff);
+	border: 1px solid;
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+#loginmodal .container .active-email-style input:focus {
+	outline: none;
+	color: #525864;
+	border-color: #84c0ee;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+}
+#loginmodal .container .active-email-style button {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	outline: 0;
+	border: 0;
+	width: 120px;
+	color: #edf4f9;
+	text-decoration: none;
+	background-color: #4f94cf;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	font-size: 14px;
+	font-weight: bold;
+	padding: 8px 26px 8px 26px;
+	margin-bottom: 15px;
+	margin-top: 20px;
+	line-height: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	margin-right: 20px;
+}
+#loginmodal .container .loginform li h1 span {
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 100;
+	color: #333333;
+}
+#loginmodal .container #forget-password {
+	text-align: left;
+	margin-top: 26px;
+}
+#loginmodal .container #forget-password h1 {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+#loginmodal .container #resetPass .resetEmail {
+	position: relative;
+	top: 20px;
+	left: 5px;
+	padding: 10px 30px;
+}
+.recInvBanner{ height: 180px;overflow: hidden;position: relative;width: 100%;}
+.recInvFont{  color: #fff;font-size: 14px;left: 35px; position: absolute;top: 20px;}
+.recInvNum {
+	color:#000000;
+    background: #fbfbfb none repeat scroll 0 0;
+    border-bottom: 1px dashed #e6e0d6;
+    padding: 15px 10px;
+}
+.cg {
+    color: #666;
+}
+.recInvMethod {
+    border-bottom: 1px dashed #e6e0d6;
+    margin: 10px 0 30px;
+    padding-bottom: 30px;
+}
+.fwB {
+    font-weight: bold;
+}
+.fs16 {
+    font-size: 16px;
+}
+.rmInfo {
+    border-left: 8px solid #f3f3f3;
+    font-size: 12px;
+    margin-left: 25px;
+    margin-top: 10px;
+    padding: 0 45px;
+}
+.rmFont {
+    padding-top: 10px;
+    position: relative;
+}
+.h140 {
+    height: 140px;
+}
+.rmFont .rmFont-icon {
+    background: rgba(0, 0, 0, 0) url("../../Images/recommend_icon01.png") no-repeat scroll 0 0;
+    color: #fff;
+    font-size: 14px;
+    height: 53px;
+    left: -75px;
+    line-height: 51px;
+    padding-right: 3px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 56px;
+}
+.rmFont h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.rmFontAddress {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #dedede;
+    color: #999;
+    padding: 5px 10px;
+    min-width: 500px;
+    word-break: break-all;
+}
+.recInvMethod .btnG {
+    background: #d7bc92 none repeat scroll 0 0;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    height: 28px;
+    margin-left: 8px;
+    overflow: visible;
+    padding: 0 13px;
+    vertical-align: bottom;
+}
+.rmCode {
+    background: rgba(0, 0, 0, 0) url("http://www.qbcdn.com/images/user/recommend_icon.png") no-repeat scroll -100px -440px;
+    display: inline-block;
+    height: 145px;
+    position: absolute;
+    right: 0;
+    top: -10px;
+    width: 150px;
+}
+.rmFont .code-yq {
+    float: right;
+    margin-left: 30px;
+    width: 121px;
+}
+.recShare span {
+    background-image: url("http://www.qbcdn.com/images/user/recommend_icon.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 40px;
+    margin-bottom: 5px;
+    opacity: 0.7;
+    width: 50px;
+}
+.recShare {
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin: 10px 30px 0 0;
+    overflow: hidden;
+    text-align: center;
+    width: 50px;
+}
+.sWeixin {
+    background-position: 5px -560px;
+}
+.sQzone {
+    background-position: 5px -600px;
+}
+.sSina {
+    background-position: 5px -480px;
+}
+.sTencent {
+    background-position: 5px -520px;
+}
+.recShareBox {
+    background: #fff none repeat scroll 0 0;
+    height: 80px;
+    padding-left: 1px;
+}
+/*.user_login:hover {
+	background: #2795d0;
+}
+.user_login:hover div {
+	display: block;
+}
+.user_login a {
+	color: #00f6ff;
+	padding: 40px 20px 20px 10px;
+	line-height: 20px;
+	display: block;
+	background: url(../images/userlogin_show.png) no-repeat right 50px
+}
+.user_login a:hover {
+	background-color: #2795d0;
+	color: #fff;
+}
+.user_login div {
+	float: right;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: none;
+	cursor: pointer;
+	background: url(../images/userlogin_show.png) repeat-x left -39px #2795d0;
+}
+.user_login div:hover {
+	color: #fff;
+}
+.user_login {
+	float: right;
+	color: #00f6ff;
+	width: 100px;
+	height: 80px;
+	font-size: 14px;
+	background: url(../images/userlogin_show.png) no-repeat right 50px;
+	/*position: absolute;
+	top: 0;
+	right: 10%;*/
+	/*display: block;
+}
+
+.user_layer {
+	width: 100px;
+	height: 50px;
+	margin-top: 45px;
+}
+.user_layer a {
+	color: #fff;
+	padding: 80px 5px 0 5px;
+	font-size: 12px;
+}
+.user_layer .usertext {
+	float: right;
+	width: 90px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	position: relative;
+}*/
+/*.user_layer .usertext_layer {
+	width: 90px;
+	height: 25px;
+	/*border-radius: 12px;
+	 border: 1px solid #fff;
+	z-index: 0;
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	opacity: 0.4;
+	filter: Alpha(Opacity=40);
+}*/*/

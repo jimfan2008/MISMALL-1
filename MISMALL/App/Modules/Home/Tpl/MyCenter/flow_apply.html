@@ -1,0 +1,134 @@
+<include file="Index:top" title="流程应用" mycenter="current"/>
+<style type="text/css">
+	#interface{width:100%;margin:0px;padding:0px;}
+	#interface tr{margin:0px;padding:0px;height:30px;}
+	#interface .head{background:#F4F4F4;}
+	#interface tr td{height:100%;text-align:center;line-height:30px;}
+</style>
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<!--左边菜单 -->
+	<include file="MyCenter:left" flow_apply="now"/>
+	<!--右边模块 -->
+	<div class="rightcontent fr">
+		<div class="breadCrumb f-14b">
+			流程应用
+		</div>
+		<div class="flow_apply">
+			<if condition="$proNum gt 0">
+				<table id="interface">
+					<tr class="head">
+						<td>编号</td>
+						<td>项目名称</td>
+						<td>进入</td>
+					</tr>
+					
+							<volist name="proList" id="vo" key="k">
+								<tr proId="{$vo.proID}" class="prot">
+									<td class="sNum">{$k}</td>
+									<td><a href="/Flow/Port/auditApp?proId={$vo.proID}" >{$vo.projectName}</a></td>
+									<td class="stayNum"><a href="/Flow/Port/auditApp?proId={$vo.proID}" target="_blank" style="font-weight:bold;color:#FF0000;">进入</a></td>
+								</tr>
+							
+							</volist>
+						
+					
+						
+				</table>
+				<else />
+			
+				<div class="notcont">
+						<span>还没有创建流程应用！<a href="{:U('/Flow/Project/index')}">点击这里</a> 创建您需要的流程应用吧！</span>
+				</div>
+		   </if>
+			
+			
+			<div class="clear"></div>
+			
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+</div>
+<script type="text/javascript">
+	
+	/*$(function(){
+		var trObj = $("#interface").find(".prot:first");
+		var proId = trObj.attr("proId");
+		if(proId != ""){
+			getStayPath(proId, trObj);
+		}
+	});
+	/**
+	 * 取项目对应的接口地址
+	 * @param  int      proId  项目ID
+	 * @param  object   行的对象
+	 */
+	/*function getStayPath(proId, trObj){
+		
+		var data = {};
+		data["proId"] = proId;
+		
+		$.ajax({
+			type : "POST",
+			url  : "__URL__/getStayPath",
+			data : data,
+			success : function(result)
+			{
+				if(result && result != 0)
+				{
+					var jsonData = JSON.parse(result) || eval("("+result+")");
+					var stayPath = jsonData['stayPath'];
+					getStayAuditNum(stayPath, trObj, proId);
+				}
+			}
+		});
+	}*/
+	/**
+	 * 获取待审核单数量
+	 * @param     string     path    接口地址
+	 * @param     object     trObj   行的对象
+	 * @param     int        proId   項目ID 
+	 */
+	/*function getStayAuditNum(path, trObj, proId)
+	{
+		var data = {};
+		
+		$.ajax({
+			type : "POST",
+			url  : "__URL__/getUserInterface",
+			data : {"proId" : proId},
+			success : function(result){
+				
+				var jsonData = JSON.parse(result) || eval("("+result+")");
+				if(jsonData){
+					var userInterface = jsonData["userInterface"];
+					data["userInterface"] = userInterface;
+		
+					$.ajax({
+						type : "GET",
+						url  : path,
+						data : data,
+						contentType: "application/json",
+						dataType:'jsonp',//数据格式
+			    		jsonpCallback:"flightHandler",
+						success : function(result){
+							if(result) {
+								trObj.removeClass("prot").find(".stayNum a").text(result["jsonData"].length);
+								
+								trObj = $("#interface").find(".prot:first");
+								var proId = trObj.attr("proId");
+								if(proId != "" && trObj.size() > 0){
+									//回調
+									getStayPath(proId, trObj);
+								}
+							}
+						}
+					});			
+				}
+			}
+		});
+	}*/
+</script>
+<include file="Index:bottom"/>

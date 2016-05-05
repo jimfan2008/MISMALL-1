@@ -1,0 +1,61 @@
+{// 加载头部公共文件 }
+<include file="Public:headerMobile" />
+<link href ="__PUBLIC__/App/Apps/FormMobile/Css/form.css" rel="stylesheet" type="text/css" >
+		<script type="text/javascript">
+			$(function() {
+				
+				$.ajax({
+					url : APPPATH + '/MyCenter/getUserInfo',
+					data : null,
+					success : function(result) {
+						var userinfo = JSON.parse(result);
+						$(".username").text(userinfo['userName']);
+						$('.useremail').text("E-mail:" + userinfo['userEmail']);
+						$('.myphoto').find("img").attr("src", userinfo["userPhoto"]);
+					}
+				});
+
+			});
+		</script>
+		<title>我的信息</title>
+	</head>
+	<body>
+		<div data-role="page" id="mycenter" data-theme="a">
+			<div class="header">
+				<a href="#menu" class="nav"></a>
+				我的信息
+			</div>		
+			<section  style="margin-top:-1em;">
+				<div  id="mycenter" data-role="content">
+					<div class="topcont userinfo">
+						<p><p class="username "></p>
+						<p class="useremail"></p>
+					</div>
+					<div class="diy_cont">
+						<p class="diytitle">
+							你可以自定义下次登录后的初始页
+						</p>
+						<form name="form" method="post" action="">
+							<p>
+								<label>
+									<input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_0">
+									<font class="font_style">用户管理</font> </label>
+								<br>
+								<label>
+									<input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_1">
+									<font class="font_style">我的信息</font></label>
+								<br>
+								<label>
+									<input type="radio" name="RadioGroup1" value="2" id="RadioGroup1_2">
+									<font class="font_style">表单列表</font></label>
+							</p>
+						</form>
+					</div>
+				</div>
+			</section>
+			<!--侧边菜单 start-->
+				<include file="Public:leftMenu" />
+			<!--侧边菜单 end-->
+		</div>
+	</body>
+</html>

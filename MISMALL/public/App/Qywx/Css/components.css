@@ -1,0 +1,231 @@
+/**
+ * 所有组件样式文件
+ * @auther 范文彬
+ * 2015-06-30
+ */
+
+[ctrl-type="compLogic"] [rowunit = "n"] {
+	margin: 0;
+	border-top: 1px solid #eee;
+}
+
+[ctrl-type="compLogic"] [rowunit = "n"]:last-child {
+	border-bottom: 1px solid #eee;
+}
+
+[ctrl-type="compLogic"] [colunit] {
+	border-right: 1px solid #eee;
+}
+
+[ctrl-type="compLogic"] [colunit]:first-child {
+	border-left: 1px solid #eee;
+}
+
+[ctrl-type="compLogic"]:hover .ctrlIconWraper {
+	display: block;
+}
+[ctrl-type="compLogic"]:hover .dyna-handle {
+	display: block;
+}
+[ctrl-type="systemCp"]:hover .ctrlIconWraper {
+	display: block;
+}
+
+/***手机翻页样式***/
+.layer-switch-page {
+	overflow: hidden;
+	padding-left: 0;
+	padding-right: 0;
+	width: auto;
+	height: 100%;
+}
+div .markLayer {
+	height: 300px;
+	left: 672px;
+	overflow: hidden;
+	position: fixed;
+	top: 164px;
+	width: 40px;
+	z-index: 2;
+}
+
+.addPageLayer {
+	background: none repeat scroll 0 0 #357ebd;
+	border-top: 1px solid #fff;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	width: 50px;
+}
+div .markLayer .layer_name {
+	cursor: pointer;
+}
+.layerSelect {
+	background: none repeat scroll 0 0 #0a70a7;
+}
+.layer-item {
+	background: none repeat scroll 0 0 #ccc;
+	border-top: 1px solid #fff;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 4px;
+	width: 43px;
+}
+.layerSelect .layer_name {
+	color: #fff;
+}
+.layer_name {
+	float: left;
+}
+.delete_layer {
+	display: block;
+	float: right;
+	height: 20px;
+	margin-right: 4px;
+	margin-top: 5px;
+	width: 20px;
+}
+.editFooter {
+	background: none repeat scroll 0 0 #fff;
+	border-top: 1px solid #ccc;
+	bottom: 0;
+	height: 16px;
+	left: 0;
+	margin-top: 20px;
+	position: absolute;
+	width: 100%;
+	z-index: 99;
+}
+.showEffect {
+	background-color: rgba(255, 255, 255, 0);
+	border: 0 none;
+	padding: 0;
+}
+div.effect {
+	background: none repeat scroll 0 0 #2795d0;
+	border-radius: 50%;
+	color: #fff;
+	height: 35px;
+	line-height: 31px;
+	margin: -20px auto 0;
+	padding: 0;
+	text-align: center;
+	width: 45px;
+}
+.editor-layer-switch .vgPage {
+	background: none no-repeat scroll 0 0 /100% 100% rgba(0, 0, 0, 0);
+	height: 86%;
+	overflow: hidden;
+}
+
+.pageFigure {
+	background-size: 100% 100%;
+	bottom: 0;
+	overflow: hidden;
+}
+/*** end 手机翻页样式***/
+
+/***百度地图组件样式***/
+#container .right-menu div .baidumap {
+	margin-left: 0;
+	margin-top: 10px;
+	width: 100%;
+}
+/***end 百度地图组件样式***/
+
+/***自定义组件样式***/
+#container .right-menu div .customcomponent {
+	margin-left: 0;
+	margin-top: 10px;
+	width: 100%;
+	min-height: 690px;
+}
+div.dynamicName {
+	display: none;
+	font-size: 11px;
+	font-weight: 500;
+	left: 0;
+	position: relative;
+}
+
+.ez-context-menu-item {
+	border-bottom: 1px solid #eee;
+	color: #249ddd;
+	cursor: pointer;
+	padding-left: 5px;
+}
+.ez-context-menu-item {
+	border-bottom: 1px solid #eee;
+	color: #249ddd;
+	cursor: default;
+	line-height: 30px;
+	min-height: 30px;
+	padding-left: 5px;
+}
+
+.setDynaData {
+	font-weight: bold;
+	height: 100%;
+	margin: 0 auto;
+	width: 328px;
+}
+
+.setDynaData > div {
+	color: #006699;
+	cursor: pointer;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+div.formWrap {
+	margin-bottom: 0;
+}
+.fieldList {
+	border-left: 1px solid #ccc;
+	font-weight: 300;
+}
+.fieldList ul.item_ul li {
+	background: none repeat scroll 0 0 #f9f9f9;
+	cursor: move;
+	height: 23px;
+	line-height: 23px;
+	margin: 2px 0;
+	padding-left: 20px;
+}
+.dataSetFieldselected {
+	background: none repeat scroll 0 0 #dfefff;
+}
+.fieldItem .isChecked {
+	float: right;
+	margin-right: 107px;
+}
+.isExpand {
+	background: url("../../images/men_icon.png") no-repeat scroll 0 -108px rgba(0, 0, 0, 0);
+	float: left;
+	height: 20px;
+	margin-top: 2px;
+	width: 20px;
+}
+.formNameWrap {
+	float: left;
+}
+.formCkBox {
+	float: right;
+	height: 100%;
+	margin-right: 100px;
+	width: 20px;
+}
+
+#panelWin {
+	background: none repeat scroll 0 0 #ffffff;
+	color: #fffff1;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 999999;
+}
+/***end 自定义组件样式***/
+

@@ -1,0 +1,104 @@
+<extend name="Public/base"/>
+<block name="style">
+<style>.plupload{border: 1px solid #CCCCCC;}</style>
+<link rel="stylesheet" href="__PUBLIC__/Js/plupload/plupload.queue.css" type="text/css" />
+</block>
+<block name="body">
+	<div class="main-title">
+		<h2>上传系统图片</h2>
+		<div class="auth-botton" style="float:left;margin-left:20px;">
+	        <a id="add-group" class="btn" href="{:U('Template/systemImageList?catid='.$imgTypeId)}">返回{$imageTypeList[$imgTypeId]}管理</a>
+	    </div>
+	</div>
+	<div class="tab-wrap">
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal"　id="upload_photos_form"　onsubmit="return false;">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<div id="upload_field">
+                                <div class="field" style="clear: both;overflow: hidden;">
+                                    <div class="fl">您选择了分类:</div>
+                                    <div class="fl" style="margin-left:5px;"><strong>{$imageTypeList[$imgTypeId]}</strong> <a href="{:U('Template/systemImageManager')}" class="ml10">返回重选</a></div>
+                                </div>
+                                <div id="muilti_uploader">
+                                    <div class="notice_info">
+                                    载入中... 
+                                    </div>
+                                </div><!--
+                                <div align="center">
+                                <input type="hidden" name="imgTypeId" value="{$imgTypeId|default=''}">
+                                <input  id = "uploadbtn" type="button" name="uploadbtn" class="btn submit-btn" value="立即上传" />
+                                <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                                </div>
+                        --></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/plupload/plupload.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/plupload/jquery.plupload.queue.min.js"></script>
+<script>
+$(function() {
+    plupload.addI18n({
+        'Filename' : '文件名',
+        'Status' : '状态',
+        'Size' : '大小',
+        'Add files' : '添加图片',
+        'Stop current upload' : '停止上传',
+        'Start uploading queue' : '开始上传',
+        'Start upload' : '开始上传',
+        'Uploaded %d/%d files':'已上传 %d/%d 图片',
+        'Drag files here.' : '拖拽文件至此处.'
+    });
+
+   $("#muilti_uploader").pluploadQueue({
+        runtimes : 'html5,flash',
+        url : '{:U("Template/system_image_upload",array("session_id"=>session_id(),"catid"=>$imgTypeId))}',
+        max_file_size : '15mb',
+        chunk_size : '512kb',
+        unique_names : false,
+        filters : [
+            {title : "Image files", extensions : "jpg,jpeg,gif,png"}
+        ],
+        flash_swf_url : '__PUBLIC__/Js/plupload/plupload.flash.swf'
+            });
+    var uploader = $('#muilti_uploader').pluploadQueue();
+    var usubmited = 0;
+  
+    if(uploader){
+        uploader.bind('UploadProgress', function() {
+            if (uploader.total.uploaded == uploader.files.length && usubmited == 0){
+                setTimeout(function(){
+                    //$('#upload_photos_form').submit();
+                    window.location="{:U('Template/systemImageList?catid='.$imgTypeId)}";
+                },200);
+            }
+        });
+        
+     /*
+        $('#uploadbtn').click(function() {
+            if (uploader.total.uploaded == 0) {
+                if (uploader.files.length > 0) {
+                    uploader.start();
+                } else {
+                    alert('至少选择一个文件上传.');
+                }
+            }
+        });
+       */
+    }
+});
+</script>
+<script>
+$(function() {
+  //导航高亮
+	$('.side-sub-menu').find('a[href="{:U('Template/systemImageManager')}"]').closest('li').addClass('current');
+})
+
+</script>
+</block>

@@ -1,0 +1,42 @@
+{// 加载头部公共文件 }
+<include file="Public:header" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Designer/FormDesign/Css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Designer/FormDesign/Css/index.css" />
+<script>
+	var FORMID = '{$formid}';
+	var DATAID = '{$dataid}'; 
+</script>
+<script src="__PUBLIC__/App/Designer/FormDesign/Js/formdesign.js"></script>
+<script src="__PUBLIC__/App/Designer/FormDesign/Js/formcommon.js"></script>
+<script src="__PUBLIC__/App/Designer/FormDesign/Js/common.js"></script>
+<script src="__PUBLIC__/App/Apps/Form/Js/formdata.js"></script>
+
+<script src="__PUBLIC__/Js/kindeditor/kindeditor.js"></script>
+<script src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script>
+	$(function() {
+		_commonAjax({
+			url : URLPATH + '/getFormXml',
+			data : {
+				id : FORMID
+			},
+			dataType : 'text',
+			success : function(r) {
+				$xmlFormDesign = r.ToXml();
+				formDesign._initFormDesign({type : "view"});
+				var tabs = $("#formdesign-main").tabs('tabs');
+				$(tabs).each(function() {
+					var $htmContainer = $(this).find("form:first").parent().css("position", "relative");
+							$('<div class="form_readonly"></div>').appendTo($htmContainer);
+				});
+				formDataClass._initData();
+			}
+		});
+	}); 
+</script>
+</head>
+<body>
+	<div id="formdesign-main" class="easyui-tabs" fit="true" data-options="tabHeight:30"></div>
+</body>
+</html>

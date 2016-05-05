@@ -1,0 +1,119 @@
+<extend name="WechatMp/base"/>
+<block name="style">
+<style type="text/css">
+	.copy, .wxUsername,.wxAppid{cursor: pointer;}
+</style>
+</block>
+<block name="header">
+	<include file="WechatMp/header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+<!-- <div class="row">
+<eq name="Think.get.first_login" value="1">
+<div class="well text-danger">首次登录，您的用户名与密码和网站会员的一致，为了企业号的安全请设置新的密码</div>
+</eq>
+	<ul class="nav nav-tabs">
+	  <li class="active"><a data-toggle="tab" href="#accont-home">接口设置</a></li>
+	  <li><a data-toggle="tab" href="#accont-common">普通模式</a></li>
+	</ul>
+</div> -->
+
+<!-- <form enctype="multipart/form-data" class="form-horizontal tab-content ajax-form" method="post" action="{:U('setting')}" > -->
+<form class="form-horizontal" >
+  <div class="tab-pane fade active in" id="accont-home">
+  	<div class="sub-item">
+		<h4 class="sub-title">企业号设置</h4>
+	</div>
+	<div class="page-header">
+		<p>
+		  企业号管理后台将回调企业应用，把用户发送的消息推送给企业应用处理，及推送位置信息等。
+		</p>
+		<p>要使用本应用，请先在<span class="text-danger">应用中开启《回调模式》</span>点击右上角的开启,复制下面的 <span class="text-danger">接口和Token</span>填入<span class="text-danger">应用配置</span>
+		</p>
+		<p></p>
+		<p></p>
+	</div>
+	<div class="form-group">
+	    <label for="name" class="col-sm-2 control-label">企业号名称</label>
+	    <div class="col-sm-7">
+	    <span class="wxUsername">{$wechat.name|default="微信企业号"} <i class="glyphicon glyphicon-edit"></i></span>
+	     <!--  <input type="text" class="form-control" name="name" placeholder="企业号名称" value="{$wechat.name}">
+	      <span class="help-block">您可以给此企业号起一个名字, 方便下次修改和查看.</span> -->
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="app_id" class="col-sm-2 control-label">企业号CorpID</label>
+	    <div class="col-sm-7">
+	     <!--  <input type="text" autocomplete="off" class="form-control" name="app_id" value="{$wechat.app_id}"> -->
+	      <span class="wxAppid">{$wechat.app_id|default="CorpID"} <i class="glyphicon glyphicon-edit"></i></span>
+	      <div class="help-block">CorpID是企业号的标识，每个企业号拥有一个唯一的CorpID</div>
+	    </div>
+	  </div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">接口URL</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{:get_host_url('/api.php')}?type=qyWechat&hash={$wechat['hash']}" style="width:460px" disabled><a  class="copy" href="javascript:;" data-value="{:get_host_url('/api.php')}?type=qyWechat&hash={$wechat['hash']}">&nbsp;&nbsp;[复制]</a>
+	      <!-- <span class="help-block">配置信息中的URL</span> -->
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">Token</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['token']}" style="width:460px" disabled> <a  class="copy" href="javascript:;" data-value="{$wechat['token']}">&nbsp;&nbsp;[复制]</a><!-- <a onclick="tokenGen();" href="javascript:;">生成新的</a> 
+	      <span class="help-block">与微信企业号接入设置值一致，必须为英文或者数字，长度为3到32个字符. 请妥善保管, Token 泄露将可能被窃取或篡改微信平台的操作数据.</span>-->
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">EncodingAESKey<br/>(消息加解密密钥)</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['encodingAESKey']}" style="width:460px" disabled> <a  class="copy" href="javascript:;" data-value="{$wechat['encodingAESKey']}">&nbsp;&nbsp;[复制]</a><!-- <a onclick="tokenGen('aes');" href="javascript:;">生成新的</a>
+	      <span class="help-block">与微信企业号接入设置值一致，必须为英文或者数字，长度为43个字符.</span> -->
+	    </div>
+	  </div>
+  </div>
+</form>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.zclip/jquery.zclip.min.js"></script>
+<script type="text/javascript">
+<!--
+$(function(){
+	$(".copy").each(function(){
+	$(this).zclip({
+		path:'__PUBLIC__/Js/jquery.zclip/ZeroClipboard.swf',
+		copy:function(){
+			return $(this).attr('data-value');
+		},
+		afterCopy: function(){
+		            $("<span id='zclipMsg' style='color:red'/>").insertAfter($(this)).text('复制成功');
+		            window.setTimeout(function(){
+		            	$('#zclipMsg').remove();
+		            }, 3000);
+		        }
+	});
+    });
+
+editCreateInput($(".wxUsername"), 'wxname', '/WechatPublic/editAccount?type=modifyname&weid={$wechat["id"]}');
+editCreateInput($(".wxAppid"), 'app_id', '/WechatPublic/editAccount?type=modifycrop&weid={$wechat["id"]}');
+
+});
+//重新生成TOKEN
+	function tokenGen(aes) {
+		var data
+		if(aes != undefined){
+			data = {'aes' : aes};
+		} else {
+			data = {};
+		}
+		$.get("{:U('WechatPublic/ajaxResetToken', 'weid='.$wechat[id])}", data, function(){
+			location.href="__SELF__";
+		});
+	}
+//-->
+</script>
+</block>

@@ -1,0 +1,184 @@
+/**
+ * 平台开发样式
+ * @author皮振华
+ */
+html,body{
+    height:100%;
+    width:100%;
+     background:#f5f5f5;
+}
+#header {
+    width: 100%;
+    height: 50px;
+    background: #485868;
+    border-bottom: 1px solid #ccc;
+}
+.logo {
+    width: 78px;
+    height: 46px;
+    float: left;
+    margin-left: 100px;
+    margin-top: 4px;
+}
+.logo img {
+    width: 90px;
+    height: 40px;
+}
+#main{
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+/**
+ * 左边菜单
+ */
+#main .m-left{
+    border:1px solid #CCC;
+    padding:0;
+}
+.m-left .col-md-12,.m-left .col-md-10,.m-left .col-md-2{
+    padding:0;
+}
+.dTypeList{
+    border:1px solid #CCC;
+    padding:0;
+    margin:0;
+}
+.dTypeList ul{
+    width:100%;
+    padding:0;
+}
+.dTypeList .dItem{
+    width:100%;
+    height:146px;
+    border-bottom:1px solid #CCC;
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+    color:#666;
+    cursor: pointer;
+}
+.dTypeList  .dSelectItem,.dTypeList .dItem:hover{
+    background:#009DD9;
+    color:#FFF;
+}
+.dTypeList .dItem .d1{
+    display: block;
+    width:20px;
+    margin:auto;
+    padding-top:30px;
+}
+.dConlist  ul{
+    margin:0;
+}
+.dConlist .conItem{
+   width:100%;
+   height:40px;
+   line-height:40px;
+   text-align: center;
+    border-bottom: 1px solid #CCC;
+    cursor:pointer;
+}
+.dConlist .addControl{
+    width:100%;
+    height:40px;
+    background:#CCC;
+    line-height:40px;
+    text-align: center;
+    border-bottom:1px solid #CCC;
+    cursor:pointer;
+}
+.conSelectItem{
+    background:#009DD9;
+    color:#FFFFFF;
+}
+/**
+ * 右边内容
+ */
+
+
+.m-right  .direction{
+    height:40px;
+    line-height:40px;
+    border-bottom:1px solid #CCC;
+}
+.m-right .content{
+    margin-top:30px;
+}
+
+.m-right .setArea{
+     background:#FFF;
+    padding:30px;
+    border-radius: 8px;
+    display:none;
+}
+.m-right .content .upImg{
+    position:relative;
+}
+.upLoadIcon{
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+    color:#FFF;
+    background:#009DD9;
+}
+#imgFile{
+    position:absolute;
+    top:0;
+    background:#009DD9;
+    height:50px;
+     filter:alpha(opacity=0);  
+      -moz-opacity:0;  
+      -khtml-opacity: 0;  
+      opacity: 0;  
+}
+#imgUpload{
+    width:80px;
+    height:80px;
+    display:none;
+}
+.m-right .selectedSetting{
+    display:block;
+}
+#setConBasicInfo .form-group{
+    padding-bottom:20px;
+}
+.steps{
+    padding:0;
+    text-align: center;
+    margin-top:30px;
+}
+.steps p{
+    padding:0;
+    margin:0;
+}
+.steps .stepItem{
+    width:40px;
+    height:40px;
+    line-height:40px;
+    border:1px solid #CCC;
+    border-radius:50%;
+}
+.steps .stepline{
+    height:60px;
+    width:1px;
+    background:#CCC;
+    margin-left:20px;
+}
+.steps .complete{
+    background:#009DD9;
+    color:#FFF;
+}
+.steps { 
+    counter-reset: num 0; 
+}
+.steps .stepItem:before { 
+    content: counter(num);
+    counter-increment: num; 
+}
+.checkbox  .col-md-3{
+    padding-top:10px;
+    padding-bottom:10px;
+}

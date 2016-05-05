@@ -1,0 +1,27 @@
+<extend name="Public/base" />
+<block name="body">
+<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>网站类型编辑</h2>
+	</div>
+	
+<form class="form-horizontal" method="POST" enctype="application/x-www-form-urlencoded" action="__SELF__">
+        <div class="form-item">
+            <label class="item-label" for="auth-title">用户组</label>
+            <div class="controls">
+                <input type="text" value="" class="text input-large" name="title" id="auth-title">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label" for="auth-description">描述</label>
+            <div class="controls">
+                <label class="textarea input-large"><textarea name="description" type="text" id="auth-description"></textarea></label>
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" value="" name="id">
+            <button target-form="form-horizontal" class="btn submit-btn ajax-post" type="submit">确 定</button>
+            <button onclick="javascript:history.back(-1);return false;" class="btn btn-return">返 回</button>
+        </div>
+    </form>
+</block>

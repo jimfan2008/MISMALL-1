@@ -1,0 +1,74 @@
+<include file="Index:top" title="帮助中心" shop="current"/>
+<link type = "text/css" href = "__PUBLIC__/Js/jquery-pager/Pager.css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/App/Home/Home/help.js"></script>
+<!--中间内容 -->
+<div class="clear"></div>
+
+<div id="content">
+	<div class="help_nav fl">
+		<div class="title f-18b">
+			帮助中心
+		</div>
+	<!--	<div class="name_tit" id="49">
+			<a href="#">常见问答</a>
+		</div>
+		<div class="son_name">
+			<ul class="menu-two" style="block"></ul>
+		</div>
+		<div class="name_tit" id="45">
+			<a href="#">操作手册</a>
+		</div>
+		<div class="son_name" style="display:none;">
+			<ul class="menu-two"></ul>
+		</div>
+		<div class="name_tit" id="46">
+			<a href="#">视频教程</a>
+		</div>
+		<div class="son_name" style="display:none;">
+			<ul class="menu-two"></ul>
+		</div> -->
+	</div>
+	<div class="help fr">
+		<div class="title_content">
+			<div class="help_title" id="title_list"></div>
+			<div class="main">
+				<span></span>
+				<ul id="flieList"></ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="main_content" style="display:none;"></div>
+
+		<if condition="$releaseNum lt 20">
+			<div class="page" id="sitePage" style="display:none;">
+				<else />
+				<div class="page"  id="sitePage">
+		</if>
+		<div style="float:left;margin-left:100px;">
+			<ul id="pageSite" class="page-nav-cell" style="margin:0px;"></ul>
+		</div>
+		<div  style="float:left;">
+
+			</span>共<span id="pageSum"></span>页 到第
+			<input name="" type="text"  class="input_box" id="fewPage"/>
+			页
+			<input name="" type="submit" class="btn" id="btnFewPage" value="确定" />
+		</div>
+	</div>
+</div>
+<div class="goTop">
+	<a id="goToTop" href="javascript:void(0)" onclick="return false" title="返回顶部" class="fr"></a>
+</div>
+</div>
+<!-- <div class="page">
+<a href="#"  ><<</a><a href="#" class="now">1</a><a href="#">2</a><a href="#">3</a><a href="#">>></a> ... 共10页 到第
+<input id="fewPage" type="text"  class="input_box"/>
+页
+<input id="btnFewPage" type="submit" class="btn" value="确定" />
+</div> -->
+</div>
+
+<div class="clear"></div>
+</div>
+<include file="Index:bottom"/>

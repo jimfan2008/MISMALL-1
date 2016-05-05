@@ -1,0 +1,38 @@
+{// 加载头部公共文件 }
+<include file="Public:header" />
+<script>
+	var FORMID = '{$formid}';
+</script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Apps/Form/Css/list.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Designer/FormDesign/Css/index.css" />
+<script src="__PUBLIC__/App/Designer/FormDesign/Js/formcommon.js"></script>
+<script src="__PUBLIC__/App/Designer/FormDesign/Js/common.js"></script>
+<script src="__PUBLIC__/App/Apps/Form/Js/list.js"></script>
+</head>
+<body>
+	<div id="top_list">
+		<ul>
+			<!--
+			<li class="add">
+				增加
+			</li>
+			-->
+			<li class="view disabled">
+				查看
+			</li>
+			<li class="edit disabled">
+				修改
+			</li>
+			<li class="delete">
+				删除
+			</li>
+			<li class="quit">
+				<a href="__GROUP__/Index/index">退出</a>
+			</li>
+		</ul>
+	</div>
+	<div id="main_list">
+		<div id="content"></div>
+	</div>
+</body>
+</html>

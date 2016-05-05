@@ -1,0 +1,155 @@
+<extend name="WechatMp/base"/>
+<block name="style">
+<style type="text/css">
+	.form_item_avatar{padding-left: 16px;text-align: justify;}
+	.upload_box{text-align: center;}
+</style>
+</block>
+<block name="header">
+	<include file="WechatMp/header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+<div class="sub-item">
+	<h4 class="sub-title">公众号应用设置</h4>
+</div>
+<div class="row">
+<div class="col-xs-6">
+	<div class="form_details">
+	      <div class="form_item form_item_avatar">
+			<div class="upload_area upload_box"><!-- 上传中的状态，加class名：upload_loading -->
+				<a class="avatar border_alpha upload_box upload_area" href="javascript:;">
+					<if condition="$app['icon'] gt 'http'">
+							<input type="file" style="position:absolute;left:0;opacity:0;z-index:100;cursor:pointer;width:120px;height:120px;" size="1" multiple="" class="ignore" name="file" id="inputFile3"><img src="{$app['icon']|default=__PUBLIC__/App/Wechat/images/appstore_avatar_default.png}" class="img_avatar" id="change_avator">
+						<else />
+						<input type="file" style="position:absolute;left:0;opacity:0;z-index:100;cursor:pointer;width:120px;height:120px;" size="1" multiple="" class="ignore" name="file" id="inputFile3"><img src="__ROOT__{$app['icon']|default=__PUBLIC__/App/Wechat/images/appstore_avatar_default.png}" class="img_avatar" id="change_avator">
+					</if>
+					<span class="loading"></span>
+					<span style="display:none;" class="add_logo">添加应用Logo</span>
+					<span class="edit_logo">编辑</span>
+				</a>
+				<p style="margin-top:10px;" class="gray">注：为了最佳的显示效果，推荐上传图片尺寸为640x640，大小不超过2M。</p>
+			</div>
+		</div>
+      	<!-- <div class="form_item">
+	     <label class="form_label">应用ID</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" value="{$app['agentId'] ? $app['agentId'] : ''}" id="agentId" placeholder="微信企业号创建应用时生成的应用ID" />
+	     </div>
+	    </div> -->
+	    <input type="hidden"  value="{$app['agentId'] ? $app['agentId'] : '0'}" id="agentId" />
+      	<div class="form_item">
+	     <label class="form_label">应用名称</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" value="{$app.name}" id="app-name" placeholder="2-16个字" />
+	     </div>
+	    </div>
+	    <div class="form_item">
+	     <label class="form_label">功能介绍</label>
+	     <div class="form_control">
+	      <textarea class="input_text" id="app-description" rows="4" placeholder="描述该应用的功能与特色，长度为4-120个字">{$app.description}</textarea>
+	     </div>
+	    </div>
+	    <div class="form_item">
+	     <label class="form_label"></label>
+	     <div class="form_control">
+	     	<input type="hidden" value="{$app.id}" id="app-id">
+	   	<input type="hidden" value="{$app.siteId}" id="app-appid">
+        		<button type="button" class="btn btn-primary" onclick="addApps()">确认</button>
+	     </div>
+	    </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+	    <gt name="app['agentId']" value="0">
+	    	<div>公众号应用推广运营二维码</div>
+	    	<div><img src="{:U('qrcode')}"></div>
+	    </gt>
+    </div>
+ </div>
+</block>
+
+<block name="script">
+<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+$(function(){
+	//upload logo
+	$('a.avatar').undelegate('#inputFile3','change').delegate('#inputFile3','change', function() {
+	      $.ajaxFileUpload({
+	         type:"POST",
+	         url:Think.APP+"/WechatPublic/ajaxUpload",
+	         secureuri:false,
+	         fileElementId:'inputFile3',
+	         dataType: 'JSON',
+	          success: function(data){
+	            var json = eval('('+data+')');
+	            //console.log(data,json);
+	            $('#change_avator').attr('src', json.image);
+	            
+	          }
+	       });
+	})
+});
+
+function addApps(){
+	var post = {};
+	post['agentId'] = parseInt($('#agentId').val());
+	post['name'] = $.trim($('#app-name').val());
+	post['description'] = $.trim($('#app-description').val());
+	post['id'] = parseInt($('#app-id').val());
+	post['siteId'] = parseInt($('#app-appid').val());
+	post['icon'] = $('#change_avator').attr('src');
+	if( $('#app-status').prop('checked') == true) {
+		post['status'] = 1;
+	} else {
+		post['status'] = 0;
+	}
+
+/*	if(post['agentId'] == 0 || isNaN(post['agentId'])) {
+		alert('请填写应用ID');
+		return false;
+	}
+	if(! checkRate(post['agentId']) ) {
+         		alert("应用ID输入正整数"); 
+         		return false;
+	}
+*/
+	var last_icon = post['icon'].lastIndexOf('/');
+	if(post['icon'].substring(last_icon+1, 100) == 'appstore_avatar_default.png') {
+		alert('请上传应用图片');
+		return false;
+	}
+
+	if(post['name'].length <2 || post['name'].length>16) {
+		alert('应用名称2-16个字');
+		return false;
+	}
+	/*if(post['description'].length <4 || post['description'].length>120){
+		alert('描述该应用的功能与特色，长度为4-120个字');
+		return false;
+	}*/
+
+	$.post(Think.APP+"/WechatMp/editAppInfo", post, function(s){
+		if(s=='1'){
+			handleAjax({'info':'操作成功','status':true});
+			$('#appModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'操作失败：'});
+		}
+	})
+}
+    //判断正整数  
+    function checkRate(s)  
+    {  
+         var re = /^[1-9]+[0-9]*]*$/;  
+         if (!re.test(s))  {  
+           return false;  
+         } 
+         return true;
+    }  
+</script>
+</block>

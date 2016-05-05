@@ -1,0 +1,63 @@
+﻿/***
+ * 基础样式
+ * 2010-11-24
+***/
+@charset "utf-8";
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,address,big,cite,code,del,em,font,img,ins,small,strong,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,textarea,input{margin:0;padding:0;border:0;}
+body{text-align:center;font-size: 12px; font-family:"微软雅黑"; background:#1776cf;color:#555; _behavior:url(js/csshover.htc);}
+.body_dl{text-align:center;font-size: 12px; font-family:"微软雅黑"; background:url(../images/dlbj.jpg) repeat 0 0;color:#555; _behavior:url(js/csshover.htc);}
+div{text-align:left;margin:0px auto;}
+ol,ul,li{list-style:none;}
+img{border:0;vertical-align:middle;}
+ins{text-decoration:none;}
+del{text-decoration:line-through;}
+em{font-style:normal;}
+a{color:#555; text-decoration:none;}
+a:hover{text-decoration:none;}
+h1,h2,h3,h4,h5,h6{margin:0; padding:0; border:0;font-weight:bold; font-size:14px;}
+:focus,*:focus{outline:0;}
+
+
+.fl{float:left;}
+.fr{float:right;}
+.fn{float:none;}
+.al{text-align:left;}
+.ac{text-align:center;}
+.ar{text-align:right;}
+.clear{height:0;font-size:0;border:0;margin:0;padding:0;clear:both;display:block; visibility: hidden;}
+.rlBlank5{margin:0 5px;}
+
+/*表单元素基本样式***/
+input,textarea,select{vertical-align:middle;}
+.textbox{border:1px solid #7F9DB9;}
+.area{border:1px solid #7F9DB9;}
+.checkbox{border:1px solid #7F9DB9;}
+.button{}
+.select{border:1px solid #7F9DB9;}
+.label{display:inline-block;}
+.lablechk{height:20px;line-height:20px;margin:0 5px;display:inline-block;}
+
+select.w100px{width:105px; height:21px;}
+
+/*常用字体样式***/
+.f-red{ color:#FF0000;}
+.f-red12{color:#FF0000; font-size:12px;}
+.f-white{color:#fff;}
+.f-white-b{color:#fff;font-weight:bold;}
+.f-black{color:#000;}
+.f-black-b{color:#000;font-weight:bold;}
+.f-blue{color: #0287c7; font-size:12px;}
+.f-16blue{color:#0287c7;font-size: 18px;font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.f-yellow{color: #ff9d00;}
+.f-yellowb{color:#ff9d00;font-weight:bold;}
+.f-green{color: #008316;}
+.f-orange{color:#ff6600;}
+.f-b{font-weight: bold;}
+.f-14{font-size: 14px;}
+.f-14b{font-size:14px;font-weight:bold;}
+.f-lineheight{ line-height:25px;}
+.f-18b{font-size:18px;font-weight:bold; font-family:"微软雅黑";}
+.f-gay{color:#a9a9a9;}
+
+
+

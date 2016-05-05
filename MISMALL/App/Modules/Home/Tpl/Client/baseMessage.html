@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 基本信息</title>
+
+		<!-- core CSS -->
+		<include file="Public:client_hearder" />
+
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect">
+							<span><a class="btn btn-info btn-reflace no-radius" style="margin-top: -5px;background: #ff6000 none repeat scroll 0 0;border: 0px;width: 83px;height: 24px;">充值</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row" style="height: 610px">
+					<div class="col-md-2 left">
+						<include file="Client:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>基本信息</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="row profile" >
+							<div class="row">
+								<div class="col-md-2">
+									<span>用户：</span>
+								</div>
+								<div class="col-md-10">
+									<span class="usertext">{:session('uname')}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<span>Email：</span>
+								</div>
+								<div class="col-md-10">
+									<span class="emailtext">{$userInfo["userEmail"]}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<span>头像设置：</span>
+								</div>
+								<div class="col-md-10">
+
+									<span class="cont fl"><img height="100" width="100" class="photo img-rounded" src="{$userInfo['userPhoto']}" id="upload_user_photo"> <font class="f-gay">(头像大小为100*100)</font></span>
+
+									<div id="userimg" class="blue_text" style="margin-left: 20px;margin-top: 120px">
+										<a href="javascript:">上传头像</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<include file="Public:client_footer" />
+		<script type="text/javascript" src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap-paginator.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+		<script>
+			$(".clientMemberCenter,.baseMessage").parent().addClass("active");
+			$("#userimg").click(function() {
+				art.dialog.open(APPPATH + "/Developer/uploadAvatar", {
+					title : "上传头像",
+					 width : 475,
+					  height : 442,
+					opacity : 0.3,
+					lock : true,
+					drag : false,
+					close : function() {
+					}
+				});
+			});
+
+		</script>
+
+		</body>
+</html>

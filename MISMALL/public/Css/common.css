@@ -1,0 +1,988 @@
+html {
+	height: 100%
+}
+#guide {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	filter: alpha( opacity=50);
+	display: none;
+	z-index: 999
+}
+#searchTip {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	/*left: 50%;
+	 margin-left: -490px; */
+	display: none
+}
+#searchTip div {
+	position: absolute;
+	display: none
+}
+#searchTip div a {
+	position: absolute;
+	width: 95px;
+	height: 32px;
+	text-indent: -999px;
+	overflow: hidden;
+	cursor: pointer;
+}
+#searchTip div span {
+	position: absolute;
+	height: 30px;
+	width: 30px;
+	text-indent: -999px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.stepA {
+	width: 520px;
+	height: 316px;
+	background: url(../Images/guide11.png);
+	top: 384px;
+	left: 335px
+}
+.stepA span {
+	top: 24px;
+	left: 449px
+}
+.stepA a {
+	left: 279px;
+	top: 112px;
+}
+
+.stepB {
+	background: url(../Images/guide21.png);
+	height: 453px;
+	left: 0px;
+	top: 105px;
+	width: 785px;
+}
+.stepB a {
+	left: 525px;
+	top: 343px;
+}
+.stepB span {
+	right: 32px;
+	top: 214px;
+}
+
+.stepC {
+	background: url(../Images/guide31.png);
+	height: 350px;
+	left: 0px;
+	top: 32px;
+	width: 753px;
+}
+.stepC a {
+	left: 530px;
+	top: 259px;
+}
+.stepC span {
+	right: 36px;
+	top: 159px;
+}
+.stepD {
+	background: url(../Images/guide41.png);
+	height: 344px;
+	left: 0;
+	top: 78px;
+	width: 743px;
+}
+.stepD a {
+	left: 525px;
+	top: 272px;
+}
+.stepD span {
+	right: 18px;
+	top: 155px;
+}
+.stepE {
+	background: url(../Images/guide51.png);
+	height: 313px;
+	left: -7px;
+	top: 290px;
+	width: 701px;
+}
+.stepE a {
+	left: 467px;
+	top: 142px;
+}
+.stepE span {
+	right: 24px;
+	top: 39px;
+}
+.stepF {
+	background: url(../Images/guide61.png);
+	height: 299px;
+	left: -10px;
+	top: 350px;
+	width: 694px;
+}
+.stepF a {
+	left: 462px;
+	top: 139px;
+}
+.stepF span {
+	right: 32px;
+    top: 30px;
+}
+
+.stepJ {
+	background: url(../Images/guide71.png);
+	height: 313px;
+	left: 441px;
+	top: 78px;
+	width: 701px;
+}
+.stepJ a {
+	left: 163px;
+	top: 231px;
+}
+.stepJ span {
+	right: 311px;
+	top: 127px;
+}
+
+.stepH {
+	background: url(../Images/guide81.png);
+	height: 327px;
+	right: 52%;
+	top: -15px;
+	width: 420px;
+}
+.stepH a {
+	left: 182px;
+	top: 252px;
+}
+
+#myCompList li#myCompList li/*控件选中样式 开始 */
+div.ctrlSelected, p.ctrlSelected, img.ctrlSelected, button.ctrlSelected {
+	border: 1px solid #88cc88;
+}
+
+.editArea .editCtrl:hover > .ctrlIconWraper {
+	display: block;
+}
+
+/*控件选中样式 结束 */
+
+/*我的组件列表 开始*/
+#myCompList {
+	margin-left: 0;
+	font-weight: normal;
+}
+
+.componentName {
+	line-height: 100px;
+}
+
+/*#myCompList li:hover .removeCompBtn {
+ display: block;
+ }
+
+ .removeCompBtn{
+ float: right;
+ width: 30px;
+ height: 30px;
+ background: #ccc url(../../images/icon_del.png) no-repeat center center;
+ cursor: pointer;
+ display: none;
+ position: absolute;
+ top: 0;
+ right: 0;
+ } */
+/*我的组件列表 结束*/
+
+/*模态框样式 开始*/
+div.modal {
+	overflow: auto;
+}
+.componentListWrap {
+	margin: auto;
+	width: 200px;
+	border: 1px inset #444;
+	overflow: auto;
+}
+.dataSetListWrap {
+	border: 1px inset #444;
+	width: 100%;/*#myCompList ul li {
+	 padding: 1px 2px;
+	 color: #CCC;
+	 text-align: center;
+	 }
+	 #myCompList ul li span {
+	 width: 100%;
+	 display: block;
+	 font-size: 12px;
+	 line-height: 80px;
+	 text-align: center;
+	 overflow: hidden;
+	 }
+	 #myCompList ul li span .componentName {
+	 -width: 100px;
+	 float: left;
+	 border: 1px solid #000;
+	 } */
+
+	height: 300px;
+	margin: auto;
+	border-radius: 2px;
+	overflow: auto;
+	color: #000;
+}
+.componentListWrap, .dataSetListWrap {
+	height: 300px;
+}
+.componentData {
+	display: none;
+}
+.componentData .dataSetListWrap .dsl > div {
+	text-align: left;
+	padding-left: 5px;
+	cursor: default;
+}
+.datalist {
+	height: 100%;
+	width: 255px;
+	overflow: auto;
+}
+
+.dsl > div, .datalist ul li {
+	height: 30px;
+	line-height: 30px;
+	padding: 2px;
+	margin: 5px;
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.dataSetListliselected {
+	background: #D9EDF7;
+}
+.dataSetFieldselected {
+	background: #DfEfFf;
+}
+
+.dsl div:hover {
+	background: #D9EDF7;
+}
+
+div.dataArrow {
+	width: 45px;
+	line-height: 298px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	background: url(../../images/jiantou.png) no-repeat center center;
+}
+
+.dataSetList {
+	border-right: 1px solid #ccc;
+}
+
+.fieldList {
+	/*display:none; */
+	font-weight: 300;
+	border-left: 1px solid #ccc;
+}
+.listTop {
+	height: 25px;
+	background: #f5f5f5;
+	line-height: 25px;
+	padding: 0 2px;
+	font-weight: bold;
+}
+.addDataSet {
+	display: block;
+	height: 25px;
+	width: 50px;
+	background: url(../../images/icon_sjyadd.png) no-repeat center center rgba(0,0,0,0.1);
+	cursor: pointer;
+}
+.addDataSet:hover {
+	background-color: #aaa;
+}
+.fieldItem .isChecked {
+	float: right;
+	margin-right: 107px;
+}
+#componentLayoutTpl {
+	border: 1px solid #eee;
+	height: 90px;
+	margin: auto;
+	padding: 3px;
+	text-align: center;
+	overflow: hidden;
+}
+#componentLayoutTpl ul {
+	margin: 0;
+	padding: 0;
+}
+#componentLayoutTpl ul li {
+	width: 65px;
+	height: 65px;
+	margin: 6px;
+	float: left;
+	cursor: pointer;
+}
+#componentLayoutTpl ul li:hover .cTplName {
+	background: #006699;
+	color: #fff
+}
+.cTplImg {
+	width: 65px;
+	height: 50px;
+	background: #666;
+}
+.cTplName {
+	height: 20px;
+	font-size: 12px;
+	background: #ccc;
+	line-height: 18px;
+}
+.addQuery {
+	height: 23px;
+	line-height: 28px;
+	font-size: 12px;
+}
+.addQuery input {
+	margin: 0 5px;
+}
+/*模态框样式 结束*/
+
+/*弹出数据源窗口样式 开始*/
+#panelWin {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+	color: #FFFFF1;
+	z-index: 999999;
+}
+#panelWin .header {
+	height: 30px;
+	line-height: 30px;
+	text-indent: 30px;
+	color: #00647F;
+	font-weight: bold;
+	background: linear-gradient(to bottom, #eff5ff 0px, #e0ecff 100%) repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+	border: 1px solid #95b8e7;
+}
+#panelWin .header button {
+	margin: 4px 20px 0px 0px;
+}
+#win {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: #006699;
+	color: #FFFFF1;
+}
+.selectCols {
+	outline: 1px solid rgb(122, 163, 185);
+}
+/*弹出数据源窗口样式 结束*/
+
+/*控件属性二级菜单的样式 开始*/
+#ctrlAttrSetting {
+	display: none;
+}
+#ctrlAttrSetting .csTitle {
+	width: 100%;
+	background: #eee;
+	color: #000;
+}
+.ez-context-menu-item {
+	min-height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #eee;
+	padding-left: 5px;
+	color: #249ddd;
+	cursor: default;
+}
+.subMenuWrap {
+	width: 100%;
+}
+.settingItem {
+	width: 240px;
+	min-height: 30px;
+	margin: 5px auto;
+	overflow: auto;
+	padding: 8px 5px;
+	font-size: 12px;
+}
+.ez-panel-item {
+	width: 100%;
+	margin-bottom: 5px;
+}
+.ez-left-align {
+	float: left;
+	width: 80%;
+}
+.ez-text-align {
+	float: left;
+}
+.ez-left {
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+}
+.ez-setting-content {
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+div.ez-slider {
+	float: left;
+	width: 180px;
+	margin-top: 10px;
+	height: 8px;
+	margin-left: 15px;
+	background: #8a8a8a
+}
+.ez-select {
+	margin-left: 15px;
+	width: 167px;
+	height: 25px;
+	margin-bottom: 0;
+}
+.ez-spinner {
+	float: right;
+	height: 20px;
+	line-height: 13px;
+	border-radius: 5px;
+}
+.ez-spinner input.slideValue {
+	border: 0 none;
+	height: 22px;
+	width: 50px;
+	margin: 0;
+}
+.borderWidth {
+	float: right;
+	width: 100px;
+	margin-left: 2px;
+	margin-top: -10px;
+}
+.borderRadius {
+	float: left;
+	width: 100px;
+	margin-right: 2px;
+	margin-top: -10px;
+}
+.borderSingle {
+	margin-top: 15px;
+}
+
+/* 虚拟圆角 */
+#radiusSetting {
+	position: relative;
+	width: 100%;
+	height: 100px;
+}
+#radiusSetting .VMRadius {
+	position: absolute;
+	left: 80px;
+	width: 70px;
+	height: 80px;
+	margin-top: 15px;
+}
+#radiusSetting .radiuLeft, #radiusSetting .radiusRight {
+	float: left;
+	width: 70px;
+}
+#radiusSetting .radius {
+	float: left;
+	width: 20px;
+	height: 20px;
+}
+#radiusSetting .radiusTopLeft {
+	border-left: 2px solid #CCC;
+	border-top: 2px solid #ccc;
+}
+#radiusSetting .radiusBottomLeft {
+	margin-left: 28px;
+	border-right: 2px solid #CCC;
+	border-top: 2px solid #ccc;
+}
+#radiusSetting .radiusTopRight {
+	margin-top: 20px;
+	border-left: 2px solid #CCC;
+	border-bottom: 2px solid #ccc;
+}
+#radiusSetting .radiusBottomRight {
+	margin-left: 28px;
+	margin-top: 20px;
+	border-bottom: 2px solid #ccc;
+	border-right: 2px solid #ccc;
+}
+#radiusSetting .inputLeft {
+	position: absolute;
+	width: 35px;
+	height: 100px;
+	left: 18px;
+}
+#radiusSetting .inputRight {
+	position: absolute;
+	width: 35px;
+	height: 100px;
+	left: 195px;
+}
+#radiusSetting .radiusTop {
+
+}
+#radiusSetting .radiusBottom {
+	margin-top: 50px;
+}
+/* 虚拟圆角 END*/
+
+/*编辑器输出控件样式,如容器,分栏,组件等 开始*/
+div.row[ctrl-type="ctrl-dynamic"], div.row[ctrl-type="ctrl-box"], div.row[ctrl-type="ctrl-colBox"], div.row[ctrl-type="ctrl-dynamic"] .row, div.row[ctrl-type="ctrl-box"] .row, div.row[ctrl-type="ctrl-colBox"] .row {
+	position: relative;
+	background: #F5F5F5;
+	margin: 15px 0;
+	padding: 17px 5px 10px 5px;
+	color: #000;
+}
+div.row[ctrl-type="ctrl-dynamic"]:hover .dyna-handle, div.row[ctrl-type="ctrl-box"]:hover .dyna-handle {
+	display: block;
+}
+div.colInner > .row {
+	margin: 5px 0;
+}
+div.row[ctrl-type="ctrl-dynamic"] div[rowUnit] {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+}
+div.dynamicName {
+	display: none;
+	position: relative;
+	font-size: 11px;
+	font-weight: 500;
+	left: 0px;
+}
+div.row[ctrl-type="ctrl-dynamic"] div[class *= 'col-'], div.row[ctrl-type="ctrl-box"] div[class *= 'col-'], div.row[ctrl-type="ctrl-colBox"] div[class *= 'col-'] {
+	/*border: 1px solid #E0E0E0;*/
+	min-height: 35px !important;
+}
+div[class *= 'col-md-12'] {
+	outline: 0;
+	outline-offset: 0;
+	float:left;
+}
+
+.col-md-12 {
+    width: 100%;
+}
+
+div[class *= 'col-md-12'] .colInner {
+}
+div[class *= 'col-md-12'] div.colInner > .row {
+	margin: 1px 0;
+}
+div.row[ctrl-type="ctrl-dynamic"] div[rowUnit] [class *= 'col-'] {
+	min-height: 35px !important;
+	outline: 0;
+	outline-offset: 0;
+}
+div[rowUnit] [class *= 'col-'] .colInner {
+	border: 0;
+}
+div.colInner {
+	width: 100%;
+	min-height: 35px;
+	padding: 1px;
+}
+.colInner img {
+	margin: auto;
+}
+
+.dyna-handle {
+	top: -1px;
+	background: none repeat scroll 0 0 rgba(133,200,255,0.3);
+	box-shadow: 0 1px 1px 1px rgba(100, 100, 100, 0.2);
+	color: #eee;
+	cursor: move;
+	height: 21px;
+	left: 40%;
+	margin: auto;
+	position: absolute;
+	text-align: center;
+	width: 50px;
+	z-index: 10;
+	border: 1px solid rgba(133,200,255,0.9);
+	display: none;
+}
+.dyna-handle:hover {
+	background: rgba(133,200,255,0.9);
+	border-top: 0;
+}
+/*编辑器输出控件样式,如容器,分栏,组件等  结束*/
+.previewArea div.row[ctrl-type="ctrl-dynamic"], .previewArea div.row[ctrl-type="ctrl-box"], .previewArea div.row[ctrl-type="ctrl-colBox"], .previewArea div.row[ctrl-type="ctrl-dynamic"] .row, .previewArea div.row[ctrl-type="ctrl-box"] .row, .previewArea div.row[ctrl-type="ctrl-colBox"] .row {
+	position: relative;
+	margin: 1px 0;
+	color: #000;
+}
+.previewArea div.row[ctrl-type="ctrl-dynamic"] div[class *= 'col-'], .previewArea div.row[ctrl-type="ctrl-box"] div[class *= 'col-'], .previewArea div.row[ctrl-type="ctrl-colBox"] div[class *= 'col-'] {
+	border: 0;
+}
+.previewArea div.row[ctrl-type="ctrl-dynamic"] div[class *= 'col-md-12'] {
+	outline: 0;
+	outline-offset: 0;
+	border: 1px solid #eee;
+}
+.previewArea div.row[ctrl-type="ctrl-dynamic"] div.row[ctrl-type="ctrl-dynamic"] div[class *= 'col-md-12'] {
+	border: 0;
+	border-bottom: 1px solid #eee;
+}
+.previewArea div.colInner {
+	width: 100%;
+	min-height: 10px;
+}
+/**/
+
+/* 数据源列表的容器 开始*/
+.setDynaData {
+	width: 328px;
+	height: 100%;
+	margin: 0 auto;
+	font-weight: bold;
+}
+.setDynaData > div {
+	font-size: 12px;
+	cursor: pointer;
+	color: #006699;
+	margin-bottom: 10px;
+}
+div.formWrap {
+	margin-bottom: 0;
+}
+.set_addDataSource, .addRule {
+	margin: 5px;
+	font-size: 12px;
+	cursor: pointer;
+	text-align: right;
+}
+.set_addDataSource:hover, .addRule:hover {
+	text-decoration: underline;
+}
+.isExpand {
+	background: url("../../images/men_icon.png") no-repeat scroll 0 -108px rgba(0, 0, 0, 0);
+	float: left;
+	height: 20px;
+	margin-top: 2px;
+	width: 20px;
+}
+.formNameWrap {
+	float: left;
+}
+.formCkBox {
+	float: right;
+	height: 100%;
+	width: 20px;
+	margin-right: 100px;
+}
+/* 数据源列表的容器 结束*/
+/*控件属性二级菜单的样式 结束*/
+
+#addFieldLinks .choseField, #addFieldLinks .innerLink, #addFieldLinks .outLink, #addFieldLinks .linkPage, #addFieldLinks .modal-footer {
+	display: none;
+}
+#addFieldLinks .innerButton, #addFieldLinks .outButton {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+#addFieldLinks .goback {
+	display: block;
+	width: 50px;
+	height: 30px;
+	margin-right: 10px;
+	margin-top: -5px;
+	text-align: center;
+	line-height: 27px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	cursor: pointer;
+}
+#addFieldLinks .goback:hover {
+	background: #f5f5f5;
+}
+/**save form 、data submit css start**/
+.tipWrap {
+	background: none repeat scroll 0 0 rgba(0, 255, 0, 0.5);
+	box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+	display: none;
+	font-size: 25px;
+	height: 60px;
+	line-height: 60px;
+	position: absolute;
+	text-align: center;
+	width: 23%;
+	left: 35%;
+	top: 0px;
+	z-index: 100;
+	position: fixed
+}
+/**end save form 、data submit css **/
+
+/**  form error css start**/
+.formCtrl .valid_error, .error {
+	color: #fc4343
+}
+.formCtrl .valid_error, .validsuccess {
+	background-image: url(../../images/ok.png);
+	background-repeat:repeat-y;
+	width:16px;
+	height:16px;
+	float: right;
+	position: inherit;
+	margin-top:-20px;
+}
+
+/** end form error css **/
+
+/*kb s*/
+.fieldDataTitle {
+	padding-left: 5px;
+}
+#dataSource ul li, #interface ul li {
+	width: 100%;
+	overflow: hidden;
+}
+
+#webSetting #main-text-align label {
+	line-height: 10px;
+}
+#main-text-align label {
+	line-height: 10px;
+}
+#webSetting #main-picture-align label {
+	line-height: 10px;
+}
+#main-picture-align label {
+	line-height: 10px;
+}
+.modalTpl, .systemCp {
+	min-height: 100px;
+	max-height: 250px;
+	border: 1px solid #ddd;
+	border-top: 0px;
+	overflow: auto;
+}
+.creatMyTpl {
+	margin-top: 30px;
+}
+/*kb end*/
+/*模板组件*/
+.myTemp, .sysComCp {
+	position: relative;
+	float: left;
+	cursor: pointer;
+}
+
+#myTab a:active, #myTab a:focus {
+	outline: none;
+}
+
+#myCompList .menuItem:hover .removeCompTempBtn {
+	display: block;
+}
+.removeCompTempBtn {
+	position: absolute;
+	top: -3px;
+	right: 0px;
+	width: 30px;
+	height: 30px;
+	background: url(../../images/icon_del.png) no-repeat center center;
+	cursor: pointer;
+	display: none
+}
+
+.tempSelected, .sysComCpSelected {
+	background: #5bc0de;
+	color: #FFFFFF;
+}
+
+.linkPageList {
+	float: left;
+	width: 30%;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 5px;
+	margin-left: 2.5%;
+	text-align: center;
+	background: #f5f5f5;
+	cursor: pointer;
+}
+
+.selectedLinkPage {
+	background: #428bca;
+}
+.pingfen_attr_list {
+	display: none;
+}
+.ctrlpingfen {
+	position: relative;
+	display: none;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.ctrlpingfen li {
+	float: left;
+	width: 22px;
+	line-height: 21px;
+	text-align: center;
+	border-left: 1px solid #ccc;
+}
+
+.sliderSpring {
+	display: none;
+}
+#sliderSpring li a {
+	outline: none;
+}
+/*链接参数设置 开始
+ #addFieldLinks .linkParamItem {
+ width: 48.5%;
+ float: left;
+ margin-left: 1%;
+ margin-top: 5px
+ }
+ #addFieldLinks .linkParamValue {
+ width: 55%;
+ border: 1px solid #CCC;
+ margin-left: 2%
+ }
+ #addFieldLinks  .linkParamMid {
+ float: left;
+ width: 6%;
+ margin-left: 2%
+ }
+ #addFieldLinks  .linkParamName {
+ float: left;
+ border: 1px solid #CCC;
+ width: 100%
+ }
+ #addFieldLinks  .linkParamSpan {
+ display: block;
+ float: left;
+ width: 35%
+ }
+ 链接参数 结束*/
+
+#addFieldLinks .delLinkParam, #addFieldLinks .addLinkParam {
+	cursor: pointer;
+}
+
+div.row[ctrl-type="ctrl-dynamic"] .editCtrl {
+	min-height: 20px;
+}
+
+/*_commonAjax提交的样式*/
+#ajaxMask {
+
+	background: none repeat scroll 0 0 #666666;
+	display: none;
+	height: 100%;
+	left: 0;
+	opacity: 0.8;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+}
+#ajaxMask .message {
+	background: none repeat scroll 0 0 #000;
+	border-radius: 8px;
+	font-size: 20px;
+	height: 80px;
+	left: 45%;
+	line-height: 80px;
+	margin: auto;
+	opacity: 1;
+	position: absolute;
+	text-align: center;
+	top: 30%;
+	width: 10%;
+	z-index: 100;
+}
+
+div[ctrl-type='ctrl-text'] {
+	min-height: 25px;
+	margin:8px 0;
+}
+/*模板8样式*/
+.inputSelectWrap {
+    padding: 2px;
+    position: relative;
+    width: 184px;
+}
+.is-top {
+    position: relative;
+}
+.is-input {
+    height: 20px;
+    padding: 2px 5px;
+    margin-left: 45%;
+    margin-top:-20%;
+}
+.is-arrow-wrap {
+    cursor: pointer;
+    height: 28px;
+    position: absolute;
+    right: -16%;
+    top: -2px;
+    width: 0px;
+}
+.is-arrow-wrap:hover .is-arrow {
+    border-top-color: #555;
+}
+.is-arrow {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #000 transparent transparent;
+    border-image: none;
+    border-right: 8px solid transparent;
+    border-style: solid;
+    border-width: 8px;
+    height: 0;
+    margin-left: 32px;
+    margin-top: -8px;
+    width: 0;
+}
+.is-options, .is-filter {
+    background: none repeat scroll 0 0 #fff;
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    top: 68%;
+    left:45%;
+    width: 98%;
+    z-index: 99;
+}
+.is-option {
+    cursor: default;
+    margin: 3px;
+    padding: 2px;
+}
+.is-option:hover {
+    background: none repeat scroll 0 0 #eee;
+}
+/*模板8样式 end*/

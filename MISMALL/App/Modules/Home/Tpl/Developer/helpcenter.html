@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 帮助中心</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" helpcenter = "active" />
+		<style type="text/css">
+			#helpMenu li a{	
+				 padding: 4px 15px;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6">
+						<div class="well sidebar-nav no-radius">
+							<ul class="nav nav-list no-radius" id="helpMenu">
+								
+							</ul>
+						</div>
+					</div>
+					<div class="article col-md-9 col-sm-18">
+						<h2 class="article_title"></h2>
+						<hr/>
+						<div class="article_content"></div>
+						<hr>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>	
+
+		<include file="Public:developer_footer" />
+		<script src="__PUBLIC__/App/Home/Developer/js/developerhelp.js"></script>
+		<script>
+			$(".helpcenter").parent().addClass("active");
+		</script>
+		</body>
+</html>

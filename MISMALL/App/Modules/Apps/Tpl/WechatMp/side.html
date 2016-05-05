@@ -1,0 +1,67 @@
+<div class="nav nav-pills nav-stacked" id="left-side">
+	<li class="nav-title"><a>公众号管理</a></li>
+	<!--<li name="index">
+      	<a href="{:U('Index/index')}">
+          	微信设置<span class="glyphicon glyphicon-home pull-right"></span>
+		</a>
+	</li> 
+	--><li name="setting">
+      	<a href="{:U('Index/setting')}">
+           	账号设置<span class="glyphicon glyphicon-cog pull-right"></span>
+       	</a>
+	</li>
+	<li name="subscribe">
+      	<a href="{:U('Message/subscribe')}">
+           	首次关注回复<span class="glyphicon glyphicon-thumbs-up pull-right"></span>
+       	</a>
+	</li>
+	<!-- <li name="autoReply">
+      	<a href="{:U('Message/autoReply')}">
+           自动回复<span class="glyphicon glyphicon-refresh pull-right"></span>
+       	</a>
+	</li> -->
+	<li name="keyword">
+      	<a href="{:U('Message/keywordList')}">
+           	关键词回复<span class="glyphicon glyphicon-random pull-right"></span>
+       	</a>
+	</li>
+	<if condition="$wechat['app_id'] AND $wechat['app_secret']">
+	<li name="request">
+		<a href="{:U('Message/index')}">
+		消息管理<span class="glyphicon glyphicon-bullhorn pull-right"></span>
+		</a>
+	</li>
+	</if>
+	<li class="nav-title"><a>微站管理</a></li>
+	
+	<if condition="$wechat['app_id'] AND $wechat['app_secret']">
+	<li name="menu">
+ 		<a href="{:U('Menu/menulist')}">
+ 			微站导航<span class="glyphicon glyphicon-th pull-right"></span>
+ 		</a>
+	</li>
+	</if>
+	<if condition="$wechat['app_id'] AND $wechat['app_secret']">
+	<li class="nav-title"><a>粉丝管理</a></li>
+	<li name="group">
+		<a href="{:U('Member/group')}">
+	 		粉丝分组<span class="glyphicon glyphicon-user pull-right"></span>
+		</a>
+	</li>
+	<li name="member">
+		<a href="{:U('Member/memberList')}">
+	 	粉丝列表<span class="glyphicon glyphicon-th-list pull-right"></span>
+		</a>
+  	</li>
+	</if>
+</div>
+
+<block name="side"></block>
+<script type="text/javascript">
+var menu_id = '{$menu_id}';
+	$('#left-side > li').each(function(){
+		if($(this).attr('name') == menu_id){
+			$(this).addClass('active');
+		}
+	});
+</script>

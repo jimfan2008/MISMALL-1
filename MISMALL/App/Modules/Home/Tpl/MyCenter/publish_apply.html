@@ -1,0 +1,154 @@
+<include file="Index:top" title="发布的应用" mycenter="current"/>
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<!--左边菜单 -->
+	<include file="MyCenter:left" buy_apply="now"/>
+	<!--右边模块 -->
+	<div class="rightcontent fr">
+		<!-- <div class="breadCrumb f-14b">
+			发布的应用
+		</div> -->
+		<div class="tabs f-14b">
+			<div class="bottomline"></div>
+			<ul >
+				<li class="orderTab" id="orderAll">
+					<a href="{:U('MyCenter/buy_apply')}"><strong>购买应用</strong></a>
+				</li>
+				<li class="on orderTab" id="orderAll">
+					<a href="{:U('MyCenter/publish_apply')}"><strong>发布应用</strong></a>
+				</li>
+			</ul>
+		</div>
+		<div class="buy_apply">
+			<if condition="$releaseNum lt 1">
+					<div class="notcont">
+						<span>还没发布任何应用！<a id="goFactory" href="#">点击这里</a> 创建您的应用发布吧！</span>
+					</div>
+				<else />
+					<ul>
+						<volist name="releaseInfo" id="vo">
+							<li class="appList">
+								<div class="fl_webpic fl">
+									<a href="#"><img src="{$vo.imgPath}" width="90" height="90" /></a>
+								</div>
+								<div class="fr_cont fl">
+									<p class="nametitle">
+										<a href="javascript:;">{$vo.projectName}</a>
+									</p>
+									<p>
+										<span class="edit xiugai"><a href="javascript:;" projectid="{$vo.ID}" >更新</a></span><span class="del delPub"><a href="javascript:;" projectid="{$vo.ID}" >删除</a></span>
+									</p>
+								</div>
+							</li>
+						</volist>
+						
+					</ul>
+			</if>
+				
+			<div class="clear"></div>
+				<if condition="$releaseNum lt 10">
+				<div class="page" id="sitePage" style="display:none;">
+				<else />
+				<div class="page"  id="sitePage">
+			</if>
+					<div style="float:left;margin-left:100px;">
+					<ul id="pageSite" class="page-nav-cell" style="margin:0px;"></ul>
+					</div>
+					<div  style="float:left;">
+						
+					</span>共<span id="pageSum"></span>页 到第
+						<input name="" type="text"  class="input_box" id="fewPage"/>
+						页
+						<input name="" type="submit" class="btn" id="btnFewPage" value="确定" />
+					</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+</div>
+<!-- 脚本库文件 -->
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	var releaseNum = '{$releaseNum}';
+	$(function(){
+		var pageSize = 9;
+	   	pageSizeSum(releaseNum, pageSize);
+	   	//分页
+	   	var btnObj = $("#btnFewPage"), fewObj = $("#fewPage"), pageSite = 'pageSite';
+	   	var showObj = $(".appList");
+	   	var pIndex = myCenterPageSize(pageSize, releaseNum, btnObj, fewObj, pageSite, showObj);
+	   	
+	    //修改已发布的项目
+	    $(".xiugai a").click(function() {
+	        var data = $(this).parent().parent().find(".name").text();
+	        var id = $(this).attr("projectid");
+	        art.dialog.open(APPPATH + "/Designer/ReleaseProject/index?id=" + id, {
+	            title : "项目修改",
+	            width : "96%",
+	            height : "94%",
+	            opacity : 0.3,
+	            lock : true,
+	            drag : true,
+	            close : function() {
+	            }
+	        });
+	    });
+	   	
+	   	 //删除已发布的项目
+        $(".delPub a").click(function() {
+            var pubid = $(this).attr("projectid");
+            //var pubNum = $(this).
+            var li = $(this).parents(".appList");
+            if (confirm("是否确认要删除该项目！")) {
+                $.ajax({
+                    type : "POST",
+                    url : GROUPPATH + "/MyCenter/delAReleaseProject",
+                    data : {
+                        pubid : pubid
+                    },
+                    success : function(data) {
+                        if (data) {
+                            li.remove();
+                            releaseNum -= 1;
+                            if(releaseNum <= pageSize){
+		            	 		$("#sitePage").hide();
+		            	 		$(".appList").show();
+		            	 	}else{
+	            	 			showObj = $(".appList");
+                       			var index = pIndex.pageIndex ;
+		            	 		if(showObj.size() == (index - 1) * 5){
+                    				index -= 1;
+                    			}
+                				pageSizeSum(releaseNum, pageSize);
+                    			pIndex = myCenterPageSize(pageSize, releaseNum, btnObj, fewObj, pageSite, showObj);
+		            	 		//记录原来页面数--第几页
+		            	 		pIndex.pageIndex = index;
+                    			myCenterPageIndex(pIndex, index, showObj);
+		            	 	}
+                        }else{
+                        	//删除失败--刷新本页面
+		            	 	history.go(0);
+                        }
+                    }
+                });
+            }
+        });
+	});
+	//显示总几页
+	function pageSizeSum(releaseNum,pageSize){
+		if(releaseNum % pageSize == 0)
+	    {
+	    	$("#pageSum").text(releaseNum / pageSize);
+	    }else
+	    {
+	    	$("#pageSum").text(parseInt(releaseNum / pageSize) + 1);
+	    }
+	}
+
+</script>
+<include file="Index:bottom"/>

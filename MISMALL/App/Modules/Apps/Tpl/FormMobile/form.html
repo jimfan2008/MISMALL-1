@@ -1,0 +1,183 @@
+<include file="Public:headerMobile" />
+
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.ImagePreview.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.FilePreview.js"></script>
+
+<script src="__PUBLIC__/Js/mobiscroll-2.6.2/js/mobiscroll.custom-2.6.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href ="__PUBLIC__/Js/mobiscroll-2.6.2/css/mobiscroll.custom-2.6.2.min.css">
+<script src="__PUBLIC__/Js/mobiscroll-2.6.2/dev/js/mobiscroll.jqm-2.6.2.js"></script>
+<link rel="stylesheet" type="text/css" href ="__PUBLIC__/Js/mobiscroll-2.6.2/dev/css/mobiscroll.jqm-2.6.2.css">
+
+<link rel="stylesheet" type="text/css" href ="__PUBLIC__/App/Apps/FormMobile/Css/form.css">
+
+<script src="__PUBLIC__/Js/vaildate/jquery.validate.js"></script>
+<script src="__PUBLIC__/App/Apps/FormMobile/Js/formdesign.js"></script>
+<script src="__PUBLIC__/App/Apps/FormMobile/Js/formdata.js"></script>
+<script src="__PUBLIC__/App/Apps/FormMobile/Js/formActionTest.js"></script>
+<script src="__PUBLIC__/App/Apps/FormMobile/Js/formAction.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	var URLPATH = '__URL__';
+	var APPPATH = '__APP__';
+	var GROUPPATH = '__GROUP__';
+	var PUBLICPATH = '__PUBLIC__';
+	var UPLOAD_URL = '__UPLOAD_URL__';
+
+	var FORMID = _getUrlParas("formid");
+	var DATAID = _getUrlParas("dataid");
+	var validateOpts = {
+		rules : {
+		},
+		submitHandler : function(form) {
+			var formData = formDesign._formData();
+			var data = {};
+			data["form_id"] = FORMID;
+			data["form_data"] = formData;
+			data['data_id'] = DATAID;
+			//alert(JSON.stringify(data));
+			_commonAjax({
+				url : GROUPPATH + "/FormDesign/saveFormDataInfo",
+				data : {
+					data_str : JSON.stringify(data)
+				},
+				dataType : 'text',
+				success : function(r) {
+					if (Boolean(r)) {
+						if (DATAID == "" || DATAID == null) {
+							alert("保存成功");
+							var $img = $("div.ImagePreview[t='CCImage']").children("img");
+							$img.attr("src", PUBLICPATH + '/App/Designer/FormDesign/Images/controls/image.png');
+							$img.css({
+								width : 100,
+								height : 100
+							});
+							form.reset();
+						} else {
+							alert("修改成功");
+							window.location = GROUPPATH + "/FormMobile/formdata.html?formid=" + FORMID;
+						}
+					}
+				}
+			});
+		},
+		errorPlacement : function(error, element) {
+			if (element.is(":radio"))
+				error.appendTo(element.parents("fieldset"));
+			else if (element.is(":checkbox"))
+				error.appendTo(element.parents("fieldset"));
+			else if (element.attr("t") == "CCRemark")
+				element.after(error);
+			else
+				element.parent().after(error);
+		}
+	};
+
+	function validate() {
+		var form = $('#form1');
+		var isVal = form.validate(validateOpts);
+		if (isVal) {
+			form.submit();
+		}
+	}
+
+	var formDesign = new FormDesignClass();
+	$(function() {
+		$.mobile.loading('show', {
+				text : '加载中,请稍后...', //加载器中显示的文字
+				textVisible : true, //是否显示文字
+				theme : 'b', //加载器主题样式a-e
+				textonly : false, //是否只显示文字
+			});
+		/**页面加载时向上滑动固定头部**/
+		$('.header > a:first').on("click", function() {
+			$(this).parent().removeAttr("style");
+			$("#content").removeAttr("style");
+		});
+		$("html").on("scrollstart", function() {
+			$(".header").attr("style", "position:absolute;position:fixed;top:0;z-index:99999");
+			$("#content").css("margin-top", "3em");
+		});
+		_commonAjax({
+			url : GROUPPATH + '/Form/getFormXml',
+			data : {
+				id : FORMID
+			},
+			dataType : 'text',
+			success : function(r) {
+				//增加几个验证的方法
+				addValidateMethod();
+				$xmlFormDesign = r.ToXml();
+		    	formDesign._initFormDesign();
+				if (DATAID) {
+					formData._initData();
+				}
+				$(".form_data").attr("href", "formdata.html?formid=" + FORMID);
+				//数据加载完成后隐藏
+				$.mobile.loading('hide');
+			}
+		});
+		
+	
+	}); 
+	
+	
+   /*
+	* 接收消息
+	*/
+	var receiveMessage = function (e) 
+	{
+	  //e.data 是接收的消息
+	  alert("父页面发过来的信息是:"+e.data);
+	}
+       
+
+	/*
+	* 发送消息
+	*/
+	function sendMessage()
+	{
+		var userName=document.getElementById("CCTextBox7").value; //消息内容
+		window.top.postMessage(userName,"*");
+	}
+
+    /*
+	*  注册消息事件
+	*/
+	window.onload=function()
+	{
+		if (window.addEventListener) 
+		{  // all browsers except IE before version 9
+			window.addEventListener("message", receiveMessage, false);
+		} else 
+		{
+			if (window.attachEvent) 
+			{   // IE before version 9
+			window.attachEvent("onmessage", receiveMessage);
+			}
+		}
+	}  
+</script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<title>编辑</title>
+</head>
+
+<body>
+	<div data-role="page" id="page1">
+		<div class="header">
+			<a href="#menu" class="nav"></a>
+			<a href="" class="form_data" data-ajax="false">数据</a>
+		</div>
+		<div id="content" data-role="content">
+			<form method="post" id="form1"  name="myForm" data-transition="pop" enctype="multipart/form-data">
+
+			</form>
+
+		</div>
+		<include file="Public:leftMenu" />
+	</div>
+
+</body>
+</html>

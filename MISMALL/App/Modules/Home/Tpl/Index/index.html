@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>mismall | 微信应用定制平台</title>
+		<meta name="keywords" content="diyapp, diyapp.in, mismall, mismall.cn, mismall平台, HTML5, diy APP">
+		<meta name="description" content="diyapp.in | 简单、强大的微信应用定制工具。移动化社交化的时代，轻、快、优雅，mismall完美实现！">
+		<meta property="qc:admins" content="2304576757651316157" />
+		<meta property="wb:webmaster" content="07887ce3aa12275f" />
+		<link rel="icon" type="image/ico" href="__PUBLIC__/Images/newfavicon.ico">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link href="__PUBLIC__/App/Home/Css/video-js.css" rel="stylesheet">
+		<script src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+		<script src="__PUBLIC__/App/Home/Js/common.js"></script>
+		<script src="__PUBLIC__/App/Home/Js/jquery-ui-1.10.3.min.js"></script>
+		<script src="__PUBLIC__/App/Home/Js/swfobject.js"></script>
+		<script src="__PUBLIC__/App/Home/Js/video.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/App/Home/Home/user.js"></script>
+		<script>
+			var URLPATH = '/Index';
+			var APPPATH = '__APP__';
+			var GROUPPATH = '';
+			var PUBLICPATH = '/public';
+			var UPLOAD_URL = 'http://qjwd.oss-cn-shenzhen.aliyuncs.com/';
+			var ROOTPATH = '__ROOT__';
+		</script>
+		<link href="__PUBLIC__/App/Home/Css/style.css" rel="stylesheet">
+		<link href="__PUBLIC__/Css/icon-css/style.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+
+		<include file="Index:user"/>
+
+		<!-- 首屏2 -->
+		<!-- 首屏黑色半透明遮罩层 -->
+		<div class = "c-f-cover"></div>
+		<div class="row">
+			<div id="topnav" class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+
+				<div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
+					<a href="index.html"> <img class="img-responsive" src="__PUBLIC__/App/Home/Images/mismall1.png" style="height: 30px;padding-left: 30px; width: 85px"> </a>
+				</div>
+
+				<div class="col-lg-6 col-sm-6 col-md-6  hidden-md hidden-sm hidden-xs">
+					<ul>
+						<li class="col-lg-3 col-sm-3 col-md-3"></li>
+						<li class="col-lg-3 col-sm-3 col-md-3">
+							<a href="__APP__/AppStore/index/type/5.html">找应用</a>
+						</li>
+						<li id="saleCenter" class="col-lg-3 col-sm-3 col-md-3">
+							创 业
+						</li>
+						<li id="userCenter" class="col-lg-3 col-sm-3 col-md-3">
+							会员中心
+						</li>
+					</ul>
+				</div>
+
+				<div style="" class="col-lg-3 col-sm-6 col-md-6 col-xs-6 user_layer" id="panel_login">
+					<if condition="isMobile()">
+						<a style="padding-left:10px;" href="javascript:;" id="a_show_register">注册 SIGN UP</a>
+						<else/>
+						<a style="padding-right:10px;" href="javascript:;" id="a_show_login">登录LOGIN</a>
+						<span>|</span>
+						<a style="padding-left:10px;" href="javascript:;" id="a_show_register">注册SIGN UP</a>
+					</if>
+				</div>
+
+				<div style="display:none;" id="panel_logined" class="col-lg-3 col-sm-12 col-md-12 col-xs-12 user_login">
+					<a href="javascript:;">{$Think.session.uname}</a>
+					<div id="btn_loginout">
+						退出
+					</div>
+				</div>
+
+			</div>
+			<div class="row" style = "margin-left: 0">
+				<div class="backstretch">
+					<img src="__PUBLIC__/App/Home/Images/maka02_xiugai_banner.jpg" id="img-responsive" />
+				</div>
+			</div>
+			<div class="row container" id="coolintro">
+				<div class="row">
+					<!--
+					<h1 class = "mismallAdv">企业<span style = "color:rgba(0,255,0,.9)"> 应用</span> 定制 <span style = "color:rgba(0,255,0,.9)">平台</span></h2>
+					-->
+					<h1 class = "mismallAdv" >企业<span > 应用</span> 定制 <span  >平台</span></h2>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 col-sm-12 col-md-12" >
+						<div class="intro" id = "viewVideo" style="margin:54px auto;width:175px;height:50px;">
+							<a href="javascript:void(0)" style="margin:0;position:relative;padding:0;">
+							<input type = "button" value = "观看视频" style = "width:120px;height:35px;margin-top:10px;font-size:18px;color:#fff;background:rgba(0,0,0,.5);border:3px solid #ccc;border-radius:6px"/>
+							</a>
+						</div>
+					</div>
+					<!--
+					<div class="col-lg-12 col-sm-12 col-md-12 hidden-md hidden-sm hidden-xs">
+						-->
+					<div class="col-lg-12 col-sm-12 col-md-12">
+						<div class="intro" id = "intro" style="margin:0 auto;width:175px;height:50px;">
+							<a href="javascript:void(0)" style="margin:0;position:relative;padding:0;">
+							<input type = "button" value = "立即动手" style = "width:120px;height:35px;margin-top:10px;font-size:18px;color:#fff;background:rgba(0,0,0,.5);border:3px solid #ccc;border-radius:6px"/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="intros" style="width:100%;display:none;position: absolute;top: 0;left: 0;"></div>
+			<div id="videos" style="display:none;position:absolute;z-index:1100;">
+				<div class = "closeVideo">
+					<img src = "__PUBLIC__/App/Home/Home/images/black-x.png"/>
+				</div>
+				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="800" height="400"   data-setup='{}'>
+					<source src="__PUBLIC__/mismall.mp4" type='video/mp4'>
+					<p class="vjs-no-js">
+					To view this video please enable JavaScript, and consider upgrading to a web browser
+					that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+				</video>
+			</div>
+		</div><!-- 首屏 END -->
+		<!-- fixed 导航 -->
+		<div id="fixednav" style="width: 100%; z-index: 9;" class="col-lg-12 col-sm-12 col-md-12  hidden-md hidden-sm hidden-xs">
+			<div id="" class="">
+				<div class="col-lg-3 col-sm-3 col-md-3" id="logo">
+					<a href="index.html"> <img class="img-responsive" src="__PUBLIC__/App/Home/Images/mismall1.png" style="padding-top:9px;padding-left: 30px;width:113px"> </a>
+				</div>
+				<div class="col-lg-6 col-sm-6 col-md-6  hidden-md hidden-sm hidden-xs">
+					<ul>
+						<li class="col-lg-3 col-sm-3 col-md-3"></li>
+						<li class="col-lg-3 col-sm-3 col-md-3">
+							<a href="__APP__/AppStore/index/type/5.html">找应用</a>
+						</li>
+						<li id="saleCenter2" class="col-lg-3 col-sm-3 col-md-3">
+							创 业
+						</li>
+						<li id="userCenter2" class="col-lg-3 col-sm-3 col-md-3" style="padding:0%;">
+							会员中心
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- fixed 导航 END -->
+		<div id="go_top" style="position:fixed;top:120px; right:20px;display:none;z-index:99999;cursor:pointer">
+			<img src="__PUBLIC__/App/Home/Images/maka02_index_58.png" />
+		</div>
+		<if condition="isMobile()">
+			<include file="Index:mobileCenter"/>
+			<else/>
+			<include file="Index:pcCenter"/>
+		</if>
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="row">
+				<!-- <div class="row" style="text-align:center">
+				<div id="footer_nav" class="col-lg-12 col-sm-12 col-md-12 ">
+				<a class="footer_btn1" href="javascript:void(0)"><img src="__PUBLIC__/App/Home/Images/maka02_index_36.png" /></a>
+				<a class="footer_btn2" id = "footer_btn2" href="javascript:void(0)"><img src="__PUBLIC__/App/Home/Images/maka02_index_38.png" /></a>
+				<a class="footer_btn3" href="javascript:void(0)"><img src="__PUBLIC__/App/Home/Images/maka02_index_41.png" /></a>
+				<a class="footer_btn4" href="javascript:void(0)"><img src="__PUBLIC__/App/Home/Images/maka02_index_43.png" /></a>
+				</div>
+				</div> -->
+				<div class="row" style="text-align:center">
+					<div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center;padding:11px 0;color:#5C5C5C">
+						<img id="weixin" src="__PUBLIC__/App/Home/Images/qjwd-qrcode.jpg" width = "200px" height = "200px"/>
+					</div>
+				</div>
+				<div class="row" style="text-align:center">
+					<div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center;color:#5C5C5C">
+						<ul>
+							<li>
+								QQ群：363028020
+							</li>
+							<li>
+								&copy;2015 mismall 粤ICP备15005056号-1
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</footer><!-- FOOTER END -->
+	</body>
+	<script src="__PUBLIC__/App/Home/Js/jquery.pin.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/App/Home/Js/jquery.kxbdmarquee.js"></script>
+	<script type="text/javascript">
+		var fp_animate = false;
+		var is_fp = $(window).scrollTop() > 0 ? false : true;
+		$(document).ready(function() {
+			var NowTime = new Date().getTime();
+			var endTime1 = new Date(Date.parse('2015-02-15')).getTime();
+			if (NowTime <= endTime1) {
+				//alert('hi');
+				$('#floatdiv').show();
+				//return  false;
+			}
+			if ($(window).scrollTop() > 0) {
+				$('#go_top').show();
+			}
+			var $goT = $("#go_top");
+			$goT.on("mouseover", function() {
+				$goT.find("img").attr("src", "http://mywork2014.qiniudn.com/maka02_index_60.png");
+			});
+			$goT.on("mouseout", function() {
+				$goT.find("img").attr("src", "http://mywork2014.qiniudn.com/maka02_index_58.png");
+
+			});
+			$goT.on("click", function() {
+				$(window).scrollTop(0);
+			});
+			$(window).resize(function() {
+				fixfirstpage();
+				videoLayout();
+			});
+			$(window).on("scroll", function() {
+				if ($(window).scrollTop() > 0) {
+
+					if (is_fp) {
+						is_fp = false;
+						$('#topnav').slideUp({
+							duration : 20,
+							easing : 'easeOutElastic',
+							complete : function() {
+								/*$('html,body').animate({scrollTop: $(window).height()}, 'fast',function(){
+								 is_fp = false;
+
+								 });*/
+
+							}
+						});
+					}
+				}
+				//是否回到顶点
+				if ($(window).scrollTop() <= 10) {
+					$('#topnav').slideDown({
+						duration : 1000,
+						easing : 'easeOutElastic',
+						complete : function() {
+							is_fp = true;
+						}
+					});
+				}
+				if ($(window).scrollTop() >= $(window).height()) {
+					$('#go_top').show();
+				} else {
+					$('#go_top').hide();
+				}
+
+			});
+			fixfirstpage();
+			videoLayout();
+			$("#fixednav").pin();
+			$('#newslist').kxbdMarquee({
+				direction : 'up',
+				isEqual : false,
+				scrollDelay : 40
+			});
+
+		});
+		function fixfirstpage() {
+			var windowW = $(window).width();
+			var windowH = $(window).height();
+			var fullimg = $('#img-responsive');
+			//1920*1080
+			var bl = parseFloat(1920 / 1080);
+			//图片大小比例
+			fullimg.attr('style', '');
+			//区分横屏 竖屏
+			if (windowH * bl > windowW) {
+				//竖屏
+				fullimg.css({
+					'height' : windowH
+				});
+			} else {
+				fullimg.css({
+					'width' : windowW
+				});
+			}
+			fullimg.parent().css({
+				"width" : windowW,
+				"height" : windowH
+			});
+		}
+
+		function videoLayout() {
+			var vwinW = $(window).width();
+			var vwinH = $(window).height();
+			var vW = $("#really-cool-video").width();
+			var vh = $("#really-cool-video").height();
+			$("#videos").css({
+				"left" : (vwinW - vW) / 2,
+				"top" : (vwinH - vh) / 2
+			});
+			var myPlayer = videojs('really-cool-video');
+			$("#viewVideo").on("click", function() {
+				$("#intros,#videos").css("display", "block");
+				myPlayer.play();
+			});
+			$("#intros").css({
+				"height" : vwinH
+			});
+			$("#intros,.closeVideo").on("click", function() {
+				$("#intros,#videos").css("display", "none");
+				myPlayer.pause();
+			});
+		}
+	</script>
+
+</html>

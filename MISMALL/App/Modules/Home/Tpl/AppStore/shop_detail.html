@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>商品详情 | mismall</title>
+
+		<!-- core CSS -->
+		<include file="Public:client_hearder" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Home/AppStore/Css/shopdetail.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Home/AppStore/Css/gallery.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Home/AppStore/Css/Pager.css" />
+	
+	<!--中间内容 -->
+	<div class="clear"></div>
+	<div id="content">
+		<div class="rightsideBar">
+			<div class="back fl">
+				<a href="../Client/appStore.html">返回</a>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="container">
+			<div class="top_cont">
+				<div class="shop_cont fl">
+					<div class="shop_img fl"><img src="" width="90" height="90" />
+					</div>
+					<div class="shop_intro fr">
+						<p>
+							<span class="f-16b"></span>
+						</p>
+						<p class="app_priceWrap">
+							价格：<span class="f-red">￥<span class="app_price"></span>/次</span>
+						</p>
+						<p class="app_type">
+							分类：微信企业应用 | 支持：手机
+						</p>
+						<if condition="isMobile()">
+							
+							<else/>
+								<p style="margin-top:10px">
+									<a href="../AppStore/confirmorder.html?id={$id}" class="btn_buy">购 买</a>
+								</p>
+						</if>
+					</div>
+					<div class="try_div">
+						<!-- <a href="__ROOT__/Qywx/Editor/index/tplId/{$id}" class="buy">购 买</a> -->
+						<!-- <a href="__ROOT__/Qywx/Editor/index/tplId/{$id}" class="try">立即体验</a> -->
+						<img src="{:U('qrcode?siteId='.$id)}" style="height: 150px"><br/>
+						微信扫码体验
+					</div>
+				</div>
+				<div class="shop_service fr" >
+					<p><img src="__ROOT__/images/kefu.jpg" width="100" height="100" />
+					</p>
+					<p class="online_ask" style="display:none;">
+						<a href="http://wpa.qq.com/msgrd?v=3&uin='+value['userQQ']+'&site=qq&menu=yes">我在线，马上咨询</a>
+					</p>
+					<p class="notline_ask" >
+						<a href="http://wpa.qq.com/msgrd?v=3&uin='+value['userQQ']+'&site=qq&menu=yes">店主不在，请留言</a>
+					</p>
+				</div>
+				<div style = "clear: both"></div>
+			</div>
+			<div class="clear"></div>
+			<div class="detail">
+				<div class="name_bar">
+					应用介绍
+				</div>
+				<div class="name_bar1">
+					应用评论
+				</div>
+				<div class="intor fl" id="app_detail">
+					<div class="intor_text">
+						
+						<p class="show">
+							<a href="#" class="ground">展开</a>
+						</p>
+					</div>
+					<!--加载图片-->
+				<div id="gallery" class="nph_gallery clearfix">
+				<div class="nph_bg">
+					<div class="nph_photo" id="modePhoto">
+						<div class="nph_photo_view">
+							<div id="photoView" name="photoView" class="nph_cnt" style="display:none">
+								<i></i><img src="" id="photo" />
+							</div>
+							<div class="nph_photo_prev" style="display:none">
+								<a id="photoPrev" class="nph_btn_pphoto" target="_self" hidefocus="true" href="#photoView"></a>
+							</div>
+							<div class="nph_photo_next" style="display:none">
+								<a id="photoNext" class="nph_btn_nphoto" target="_self" hidefocus="true" href="#photoView"></a>
+							</div>
+						</div>
+						<!--nph_photo_view end-->
+						
+						<div class="nph_cnt" style="display:none">
+							<div class="nph_cnt clearfix">
+								<div class="nph_set_info">
+									<div id="setInfo">
+										<div class="nph_set_title">
+											<span id="photoType" class="nph_set_cur">（<span class="nph_c_lh" id="photoIndex">0</span>/<span id="nph_tool">0</span>）</span>
+											<h1>应用截图预览</h1>
+										</div>
+									</div>
+								</div>
+						</div> 
+							
+							<div id="photoDesc" class="nph_photo_desc">
+							</div>
+						</div><!--nph_cnt end-->
+						
+						<div class="nph_cnt" style="display:none">
+							<div class="clearfix">
+								<div class="nph_set">
+									<div class="nph_set_thumb">
+										<div id="scrl" class="nph_photo_thumb clearfix" style="width:589px;">
+											<div class="clearfix">
+												<div class="nph_scrl">
+													<div class="nph_scrl_thumb">
+														<div class="nph_scrl_main" id="nph_scrl_main">
+															<ul id="thumb" class="nph_list_thumb clearfix" style="width:800px;">
+			
+															</ul>
+														</div>
+														
+														<div class="nph_scrl_bar clearfix"  style="display:none">
+															<span class="nph_scrl_lt"></span>
+															<span class="nph_scrl_rt"></span>
+															<div class="nph_scrl_bd">
+																<div class="nph_scrl_ct" id="nph_scrl_ct">
+																	<a id="bar" class="nph_btn_scrl">
+																		<b class="nph_btn_lt"></b>
+																		<b class="nph_btn_rt"></b>
+																		<span class="nph_btn_bd"><span><b class="nph_btn_ct"></b></span></span>
+																	</a>
+																</div>
+															</div>
+														</div>
+														
+													</div>
+												</div>
+												
+												<span class="nph_scrl_prev" style="display:none"><a id="scrlPrev" class="nph_btn_pscrl" hidefocus="true" href="javascript:void(0)"></a></span>
+												<span class="nph_scrl_next" style="display:none"><a id="scrlNext" class="nph_btn_nscrl" hidefocus="true" href="javascript:void(0)"></a></span>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				<!--图片结束-->
+			</div>
+			<div class="intor fl" id="app_comment" style="display:none">
+				<div class="comment">
+					<div class="tit_list">
+						<ul>
+							<li class="commenttype" id="allcomment">
+								<a href="javascript:;" val="0" style="color:#000">全部评论(<b></b>)</a>
+							</li>
+							<li class="commenttype" id="goodcomment">
+								<a href="javascript:;" val="1">好评(<b></b>)</a>
+							</li>
+							<li class="commenttype" id="normalcomment">
+								<a href="javascript:;" val="2">中评(<b></b>)</a>
+							</li>
+							<li class="commenttype" id="badcomment">
+								<a href="javascript:;" val="3">差评(<b></b>)</a>
+							</li>
+						</ul>
+					</div>
+					<div class="comment-con">
+						<ul id="ulComment"></ul>
+						<div id="pager"></div>
+						<div class="fbpl">
+							<p>
+								<span class="pl_dj">
+									<input name="comment-rank" type="radio" id="good" value="1"  class="pl_dj" checked/>
+									好评</span>
+								<span class="pl_dj">
+									<input name="comment-rank" type="radio" id="normal"  value="2" />
+									中评</span>
+								<span class="pl_dj">
+									<input name="comment-rank" type="radio" id="bad" value="3" />
+									差评</span>
+							</p>
+							<p class="fbtitle">
+								发布评论<span id="fontleng" style="margin-left:440px">还能输入<label id="font">500</label>个字符</span>
+							</p>
+							   <p>
+								{:Widget('Editor',array('height'=>'200px','type'=>'simple_comment','number' => 500,'numberId' => 'fontleng','contentName'=>'comment_content','value'=>''))}
+	                           </p>   
+	                         <p>
+								<input id="submitbtn" type="button" value="发布评论"  class="sent"/>
+								<span id='tips' style='color:red;margin-left:300px;'><b></b></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "intor_fr designerOtherApps fr">
+				<p class="title">
+					开发者其他应用
+				</p>
+				<div class = "designerAppsListWrap">
+					<volist name="userAppList" id="vo">
+					<div class = "appsListItem">
+						<a href="{:U('AppStore/shop_detail')}?id={$vo.id}"><img src = "{$vo.thumbPath}" width = "100px" height = "100px" alt = "{$vo.siteName}"/></a>
+						<p>{$vo.siteName}</p>
+					</div>
+					</volist>
+				</div>
+			</div>
+			<div class="intor_fr fr">
+				<p class="title">
+					应用信息
+				</p>
+				<div class = "appInfoDtl">
+					<p>
+						类别 ： <span class="app_type"></span>
+					</p>
+					<p>
+						版本 ：<span class="app_version"></span>
+					</p>
+					<p>
+						更新 ：<span class="release_time"></span>
+					</p>
+					<p>
+						开发者 ： <span class="app_author"></span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<include file="Public:unregistered_footer" />
+<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/jquery.pager.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/appdetails.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/slider.js"></script>
+<script type="text/javascript" src="__STATIC__/Home/template.js"></script>

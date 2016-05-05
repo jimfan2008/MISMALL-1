@@ -1,0 +1,251 @@
+<html lang="gbk">
+  <head>
+    <meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>微信管理</title>
+
+	<!-- 为了让html5shiv生效，请将所有的CSS都添加到此处 -->
+	<link href="__PUBLIC__/Js/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="__PUBLIC__/App/Forum/js/ext/toastr/toastr.min.css" rel="stylesheet"/>
+	<link href="__PUBLIC__/App/Wechat/css/wechat.css" rel="stylesheet"/>
+	<!-- jQuery库 -->
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.10.2.min.js"></script>
+	<![endif]--><!--[if gte IE 9]><!-->
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+	<!--<![endif]-->
+	<!-- Bootstrap库 -->
+	<script type="text/javascript" src="__PUBLIC__/Js/bootstrap/js/bootstrap.min.js"></script>
+	<!-- 增强IE兼容性 -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="__PUBLIC__/Js/bootstrap/js/html5shiv.js"></script>
+	<script src="__PUBLIC__/Js/bootstrap/js/respond.js"></script>
+	<![endif]-->
+	<style type="text/css">
+.icon_mp_kind{width:106px;height:106px;vertical-align:middle;display:inline-block;display:block;margin:0 auto 30px; background:url("https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_login_z.png") no-repeat;}
+.icon_mp_kind.service{background-position: 0 -177px}
+.icon_mp_kind.subscribe{background-position:0 -293px}
+.icon_mp_kind.enterprise{background-position: 0 -409px}
+.mp_kind_mod{padding-bottom:40px;border-bottom:1px solid #e7e7eb}
+.mp_kind_mod_hd{/*padding-bottom:35px;padding-top:24px*/}
+.mp_kind_mod_hd h3{font-weight:400;font-style:normal;font-size:20px}
+.mp_kind_mod_bd{*zoom:1}
+.mp_kind_mod_bd:after{display:block;height:0;clear:both}
+.mp_kind_wrp{display:inline-block;_zoom:1;_display:inline;width:212px;margin:0 2px;*float:left;border: 1px solid #fff}
+a.mp_kind_wrp:hover{text-decoration:none;border:1px solid #0a70a7;}
+.mp_kind{color:#8d8d8d}
+.mp_kind dt{padding-top:10px;color:#222;font-size:16px;text-align:center;margin-bottom:11px}
+.mp_kind dd{margin-bottom:3px;text-align:left}
+.mp_kind dd.icon_mp_kind{margin-left:0;position:absolute;top:0;left:70px}
+.icon_mp_case{display:inline-block;width:72px;height:72px;vertical-align:middle}
+.form_label{width: 8em;}
+.loading {
+      float: left;
+    margin-left: 20px;
+    position: relative;
+    width: 150px;
+}
+.loading .loading_txt {
+    left: 40px;
+    position: absolute;
+    top: 8px;
+}
+	</style>
+</head>
+<body>
+    <div class="container">
+	<div class="row" style="margin:0">
+           	           <div class="mp_kind_mod">
+	                <div class="mp_kind_mod_hd">
+	                    <h3>绑定帐号类型</h3>
+	                </div>
+	                <div class="mp_kind_mod_bd group">
+	                <a class="mp_kind_wrp" href="javascript:void(0);" onclick="next(1)">
+	                        <dl class="mp_kind">
+	                            <dt class="name"><span class="icon_mp_kind enterprise"></span>企业号</dt>
+	                            <dd>为企业或组织提供移动应用入口，帮助企业建立与员工、上下游供应链及企业应用间的连接。</dd>
+	                        </dl>
+	                    </a>
+	                    <a class="mp_kind_wrp" href="javascript:void(0);" onclick="next(2)">
+	                        <dl class="mp_kind">
+	                            <dt class="name"><span class="icon_mp_kind service"></span>虚拟公众号</dt>
+	                            <dd>虚拟公众号是为解析无法或者申请公众号验证困难的广大用户而专门开发的应用，用户无需公众号可享受验证公众号的功能。 </dd>
+	                        </dl>
+	                    </a>
+	                      <a class="mp_kind_wrp" href="javascript:void(0);" onclick="next(0)">
+	                        <dl class="mp_kind">
+	                            <dt class="name"><span class="icon_mp_kind service"></span>公众号</dt>
+	                            <dd>给企业和组织提供更强大的业务服务与用户管理能力，帮助企业快速实现全新的公众号服务平台。 </dd>
+	                        </dl>
+	                    </a>
+	                </div>
+	            </div>
+
+	            <div class="mp_wechat_service" style="display:none">
+	            		<div class="mp_kind_mod_hd">
+		                    <h3>智能绑定公众账号</h3>
+		               </div>
+	            		<div style="padding:10px;">
+		                <p style="text-align:center;"><span style="color: #ff4400;">重要提示：我们确保每个公众号的信息安全，公众号账号及密码系统不会做记录，您可放心填写。</span></p>
+		            </div>
+		        	<div class="form_item">
+			    <label class="form_label">公众平台用户名</label>
+			    <div class="form_control">
+			      <input type="text" class="input_text" id="wxusername" name="wxusername" onblur="verifyGen()" autocomplete="off">
+			    </div>
+			  </div>
+			  <div class="form_item">
+			    <label class="form_label">公众平台密码</label>
+			    <div class="form_control">
+			      <input type="password" class="input_text"  id="wxpassword" name="wxpassword" autocomplete="off">
+			    </div>
+			  </div>
+			  <div class="form_item" style="display:none">
+			    <label class="form_label">登录验证码</label>
+			    <div class="form_control">
+			      <input type="text" name="verify" id="wxverify" class="input_text" value="" autocomplete="off" width="100px" />
+				  <span class="help-inline"><img src="" id="imgverify"> <a href="javascript:;" onclick="verifyGen()">换一张</a></span>
+			    </div>
+			  </div>
+			  <div style="color:gray;text-align:right;padding:10px;">提示：此处为微信公众平台的账号，尚未申请的请点击>><a href="http://mp.weixin.qq.com" target="_blank">申请</a><<</div>
+
+			  <div class="form_item">
+			    <label class="form_label"></label>
+			    <div class="form_control">
+			      <button class="btn btn-primary pull-left" onclick="ajaxAutoBind()">一键智能升级</button>
+			      <div id="wxloading" class="loading" style="display:none;">
+			                <img src="__PUBLIC__/App/Wechat/images/ico_loading_white.gif">
+			                <div class="loading_txt">正在绑定...</div>
+			            </div>
+			    </div>
+			  </div>
+			  <div style="text-align:right;padding:10px;">不想输入账号和密码? 点击进入>><a href="javascript:void(0);" onclick="notAutobind(0)">手动绑定</a>
+<<</div>
+	            </div>
+	</div>
+    </div>
+
+	
+<script type="text/javascript">
+(function(){
+	window.Think = {
+		"ROOT"   : "__ROOT__", //当前网站地址
+		"APP"    : "__GROUP__", //当前项目地址
+		"PUBLIC" : "__PUBLIC__", //项目公共目录地址
+		"DEEP"   : "{:C('URL_PATHINFO_DEPR')}", //PATHINFO分割符
+		"MODEL"  : ["{:C('URL_MODEL')}", "{:C('URL_CASE_INSENSITIVE')}", "{:C('URL_HTML_SUFFIX')}"],
+		"VAR"    : ["{:C('VAR_GROUP')}", "{:C('VAR_MODULE')}", "{:C('VAR_ACTION')}"]
+	}
+})();
+</script>
+<script type="text/javascript" src="__PUBLIC__/App/Forum/js/ext/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Wechat/js/core.js"></script>
+<script type="text/javascript">
+var siteId = {$site_id};
+	function next(type) {
+		if(type==1) {
+			notAutobind(1);
+		} else if(type==2) {
+			notAutobind(2);
+		} else {
+			$('.mp_kind_mod').css('display', 'none');
+			$('.mp_wechat_service').css('display', 'block');
+		}
+	}
+
+	//手动绑定
+	function notAutobind(type) {
+		$.ajax({
+			url : Think.APP+'/MyCenter/bindWechatPost',
+			type : 'POST',
+			dataType : 'text',
+			data : {type: type, id : siteId},
+			success : function(s) {
+				if(s == '-1') {
+					handleAjax({'info' : '应用不存在'});
+					art.dialog.close();	
+				} else if(s == 'success') {
+					var url;
+					switch(type){
+						case 2:
+							url = "/Apps/WechatMp/appSetting";
+						break;
+						case 2:
+							url = "/Apps/WechatQy/appSetting";
+						break;
+						default:
+							url = "/Apps/WechatMp/setting";
+
+					}
+					handleAjax({'info' : '手动绑定，即将跳转....', 'status' : true});
+    					window.setTimeout(function(){parent.location.href = url;}, 3000);
+				} else if(s == 'error') {
+					handleAjax({'info' : '绑定失败'});
+					return false;
+				} else {
+					handleAjax({'info' : '绑定失败'});
+					return false;	
+				}
+			}
+		})
+	}
+
+	function ajaxAutoBind() {
+	var name = $('#wxusername').val();
+	var pwd = $('#wxpassword').val();
+	var verify = $('#wxverify').val();
+	if(name == '') {
+		handleAjax({'info' : '公众平台用户名不能为空'});
+		return false;
+	}
+	if(pwd == '') {
+		handleAjax({'info' : '公众平台密码不能为空'});
+		return false;
+	}
+	if(verify == '') {
+		handleAjax({'info' : '验证码不能为空'});
+		return false;
+	}
+	$.ajax({
+		url : Think.APP+'/MyCenter/bindWechatPost',
+		type : "POST",
+		dataType : 'text',
+		data : {type : 0, id : siteId, user:name, pwd : pwd, verify : verify},
+		success: function(s) {
+			$('#wxloading').css('display', 'none'); 
+			if(s == -1) {
+				handleAjax({'info' : '输入参数不能为空'});
+				return false;
+			} else if(s==-2) {
+				handleAjax({'info' : '绑定公众账号失败，请手动绑定公众帐号'});
+				return false;
+			} else if(s == 'success') {
+				handleAjax({'info' : '绑定成功，即将跳转....', 'status' : true});
+    				window.setTimeout(function(){parent.location.href = Think.APP+"/Apps/WechatMp/setting";}, 3000);
+			} else if( s == 'error') {
+				handleAjax({'info' : '绑定公众账号失败'});
+				return false;
+			} else {
+				handleAjax({'info' : '绑定公众账号失败，请手动绑定公众帐号'});
+				return false;
+			}
+		},
+		beforeSend : function(){
+			$('#wxloading').css('display', 'block'); 
+		}
+	});
+}
+//获取验证码
+function verifyGen() {
+	if ($('#wxusername').val()) {
+		$('#imgverify').attr('src', 'https://mp.weixin.qq.com/cgi-bin/verifycode?username='+$('#wxusername').val()+'&r='+Math.round(new Date().getTime()));
+		$('#imgverify').parent().parent().parent().show();
+	}
+}
+</script>
+
+	
+</body>
+</html>

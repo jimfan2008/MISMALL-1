@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>[title]</title>
+		<link href="__STATIC__/Home/Css/base1.css" rel="stylesheet" type="text/css" />
+		<link href="__STATIC__/Home/Css/index1.css" rel="stylesheet" type="text/css" />
+		<link href="__PUBLIC__/App/Home/Home/Css/base.css" rel="stylesheet" type="text/css" />
+		<link href="__PUBLIC__/App/Home/Home/Css/designer.css" rel="stylesheet" type="text/css" />
+		<link href="__PUBLIC__/App/Home/Home/Css/member.css" rel="stylesheet" type="text/css" />
+		<link href="__PUBLIC__/Css/icon-css/style.css" rel="stylesheet" type="text/css" />
+		<script src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+		<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js"></script>
+		<script src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script src="__PUBLIC__/Js/common.js"></script>
+		<script src="__PUBLIC__/App/Home/Home/user.js"></script>
+		<script>
+			var URLPATH = '__URL__';
+			var APPPATH = '__APP__';
+			var GROUPPATH = '__GROUP__';
+			var PUBLICPATH = '__PUBLIC__';
+			var UPLOAD_URL = '__UPLOAD_URL__';
+			var ROOTPATH = '__ROOT__';
+		</script>
+	</head>
+	<body>
+		<include file="Index:user"/>
+		<div id="container_table">
+			<div class="container_table_row">
+				<div class="container_table_cell" style="height:10px;">
+					<div id="heard" >
+						<div class="navmenu">
+							<div class="layer"></div>
+							<div class="menu">
+								<div class="logo fl">
+									<img src="__PUBLIC__/App/Home/Home/images/Mismall1.png" width="112px" height="70px">
+
+								</div>
+								<ul>
+									<li >
+										<a  class="[index]" href="{:U('/')}">首页</a>
+									</li>
+									<li >
+										<a  class="[shop]" href="{:U('/AppStore/index/type/5')}" >找应用</a>
+									</li>
+									<!-- <li>
+									<a  class="[need]" href="#" id="yourNeed" >发需求</a>
+
+									</li> -->
+									<li >
+										<a   href="{:U('/Template/index/type/20')}" id="DIY" class="[hand]">动手做</a>
+									</li>
+									<!--<li >
+									<a href="{:U('/Forum/Index/forum')}">论坛</a>
+									<!--<a  class="[forum]"  href="#" id="forum">论坛</a>
+									</li>-->
+									<li>
+										<span style = "float:left;">创业</span>
+										<div class="uiArrow">
+											<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+										</div>
+										<!-- <a href="{:U('/MyCenter/my_sale')}">开发者中心</a> -->
+										<div class = "subMenu">
+											<ul>
+												<li><a href = "{:U('/MyCenter/web_wx')}" style = "padding-right:95px;">我的</a></li>
+												<li><a href = "{:U('/MyCenter/proxy')}" style = "padding-right:65px;">渠道代理</a></li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a  class="[mycenter]" href="#" id="userCenter">会员中心</a>
+										<!-- <a href="{:U('/MyCenter/web_wx')}">会员中心</a> -->
+									</li>
+									<li>
+										<a id="help"  class="[help]" href="{:U('Home/Help/index')}" >帮助中心</a>
+										<!-- <a href="{:U('/MyCenter/web_wx')}">帮助中心</a> -->
+									</li>
+
+								</ul>
+
+								<div class="user_layer fr" id="panel_login">
+									<div class="usertext_layer"></div>
+									<div class="usertext">
+										<a id="a_show_login" href="javascript:;">登录</a> 　|　 <a id="a_show_register" href="javascript:;">注册</a>
+									</div>
+								</div>
+								<div class="user_login" id="panel_logined" style="display:none;">
+									<a href="javascript:;">{:session('uname')}</a>
+									{$developPage}
+									<div id="btn_loginout">
+										退出
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container_table_row">
+				<div class="container_table_cell">

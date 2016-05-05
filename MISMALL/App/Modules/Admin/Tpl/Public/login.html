@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{$meta_title}|管理平台</title>
+    <link href="__ROOT__/public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Css/base.css" media="all">
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+    <style type="text/css">
+<!--
+/*使用者登陆界面*/
+#userlogin_top{width:400px; height:80px; line-height:80px; margin:70px auto 15px; color:#fff;}
+#userlogin_top img{width:200px; height:80px; margin-left:10px;}
+#userlogin_main{width:400px; height:auto; overflow:auto; margin:0 auto; background:#705ef0; color:#fff;}
+#userlogin_main .title{width:100%; height:40px; line-height:40px; font-size:14px; background:url(__STATIC__/Images/user.png) no-repeat -2px center; text-indent:2.5em;}
+#userlogin_main .infor{width:75%; margin:20px auto; font-size:14px;text-align: left;}
+#userlogin_main .infor li{width:100%; height:40px; overflow:hidden; line-height:45px;}
+#userlogin_main .infor li.name{line-height:55px;}
+#userlogin_main .infor li a{color:#fff;}
+#userlogin_main .infor li a:hover{color:#cec7ff;}
+#userlogin_main .infor .input{width:100%; height:18px; padding:6px 5px; line-height:18px; color:#333; border:1px solid #fff;}
+#userlogin_main .infor .input:hover{border:1px solid #1776cf;}
+#userlogin_main .infor .sent{width:96px; height:36px; line-height:38px; background:#311dbb; border:none; color:#fff; font-size:14px; font-family:"΢���ź�"; cursor:pointer;}
+#userlogin_main .infor .sent:hover{ background:#4b36e0; }
+
+/*用户提示信息*/
+#userlogin_main .error {background: url("__STATIC__/Images/icon_error.gif") no-repeat scroll 10px 11px #F6B9B9;border: 1px solid #E18484;color: #C32727;display: block;font-size: 13px; margin: 0;margin-top:10px; padding: 10px 10px 10px 35px;position: relative; width: 100px;height: 10px;
+}
+-->
+</style>
+</head>
+
+<script type="text/javascript">
+//登录按钮事件
+function subForm()
+{ 
+	var username=$("#userName").val();	
+	var password=$("#userPwd").val();
+	if(username=="")
+	{
+		$("#userName").focus();
+		$("#errMsg_name").css("display","block");//“用户名”提示框信息显示 
+		return false;
+	}else if(password==""){
+		$("#userPwd").focus();
+		$("#errMsg_name").css("display","none");
+		$("#errMsg_pwd").css("display","block");//“密码”提示框信息显示 
+		return false;
+	}
+	else
+	{
+		$.ajax({
+			type:"POST",
+			url: "__GROUP__/Public/ajaxLogin",
+			dataType:'JSON',
+			data:{user_name:username,password:password},
+			success:function(data)
+			{
+				if(data['status']==1)
+				{ 
+					window.location = "__GROUP__/Index/index";
+				}
+				else{
+					$("#userName").focus();
+					$("#errMsg_pwd").css("display","none");
+					$("#Msg_error").css("display","block").css("width",130);
+				}
+			}
+		});
+	}
+}
+$(function()
+ {
+	 document.onkeydown=function(e)
+	 {
+		 var e = document.all ? window.event : e;
+         if(e.keyCode==13){
+        	 subForm();
+         }
+     }
+ })
+</script>
+</head>
+<body>
+
+<div id="userlogin_top"></div>
+<div class="clear"></div>
+<div id="userlogin_main">
+<div class="infor">
+<div class="title" style="font-size:20px;"><strong>后台系统登陆</strong></div>
+<ul>
+<li class="name">用户名：</li>
+<li><input name="userName" id="userName" type="text" class="input" value="" /></li>
+<span class="error" id="errMsg_name" style="display: none;">请输入用户名<span class="hint-pointer"></span> </span>
+<li class="name">密码：</li>
+<li><input name="userPwd" id="userPwd" type="password" class="input" value="" /></li>
+<span class="error" id="errMsg_pwd" style="display: none;">请输入密码<span class="hint-pointer"></span> </span>
+		<span class="error" id="Msg_error" style="display: none;">用户名或密码错误
+		<span class="hint-pointer"></span> </span>
+<li style="margin-top:15px;"><input name="loginbtn" type="button" value="登 陆"  class="sent" onclick="subForm();"/></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<volist name="tree" id="list">
+	<dl class="cate-item">
+		<dt class="cf">
+			<form action="{:U('departmentEdit')}" method="post">
+				<div class="fold"><i class="icon-unfold"></i></div>
+				<div class="name">
+					<span class="tab-sign"></span>
+					<input type="hidden" name="id" value="{$list.id}">
+					<input type="text" name="title" class="text" value="{$list.name}">
+					<a class="add-sub-cate" title="添加子部门" href="javascript:void(0)" onclick="addDepartment({$list['depId']})">
+						<i class="icon-add"></i>
+					</a>
+					<a class="add-sub-cate" title="删除部门" href="javascript:void(0)" onclick="delDepartment({$list['id']})">
+						<i class="icon-del"></i>
+					</a>
+					<span class="help-inline msg"></span>
+				</div>
+			</form>
+		</dt>
+		<notempty name="list['_']">
+			<dd>
+				{:R('WechatQy/department_tree', array($list['_']))}
+			</dd>
+		</notempty>
+	</dl>
+</volist>

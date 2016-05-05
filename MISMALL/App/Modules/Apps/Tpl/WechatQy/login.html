@@ -1,0 +1,106 @@
+<extend name="mobileBase"/>
+<block name="style">
+<style type="text/css">
+<!--
+/*使用者登陆界面*/
+body{background: url("__PUBLIC__/App/Wechat/images/qy_login_bg.jpg")}
+#userlogin_main{width:400px; height:auto; margin:200px auto 0; background:#fff; overflow: hidden;}
+#userlogin_main .title{ 
+    font-size: 20px;
+    font-weight: bolder;
+    height: 51px;
+    line-height: 38px;
+    padding-top: 20px;
+    text-indent: 2.5em;
+    width: 100%;
+}
+div{margin: 0;padding: 0;}
+.form{margin: 33px auto;}
+.form-horizontal .form-group{margin: 0 0 25px}
+</style>
+</block>
+<block name="body">
+<div class="row" >
+	<div id="userlogin_main">
+		<div class="title"><img src="__PUBLIC__/App/Wechat/images/logo/1.jpg" width="40">&nbsp;微信企业号后台管理系统</div>
+	<form  class="form form-horizontal">
+		<div class="form-group">
+		    <label class="col-sm-4 control-label">邮箱</label>
+		    <div class="col-sm-6">
+		    <input name="userName" id="userName" type="text" class="form-control" value="{$user.userEmail|default=''}" />
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">密码</label>
+		    <div class="col-sm-6">
+		    <input name="userPwd" id="userPwd" type="password" class="form-control" value="" />
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-4 col-sm-7">
+		      <button type="button" onclick="subForm();" class="btn btn-primary">提交</button>
+		    </div>
+		  </div>
+	</form>
+	</div>
+</div>
+</block>
+<block name="script">
+
+<script type="text/javascript">
+//登录按钮事件
+function subForm()
+{ 
+	var username=$("#userName").val();	
+	var password=$("#userPwd").val();
+	if(username=="")
+	{
+		$("#userName").focus();
+		 handleAjax({'info': '邮箱不能为空！'});
+		return false;
+	}else if(password==""){
+		$("#userPwd").focus();
+		 handleAjax({'info': '密码不能为空！'});
+		return false;
+	}
+	else
+	{
+		$.ajax({
+			type:"POST",
+			url: "__SELF__",
+			//dataType:'JSON',
+			data:{user:username,password:password},
+			success:function(data)
+			{
+				if(data == 'success')
+				{ 
+					window.location = Think.APP+"/WechatQy/setting";
+				} else if(data == -1) {
+					$("#userName").focus();
+					 handleAjax({'info': '邮箱不存在！'});
+				}else if(data == -2) {
+					$("#userPwd").focus();
+					 handleAjax({'info': '密码错误！'});
+				}
+				else{
+					handleAjax({'info': data});
+				}
+			}
+		});
+	}
+}
+$(function()
+ {
+	document.onkeydown=function(e)
+	{
+		var e = document.all ? window.event : e;
+		if(e.keyCode==13){
+			subForm();
+		}
+	}
+ })
+</script>
+</block>
+
+
+

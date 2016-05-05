@@ -1,0 +1,56 @@
+{// 加载头部公共文件 }
+<include file="Public:headerMobile" />
+
+		<script src="__PUBLIC__/App/Apps/User/Js/index.js"></script>
+		<script src="__PUBLIC__/Js/jquery.validate.min.js"></script>
+		<link rel="stylesheet" type="text/css" href ="__PUBLIC__/App/Apps/User/Css/user.css">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<title>用户管理</title>
+
+
+	</head>
+	<body>
+		<div data-role="page" id="userM" data-theme="a">
+			<div class="header" data-role="hearder" data-position="fixed">
+				<a href="#menu" class="nav"></a>
+				用户管理
+			 <a href="__URL__/add.html" class="addUsers" style="" alt="添加用户" data-ajax="false" data-icon="plus" class="right" >
+			 </a> 
+			<!-- <div class="ui-btn-right">
+			<select data-native-menu="false" data-mini="true"  data-icon="plus"  data-iconpos="notext" >
+			<option id="adduser">添加用户</option>
+			<option id="addlimit">权限设置</option>
+			</select>
+			</div> -->
+			
+			</div>
+			
+			<section id="MyProject" style="margin-top:-1em;">
+				<div data-role="content">
+					<h2>所有用户列表：</h2>
+				    <ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="搜索用户" id="userList" data-theme="a">		 
+				    </ol>
+				</div>
+			
+			</section>
+				
+			
+				<include file="Public:leftMenu" />
+			
+		</div>
+				<script type="text/javascript">
+					
+					$(window).load(function() { 
+  $('img').each(function() {
+    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) { 
+      this.src = '__ROOT__/uploads/Images/Avatar/00.gif'; 
+      } 
+   });
+});
+	
+
+				</script>
+	</body>
+</html>

@@ -1,0 +1,221 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+}
+.swiper-container {
+    height: 100%;
+}
+.blue-slide {
+    background: none repeat scroll 0 0 rgba(24, 91, 133, 1);
+}
+.orange-slide {
+    background: none repeat scroll 0 0 #fff;
+}
+.green-slide {
+    background: none repeat scroll 0 0 green;
+}
+.black-slide {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 1);
+}
+.swiper-slide {
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+}
+.ms-logoWrap {
+    height: 350px;
+}
+.ms-logo {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.ms-compName {
+    margin: 20px 0;
+}
+.ms-compUrl {
+    font-size: 16px;
+}
+.ms-desc {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    line-height: 30px;
+    margin: auto;
+    margin-top:80px;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+}
+.circle-wrap {
+    border: 2px solid orange;
+    border-radius: 50%;
+    height: 150px;
+    margin: 100px auto;
+    position: relative;
+    width: 150px;
+}
+.c {
+    border-radius: 50%;
+    height: 50px;
+    position: absolute;
+    width: 50px;
+}
+.cir1 {
+    background: none repeat scroll 0 0 red;
+}
+.cir2 {
+    background: none repeat scroll 0 0 blue;
+    left: 119px;
+    top: 30px;
+}
+.cir3 {
+    background: none repeat scroll 0 0 green;
+    left: 30px;
+    top: 115px;
+}
+.ms-anim1 {
+    font-size: 50px;
+    margin: 30px 0;
+    padding-top: 30px;
+}
+.ms-anim2 {
+    font-size: 22px;
+    margin: 20px;
+    text-align: left;
+}
+.ms-anim3 {
+    color: #555;
+    font-size: 40px;
+    margin: 30px 0;
+    padding-top: 30px;
+    text-shadow: 2px 5px 2px #888;
+}
+.ms-anim4 {
+    color: #555;
+    font-size: 22px;
+    margin: 20px;
+    text-align: left;
+}
+.ms-anim5 {
+    color: #555;
+    font-size: 22px;
+    line-height: 30px;
+    margin: 30px;
+    text-align: right;
+}
+.ms-anim6 {
+    font-size: 30px;
+    margin: 20px;
+    padding-top: 30px;
+    text-align: left;
+}
+.ms-anim7 {
+    font-size: 30px;
+    margin: 30px;
+    text-align: right;
+}
+.ms-anim8 {
+    font-size: 22px;
+    margin: 30px;
+    text-align: center;
+}
+.ms-anim9 {
+    font-size: 22px;
+    margin: 30px;
+    text-align: right;
+}
+.ms-anim10 {
+    color: #000;
+    font-size: 50px;
+    margin: 30px;
+    padding-top: 30px;
+    text-align: left;
+}
+.ms-anim11 {
+    color: #000;
+    font-size: 30px;
+    margin: 30px;
+    text-align: right;
+}
+.ms-cs {
+    height: auto;
+    margin-top: 50px;
+    width: 90%;
+}
+.ms-cs2 {
+    height: auto;
+    margin-top: 50px;
+    width: 98%;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+.ms-arrow-bottom {
+    bottom: 10px;
+    height: 14px;
+    left: 50%;
+    margin-left: -7px;
+    position: absolute;
+    width: 24px;
+    z-index: 150;
+}
+.ms-arrow-bottom img {
+    animation: 1.5s ease-in-out 0s  infinite start;
+    -webkit-animation: 1.5s ease-in-out 0s infinite start;
+    background-position: 0 -82px;
+    height: 14px;
+    left: 50%;
+    margin: -7px 0 0 -14px;
+    position: absolute;
+    top: 50%;
+    width: 24px;
+}
+
+@-webkit-keyframes start{
+	0%,30%{
+		opacity:0;
+		-webkit-transform:translate(0,10px)
+	}
+	60%{
+		opacity:1;
+		-webkit-transform:translate(0,0)
+	}
+	100%{
+		opacity:0;
+		-webkit-transform:translate(0,-8px)
+	}
+}
+@-moz-keyframes start{
+	0%,30%{
+		opacity:0;
+		-moz-transform:translate(0,10px)
+	}
+	60%{
+		opacity:1;
+		-moz-transform:translate(0,0)
+	}
+	100%{
+		opacity:0;
+		-moz-transform:translate(0,-8px)
+	}
+}
+
+@keyframes start{
+	0%,30%{
+		opacity:0;
+		transform:translate(0,10px)
+	}
+	60%{
+		opacity:1;
+		transform:translate(0,0)
+	}
+	100%{
+		opacity:0;
+		transform:translate(0,-8px)
+	}
+}

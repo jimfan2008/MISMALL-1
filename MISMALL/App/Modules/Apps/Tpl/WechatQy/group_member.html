@@ -1,0 +1,156 @@
+<extend name="WechatMp/mobileBase"/>
+<block name="style">
+<style type="text/css">
+.list-group li{cursor: pointer;}
+</style>
+</block>
+<block name="body">
+<div class="row">
+	<ul class="nav nav-tabs" role="tablist">
+	  <li class="active"><a href="#user" data-toggle="tab">选择用户</a></li>
+	  <eq name="admin" value="0">
+	  <li><a href="#party" data-toggle="tab">选择部门</a></li>
+	  </eq>
+	</ul>
+</div>
+<div class="tab-content" style="margin-top:20px;overflow: hidden;">
+   <div id="user" class="tab-pane fade active in">
+  	 <div class="col-xs-4">
+  		<ul class="list-group" id="list-group">
+  		  <foreach name="groups" key="group_id" item="group_value">
+		  <li class="list-group-item" key="{$group_id}">{$group_value}</li>
+		  </foreach>
+		</ul>
+  	</div>
+  	<div class="col-xs-6">
+  		<ul class="list-group" id="list-user">
+		  <!-- <li class="list-group-item">用户 <input class="form-contral pull-right" type="checkbox" name="touser[]" value=""></li> -->
+		  
+		</ul>
+  	</div>
+  </div>
+  <div id="party" class="tab-pane fade">
+	  	<div class="col-xs-6">
+	  		<ul class="list-group" id="list-party">
+	  		  <foreach name="groups" key="group_id" item="group_value">
+			  <li class="list-group-item">{$group_value} <input class="form-contral pull-right" type="checkbox" name="touser" value="{$group_id}:{$group_value}"></li>
+			  </foreach>
+			</ul>
+	  	</div>
+  </div>
+</div>
+<eq name="admin" value="1">
+<div class="row">
+	<div class="form-group">
+		 <label class="pull-left control-label">权限组</label>
+	    	<div class="col-sm-3">
+	    	<select id="groupId" class="form-control">
+	    		<volist name="groupList" id="vo">
+	    		<option value="{$vo.id}">{$vo.name}</option>
+	    		</volist>
+	    	</select>
+	    	</div>
+	</div>
+	<div style="clear: both; overflow: hidden; height: 20px;"></div>
+</div>
+</eq>
+
+<div class="row">
+	<div class="form-group">
+		<input type="hidden" id="select_type" value="touser">
+		<button type="button" class="btn btn-primary" id="btn-submit">选择</button>
+		<button class="btn btn-default" id="btn-canl">取消</button>
+	</div>
+</div>
+<eq name="admin" value="1">
+<div class="well text-danger">选择用户为管理员，邮箱为登录账号，初始密码为123456</div>
+</eq>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+var members = {:json_encode($memberlist)};
+$(function(){
+	//touser
+	$('#list-group li').click(function(){
+		var key = $(this).attr('key');
+		var li_user = '';
+		for(var m in members){
+			if(members[m]['id'] == key && members[m]['ist'] != 'null'){
+				for(var i in members[m]['list']) {
+					var s = members[m]['list'][i];
+					<eq name="admin" value="1">
+					if(s['email']){
+					</eq>
+					li_user += '<li class="list-group-item">'+s['name']+' <input class="form-contral pull-right" type="checkbox" name="toparty[]" value="'+s['userid']+':'+s['name']+'"></li>';
+					<eq name="admin" value="1">
+					}
+					</eq>
+				}
+				$('#list-user').html(li_user);
+			}
+		}
+		$('#list-group li').removeClass('active');
+		$(this).addClass('active');
+		selectUser();
+		$('#select_type').val('touser');
+	});
+
+	//toparty
+	$('#list-party li').click(function(){
+			if($(this).hasClass('list-group-item-info')) {
+				$(this).removeClass('list-group-item-info');
+				$(this).find('input').prop('checked', false);
+				return;
+			}
+			$(this).addClass('list-group-item-info');
+			$(this).find('input').prop('checked', true);
+			$('#select_type').val('toparty');
+	});
+
+	$('#btn-canl').click(function(){
+		art.dialog.close();
+	});
+	$('#btn-submit').click(function(){
+		var type = $('#select_type').val();
+		var to = '';
+		if(type == 'touser') {
+			$('#list-user li').find('input').each(function(){
+				if( $(this).prop('checked') == true) {
+					//to.push({'id':$(this).attr('name'), 'value' : $(this).attr('value')});
+					to += $(this).attr('value')+';';
+				}
+			})
+			
+		} else if(type == 'toparty') {
+			$('#list-party li').find('input').each(function(){
+				if( $(this).prop('checked') == true) {
+					//to.push({'id':$(this).attr('name'), 'value' : $(this).attr('value')});
+					to += $(this).attr('value')+';';
+				}
+			})
+		}
+		to = to.substring(0, to.length-1);
+
+		//manager select manager_list.html
+		if($('#groupId').val() != undefined) {
+			type = $('#groupId').val();
+		}
+		artDialog.open.origin.setMessageUsers(type, to);
+		art.dialog.close();
+	});
+});
+function selectUser(){
+	$('#list-user li').click(function(){
+		if($(this).hasClass('list-group-item-info')) {
+			$(this).removeClass('list-group-item-info');
+			$(this).find('input').prop('checked', false);
+			return;
+		}
+		$(this).addClass('list-group-item-info');
+		$(this).find('input').prop('checked', true);
+	});
+}
+</script>
+</block>

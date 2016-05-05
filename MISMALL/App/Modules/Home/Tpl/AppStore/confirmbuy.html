@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>确认购买 | mismall</title>
+
+		<!-- core CSS -->
+		<include file="Public:client_hearder" />
+		<link href="__PUBLIC__/Js/swipe3.0.6/css/swiper.min.css" rel="stylesheet">
+		<link href="__PUBLIC__/App/Home/AppStore/Css/yyshop.css" rel="stylesheet" type="text/css" />
+
+	<!--中间内容 -->
+	<div class="clear"></div>
+	<div id="content">
+	<div class="shopping_cart">
+		<form name="alipayment" action="__ROOT__/alipayassure/alipayapi.php" method="post" target="_blank">
+		<div class="shop_buy"><span class="f-18b">确认购买</span>{$orderInfo['orderNo']}</div>
+		<input type="hidden" name="orderType" value="" />
+		<input type="hidden" name="WIDappid" value="" />
+		<input id="ProjectName" type="hidden" name="WIDsubject" value="" />
+		<input type="hidden" name="univalent" value="" />
+		<input id="inputPrice" type="hidden" name="WIDprice" value="" />
+		<input  id="ordernumber" type="hidden" name="WIDout_trade_no" value="" />
+		<div class="toptitle">
+			<div class="name fl"><strong>名称</strong></div>
+			<div class="designer fl"><strong>设计师</strong></div>
+			<div class="unit_price fl"><strong>单价</strong></div>
+			<div class="number fl"><strong>用户数</strong></div>
+			<div class="total fl"><strong>天数</strong></div>
+			</div>
+		<div class="clear"></div>
+		<ul>
+		  <li>
+		    <div class="name fl"><span class="pro-img fl"><a href="shop_detail?id={$orderInfo['projectImage']}"><img src="{$orderInfo['projectImage']}"/></a></span><span class="title fl"><a href="#">{$orderInfo['projectName']}</a></span></div>
+		    <div class="designer fl username">{$orderInfo['releaseUser']}</div>
+		    <div class="unit_price f-yellow fl app_price">{$orderInfo['appPrice']}  </div>
+		    <div class="number fl numuser">{$orderInfo['userNum']} </div>
+		    <div class="total f-yellow fl numday">{$orderInfo['dayNum']} </div>
+		  </li> 
+		</ul>
+		<div class="bottomdiv">
+		  <div class="totalall fr"> 
+		  	价格：
+		  	<span class="f-18b f-yellow">{$orderInfo['tradeMoney']} </span> 
+		  	<span id="btnbuynow" class="affirm buysure">
+		  		<input id="btnconbuy" name="aliplay" type="submit" value="" class="alipay" />
+		  	</span>
+		  </div>
+	    </div>
+	  </form>
+	</div>
+	<div class="clear"></div>
+	</div>
+	<div id="tc_window" style="display:none;">
+		<div class="infor">
+			<h1>请在新打开的页面完成支付</h1>
+			<p>点击"已完成支付"，您可以查看订单</p>
+			<p>点击"遇到支付困难"，您可以查看支付帮助信息</p>
+			<p class="botbox"><input name="" onclick="playok()" type="button" value="已完成支付" class="ywczf" /><input name="" onclick="playno()" type="button" value="遇到支付困难" class="ydzfkl" /></p>
+		</div>
+	</div>
+	<footer id="footer" class="midnight-blue">
+			<div class="container">
+				<div class="footNav" style="text-align: center;">
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+							<a class="appStore" href="appStore.html">应用商店</a>
+						</li>
+						<li>
+							<a class="channelAgent" href="channelAgent.html">渠道代理</a>
+						</li>
+						<li>
+							<a class="developerShadow" href="developerShow.html">开发者</a>
+						</li>
+					</ul>
+				</div>
+				<div style="text-align:center" class="row">
+					<div style="text-align:center;" class="col-lg-12 col-sm-12 col-md-12">
+						<ul>
+							<li>
+								QQ群：363028020
+							</li>
+							<li>
+								&copy;2015 mismall 粤ICP备15005056号-1
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer><!--/#footer-->
+		
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$paginationWrap = $("#paginationWrap"),
+					$footer = $("#footer"),
+					$content = $("#content");
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height")) - $paginationWrap.height() - 243;
+				$content.css("margin-bottom",minH);
+			}
+		</script>
+		<script src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/confirmbuytow.js"></script>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+{// 加载头部公共文件 }
+<include file="Public:headerMobile" />
+		
+		<link rel="stylesheet" type="text/css" href ="__PUBLIC__/App/Apps/User/Css/user.css">
+		<script src="__PUBLIC__/App/Apps/User/Js/add.js"></script>
+		
+		
+		
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<title>增加用户</title>
+
+</style>
+	</head>
+	<body>
+		
+		<div data-role="page" id="page1" data-theme="a">
+			<div class="header">
+				<a href="#menu" class="nav"></a>
+				添加用户
+				<!--<a href="__URL__/add.html" class="addUsers" style=""  data-ajax="false" data-icon="plus" class="right" ></a>
+				-->
+			</div>
+			<!--<div data-role="header" id="header" data-theme="c" data-position="fixed";>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-theme="c">返回</a>
+				<h1>用户管理</h1>
+				<a href="__GROUP__/FormMobile/index.html" data-icon="grid" data-ajax="false" data-theme="c" >首頁</a>
+			</div>-->
+			<section id="MyProject" style="margin-top:-1em;">
+				<div data-role="content">
+
+					<h2>请完善用户信息：</h2>
+				    
+				     <form method="post" id="addForm1" name="addForm1" data-inset="true" data-theme="c">
+				     	<div  data-role="fieldcontain" >
+				     		<div id="success" style="display: none;top: 50%;left:30%;  position:absolute; padding: 20px;border-radius:5px;font-weight:bold; font-size:18px;background: #40E0D0;z-index:100000;">注册成功</div>
+	  					<!-- 	<label for="username">用户名:</label>
+	  						<input type="text" name="username" id="username" placeholder="用户名" required /> -->
+	  						
+						    <label for="email">邮箱：</label>
+						    <input type="email" name="email" id="email" placeholder="请输入邮箱.." required />
+						    <!-- <label for="password">密码</label>
+						    <input type="text" name="password" id="password" placeholder="请输入密码.." required /> -->
+						    <div style="margin-top:5px;">
+							    <fieldset data-role="fieldcontain">
+							    <label for="role">选择角色:</label>
+							    <select  data-native-menu="false"  name="role" id="role">
+							      <option value="">请选择角色</option> 
+							    </select>
+							    
+							  </fieldset>
+							</div>
+							<div >
+						       <fieldset data-role="fieldcontain">
+							    <label for="setAdmin">是否管理员：</label>
+							        <select name="setadmin" id="setadmin" data-role="slider">
+							          <option value="off">Off</option>
+							          <option value="on">On</option>
+							        </select>
+							   </fieldset>
+						    </div>
+
+						  <a href="{:U("Apps/User/addroles")}" data-role="button" name="power" id="setpower" class="setPower" data-inline="true" data-theme="c" data-ajax="false" data-iconpos="right" value="去添加角色" > 去添加角色</a>
+						  
+  						</div>
+  						
+  						<input type="button" name="submit" id="submit" data-inline="true" style="background: #005599;color: #FFF" value="提交" >
+  						 
+					</form>
+				</div>
+				<a href="#dialog-active" id="link-dialog"></a>
+			</section>
+		
+		</div>
+		
+		
+ 
+			
+			<nav data-role="page" id="dialog-active" data-rel="dialog" data-ajax="false" data-dialog="true">
+				<div data-role="header" data-theme="b">
+					<h1>邮箱已被注册</h1>
+				</div>
+
+				<div role="main" class="ui-content">
+					<h1>发送邮件?</h1>
+					<p>这个邮箱已经注册，是否选择发送邮件邀请加入？</p>
+					<a href="#page" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a">不发送</a>
+					<a id="sendActiveEmail"  data-rel="back" class=" ui-btn ui-shadow ui-corner-all ui-btn-c ">发送！</a>
+					<a  href="#page" id="go-page"></a>
+				</div>
+			</nav>
+				<include file="Public:leftMenu" />
+
+
+	</body>
+</html>

@@ -1,0 +1,90 @@
+<extend name="base"/>
+
+<block name="style">
+<link rel="stylesheet" href="__PUBLIC__/Js/bootstrap/css/bootstrap-switch.min.css"/>
+</block>
+
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+
+<form enctype="multipart/form-data" class="form-horizontal ajax-form" method="post" action="__SELF__">
+  
+
+  	<div class="sub-item">
+		<h4 class="sub-title">自定义菜单</h4>
+		<p class="help-block">目前自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。</p>
+	</div>
+	 <div class="form-group">
+	    <label for="name" class="col-sm-2 control-label">菜单位置</label>
+	    <div class="col-sm-3">
+	      <select class="form-control" name="pid">
+	      	<option value='0'>一级菜单</option>
+	      	<volist name="menulist" id="p">
+	      		<option value='{$p.id}' <eq name="menu['pid']" value="$p['id']">selected</eq>>{$p.name}</option>
+	      	</volist>
+	      </select>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="app_id" class="col-sm-2 control-label">菜单标题</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="name" value="{$menu.name}">
+	    </div>
+	  </div>
+	   <div class="form-group hide">
+	    <label for="app_id" class="col-sm-2 control-label">菜单类型</label>
+	    <div class="col-sm-6 form-inline">
+	      <input type="radio" class="form-control" name="type" value="view" <if condition="$menu.type eq view">checked</if>> view：跳转URL &nbsp;&nbsp;&nbsp;&nbsp;
+	      <input type="radio" class="form-control" name="type" value="click" <if condition="$menu.type eq view">click</if>> click：点击推事件
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="app_secret" class="col-sm-2 control-label">菜单链接</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" id="link" name="url" value="{$menu.url}">
+	   	  <div class="help-block">指定这个导航的链接目标</div>
+	   	 <!--  <div style="padding:3px 0;" class="alert-block"><strong class="text-danger">使用微站链接:</strong>
+			<a onclick="$('#link').val('');" class="glyphicon glyphicon-new-window" href="javascript:;">首页</a> &nbsp;
+			<a onclick="$('#link').val('');" class="glyphicon glyphicon-new-window" href="javascript:;">个人中心</a> &nbsp;
+		  </div> -->
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="account" class="col-sm-2 control-label">排列顺序</label>
+	    <div class="col-sm-6 form-inline">
+	      <input type="text" autocomplete="off" class="form-control" name="sort" value="{$menu.sort|default=0}">
+	      <span class="help-inline">数字越大越靠前</span>
+	    </div>
+	  </div>
+	 <div class="form-group">
+	    <label for="account" class="col-sm-2 control-label">是否显示</label>
+	    <div class="col-sm-6" style="height:30px">
+	       <input name="status" type="checkbox" <eq name="menu['status']" value="1">checked</eq> data-on-text="是" data-off-text="否"/>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-7">
+	      <button type="submit" class="btn btn-primary">提交</button>
+	    </div>
+	  </div>
+</form>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/bootstrap/js/bootstrap-switch.min.js"></script>
+
+<script type="text/javascript">
+<!--
+$(function(){
+	$('input[type="checkbox"]').bootstrapSwitch();
+});
+
+//-->
+</script>
+</block>

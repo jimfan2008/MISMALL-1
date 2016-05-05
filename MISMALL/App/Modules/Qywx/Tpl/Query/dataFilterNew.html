@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <title>MISMALL平台--数据筛选器</title>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/base.css">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Qywx/Query/QueryNew/Css/dataFilterNew.css" />
+<script type="text/javascript">
+            var SITECONFIG = {
+                    PUBLICPATH : '__PUBLIC__',
+                    APPPATH : '__GROUP__',
+                    GROUPPATH : '__GROUP__',
+                    ROOTPATH : '__ROOT__',
+                    SITEID : '{$siteId}',
+                    SESSIONID : '{:session_id()}',
+            };
+</script>
+</head>
+<body>
+	<!--提示弹出框-->
+		<div id="tipBox">
+			<div class="tipMessage">
+				<span class="tipClose">X</span>
+				<span class="mas_img" style="margin:auto;color:white;"></span>
+			</div>
+		</div>
+    <!--头部-->
+   <div id="header">
+               <div class="logo"><img src="__PUBLIC__/App/Home/Client/images/logo.png">
+                </div>
+                <div class="top-menu">
+        
+                </div>
+                <div id="backToEditor">
+                    退 出
+                </div>
+    </div>
+      <!--内容-->
+     <div id="main" class="container" formId="">
+                  <!--左边-->
+                 <div class="m-left col-md-2">
+                            <div class="dataTitle">
+                                    <div class="col-md-12">
+                                        <span>设置过的数据源</span>
+                                    </div>
+                            </div>
+                            <ul id="dataSourceList">
+                                 <li  class="dataItem glyphicon glyphicon-plus addHover" id="initNewDataSources" style="width: 100%"></li>
+                            </ul>
+                 </div>
+                  <!--右边-->
+                 <div class="m-right col-md-10">
+                        <div class="col-md-11 guide">
+                            <span id="guideTit">选择表单列表</span>
+                        </div>
+                        
+                        <!--<div class="col-md-1"></div>-->
+                        <!--设置数据源区域-->
+                        <div class="col-md-10 settingDataArea" id="setDataArea">
+                                        <!--步骤1-->
+                                        <div class="col-md-12 setArea selectedArea" steps="1" id="selectedForm" alt="选择表单列表">
+                                                    <div class="formList">
+                                                           
+                                                    </div>
+                                                    
+                                                    <button type="button" class="btn btn-default btn-operation"  layer="selectedField" next="next">下一步</button>
+                                        </div>
+
+                                         <!--步骤2-->
+                                        <div class="col-md-12 setArea" steps="2" id="selectedField" alt="选择表单字段">
+                                                    <div class="formFields">
+                                                                 <!--<div class="panel panel-default">
+                                                                          <div class="panel-heading">商品分类</div>
+                                                                          <div class="panel-body">
+                                                                                   <button class="btnF fieldItem" type="button" formId="1" value="商品分类" >商品分类</button>
+
+                                                                          </div>
+                                                                </div>-->
+                                                    </div>
+                                                   
+                                                    <button type="button" class="btn btn-default btn-operation" layer="selectedForm" >上一步</button>
+                                                    <button type="button" class="btn btn-default btn-operation"  layer="selectResults" next="next">下一步</button>
+                                        </div>
+
+                                         <!--步骤3-->
+                                        <div class="col-md-12 setArea" steps="3" id="selectResults" alt="选择查询结果">
+                                                    <ul class="nav nav-tabs">
+                                                              <li role="presentation" class="active"><a href="#">结果1</a></li>
+                                                    </ul>
+                                                    <div class="col-md-12 dataView">
+                                                                <table class="table">
+                                                                        <thead>
+                                                                          <tr class="fieldTitle">
+                                                                            
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody class="dataContent">
+                                                                          
+                                                                      </table>  
+                                                    </div>
+                                                    <div class="col-md-12 selectResults">
+                                                                <div class="col-md-12" style="padding:0;margin-bottom:10px;">选择结果：</div> 
+                                                                <button class="btnF resultsItem selectedRe" type="button" value="结果1" >结果1</button>
+                                                    </div>
+                                                    <button type="button" class="btn btn-default btn-operation" layer="selectedField" >上一步</button>
+                                                    <button type="button" class="btn btn-default btn-operation"  layer="dataViewOperation" next="next">下一步</button>
+                                        </div>
+
+                                         <!--步骤4-->
+                                        <div class="col-md-12 setArea" steps="4" id="dataViewOperation" alt="设置数据源">
+                                                    <div class="col-md-12 dataView">
+                                                                <table class="table">
+                                                                        <thead>
+                                                                          <tr class="fieldTitle">
+                                                                            
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody class="dataContent">
+                                                                          
+                                                                      </table>  
+                                                    </div>
+                                                    <button type="button" class="btn btn-default btn-operation" layer="selectResults" >上一步</button>
+                                                    <button type="button" class="btn btn-default btn-operation"  layer="selectFieldWhere" next="next">下一步</button>
+                                        </div>
+
+                                         <!--步骤5-->
+                                        <div class="col-md-12 setArea" steps="5" id="selectFieldWhere" alt="选择字段作为过滤条件">
+                                                    
+                                                  <div class="formFields">
+                                                                 <!--<div class="panel panel-default">
+                                                                          <div class="panel-heading">商品分类</div>
+                                                                          <div class="panel-body">
+                                                                                   <button class="btnF fieldItem" type="button" formId="1" value="商品分类" >商品分类</button>
+
+                                                                          </div>
+                                                                </div>-->
+                                                    </div>
+                                                   
+                                                        <button type="button" class="btn btn-default btn-operation" layer="dataViewOperation" >上一步</button>
+                                                        <button type="button" class="btn btn-default btn-operation"  layer="setDataWhere" next="next">下一步</button>
+                                                         <span style="color:#FF0000;margin-left:20px;">*不选可以直接下一步操作</span>
+                                                    
+                                        </div>
+                                           <!--步骤6-->
+                                        <div class="col-md-12 setArea" steps="6" id="setDataWhere" alt="设置过滤条件">
+                                                  <div class="col-md-12 dataEffect">
+                                                              <table class="table">
+                                                                        <thead>
+                                                                          <tr class="fieldTitle">
+                                                                            
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody class="dataContent">
+                                                                          
+                                                                      </table>  
+                                                   </div>
+                                                   <div class="col-md-12" style="padding:0">
+                                                             <div class="panel panel-default">
+                                                              
+                                                                      <div class="panel-heading">设置过滤条件</div>
+                                                                      <div class="panel-body">
+                                                                              <div class="col-md-10">
+                                                                                         <ul class="setWhere">
+                                                                                   
+                                                                                        </ul>
+                                                                              </div>
+                                                                             <button type="button" class="btn btn-default seeEffect">查看效果</button>
+                                                                      </div>
+
+                                                            </div>
+                                                   </div>
+                                                      <button type="button" class="btn btn-default btn-operation" layer="selectFieldWhere" >上一步</button>
+                                                      <button type="button" class="btn btn-default btn-operation"  layer="saveDataName" next="next">下一步</button>
+                                                           
+                                                  
+                                        </div>
+                                         <!--步骤7-->
+                                        <div class="col-md-12 setArea " steps="7" id="saveDataName" alt="设置数据源名称">
+                                                   <div class="col-md-12">
+                                                              <div class="col-md-3"></div>
+                                                                <div class="col-md-6">
+                                                                 <div class="form-group">
+                                                                         <label for="exampleInputEmail1">数据源名称：</label>
+                                                                         <input type="text" class="form-control" id="querierName" placeholder="名称">
+                                                                         </div>
+                                                                </div>
+                                                                <div class="col-md-3" id="existName">
+                                                                	<span>*该数据源名称已存在</span>
+                                                                </div>
+                                                   </div>
+                                                   <div class="col-md-12" style="text-align:center;margin-bottom: 50px;">
+                                                          <button type="button" class="btn btn-default btn-operation" layer="setDataWhere" >上一步</button>
+                                                          <button type="button" class="btn btn-default btn-operation" id="saveQuerier"  next="next">完成</button>
+                                                   </div>
+                                                  
+                                        </div>
+                                         <div style="clear:both;"></div>
+                        </div>
+                        <!--步骤数区域-->
+                        <div class="col-md-1">
+                                     <div class="steps" id="setSteps">
+                                                    <p class="stepItem complete"><span class="prompt">选表单</span></p>
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">选字段</span></p>
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">选结果</span></p>
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">设置数据</span></p>
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">选择条件</span></p>
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">设置条件</span></p> 
+                                                    <p class="stepline"></p>
+                                                    <p class="stepItem"><span class="prompt">设置名称</span></p> 
+                                            </div>
+                        </div>
+                 </div>
+     </div>
+     <!--设置条件 条件选择值-->
+     <div style="" id="setFilterMenu">
+            <div class="setFilter">
+                <div id="setSystem" class="menu-item disabled-item"><span>系统变量</span>
+                    <span class="glyphicon  glyphicon-play more"></span>
+                    <div id="systemList" class="more-menu" style="display: none;">
+                            <div s_tit="当前用户ID" s_type="STAFFID" class="menu-item">当前用户ID</div>
+                            <div s_tit="当前用户名称" s_type="USERNAME" class="menu-item">当前用户名称</div>
+                            <div s_tit="当前系统时间" s_type="SysDBDateTime" class="menu-item">当前系统时间</div>
+                    </div>
+                </div>
+                <div id="setFormCtrl" class="menu-item disabled-item">
+                        <span>表单控件</span>
+                        <span class="glyphicon  glyphicon-play more"></span>
+                        <div id="formCtrlList"  class="more-menu" style="display: none;">
+                            <!--<div s_tit="文本框1" s_field="cc_tbfm201604141038296091.TEXTBOX1" class="menu-item">文本框1</div><div s_tit="上传图片6" s_field="cc_tbfm201604141038296091.IMAGE6" class="menu-item">上传图片6</div><div s_tit="自定义组件模板" s_field="cc_tbfm201604141038296091.compLogic10" class="menu-item">自定义组件模板</div><div s_tit="123" s_field="cc_tbfm201604141038296091.compLogic13" class="menu-item">123</div>-->
+                        </div>
+                </div>
+                <!-- 设置查询条件为子查询 -->
+                <div id="subQuery" class="menu-item disabled-item" style="display:none;">数据集<span class="glyphicon  glyphicon-play more"></span>
+                    <div id="fromSubQuery" style="display: none;">
+                    
+                    </div>
+                </div>
+                <!--<div id="pageParamId" class="menu-item disabled-item">-->
+                <div  id="pageParamId" class="menu-item disabled-item">
+                		<span>当前页接收的参数</span>
+                        <span class="glyphicon  glyphicon-play more"></span>
+                        <div id="paramItem"  class="more-menu" style="display: none;">
+                        </div>
+                </div>
+               
+                <div id="setNull" class="menu-item disabled-item">空值</div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="custom">
+              <div class="arrow-left"></div>
+              <div class="arrow-left-wrap"></div>
+            </div>
+        </div>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ezCommon.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/App/Qywx/Query/QueryNew/Js/dataFilterNew.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/App/Qywx/Query/QueryNew/Js/ajaxData.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/App/Qywx/Query/QueryNew/Js/setDataWhere.js"></script>
+     <script type="text/javascript" src="__PUBLIC__/App/Qywx/Query/QueryNew/Js/dataRestore.js"></script>
+</body>
+</html>

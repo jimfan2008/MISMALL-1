@@ -1,0 +1,121 @@
+<extend name="base"/>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">粉丝管理&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="groupEdit()">新增分组</a>
+	  	<div class="pull-right">
+			  <a href="{:U('syncGroup')}" class="ajax-post">同步微信分组</a>
+		  </div>
+	  </div>
+	
+	  <!-- Table -->
+	<div class="table-responsive">
+	 <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>微信分组ID</th>
+              <th class="col-sm-6">分组名称</th>
+              
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<volist name="grouplist" id="vo">
+				<tr>
+					<!-- <td>{$vo.id}</td> -->
+					<td>{$vo.groupid}</td>
+					<td>{$vo.name}</td>
+					
+					<td>
+						<a href="javascript:void(0);" onclick="groupEdit('{$vo.name}', {$vo.id})">编辑</a><!-- | 
+						<a href="javascript:void(0);" onclick="groupDel({$vo.id})">删除</a>
+					--></td>
+				</tr>
+			</volist>
+          </tbody>
+        </table>
+       </div>
+	</div>
+
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+        <h4 class="modal-title">添加分组</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" style="width: 375px; height: 35px;" id="input-group" />
+        <input type="hidden" id="input-group-id" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="addGroup()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+
+</block>
+
+<block name="script">
+<script type="text/javascript">
+<!--
+function groupEdit(title, id){
+	if(title == undefined) {
+		title = '';
+	}
+	if(id == undefined) {
+		id = 0;
+	}
+	$('#input-group').val(title);
+	$('#input-group-id').val(id);
+	$('#keywordModal').modal('show');
+}
+
+function addGroup(){
+	var title = $('#input-group').val();
+	var id = $('#input-group-id').val();
+	if($.trim(title)==''){
+		handleAjax({'info':'分组名称不能为空'});
+		return false;
+	}
+	$.post("{:U('groupEdit')}",{title:title,id:id},function(s){
+		if(s==-1) {
+			handleAjax({'info':'分组名称不能为空'});
+		} else if( s== -2) {
+			handleAjax({'info':'分组名称已经存在'});
+		} else if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			$('#keywordModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'同步失败：'+ s});
+			$('#keywordModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		}
+	});
+	
+}
+
+function groupDel(mid) {
+	if(confirm('你确定要删除该菜单吗？')){
+		$.post("{:U('groupDelete')}",{id : mid}, function(s){
+			if(s == 'success') {
+				window.setTimeout(function(){location.href = location.href;}, 300);
+			} 
+		});	
+	}
+}
+//-->
+</script>
+</block>

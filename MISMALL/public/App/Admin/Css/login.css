@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*使用者登陆界面*/
+#userlogin_top{width:400px; height:80px; line-height:80px; margin:70px auto 15px; color:#fff;}
+#userlogin_top img{width:200px; height:80px; margin-left:10px;}
+#userlogin_main{width:400px; height:auto; overflow:auto; margin:0 auto; background:#705ef0; color:#fff;}
+#userlogin_main .title{width:100%; height:40px; line-height:40px; font-size:14px; background:url(../Images/user.png) no-repeat -2px center; text-indent:2.5em;}
+#userlogin_main .infor{width:75%; margin:20px auto; font-size:14px;}
+#userlogin_main .infor li{width:100%; height:40px; overflow:hidden; line-height:45px;}
+#userlogin_main .infor li.name{line-height:55px;}
+#userlogin_main .infor li a{color:#fff;}
+#userlogin_main .infor li a:hover{color:#cec7ff;}
+#userlogin_main .infor .input{width:100%; height:18px; padding:6px 5px; line-height:18px; color:#333; border:1px solid #fff;}
+#userlogin_main .infor .input:hover{border:1px solid #1776cf;}
+#userlogin_main .infor .sent{width:96px; height:36px; line-height:38px; background:#311dbb; border:none; color:#fff; font-size:14px; font-family:"΢���ź�"; cursor:pointer;}
+#userlogin_main .infor .sent:hover{ background:#4b36e0; }
+
+/*用户提示信息*/
+#userlogin_main .error {background: url("../Images/icon_error.gif") no-repeat scroll 10px 11px #F6B9B9;border: 1px solid #E18484;color: #C32727;display: block;font-size: 13px; margin: 0;margin-top:10px; padding: 10px 10px 10px 35px;position: relative; width: 100px;height: 10px;
+}

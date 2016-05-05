@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 开发者中心</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+		<link rel="stylesheet" href="__PUBLIC__/App/Apps/Index/Js/src/mmGrid.css">
+		<link rel="stylesheet" href="__PUBLIC__/App/Apps/Index/Js/src/theme/bootstrap/mmGrid-bootstrap.css">
+		<link rel="stylesheet" href="__PUBLIC__/App/Apps/Index/Js/src/mmPaginator.css">
+		<link rel="stylesheet" href="__PUBLIC__/App/Apps/Index/Js/src/theme/bootstrap/mmPaginator-bootstrap.css">
+
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>邀请列表</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="row profile" style="margin:0px 10px;" >
+							<main>
+								<table id="myShareslist" class="mmg">
+									<tr>
+										<th rowspan="" colspan=""></th>
+									</tr>
+								</table>
+								<div id="pg" style="text-align: right;"></div>
+							</main>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script type="text/javascript" src="__PUBLIC__/App/Apps/Index/Js/plugins.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/App/Apps/Index/Js/src/mmGrid.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/App/Apps/Index/Js/src/mmPaginator.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$(".developerCenter,.my_shares").parent().addClass("active");
+			var cols = [
+				 {title:'会员账号',name:'userName',align: 'center'},
+				 {title:'邮箱',name:'userEmail',align: 'center'},
+				 {title:'时间',name:'regTime',align: 'center'},
+				 {title:'邀请奖励',name:'',align: 'center'},
+				 {title:'是否激活',name:'',align: 'center'},
+				 ];
+				 
+
+		var myShareslist = $('#myShareslist').mmGrid({
+				height : 400,
+				cols : cols,
+				url : APPPATH + "/Developer/getMyShares",
+				method : 'post',
+				remoteSort : true,
+				multiSelect : true,
+				nowrap : true,
+				checkCol : true,
+				fullWidthRows : true,
+				autoLoad : false,
+				ache:true,
+				showBackboard:false,
+				plugins : [$('#pg'
+					).mmPaginator({})]
+
+					});
+					myShareslist.on('loadSuccess', function(e, data) {
+						if (data["totalCount"] == 0) {
+							var $mmGrid = $(".mmGrid");
+							var $headWrapper = $mmGrid.find('.mmg-headWrapper');
+							var $message = $mmGrid.find('.mmg-message');
+							$message.css({
+								'left' : ($mmGrid.width() - $message.width()) / 2,
+								'top' : ($mmGrid.height() + $headWrapper.height() - $message.height()) / 2
+							}).empty().append('没有数据,赶快<a href="share_friend.html">邀请</a>好友加入').show();
+
+						}
+					}).on('loadError', function(e, data) {
+						var $mmGrid = $(".mmGrid"), $message = $mmGrid.find('.mmg-message'), $headWrapper = $mmGrid.find(".mmg-headWrapper");
+						$message.css({
+							'left' : ($mmGrid.width() - $message.width()) / 2,
+							'top' : ($mmGrid.height() + $headWrapper.height() - $message.height()) / 2
+						}).text("数据加载失败，请稍后再试").show();
+					}).load();
+
+					});
+		</script>
+
+		</body>
+</html>

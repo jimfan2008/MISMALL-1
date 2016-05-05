@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/themes/default/default.css" />
+<style tyle="text/css">
+.ke-dialog-body .tabs{border-width:0;height: auto;width:auto;}
+</style>
+<script type="text/javascript" src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/kindeditor/lang/zh_CN.js"></script>
+<!--发布样式 begi-->
+<div class="contents">
+<textarea  name="{$contentName}" id="{$contentName}" style="width:{$width};height:{$height}; margin-bottom:10px;*width:99%;visibility:hidden;">{$value}</textarea>
+</div>
+<script>
+var type =	'{$type}';
+var ke_config = {};
+var limitNum = '{$number}' || 500;
+var numberId = '{$numberId}';
+var editor;
+
+switch (type) {
+	case 'simple': //简单编辑器
+	{
+		ke_config = {
+				allowPreviewEmoticons : false,
+		        allowImageUpload : true,
+		        uploadJson : '{:U("/Index/editorUpload")}', //服务端上传图片处理URI
+		        items : ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
+		        afterChange: function (e) { this.sync() } 
+		 		}
+		break;
+	}
+	case 'simple_comment': //简单编辑器－限制字数
+	{
+		ke_config = {
+				allowPreviewEmoticons : false,
+		        allowImageUpload : false,
+		        items : ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
+                 afterChange : function() {
+		                //设定限制字数
+		                var pattern = '';
+		                //输入显示
+		                if (this.count('text') > limitNum) {
+		                    pattern = ('<font color="red">字数超过限制，请适当删除部分内容</font>');
+		                    //超过字数限制自动截取
+		                    var strValue = editor.text();
+		                    strValue = strValue.substring(0, limitNum);
+		                    editor.text(strValue);
+		                } else {
+		                    //计算剩余字数
+		                    var result = limitNum - this.count('text');
+		                    pattern = '还可以输入<font color="red">' + result + '</font>字';
+		                }
+		                $('#'+numberId).html(pattern);
+		                this.sync();
+		            }
+				}
+		break;
+	}
+	default :	//默认全部
+	{
+
+		ke_config = {
+			allowImageUpload : true, //允许上传图片
+			uploadJson : '{:U("/Index/editorUpload")}', //服务端上传图片处理URI
+			afterChange: function (e) { this.sync() }
+		}
+	}
+}
+
+
+KindEditor.ready(function(K) {
+	editor = K.create('#{$contentName}', ke_config);
+}); 
+</script>

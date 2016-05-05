@@ -1,0 +1,103 @@
+<include file="Index:top" title="应用商店" shop="current"/>
+<link type = "text/css" href = "__PUBLIC__/Js/jquery-pager/Pager.css" rel="stylesheet" />
+<link />
+<link />
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<div class="shop_fl fl">
+		<div class="title f-18b">
+			帮助中心
+		</div>
+		<ul>
+			<li>
+				<a href="{:U('Help/index')}">表单应用</a><p class="border"></p>
+			</li>
+			<li>
+				<a href="#">模板网站</a><p class="border"></p>
+			</li>
+			<li>
+				<a href="#">手机应用</a><p class="border"></p>
+			</li>
+			<li>
+				<a href="#">流程应用</a><p class="border"></p>
+			</li>
+		</ul>
+	</div>
+	<div class="help fr">
+		<!--右边搜索star -->
+		<div class="rightsideBar">
+			<div class="search fr">
+				<select name="" class="classify">
+					<option>请选择分类</option>
+					<option>手机应用</option>
+					<option>表单应用</option>
+					<option selected="selected">网站模板</option>
+					<option>流程应用</option>
+				</select>
+				<input name="" type="text" class="input_box" value="输入问题关键字，如：创建ezForm项目" onfocus="this.value=''; style.color='#000'" onblur="if(this.value==''){this.value='关键字如：创建ezForm项目';style.color=''}" />
+				<input name="" type="submit" class="btn" value="搜索" />
+			</div>
+		</div>
+		<!--右边搜索end -->
+		<div class="help_title">
+			<ul>
+				<li>
+					<a href="#">创建项目</a>
+				</li>
+				<li class="on">
+					<a href="#">操作手册</a>
+				</li>
+				<li>
+					<a href="#">视频教程</a>
+				</li>
+				<li>
+					<a href="#">常见问答</a>
+				</li>
+			</ul>
+			<div class="ask_bot fr">
+				<a href="#">找不到答案？这里提问</a>
+			</div>
+		</div>
+	<div class="detail_title">
+<p><strong>表单控件的介绍属性设置详解：文本框</strong></p>
+<p class="time">时间：2014-4-8</p>
+</div>
+<div class="detail_cont">
+<P class="f-14b">文本框：用来接收使用者输入单行文字或数据的容器</p>
+<p class="f-14b"><strong>属性面板介绍</strong>：</p>
+<p class="f-14b">&nbsp;</p>
+<p class="img_p"><img width="600" height="390" src="help_detail_clip_image002.jpg" /></p>
+<p class="img_p">&nbsp;</p>
+<p class="f-14b"><strong>常规：</strong></p>
+<p>1、标题：表单的字段名；</p>
+  <p>2、宽度：设置文本框的具体宽度；</p>
+  <p>3、单位：如单位&ldquo;元、天、个&rdquo;等这类相关单位注明；</p>
+  <p>4、提示信息：针对当前表单项填写一些注释说明文字或提醒使用者的注意事项； </p>
+  <p>5、布局：用于表单排版格式设置（表单默认一行只显示一个，选中表单，单击布局下方的单格、双格、三格、就可以进行一行显示一个，或两个，三个的格式进行设计排版）； </p>
+  <p>6、是否只读：设置当前表单项用户能不能操作或填写数据； 7.是否隐藏：当前表单项是不是需要给使用者看见。 </p>
+  <p>&nbsp;</p>
+  <p><strong>验证：</strong></p>
+  <p>1、必填项：当前表单项是不是必须要填写；</p>
+  <p>2、文本格式：针对文本框设置他的格式，文本框格式包括：纯文本（允许输入中英文字符及数字）、邮箱（只允许输入带@符号的邮箱账号）、整数（只能数入数字且是整数）、小数（可以输小数或者整数）、身份证（一定要输入身份证号相同的位数）、电话（手机或者坐机号码）；</p>
+  <p>3、最短字符：当前这个表单最少能输入多少个字符;</p>
+  <p>4、最大值：当前这个表单最多输入多少个字符 5.唯一性:当前表单项里用户录入的数据只能是唯一的,第二次不能重复录入同样的数据. </p>
+  <p>&nbsp;</p>
+  <p><strong>数据: </strong></p>
+  <p>1、默认值:一个默认显示在当前表单里的值,使用者可以看到的默认值（这个值可以是自己输入的，也可以是调用别的表单里的数据。）.</p>
+</div>
+
+
+</div>
+<div class="clear"></div>
+</div>
+<include file="Index:bottom"/>
+
+<script>
+	$(".help_title li").click(function() {
+			var index_tab = $(this).parent().children().index($(this));
+			$(".help_title li").removeClass("on");
+			$(this).addClass("on");
+			
+			});
+</script>

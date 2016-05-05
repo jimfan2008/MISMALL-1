@@ -1,0 +1,14 @@
+<extend name="base" />
+<block name="body">
+
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:"http://maps.google.cn/maps/api/geocode/json?latlng=22.667231,114.218430&sensor=true",
+			success:function(res){
+				console.log(res);
+			}
+		});
+	});
+</script>
+</block>

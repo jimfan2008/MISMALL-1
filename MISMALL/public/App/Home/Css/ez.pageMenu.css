@@ -1,0 +1,35 @@
+#sitemap, #dragHelper {display: block; margin: 0; list-style: none;}
+#dragHelper { background: #eee;}
+#sitemap ul, #dragHelper ul {font-size: 1em; list-style: none;margin-left:20px;}
+#sitemap li, #dragHelper li {display: block; width: 100%; display: block; clear: both; }
+#sitemap dl, #dragHelper div {position: relative; display: block; height: 30px; border-top: 1px solid #eee; padding-top: 0px; background:#fff;}
+#sitemap dt, #dragHelper dt {float: left; font-size: 16px; line-height:25px; margin-left: 25px; padding: 0 0 0 1px;}
+#sitemap dd, #dragHelper dd {float: left;}
+#sitemap .sm2_actions, #dragHelper .sm2_actions {display: none; padding: 3px 2px 0 5px;}
+#sitemap .sm2_status, #dragHelper .sm2_status {position: absolute; top: 3px; right: 0;}
+
+#sitemap dl:hover dd{display: block;}
+#sitemap dd:hover {display: block;}
+#sitemap dd strong, #dragHelper dd strong {display: none;}
+#sitemap a, #dragHelper a {border: none; text-decoration:none;font-size:14px;color:#000000;}
+#sitemap .sm2_expander, #dragHelper .sm2_expander {position: absolute; left: 0; top: 3px;}
+
+#sitemap .sm2_liOpen > dl > .sm2_expander, #dragHelper .sm2_liOpen > dl > .sm2_expander {display: block; width: 15px; height: 10px; background: url(http://ezsite-images.stor.sinaapp.com/excol_open.gif) 50% 50% no-repeat;}
+#sitemap .sm2_liClosed > dl > .sm2_expander, #dragHelper .sm2_liClosed > dl > .sm2_expander {display: block; width: 15px; height: 10px; background: url(http://ezsite-images.stor.sinaapp.com/excol_closed.gif) 50% 50% no-repeat;}
+#sitemap .sm2_liClosed ul, #dragHelper .sm2_liClosed ul {display: none;}
+
+.sm2_move, .sm2_delete, .sm2_addChild, .sm2_pub, .sm2_workFlow {display: block; float: left; width: 16px; height: 16px; text-indent: -5000px; margin: 0 1px 0 0;}
+.sm2_actions * {cursor: pointer;}
+.sm2_pub, .sm2_workFlow {float: right; margin: 0 1px 0 0;}
+
+.sm2_delete {background-image: url(http://ezsite-images.stor.sinaapp.com/sm2_delete.png);}
+.sm2_addChild {background-image: url(http://ezsite-images.stor.sinaapp.com/sm2_addChild.png);}
+
+
+#sitemap .dropzone {background-color:#FFFFFF;}/* ljp */
+#sitemap .sm2_s_published dt{overflow:hidden;width:50%;}
+#sitemap .sm2_s_published dt a{word-break:keep-all;white-space:nowrap;}
+#sitemap .selMenu{background:#E5E5E5}
+#sitemap .inVisible{margin:4px 2px 0px -5px;width:20px;height:20px;float:left;background:url(http://ezsite-images.stor.sinaapp.com/inVisible.png) 2px -3px no-repeat;display:none;}
+/*#sitemap .dropzone { height:0px; background-color:#FFFFFF;border-bottom:12px solid #FFFFFF; border-top: 1px solid #eee}*/
+/*#sitemap .dropmenu { height:0px; background-color:#FFFFFF;border-bottom:10px solid #FFFFFF; }*/

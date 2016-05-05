@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 应用商店</title>
+		<include file="Public:unregistered_hearder" appstore = "active"/>
+	
+		<!-- <section id="template" class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row template-type" >
+					<div  class="col-lg-8 col-sm-8 col-md-8 no-top">
+						<span> 分类</span>
+					</div>
+					<div  class="col-lg-4col-sm-4 col-md-4">
+						<input type="text" placeholder="查找" autocomplete="off" class="form-control search_box">
+					</div>
+					<div style="border:1px solid #ccc;width:1145px;height:71px;margin-left:1%;margin-top:4%;padding:10px 50px" class="search">
+						<span style="font-size:16px;color:#CCC;font-weight:bold;">没有更多分类</span>
+					</div>
+				</div>
+			</div>
+		</section> -->
+	
+		<section id="templatelist" class="no-margin">
+			<div class="container">
+				
+			</div>
+		</section>
+		
+		<div class="container" id = "paginationWrap">
+			<div class="row text-center">
+				<ul class="pagination">
+					
+				</ul>
+			</div>
+		</div>
+		
+		<include file="Public:unregistered_footer"/>
+		<script type="text/javascript" src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap-paginator.js"></script>
+		<script src="__PUBLIC__/App/Home/Unregistered/js/appstroe.js"></script>
+		
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$paginationWrap = $("#paginationWrap"),
+					$footer = $("#footer"),
+					$templateList = $("#templatelist");
+				
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height")) - $paginationWrap.height();
+				$templateList.css("min-height",minH);
+			}
+		</script>
+	</body>
+</html>

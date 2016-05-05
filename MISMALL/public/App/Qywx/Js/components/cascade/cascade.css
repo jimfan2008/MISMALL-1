@@ -1,0 +1,125 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.cascadeList div {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #00ccff;
+	overflow: hidden;
+}
+
+.cascade ul {
+	background: #ffffff;
+}
+.cascade ul li {
+	list-style: none;
+	height: 40px;
+	border: 1px solid #ffffff;
+	line-height: 40px;
+	font-size: 1.3em;
+	text-align: center;
+	background: #f5f5f5;
+	overflow: hidden;
+}
+
+.cascade-addRess {
+	display: none;
+	margin: 0;
+	padding-top: 50px;
+}
+
+.slide-province {
+	overflow: auto;
+}
+.slide-province {
+	height: 100%;
+}
+.slide-province > li {
+	width: 100%;
+	margin: 2px 0;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+}
+.slide-province > li span {
+	display: block;
+	text-align: center;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.slide-province  .slide-cityList li {
+	float: left;
+	margin: 5px;
+	height: 20px;
+	border: 1px solid rgba(0,0,0,0.5);
+	line-height: 20px;
+	padding: 0px 5px;
+}
+.slide-cityList li:hover{
+	background:#00438A;
+	color:#fff;
+}
+.slide-city-county {
+	height: 100%;
+	background:#FFFFFF;
+}
+.slide-city-county .slide-city{
+	float:left;
+	width: 20%;
+	height:100%;
+	background:#F5F5F5;
+	overflow:auto;
+	
+}
+
+.slide-city-county .slide-city li{
+	height:30px;
+	line-height: 30px;
+	padding:0px 5px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.slide-city-county .slide-county{
+	float:left;
+	width: 80%;
+	background : #FFFFFF;
+	height:100%;
+}
+
+.slide-city-county .slide-county li{
+	float:left;
+	margin:5px;
+	padding:5px;
+	cursor: pointer;
+	border:1px solid #ccc;
+}
+.slide-city-county li:hover{
+	background:#888888;
+}
+.slideIpSaveNone{
+	display: none;
+}
+.selected-slide-city{
+	background:#0099FF;
+}
+
+.province-city-county{
+	background:#008bcd;
+	margin:10px 0px;
+	width:100%;
+	overflow: hidden;
+}
+.province-city-county span{
+	display: inline-block;
+	font-size:16px;
+	font-weight: bold;
+	margin-left: 5px;
+	color: #FFFFFF;
+	height:30px;
+	line-height:30px;
+}

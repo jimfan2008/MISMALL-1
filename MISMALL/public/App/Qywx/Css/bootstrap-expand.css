@@ -1,0 +1,85 @@
+/**
+ * bootstrap样式扩展文件，用于覆盖bootstrap中的部分样式（请勿将其他类型的css代码写到这里来）
+ * @auther cy
+ * 2015-6-25
+ */
+
+.myForm label{
+	font-weight:normal;
+	padding-top:8px;
+	text-align:center;
+}
+
+#myWeb .form-horizontal .form-group {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.ctrl input[type="checkbox"], .ctrl input[type="radio"]{
+	margin-top:2px;
+}
+
+.ctrl .col-md-1, .ctrl .col-md-2, .ctrl .col-md-3, 
+.ctrl .col-md-4, .ctrl .col-md-5, .ctrl .col-md-6, 
+.ctrl .col-md-7, .ctrl .col-md-8, .ctrl .col-md-9,
+.ctrl .col-md-10, .ctrl .col-md-11, .ctrl .col-md-12,
+.ctrl .col-xs-1, .ctrl .col-xs-2, .ctrl .col-xs-3, 
+.ctrl .col-xs-4, .ctrl .col-xs-5, .ctrl .col-xs-6, 
+.ctrl .col-xs-7, .ctrl .col-xs-8, .ctrl .col-xs-9,
+.ctrl .col-xs-10, .ctrl .col-xs-11, .ctrl .col-xs-12{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+div .bootstrap-switch{
+	border-radius:0;
+	border-color:none;
+}
+
+div.bootstrap-switch.bootstrap-switch-mini{
+	min-width:80px;
+}
+
+div.bootstrap-switch .bootstrap-switch-container{
+	height:20px;
+}
+
+div.bootstrap-switch.bootstrap-switch-on .bootstrap-switch-label{
+	border-radius:0;
+}
+
+div.bootstrap-switch.bootstrap-switch-off .bootstrap-switch-label{
+	border-radius:0;
+}
+
+div.bootstrap-switch .bootstrap-switch-handle-on{
+	border-radius:0;
+}
+div.bootstrap-switch .bootstrap-switch-handle-off{
+	border-radius:0;
+}
+div.bootstrap-switch .bootstrap-switch-label{
+	border:0;
+}
+
+#container .right-menu div.ui-slider-horizontal .ui-slider-range{
+	background:#8a8a8a;
+}
+
+div.ui-slider-horizontal .ui-slider-handle{
+	top: -9px;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	-moz-outline-style: none;
+	outline-style:none;
+}
+
+label.ui-button{
+	padding: 3px 26px 2px;
+}
+
+span.help-block{
+	margin-bottom:0;
+	margin-top:0;
+}

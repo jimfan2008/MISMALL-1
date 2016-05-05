@@ -1,0 +1,211 @@
+<include file="Index:top" title="模板中心" designer="current"/>
+
+<link type = "text/css" href = "__STATIC__/Css/pageCommon.css" rel="stylesheet" />
+<link type = "text/css" href = "__STATIC__/Template/Css/templete.css" rel = "stylesheet" />
+<link type = "text/css" href = "__STATIC__/Template/Css/style.css" rel="stylesheet" />
+<link type = "text/css" href = "__PUBLIC__/Js/jquery-pager/Pager.css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-pager/jquery.pager.js"></script>
+
+     <div class="query_color" style="margin-top:20px;">
+         <input type="hidden" id="templateInput" cate="" sort="" color="" title="" />
+         <div class="d_query_color">
+             <div class="search_template">
+                 <p class="search_title"><input type="text" id="search_title" placeholder="模板"/></p>
+                 <div class = "search_btn" id="search_btn"></div>
+             </div>
+             <div class="color_type">
+                <ul id="color_type">
+                <volist name="Think.config.TEMPLATE_COLOR" id="color">
+                    <li value="{$color.id}"><span style="background:{$color.value}" title="{$color.name}"></span></li>
+                </volist>
+                </ul> 
+                  <p>色彩分类:</p> 
+             </div>
+         </div>
+         
+     </div>
+     
+     
+     <div class="templateBox">
+         <div class="template_left">
+             
+              <div id="top_temp" >
+                 <ul>
+                     <li name="new">最新模板</li>
+                     <li name="click">最受欢迎模板</li>
+                     <li>空白模板</li>
+                 </ul> 
+                 
+              </div>
+              
+              <div id="bottom_temp">
+                  <p class="parTemp_title">&nbsp;&nbsp;行业分类</p>
+                  <volist name="template_category_list" id="category">
+                  <div class="temp_parNode">
+                      <p class="parTemp_Name">{$category.nameCN}</p>
+                      <if condition="is_array($category['child'])">
+                      <ul class="tamp_childNode">
+                      	<volist name="category['child']" key="key" id="sub">
+                          <li value="{$sub.id}" parent="{$category.id}" <eq name="key" value="1">class="first"</eq>>{$sub.nameCN}</li>
+                      	</volist>
+                      </ul>
+                      </if>
+                  </div>
+				 </volist>
+                 
+              </div>
+             
+         </div>
+         <div class="template_right" >
+         	　<div class="template_no">暂无模板，请选择其他分类</div>
+              <ul class="template_list" id="templateList">
+              	<volist name="templateList" id="tpl" key="k">
+              	   <li>
+                       <a href="{$tpl.preView}"><img src = "{$tpl.thumbPath}"></img>{:l('preview')}</a>
+                        <div class = "tpl_info">
+                          	<p class="name">{$tpl.templateName}</p>
+                          	<p>设计师：{$tpl['user_name']}</p>
+                          	<p>价格：{$tpl['priceFormat']}</p>
+                          <div class="tpl_right">
+	                          <p class="view"><a href="{$tpl.preView}">{:l('preview')}</a></p>
+	                          <p class="editTemp" onclick="ezPageCommon.editorByTplId({$tpl.id})">{:l('edit')}</p>
+                          </div>     
+                        </div>
+                   </li>
+              	</volist>
+              </ul>
+              <div id="pager" style="margin: 0 0 0 188px;"></div>
+         </div>
+     </div>
+     
+<script type="text/javascript" language="javascript">
+/*******切换模板菜单*********/
+
+var ForceWindow = function(){
+	  this.r = document.documentElement;
+	  this.f = document.createElement("FORM");
+	  this.f.target = "_blank";
+	  this.f.method = "post";
+	  this.r.insertBefore(this.f, this.r.childNodes[0]);
+	};
+var ezPageCommon={
+		/**
+		 * 根据站点ID编辑站点
+		 * ＠param int siteId
+		 */
+		editorByTplId:function(siteId)
+		{
+			if(ezPageCommon.isLogin()){
+				window.force = new ForceWindow();
+				window.open(ROOTPATH+"/Qywx/Editor/edit?tplId="+siteId);
+			}else{
+				//跳转登录
+				$("#a_show_login").click();
+			}
+		},
+		/**
+		 *是否登录状态 
+		 *@return boolean true OR false
+		 */
+		isLogin:function()
+		{
+			var status = false;
+			$.ajax({
+	           type:"POST",
+	           url:ROOTPATH+"/Passport/isLogin",
+	           data:{},
+	           async:false,
+	           success:function(data)
+	           {
+	           	  status = data ? true : false;
+	           }
+	        });
+	        return status;
+		}
+};
+
+
+$("#bottom_temp").find(".parTemp_Name").click(function(){
+    $(".tamp_childNode").hide();
+    $(this).parent().find(".tamp_childNode").show();
+    
+});
+/*******分页*******/
+var pageButton = {'first':'首页','prev':'上一页','next':'下一页','last':'尾页'};
+var pagecount = {$pageCount};
+	if(pagecount>1){
+        $(document).ready(function() {
+            $("#pager").pager({ pagenumber: {$page}, pagecount: pagecount, button : pageButton, buttonClickCallback: PageClick});
+        });
+	}
+        PageClick = function(pageclickednumber) {
+            var search = $('#templateInput');
+            $.ajax({
+				url:'{:U("Template/search")}',
+				type:'POST',
+				data:{page:pageclickednumber, cate:search.attr('cate'), color:search.attr('color'), sort:search.attr('sort'), title:search.attr('title')},
+				datatype:'JSON',
+				//beforeSend:function(){
+				//	$('#templateList').html('<img src="http://ezsite-images.stor.sinaapp.com/loading.gif">死命加载中...');
+				//},
+				success:function(data){
+					if(data.pageCount){
+						var tplCount = '';
+						for(var i in data.list){
+							tplCount += '<li>';
+							tplCount += '<img src = "'+data.list[i].thumbPath+'"/>';
+							tplCount += '<div class = "tpl_info">';
+							tplCount += '<div class="tpl_left"><p class="name">'+data.list[i].templateName+'</p><p>价格：'+data.list[i].priceFormat+'</p></div>';
+							tplCount += '<div class="tpl_right">';
+							tplCount += '<p class="view"><a href="'+data.list[i].preView+'">预览</a></p>';
+							tplCount += '<p class="editTemp" onclick="ezPageCommon.editorByTplId('+data.list[i].id+')">编辑</p>';
+							tplCount += '</div>';
+							tplCount += '</div>';
+							tplCount += '</li>';
+						}
+						$('#templateList').html(tplCount);
+						if(data.pageCount>1){
+							$("#pager").pager({ pagenumber: pageclickednumber, pagecount: data.pageCount, button : pageButton, buttonClickCallback: PageClick});
+						}
+						$('.template_no').css('display','none');
+					} else {
+						$('.template_no').css('display','block');
+						$('#templateList').html('');
+						$("#pager").html('');
+					}
+				}
+            });
+        }
+/***search***/
+        $('#top_temp ul>li').click(function(){
+			$('#templateInput').attr('sort', $(this).attr('name'));
+			$('#top_temp li').removeClass('curr');
+			$(this).addClass('curr');
+			PageClick(1);
+         });
+        $('#color_type li').click(function(){
+        	$('#templateInput').attr('color', $(this).attr('value'));
+			$('#color_type li').removeClass('curr');
+			$(this).addClass('curr');
+			PageClick(1);
+         });
+        $('#bottom_temp > .temp_parNode >ul > li').click(function(){
+        	$('#templateInput').attr('cate', $(this).attr('value'));
+        	$('#bottom_temp > .temp_parNode >ul > li').removeClass('curr');
+			$(this).addClass('curr');
+			PageClick(1);
+         });
+        $('#search_btn').click(function(){
+            var title = $('#search_title').val();
+            if(title ==''){
+                alert('请输入要搜索的模板名称');
+            } else {
+        		$('#templateInput').attr('title', title);
+        		$('#templateInput').attr('sort', '');
+        		$('#templateInput').attr('color', '');
+        		$('#templateInput').attr('cate', '');
+        		PageClick(1);
+            }
+         });
+    </script>
+<include file="Index:bottom"/>

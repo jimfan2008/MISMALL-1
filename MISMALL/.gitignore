@@ -1,0 +1,18 @@
+App/Runtime/
+wxsite/user_*/
+uploads/
+website/user_*/
+ezQa/
+.project
+/.metadata
+/.settings
+#忽略所有 .db,.bak 结尾的文件,Thumbs.db
+*.db
+*.bak
+#忽略缩略图
+*_150_auto.jpeg
+*_150_auto.jpg
+*_150_auto.png
+*_210_170.png
+*_210_170.jpeg
+*_210_170.jpg

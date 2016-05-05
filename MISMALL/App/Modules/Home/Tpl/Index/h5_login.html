@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<meta name="description" content="">
+		<meta name="author" content="cc">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>登陆</title>
+		<link href="__PUBLIC__/Css/icon-css/style.css" rel="stylesheet" type="text/css" />
+		<script src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+		<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js"></script>
+		<script src="__PUBLIC__/Js/common.js"></script>
+		<script src="__PUBLIC__/App/Home/Home/user.js"></script>
+		<!--样式文件-->
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+		<!-- 脚本库文件 -->
+		<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+		<!-- <script src="__PUBLIC__/Js/jquery.ImagePreview.js"></script> -->
+		<script src="__PUBLIC__/Js/ezCommon.js"></script>
+		<script>
+			var URLPATH = '__URL__';
+			var APPPATH = '__APP__';
+			var GROUPPATH = '__GROUP__';
+			var PUBLICPATH = '__PUBLIC__';
+			var UPLOAD_URL = '__UPLOAD_URL__';
+			var ROOTPATH = '__ROOT__';
+		</script>
+	</head>
+
+	<body>
+		
+		<style>
+			body {
+				background-color: #2795d0;
+			}
+			.register-main {
+
+			}
+			.main-top {
+				height: 50px;
+				background: #2795d0;
+				display: block;
+				color: #000;
+				margin: 14% auto;
+				text-align: center;
+				width: 90%;
+			}
+			.button-register {
+				background: #EE7942;
+				width: 100%;
+			}
+			.back {
+				float: left;
+				color: #fff;
+				margin-left: 20px;
+				line-height: 50px;
+			}
+			.register-first-step {
+				margin: 0 auto;
+				line-height: 50px;
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				color: #fff;
+				float: left;
+			}
+			.forms {
+				margin-top: 10%;
+				width: 90%;
+				margin: 14% auto;
+				text-align: center;
+			}
+			.h5-logo {
+				float: left;
+				margin-left: 10%;
+			}
+			.forms input {
+				border: none;
+				height: 45px;
+				border-radius: 0px;
+				padding-left: 40px;
+			}
+			.top-tips {
+				margin: 0 auto;
+				color: #ee7942;
+			}
+			.top-troduce {
+				margin: 0 auto;
+				color: #fff;
+				font-size: 14px;
+			}
+			.margin-top-30 {
+				margin-top: 30px;
+			}
+			.margin-top-10{
+				margin-top:10px;
+			}
+			.color-fff {
+				color: #fff;
+				font-weight: bold;
+			}
+			.input-icon {
+				background: rgba(0, 0, 0, 0) url("__PUBLIC__/Images/icon_all.png") no-repeat scroll 0 0 /127px auto;
+				height: 21px;
+				width: 21px;
+			}
+			.email-pic {
+				position: absolute;
+				line-height: 50px;
+				margin-top: 12px;
+			}
+
+			.password-pic {
+				position: absolute;
+				line-height: 50px;
+				display: inline-block;
+				width: 21px;
+				height: 21px;
+				margin-top: 12px;
+				background-position: -42px 0;
+			}
+			.margins {
+				position: relative;
+			}
+			.red {
+				color: red;
+			}
+			.to-register{
+				background:#ccc;
+			}
+		</style>
+		<div class="register-main container">
+			<div class="main-top row">
+				<div class="h5-logo"><img src="__PUBLIC__/App/Qywx/Images/Mismall1.png" width="87" height="65" />
+				</div>
+				<div class="register-first-step">
+					<div class="top-tips">
+						MISMALL
+					</div>
+					<div class="top-troduce">
+						开启&nbsp;&nbsp;微信应用&nbsp;&nbsp;定制&nbsp;&nbsp;新时代
+					</div>
+				</div>
+
+			</div>
+			<form class="form-horizontal forms" onsubmit="return check()" method="post" action="__APP__/Index/register.html" enctype="multipart/form-data">
+				
+				<div class="control-group  register-line row">
+					<div class="col-sm-12 margins">
+						<div class="input-icon email-pic"></div>
+						<input type="text" class="form-control" id="email" name ="email" placeholder="输入邮箱">
+					</div>
+				</div>
+				<div class="control-group register-line row">
+					<div class="col-sm-12 margins">
+						<div class="input-icon password-pic"></div>
+						<input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="输入密码6-20位">
+					</div>
+				</div>
+
+				<div class="control-group register-line margin-top-30 row">
+					<div class="middles">
+						<button id="login" class="btn btn-default button-register color-fff" type="button">
+							登陆
+						</button>
+					</div>
+				</div>
+				<div class="control-group register-line margin-top-10 row">
+					<div class="middles">
+						<button class="btn btn-default button-register color-fff to-register" type="button">
+							免费注册
+						</button>
+					</div>
+				</div>
+			</form>
+			
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#login").click(function() {
+					var email = $("#email").val();
+					if (email == "") {
+						alert("邮箱不能为空！");
+						return false;
+					} else {
+						var szReg = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+						var bChk = szReg.test(email);
+						if ((!bChk)) {
+							return false;
+						}
+					}
+
+					var password = $("#inputPassword").val();
+					if (password.length > 20 && password.length < 6) {
+						alert("密码长度输入错误");
+						return false;
+					}
+
+					
+
+					_commonAjax({
+						url : ROOTPATH + "/Passport/ajaxLogin",
+						type : "post",
+						data : {
+							"checked" : false,
+							"email" : email,
+							"password" : password,
+						},
+						async : false,
+						success : function(r) {
+							if (r['status'] == 1) {
+								window.location.href=ROOTPATH+"/Index";
+							}
+						}
+					});
+				});
+				
+				$(".to-register").click(function(){
+					window.location.href=ROOTPATH+"/Index/register.html";
+				});
+
+			});
+
+		</script>
+	</body>
+</html>

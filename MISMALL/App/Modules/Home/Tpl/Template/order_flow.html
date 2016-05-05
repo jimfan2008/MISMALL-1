@@ -1,0 +1,66 @@
+<include file="Public:after_body"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单</title>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Css/base.css" />
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+		<link href="__STATIC__/AppStore/Css/base.css" rel="stylesheet" type="text/css" />
+		<link href="__STATIC__/AppStore/Css/yyshop.css" rel="stylesheet" type="text/css" />
+		<style>
+		#yyshop_main .buybk .toptitle .fl_kj,#yyshop_main .buybk .buylist .listkj{width:33.33%;}
+		</style>
+</head>
+	<body>
+		<div id="login_top"><img src="__PUBLIC__/App/Home/Home/images/logo.jpg"/>
+	</div>
+	</div>
+	<div class="clear"></div>
+	<div id="yyshop_main">
+		<form name="alipayment" action="__SELF__" method="post" target="_blank">
+			<div class="buyline">
+				<p class="tit fl">
+					购买
+				</p>
+				<p class="curent fr">
+						<a href="/Index/index">首页</a> ><a href="/Home/Template/index">模板列表</a> > 购买
+				</p>
+			</div>
+			<div class="clear"></div>
+			<div class="buybk">
+				<div class="toptitle">
+					<span class="fl_kj fl">模板名称</span><span class="fl_kj fl">设计师</span><span class="fl_kj fl">价格</span>
+				</div>
+				<div class="clear"></div>
+				<div class="buylist">
+					<div class="listkj fl">
+						<p class="yyxm">
+							<a href="{$template['preView']}"><img src="{$template['thumbPath']}" id="app_logo" /></a>
+						</p>
+						<p class="yyxmname">
+							{$template['siteName']}
+						</p>
+						<input id="ProjectName" type="hidden" name="WIDsubject" value="{$template['siteName']}" />
+					</div>
+					<div class="listkj fl xmdpre" style="color:#000">
+							{$template['user_name']}
+					</div>
+					<div class="listkj fl xmdpre" id="Price" >{$template['priceFormat']}</div>
+					
+				</div>
+				<div class="clear"></div>
+				<div class="hjpre">
+					价格总数：<span class="prepic" > <label  id="priceNum">{$template['priceFormat']}</label>
+						<input id="inputPrice" type="hidden" name="WIDprice" value="{$template['price']}" />
+						<input  type="hidden" name="tplId" value="{$template['id']}" />
+					</span>
+				</div>
+			</div>
+			<div class="buysent">
+				<input id="btnconbuy" name="aliplay" type="submit" value="确认下单" class="alipay"/>
+			</div>
+		</form>
+	</div>
+	<div id="dg"></div>
+	<div class="clear"></div>
+	
+	</body>
+</html>

@@ -1,0 +1,251 @@
+    <!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>分享应用</title>
+<style type="text/css">
+body { text-align: left; font-size: 12px; color: #333; margin: 0; padding: 0; font-family: 'simsun', 'microsoft yahei', arial,tahoma; }
+p,ul,dl,dt,dd,form,h2 { margin: 0; }
+ul { list-style: none; }
+em,b { font-style: normal; }
+a { text-decoration: none; }
+img { border: none; }
+.upload_area{display:inline-block;position:relative;vertical-align:middle}
+.upload_box{display:inline-block;line-height:1.6;padding:0;position:relative;vertical-align:middle;z-index:1}
+.border_alpha {background-clip: padding-box;border: 1px solid rgba(0, 0, 0, 0.1);}
+.upload_box.avatar{border-radius:50%;display:inline-block;height:120px;overflow:hidden;position:relative;vertical-align:bottom;width:120px}
+.upload_box.avatar img{border-radius:50%;height:120px;width:120px}
+.upload_box.add_logo{font-size:14px;height:120px;left:0;line-height:120px;position:absolute;top:0;width:120px}
+.upload_box.edit_logo{background-color:#000000;bottom:0;color:#FFFFFF;height:24px;left:0;line-height:24px;opacity:0.6;position:absolute;width:120px}
+.form_item_avatar {margin-bottom: 20px;padding-left: 0;text-align: center;}
+.form_item:before{content:"";display:table}
+.form_item:after{clear:both;content:"";display:table}
+.form_item{line-height:34px;margin-bottom:20px}
+.form_label{color:#777777;float:left;margin-right:0.7em;text-align:right;width:6em}
+.form_control{margin-left:6.7em}
+.input_text{background-color:#FFFFFF;border:1px solid#CCCCCC;border-radius:3px;height:auto;line-height:20px;padding:4px 5px;width:240px}
+.form_details .input_text{width:400px}
+.form_tips{color: #999;line-height: 18px;}
+.btn{background-image:none;-moz-user-select:none;border:1px solid rgba(0,0,0,0);border-radius:4px;cursor:pointer;display:inline-block;font-size:14px;font-weight:400;line-height:1.42857;margin-bottom:0;padding:6px 12px;text-align:center;vertical-align:middle;white-space:nowrap;}
+.btn-primary{background-color:#428BCA;border-color:#357EBD;color:#FFFFFF}
+.btn-default{background-color:#FFFFFF;border-color:#CCCCCC;color:#333333}
+.modal-footer{border-top:1px solid#E5E5E5;padding:15px;text-align:right}
+.modal-footer .btn{margin-bottom:0;margin-left:15px}
+
+.preview{width:100px;border:solid 1px #dedede; margin:10px;padding:10px;}
+.btn{position: relative;overflow: hidden;margin-right: 4px;display:inline-block;*display:inline;padding:4px 10px 4px;font-size:14px;line-height:18px;*line-height:20px;color:#fff;text-align:center;vertical-align:middle;cursor:pointer;background-color:#5bb75b;border:1px solid #cccccc;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.btn input {position: absolute;top: 0; right: 0;margin: 0;border: solid transparent;opacity: 0;filter:alpha(opacity=0); cursor: pointer;}
+</style>
+	</head>
+	<body>
+		<!--form action="{:U('Template/shareTemplate')}" method="post" style="overflow:hidden;" id="commentForm" -->
+		<div class="form_details" style="overflow:hidden">
+	      <div class="form_item form_item_avatar">
+			<div class="upload_area upload_box"><!-- 上传中的状态，加class名：upload_loading -->
+				<a class="avatar border_alpha upload_box upload_area" href="javascript:;">
+				<input type="file" style="position:absolute;left:0;opacity:0;z-index:100;cursor:pointer;width:120px;height:120px;" size="1" multiple="" class="ignore" name="file" id="inputFile3"><img src="{$siteInfo['thumbPath']|default='__PUBLIC__/App/Wechat/images/appstore_avatar_default.png'}" class="img_avatar" id="change_avator">
+					<span class="loading"></span>
+					<span style="display:none;" class="add_logo">添加应用Logo</span>
+					<span class="edit_logo">编辑</span>
+				</a>
+				<p style="margin-top:10px;" class="gray">注：为了最佳的显示效果，推荐上传图片尺寸为640x640，大小不超过2M。</p>
+			</div>
+		</div>
+      	<div class="form_item">
+	     <label class="form_label">应用名称</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" name="templateTitle" value="{$siteInfo['siteName']|htmlspecialchars}" id="templateTitle" placeholder="2-16个字" />
+	     </div>
+	    </div>
+	    
+	    <div class="form_item">
+	    	  <label class="form_label">分享：</label>
+	    	   <div class="form_control">
+		    <div class="bdShare">
+				<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+			</div>
+			</div>
+		</div>
+
+	    <div class="form_item" <eq name="is_free" value="1">style="display:none"</eq>>
+	     <label class="form_label">应用价格</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" name="templatePrice" value="0.00" id="templatePrice" />
+	      <p class="form_tips">0.00默认为免费分享</p>
+	     </div>
+	    </div>
+
+		<div class="form_item" <eq name="is_free" value="1">style="display:none"</eq>>
+	      <label class="form_label">应用截图</label>
+	      <div class="form_control">
+			  <form id="imageform" method="post" enctype="multipart/form-data" action="{:U('Template/uploadAppPreview')}">
+				<div id="up_status" style="display:none"><img src="__ROOT__/images/loader.gif" alt="uploading"/></div>
+				<div id="up_btn" class="btn">
+					<span>添加图片</span>
+					<input id="photoimg" type="file" name="photoimg">
+				</div>
+			  </form>
+			  <p class="form_tips">最大512KB，支持jpg，jpeg，gif，png格式。</p>
+			  <div id="preview"></div>
+	      </div>
+	    </div>
+
+	    <div class="form_item" <eq name="is_free" value="1">style="display:none"</eq>>
+	     <label class="form_label">功能介绍</label>
+	     <div class="form_control">
+	      <textarea class="input_text" name="siteDescription" id="siteDescription" rows="4" placeholder="描述该应用的功能与特色，长度为4-120个字"></textarea>
+	     </div>
+	    </div>
+	    <div class="form_item" <eq name="is_free" value="1">style="display:none"</eq>>
+	     <label class="form_label">开发者</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" name="user_name" value="{$Think.session.uname}" id="user_name" placeholder="开发者的名称" />
+	     </div>
+	    </div>
+	    <input name="siteId" type="hidden" value="{$siteInfo['id']}" />
+	    <input name="thumbPath" type="hidden" value="{$siteInfo['thumbPath']}" id="thumbPath" />
+      </div>
+	 <div class="modal-footer">
+        <button id="btn-cancel" class="btn btn-default" type="button">取消</button>
+        <input id="btn-submit" class="btn btn-primary" type="button" value="确认">
+     </div>
+    <!--/form-->
+</body>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/Ac_jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.wallform.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script type="text/javascript">
+var ROOTPATH = "__ROOT__";
+$(function(){
+		//upload logo
+	$('a.avatar').undelegate('#inputFile3','change').delegate('#inputFile3','change', function() {
+	    $.ajaxFileUpload({
+         type:"POST",
+         url:ROOTPATH+"/Apps/WechatPublic/ajaxUpload",
+         secureuri:false,
+         fileElementId:'inputFile3',
+         dataType: 'JSON',
+          success: function(data){
+            var json = eval('('+data+')');
+            //console.log(data,json);
+            $('#change_avator').attr('src', json.image);
+            $('#thumbPath').val(json.image);
+          }
+       });
+	});
+
+	$('#btn-cancel').click(function(){
+		art.dialog.close();
+	});
+
+	$('#photoimg').on('click').on('change', function(){
+		$("#imageform").ajaxForm({
+			target: '#preview', 
+			beforeSubmit:function(){
+				$("#up_status").show();
+				$("#up_btn").hide();
+			}, 
+			success:function(){
+				$("#up_status").hide();
+				$("#up_btn").show();
+			}, 
+			error:function(){
+				$("#up_status").hide();
+				$("#up_btn").show();
+			}
+		}).submit();
+	});
+
+	$('#btn-submit').on('click', function(){
+		var title = $('input[name="templateTitle"]').val();
+		var user_name = $('input[name="user_name"]').val();
+		var price = $('input[name="templatePrice"]').val();
+		var thumb = $('#thumbPath').val();
+		var desc  = $('#siteDescription').val();
+		
+		var img_pre_list = '';
+		var img_previews = $('#preview').find("img");
+		img_previews .each(function(k,v){
+	        var imagesrc = $(this).attr("src");
+			//  imagesrc = imagesrc.substring(11);
+			img_pre_list = img_pre_list + imagesrc + ',';
+		});
+
+		if(title==''){
+			alert('还没有输入应用名称，不能提交');
+			$('#btn-submit').get(0).disabled = false;
+			return false;
+		}
+
+		if(user_name==''){
+			alert('还没有输入开发者，不能提交');
+			$('#btn-submit').get(0).disabled = false;
+			return false;
+		}
+
+		if(price && price !='0.00'){
+			var reg = /^(([1-9]\d*)|\d)(\.\d{1,2})?$/;
+			if( ! reg.test(price.toString())　){
+				alert('价格格式不正确，不能提交!');
+				$('#btn-submit').get(0).disabled = false;
+				return false;
+			}
+		}
+
+		if(thumb == ''){
+			alert('请上传应用图片，不能提交');
+			$('#btn-submit').get(0).disabled = false;
+			return false;
+		}
+		
+		var data = {};
+		data['siteId'] = _getUrlParas('siteId');
+		data['templateTitle'] = title;
+		data['templatePrice'] = price;
+		data['user_name'] = user_name;
+		data['thumbPath'] = thumb;
+		data['imgPreviewList'] = img_pre_list;
+		data['siteDescription'] = desc;
+
+		$.ajax({
+			type : "POST",
+			url : ROOTPATH + "/Template/shareTemplate",			
+			data : data,
+			success : function(result) {
+				alert('感谢您的无私分享,请耐心等待管理员审核处理!');
+				art.dialog.close();
+			}
+		});
+
+	});
+});
+</script>
+<script>
+			var url = "{:U('Index/preview','siteId='.$siteId, false,false,true)}";
+			
+	window._bd_share_config = {
+		common : {
+			bdUrl : url,
+		},
+		share : [{
+			"bdSize" : 32
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+</html>
+

@@ -1,0 +1,265 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__PUBLIC__/Js/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}模板</h2>
+	</div>
+	<div class="tab-wrap">
+		<!--<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			<li data-tab="tab2"><a href="javascript:void(0);">高 级</a></li>
+		</ul>-->
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							模板名称<span class="check-tips">（名称不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="siteName" class="text input-large" value="{$info.siteName|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							模板标识<span class="check-tips">（标识不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="sitePath" class="text input-large" value="{$info.sitePath|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">网站类型<span class="check-tips"></span></label>
+						<div class="controls">
+							<select name="siteTypeId">
+							<volist name="Think.config.SITE_TYPE_LIST" id="site">
+								<option value="{$site.id}"  <eq name="info['siteTypeId']" value="$site['id']">selected</eq>>{$site.name}</option>
+							</volist>
+						</select>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">模板分类<span class="check-tips"></span></label>
+						<div class="controls">
+							<select name="templateTypeId">
+								<volist name="template_category_list" id="category">
+								<option value="{$category['id']}" <eq name="info['siteCategoryId']" value="$category['id']">selected</eq>>{$category.nameCN}</option>
+									<!--<optgroup label="{$category.nameCN}"></optgroup>
+										<if condition="is_array($category['child'])">
+											<volist name="category['child']" id="sub">
+											<option value="{$sub['id']}" <eq name="info['templateTypeId']" value="$sub['id']">selected</eq>>&nbsp;&nbsp;&nbsp;&nbsp;|--{$sub.nameCN}</option>
+											</volist>
+										</if>
+									 --></volist>
+							</select>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">模板颜色<span class="check-tips">(模板主色调)</span></label>
+						<div class="controls">
+							<select name="colorId">
+							<volist name="Think.config.TEMPLATE_COLOR" id="color">
+								<option value="{$color.id}"  <eq name="info['colorId']" value="$color['id']">selected</eq>>{$color.name}</option>
+							</volist>
+						</select>
+						</div>
+					</div>
+					
+					<div class="controls">
+						<label class="item-label">模板缩略图</label>
+						<input type="file" id="upload_picture">
+						<input type="hidden" name="thumbPath" id="thumbPath" value="{$info['source_image']|default=''}"/>
+						<div class="upload-img-box">
+						<notempty name="info['thumbPath']">
+							<div class="upload-pre-item"><img src="{$info.thumbPath}"/></div>
+						</notempty>
+						</div>
+					</div>
+					<script type="text/javascript">
+					//上传图片
+				    /* 初始化上传插件 */
+					$("#upload_picture").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__PUBLIC__/Js/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id(),'dir'=>'Tpl_Image'))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture
+				    });
+					function uploadPicture(file, data){
+				    	var data = $.parseJSON(data);
+				    	console.log(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#thumbPath").val(data.path);
+				        	src = data.url || '__UPLOAD_URL__' + data.path;
+				        	$("#thumbPath").val(src);
+				        	$("#thumbPath").parent().find('.upload-img-box').html(
+				        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(this).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>
+				</div>
+				
+				<div class="form-item">
+					<label class="item-label">
+						模板编号<span class="check-tips">(模板编号为模板对应的目录名称,<font color="red">只能为数字、字母、中划线和下划线组成</font>,请不要随意修改，当上传模板时编号不填写)</span>
+					</label>
+					<div class="controls">
+						<input type="text" name="sitePath" id="templatePath" class="text input-large" value="{$info.sitePath|default=''}">
+					</div>
+				</div>
+				<!-- <div class="form-item">
+					<label class="item-label">
+						上传模板<span class="check-tips">(模板只能为.zip格式的模板压缩包)</span>
+					</label>
+					<div class="controls">
+						<input type="file" id="upload_file">
+						<input type="hidden" name="templateDownload" id="templateDownload" value="{$info.templateDownload}"/>
+						<input type="hidden" name="file_id" id="file_id" value="{$info.file_id|default=0}"/>
+						<div class="upload-img-box">
+							<present name="info['templateDownload']">
+								<div class="upload-pre-file"><span class="upload_icon_all"></span><a href='__ROOT__{$info.templateDownload}'target='_blank'>{$info.file.name}</a></div>
+							</present>
+						</div>
+					</div>
+					<script type="text/javascript">
+					//上传图片
+				    /* 初始化上传插件 */
+					$("#upload_file").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__PUBLIC__/Js/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传附件",
+				        "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.zip;',
+				        "onUploadSuccess" : uploadFile
+				    });
+					function uploadFile(file, data){
+						var data = $.parseJSON(data);
+				        if(data.status){
+				        	$("#templateDownload").val(data.path);
+				        	$('#file_id').val(data.id);
+				        	$("#templateDownload").parent().find('.upload-img-box').html(
+				        		"<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span><a href='__ROOT__"+data.path+"' target='_blank'>" + data.info + "</a></div>"
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(this).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>
+				</div>
+				 -->
+				<div class="form-item">
+					<label class="item-label">
+						设计师<span class="check-tips"></span>
+					</label>
+					<div class="controls">
+						<input type="text" name="user_name" class="text input-large" value="{$info.user_name|default='官方团队'}">
+					</div>
+				</div>
+				<div class="form-item">
+					<label class="item-label">
+						价格<span class="check-tips">模板价格</span>
+					</label>
+					<div class="controls">
+						<input type="text" name="price" class="text input-large" value="{$info.price|default='0.00'}">
+					</div>
+				</div>
+				<div class="form-item">
+						<label class="item-label">分享类型<span class="check-tips"></span></label>
+						<div class="controls">
+							<select name="isShare">
+								<option value="０"  <eq name="info['isShare']" value="０">selected</eq>>未审核</option>
+								<option value="1"  <eq name="info['isShare']" value="1">selected</eq>>官方模板</option>
+								<option value="2"  <eq name="info['isShare']" value="2">selected</eq>>空白模板</option>
+								<option value="3"  <eq name="info['isShare']" value="3">selected</eq>>会员分享</option>
+						</select>
+						</div>
+					</div>
+				<div class="form-item">
+					<label class="item-label">
+						模板类型
+					</label>
+					<div class="controls">
+						<input type="radio" name="siteTempType" value="0" <if condition="$info['siteTempType'] eq 0">checked</if> > 网站模板
+						<input type="radio" name="siteTempType" value="1" <if condition="$info['siteTempType'] eq 1">checked</if> > 微企模板
+						<input type="radio" name="siteTempType" value="2" <if condition="$info['siteTempType'] eq 2">checked</if> > ezApp模板
+						<input type="radio" name="siteTempType" value="3" <if condition="$info['siteTempType'] eq 3">checked</if> > 微观模板
+					</div>
+				</div>
+				<div class="form-item">
+					<label class="item-label">
+						启动<span class="check-tips">（显示模板）</span>
+					</label>
+					<div class="controls">
+						<input type="radio" name="status" class="text input-small" value="1" <if condition="$info['status'] eq 1">checked</if> > 显示
+						<input type="radio" name="status" class="text input-small" value="0" <if condition="$info['status'] eq 0">checked</if> > 不显示
+					</div>
+				</div>
+
+				<!-- 高级 -->
+				<!--<div id="tab2" class="tab-pane tab2">
+					
+					<div class="form-item">
+						<label class="item-label">网页标题</label>
+						<div class="controls">
+							<input type="text" name="meta_title" class="text input-large" value="{$info.meta_title|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">关键字</label>
+						<div class="controls">
+							<label class="textarea input-large">
+								<textarea name="keywords">{$info.keywords|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">描述</label>
+						<div class="controls">
+							<label class="textarea input-large">
+								<textarea name="description">{$info.description|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+				</div>-->
+
+				<div class="form-item">
+					<input type="hidden" name="id" value="{$info.id|default=''}">
+					<input type="hidden" name="userId" value="{$info.userId|default='0'}">
+					<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		$(function(){
+			//showTab();
+		});
+		//导航高亮
+		$('.side-sub-menu').find('a[href="{:U('Template/templateList')}"]').closest('li').addClass('current');
+	</script>
+</block>

@@ -1,0 +1,28 @@
+/* 客服目录除主页外其他页面底部样式样式*/
+#footer {
+	width:100%;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background: #2e2e2e;
+	text-align: center;
+}
+
+#footer a {
+	color:#5c5c5c;
+}
+
+#footer a:hover {
+	color: #c52d2f;
+}
+
+#footer ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#footer ul > li {
+	display: inline-block;
+    margin: 20px 0 0 5px;
+    padding: 0 3px;
+}

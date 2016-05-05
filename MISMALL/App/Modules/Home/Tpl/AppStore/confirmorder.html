@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>确认订单 | mismall</title>
+
+		<!-- core CSS -->
+		<include file="Public:client_hearder" />
+		
+		<link href="__PUBLIC__/App/Home/AppStore/Css/yyshop.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+			var userNum = "{$_GET['userNum']}";
+		</script>
+
+		<div id="content">
+			<form action = "confirmbuy.html" method="post">
+				<div class="shopping_cart">
+					<div class="shop_buy">
+						<span class="f-18b">确认订单</span>
+						<span class="back"><a href="{:U('Client/appStore')}">&lt;返回</a></span>
+					</div>
+					<div class="toptitle">
+						<div class="name fl">
+							<strong>商品信息</strong>
+						</div>
+						<div class="designer fl">
+							<strong>设计师</strong>
+						</div>
+						<div class="unit_price fl">
+							<strong>单价</strong>
+						</div>
+						<div class="number fl">
+							<strong>用户(/位)</strong>
+						</div>
+						<div class="number fl">
+							<strong>天数(/天)</strong>
+						</div>
+						<strong></strong>
+					</div>
+					<div class="clear"></div>
+					<ul>
+						<li>
+							<div class="name fl">
+								<span class="pro-img fl"> 
+									<a href="confirmbuy.html">
+										<img src="{$siteInfo['thumbPath']}"/>
+									</a> 
+								</span>
+								<span class="title fl"> 
+									<input type = "hidden" name = "appId" value = "{$siteInfo['id']}">
+									<a href="#">{$siteInfo['siteName']}</a> 
+								</span>
+							</div>
+							<div class="designer fl username">
+								{$siteInfo['user_name']}
+							</div>
+							<div class="unit_price f-yellow fl app_price">
+								{$siteInfo['price']}
+							</div>
+							<div class="number fl">
+								<a href="#" class="regulation fl minu" disabled=true>-</a>
+								<input id="textUser"  name = "textUser" type="text" value="1" class="inupt fl"  onkeyup="value=value.replace(/[^\d]/g,'');SumNum();" />
+								<a href="#" class="regulation fl addu">+</a>
+							</div>
+							<div class="number fl">
+								<a href="#" class="regulation fl mind" disabled=true>-</a>
+								<input id="textDay"  name = "textDay" type="text" value="30" class="inupt fl"  onkeyup="value=value.replace(/[^\d]/g,'');SumNum();" />
+								<a href="#" class="regulation fl addd">+</a>
+							</div>
+						</li>
+					</ul>
+					<div class="bottomdiv">
+						<div class="totalall fr">
+							合计： ¥
+							<span id="priceNum"  class="f-18b f-yellow">0.00</span>
+							<span class="affirm">
+								<!--input type = "submit" value = "确认订单"/-->
+								<input type="button" id="btnconbuy" value="确认下单" />
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+		
+		<include file="Public:client_footer" />
+		
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$paginationWrap = $("#paginationWrap"),
+					$footer = $("#footer"),
+					$content = $("#content");
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height")) - $paginationWrap.height() - 243;
+				$content.css("margin-bottom",minH);
+			}
+		</script>
+		<script src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/confirmbuy.js"></script>
+	</body>
+</html>
+		

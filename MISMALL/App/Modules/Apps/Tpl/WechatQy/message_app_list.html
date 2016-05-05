@@ -1,0 +1,31 @@
+<extend name="base"/>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="qy_side"/>
+</block>
+<block name="body">
+<div class="row">
+	<div class="tool_bar">
+		<h2 class="page_title">发消息</h2>
+	</div>
+	<div class="app_view">
+		<div style="" class="app_box_item open border_none">
+			<span class="app_box_title">选择一个应用发消息</span>
+			<ul style="padding-top:60px;" class="app_box js_agent_box">
+				<!-- 插入 agent-item -->
+			<volist name="applist" id="app">
+			<li class="item" data-id="{$app.id}">
+				<a class="logo_img border_alpha" href="{:U('sendMessage', array('aid' => $app['id']))}">
+					<img class="img_logo" src="{$app.icon}" style="width:80px;height:80px;">
+					</a>
+				<h3 class="name">{$app.name}</h3>
+			</li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+
+</block>

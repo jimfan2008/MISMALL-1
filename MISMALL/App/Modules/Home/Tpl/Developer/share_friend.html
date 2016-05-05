@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 开发者中心</title>
+
+		<!-- core CSS -->
+		<link href="__PUBLIC__/App/Home/Home/Css/base1.css" rel="stylesheet" type="text/css" />
+		<include file="Public:developer_hearder" />
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>我的邀请链接 </b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="row profile" >
+
+							<div class="web_case">
+								<div class="recInvBanner mt10">
+									<div class="recInvFont" >
+										<h2 class="mb5">邀请伙伴 拿提成奖励</h2>
+										<h3 id="ut192"> 推荐好友，更多奖励赚不停！
+										<br>
+										快来和你的小伙伴一起创业吧...... </h3>
+
+									</div>
+									<img alt="" src="__ROOT__/uploads/Tpl_Image/recommend_banner.jpg">
+								</div>
+								<div class="recInvNum fs12 cg" id="ut198">
+									我已邀请<span id="totalCount" class="mlr5 fs18 cr2">{$shareCount}</span>位好友，  获得收益<span id="totalIncome" class="mlr5 fs18 cgl">0</span>￥
+								</div>
+								<div class="recInvMethod" id="ut199">
+									<h2 class="fs16 cg fwB" id="ut200">邀请方法：</h2>
+									<div class="rmInfo cg" id="ut201">
+										<div class="rmFont h140" id="ut202">
+											<span class="rmFont-icon" id="ut203">方法<i id="ut204">1</i></span>
+											<h2 id="ut205">邀请码</h2>
+											<p id="ut206">
+												我的邀请码：<span id="recommendCode" class="cr2">{$shareNum}</span>
+											</p>
+											<p id="ut207">
+												你的好友在注册时如果填写了你的邀请码，我们就认为这个会员是你邀请来注册的。
+											</p>
+											<span class="rmCode" id="ut208"></span>
+										</div>
+										<div class="rmFont h160" id="ut209">
+											<span class="rmFont-icon" id="ut210">方法<i id="ut211">2</i></span>
+											<h2 id="ut212">邀请链接</h2>
+											<div class="clearfix mb10" id="ut213">
+												<div id="recommendLink" class="rmFontAddress fl">
+													http://{$serverName}__ROOT__/Unregistered/registered.html?sharecode={$shareCode}
+												</div>
+												<input type="button" class="btnG" data-clipboard-target="recommendLink"  value="复制" id="copyLink">
+												<div class="zclip" id="zclip-ZeroClipboardMovie_1" style="position: absolute; left: 478px; top: 36px; width: 58px; height: 28px; z-index: 99;">
+
+												</div>
+											</div>
+											<p id="ut214">
+												把专属于你的邀请链接发给你的好友，好友打开此链接后系统会默认输入你的邀请码（你的好友无需输入）。
+											</p>
+										</div>
+										<div class="rmFont" id="ut215">
+											<span class="rmFont-icon" id="ut216">方法<i id="ut217">3</i></span>
+											<img class="code-yq" src="http://qr.liantu.com/api.php?text=http://{$serverName}__ROOT__/Unregistered/registered.html?sharecode={$shareCode}" id="imgRecommendLink">
+
+											<div class="code_font" id="ut218">
+												<h2 id="ut219">邀请扫码</h2>
+												<div class="recShareBox" id="ut220">
+													邀请你的好友来扫码，好友扫此二维码后系统会默认输入你的邀请码（你的好友无需输入）。
+												</div>
+											</div>
+										</div>
+										<!--<div class="rmFont" id="ut221">
+											<span class="rmFont-icon" id="ut222">方法<i id="ut223">4</i></span>
+											<h2 id="ut224">合作帐号邀请</h2>
+											<div class="recShareBox" id="ut225">
+												<a id="weixinLi" class="recShare" href="javascript:void(0);"><span class="sWeixin" id="ut226"></span>微信</a>
+												<a target="_blank" id="qqLi" class="recShare" href="http://connect.qq.com/widget/shareqq/index.html?url=http://{$serverName}__ROOT__/Unregistered/registered.html?sharecode={$shareCode}&amp;title=来自mismall的分享&amp;desc=我在玩mismall，轻松赚外快，你也来吧！&amp;summary=&amp;site=qianbao666&amp;pics=http://user.qbao.com/images/wap/120.png"><span class="sQzone" id="ut227"></span>QQ</a>
+												<a target="_blank" id="sinaLi" class="recShare" href="http://service.weibo.com/share/share.php?url=http://{$serverName}__ROOT__/Unregistered/registered?sharecode={$shareCode}&amp;title=我在玩mismall，轻松赚外快，你也来吧！&amp;searchPic=false&amp;appkey=1343713053"><span class="sSina" id="ut228"></span>新浪微博</a>
+												<a target="_blank" id="tengxunLi" class="recShare" href="http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=http://{$serverName}__ROOT__/Unregistered/registered.html?sharecode={$shareCode}&amp;title=我在玩mismall，轻松赚外快，你也来吧！&amp;appkey=801cf76d3cfc44ada52ec13114e84a96"><span class="sTencent" id="ut229"></span>腾讯微博</a>
+											</div>
+										</div>-->
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script type = "text/javascript" src = "__PUBLIC__/Js/copy/jquery.zclip.min.js"></script>
+		<script type = "text/javascript">
+			$(function(){
+				var swfUrl = PUBLICPATH + '/Js/copy/ZeroClipboard.swf';
+				$('#copyLink').zclip({
+					path : swfUrl,
+					copy : function(){
+						return $("#recommendLink").html();
+					}
+				})
+			});
+		</script>
+
+		</body>
+</html>

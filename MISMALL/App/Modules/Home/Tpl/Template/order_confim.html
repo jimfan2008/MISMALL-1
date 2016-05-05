@@ -1,0 +1,117 @@
+<include file="Index:top" title="确认购买" designer="current"/>
+<link href="__PUBLIC__/App/Home/AppStore/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/App/Home/AppStore/Css/yyshop.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.shopping_cart .unit_price {
+    width: 180px;
+}
+</style>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+	<!--中间内容 -->
+	<div class="clear"></div>
+	<div id="content">
+	<div class="shopping_cart">
+		<form id="paymentForm" name="alipayment" action="{:U('Home/Payment/payForm')}" method="post" target="_blank">
+		<div class="shop_buy"><span class="f-18b">订单详情</span></div>
+		<!----> <input type="hidden" name="orderType" value="2" />
+		<input type="hidden" name="WIDappid" value="{$template['id']}" />
+		<input id="ProjectName" type="hidden" name="WIDsubject" value="{$template['siteName']}" />
+		<input id="inputPrice" type="hidden" name="WIDprice" value="{$order['tradeMoney']}" />
+		<input  id="ordernumber" type="hidden" name="WIDout_trade_no" value="{$order['orderNo']}" /> 
+		<input  id="ordernumber" type="hidden" name="out_trade_no" value="{$order['orderNo']}" />
+		<input id="paytype" type="hidden" name="paytype" value="alipay">
+		<div class="toptitle">
+			<div class="name fl"><strong>名称</strong></div>
+			<div class="designer fl"><strong>设计师</strong></div>
+			<div class="unit_price fl"><strong>单价</strong></div>
+		
+			</div>
+		<div class="clear"></div>
+		<ul>
+		  <li>
+		    <div class="name fl"><span class="pro-img fl"><a href="{$template['preView']}"><img src="{$template['thumbPath']}" id="app_logo" /></a></span><span class="title fl"><a href="#">{$template['siteName']}</a></span></div>
+		    <div class="designer fl">{$template['user_name']}</div>
+		    <div class="unit_price f-yellow fl app_price">{:currency($order['appPrice'])}</div>
+		  </li> 
+		</ul>
+		<div class="bottomdiv">
+		  <div class="totalall fr"> 价格：<span class="f-18b f-yellow">{:currency($order['appPrice'])}</span> 
+		  	<span id="btnbuynow" class="affirm">
+		  	 <input id="btnalipay"  type="button" value="确认支付" class="btn_pay alipay"/>
+		  	  <input id="btnwechat" type="button" value="确认支付" class="btn_pay  wechat"/>
+		  	</span>
+		  </div>
+	    </div>
+	  </form>
+	</div>
+	<div class="clear"></div>
+	</div>
+	<div id="tc_window" style="display:none;">
+		<div class="infor">
+			<h1>请在新打开的页面完成支付</h1>
+			<p>点击"已完成支付"，您可以查看订单</p>
+			<p>点击"遇到支付困难"，您可以查看支付帮助信息</p>
+			<p class="botbox"><input name="" onclick="playok()" type="button" value="已完成支付" class="ywczf" /><input name="" onclick="playno()" type="button" value="遇到支付困难" class="ydzfkl" /></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var order_sn = '{$order["orderNo"]}';
+	var product_id = '{$order["proID"]}';
+	var art_dialog = '';
+	var template = {:json_encode($template)};
+	$(function() {
+		$('#btnalipay').click(function(){
+			$('#paytype').val('alipay');
+			payment();
+		});
+		$('#btnwechat').click(function(){
+			$('#paytype').val('wxpay');
+			payment();
+		});
+	
+});
+	//支付
+	function payment() {
+		$('#paymentForm').submit();
+		art_dialog = art.dialog({
+			content : $("#tc_window").html(),
+			opacity : 0.1,
+			resize : false,
+			drag : false,
+			lock : true,
+			title : "确认支付结果",
+		});
+
+	};
+	function playno() {
+		window.location = GROUPPATH+"/MyCenter/my_order.html";
+	}
+
+	function playok() {
+		$.ajax({
+			type : 'POST',
+			url	 : '{:U("Payment/checkOrderPaymentStatus")}',
+			data : {'sn':order_sn},
+			dataType : "JSON",
+			success: function(data){
+				if(data.error){
+					alert(data.message);
+					art_dialog.close();
+				} else {
+					if(data.message == '1'){
+						if(template['siteTempType'] == 1) {
+							location.href = GROUPPATH + '/Qywx/Editor/index?order_sn='+ order_sn;
+						} else {
+							location.href = GROUPPATH + '/Qywx/Editor/edit?order_sn='+ order_sn;
+						}
+						
+					} else {
+						alert('支付失败请继续支付');
+						art_dialog.close();
+					}
+				}
+			}
+		});
+	}
+	</script>
+<include file="Index:bottom"/>

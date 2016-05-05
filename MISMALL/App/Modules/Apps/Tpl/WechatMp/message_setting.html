@@ -1,0 +1,1145 @@
+<extend name="base"/>
+<block name="style">
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/themes/default/default.css" />
+<style tyle="text/css">
+.ke-dialog-body .tabs{border-width:0;height: auto;width:auto;}
+.mod-msg{margin-left: 30px;}
+
+.input_edition_wrap {
+    border: 1px solid #CCCCCC;
+    min-height: 300px;
+    min-width: 360px;
+    padding: 10px;
+    position: relative;
+}
+
+.input_edition_content {
+    border-radius: 3px;
+    bottom: 35px;
+    left: 0;
+    outline: 0 none;
+    overflow: auto;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.input_edition_bar {
+    bottom: 0;
+    height: 32px;
+    left: 0;
+    padding: 0 8px;
+    position: absolute;
+    right: 0;
+}
+
+.input_word_num_limit {
+    padding-top: 5px;
+}
+</style>
+</block>
+<block name="header">
+    <include file="header"/>
+</block>
+<block name="side">
+    <include file="Public:apps_leftMenu"/>
+</block>
+
+<block name="body">
+<div class="page-header">
+    <switch name="ACTION_NAME">
+    <case value="keyword">
+    <h1>关键词回复</h1>
+    <p>您的公众号粉丝发送消息如包含您设置的关键字，即可收到您设置的对应回复内容。<a target="_blank" href="http://kf.qq.com/faq/140410VnIvYV140415EvYBji.html">如何设置关键词回复</a></p>
+   </case>
+    <case value="autoReplay">
+    <h1>自动回复</h1>
+    <p>粉丝在回复您微信消息时，系统自动回复您设置的内容给粉丝。<a target="_blank" href="http://kf.qq.com/faq/140410VnIvYV140415AvAVfY.html">如何设置自动回复</a></p>
+    </case>
+    <case value="subscribe">
+     <h1>首次关注回复</h1>
+    <p>粉丝在关注您的公众号时，系统会自动发送您设置回复内容给粉丝。<a target="_blank" href="http://kf.qq.com/faq/140410VnIvYV140415NjyUrA.html">如何设置首次关注回复</a></p>
+     </case>
+     <case value="memberSend">
+        <h3>与 {$userName} 的聊天</h3>
+     </case>
+    <default/>
+    </switch>
+</div>
+
+<form enctype="multipart/form-data" class="form form-horizontal ajax-form" method="post" action="{:U('message_setting')}" >
+<div id="replyContent">
+    <div class="row" style="margin: 20px 0 0 ">
+    <switch name="ACTION_NAME">
+         <case value="memberSend">
+         <input type="hidden" name="FromUserName" value="{$FromUserName}"/>
+        </case>
+        <case value="keyword">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">规则名称<sub>*</sub></label>
+            <div class="col-sm-6 form-inline">
+              <input type="text" class="form-control" placeholder="请输入规则名称" autocomplete="off" name="rule_name" value="{$ruleInfo.ruleName}">
+              <span class="help-inline">60字以内</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3" style="margin-left:62px">关键词（最多10条关键词）<sub>*</sub></label>
+            <div class="col-sm-12">
+                <div id="keywords-tags">
+                    <volist name="ruleInfo['keywords']" id="vo">
+                    <span class="ui-tag edit-status-key">
+                        <label>{$vo}</label> 
+                        <a class="glyphicon glyphicon-remove-circle" href="javascript:;"></a>
+                    </span>
+                    </volist>
+                    <span class="ui-tag add" data-toggle="modal" data-target="#keywordModal">
+                        <a class="glyphicon glyphicon-plus" href="javascript:;"></a>
+                    </span>
+                    <input type="hidden" name="keywords" value="{:join(';', $ruleInfo['keywords'])}" id="keyword-input">
+                </div>
+                <div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+                        <h4 class="modal-title">添加关键字</h4>
+                      </div>
+                      <div class="modal-body">
+                        <textarea style="width: 375px; height: 95px;" id="keyword-textarea"></textarea>
+                        <span class="help-block">输入英文分号";"可添加多个关键字，每个关键字少于30个字</span>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="addKeywords()">确认</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span class="help-block"></span>
+            </div>
+        </div>
+         </case>
+        <default/>
+            <input type="hidden" name="rule_name" value="{$ruleInfo.ruleName}">
+       </switch>
+        
+        <input type="hidden" name="action_name" value="{$Think.const.ACTION_NAME}"/>
+        <input type="hidden" name="rule_id" value="{$ruleInfo.id}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">回复类型</label>
+            <div class="col-sm-2">
+              <select name="msgType" id="msgType" class="form-control" onchange="changeType(this.value)">
+                <option value="text" <eq name="ruleInfo['msgType']" value="text">selected</eq>>文本</option>
+                <!--  <option value="image" <eq name="ruleInfo['msgType']" value="image">selected</eq>>图片</option>
+               <option value="voice" <eq name="ruleInfo['msgType']" value="voice">selected</eq>>语音</option>
+                <option value="video" <eq name="ruleInfo['msgType']" value="video">selected</eq>>视频</option>
+                <option value="file" <eq name="ruleInfo['msgType']" value="file">selected</eq>>文件</option> -->
+                <option value="mpnews" <eq name="ruleInfo['msgType']" value="mpnews">selected</eq>>单图文</option>
+                <option value="news" <eq name="ruleInfo['msgType']" value="news">selected</eq>>多图文</option>
+              </select>
+            </div>
+           <!--  <div class="col-sm-2" style="margin-top:8px"><a href="javascript:void(0)" onclick="getMessageSetting()">从素材库中选择</a></div> -->
+        </div>
+        <div id="resContent">
+        	<!-- text -->
+            <div style="display: <if condition="(isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'text') || (!isset($ruleInfo['msgType']))">block<else/>none</if>;" class="row" id="resContentText">
+                <div class="message-content clearfix">
+                    <div class="col-xs-6 mod-msg-editor">
+                        <!--<span style="float:right;" id="limit-place">仅限60个字</span>
+                         <div class="content" id="edit_area">
+                            <textarea  name="text_content" id="text_content" style="width:100%;height:200px; margin-bottom:10px;*width:99%;visibility:hidden;" autocomplete="off"></textarea>
+                        </div> -->
+                        <div class="input_edition_wrap input_text">
+        <textarea contenteditable="true" name="text_content" id="text_content" style="resize: none; min-width: 350px; min-height: 290px; border: medium none;" class="input_edition_content"></textarea>
+        <div class="input_edition_bar">
+            <a href="javascript:;" class="icon icon_expression js_emoticon"></a>
+            <span class="input_word_num_limit pull-right" id="limit-place">600</span>
+        </div>
+    </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg">
+                        <div class="mod-msg-txt">
+                            <div id="logo" class="user">
+                                <span class="mod-default-avatar"></span>
+                            </div>
+                            <div class="content">
+                                <span class="arrow"></span>
+                                <div id="show-text" class="msg empty"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image -->
+            <div style="display: <if condition="isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'image'">block<else/>none</if>;" class="row" id="resContentImage">
+                <div class="message-content clearfix">
+                    <div class="col-xs-6 mod-msg-editor">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_image">
+                              <input type="hidden" name="cover_image_id" id="cover_image_id" value="0"/>
+                              <input type="hidden" name="cover_image_path" id="cover_image_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">(大图片建议尺寸：640像素 * 640像素)限大小2MB以内的JPG文件</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg">
+                        <div class="mod-msg-txt">
+                            <div id="logo" class="user">
+                                <span class="mod-default-avatar"></span>
+                            </div>
+                            <div class="content">
+                                <span class="arrow"></span>
+                                <div id="show-image" class="msg empty"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- voice -->
+            <div style="display: <if condition="isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'voice'">block<else/>none</if>;" class="row" id="resContentVoice">
+                <div class="message-content clearfix">
+                    <div class="col-xs-6 mod-msg-editor">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_voice">
+                              <input type="hidden" name="cover_voice_id" id="cover_voice_id" value="0"/>
+                              <input type="hidden" name="cover_voice_path" id="cover_voice_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">大小: 2MB以内,播放长度不超过60s, 格式: mp3, wma, wav, amr</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg">
+                        <div class="mod-msg-txt">
+                            <div id="logo" class="user">
+                                <span class="mod-default-avatar"></span>
+                            </div>
+                            <div class="content">
+                                <span class="arrow"></span>
+                                <div id="show-voice" class="msg empty"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- file -->
+            <div style="display: <if condition="isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'file'">block<else/>none</if>;" class="row" id="resContentFile">
+                <div class="message-content clearfix">
+                    <div class="col-xs-6 mod-msg-editor">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_file">
+                              <input type="hidden" name="cover_file_id" id="cover_file_id" value="0"/>
+                              <input type="hidden" name="cover_file_path" id="cover_file_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">大小: 10MB以内, 格式: txt,xml,pdf,zip,doc,ppt,xls,docx,pptx,xlsx</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg">
+                        <div class="mod-msg-txt">
+                            <div id="logo" class="user">
+                                <span class="mod-default-avatar"></span>
+                            </div>
+                            <div class="content">
+                                <span class="arrow"></span>
+                                <div id="show-file" class="msg empty">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- video -->
+            <div style="display: <if condition="isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'video'">block<else/>none</if>;" class="row" id="resContentVideo">
+                <div class="message-content clearfix">
+                    <div id="msgEditFormVideo" class="col-xs-6 mod-msg-editor">
+                    	<div class="form-group">
+                            <label for="" class="col-sm-2 control-label">视频<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_video">
+                              <input type="hidden" name="cover_video_id" id="cover_video_id" value="0"/>
+                              <input type="hidden" name="cover_video_path" id="cover_video_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">大小: 不超过10M, 格式: rm, rmvb, wmv, avi, mpg, mpeg, mp4 </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" placeholder="请输入标题" autocomplete="off" name="video_title">
+                              <span class="help-block">限64个字</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">简介</label>
+                            <div class="col-sm-10">
+                              <textarea class="form-control edit_msg_add_desc" name="video_content" autocomplete="off"  style="height: 160px;"></textarea>
+                              <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg" id="msgEditVideo">
+	                	<div style="cursor: default;" data-index="0" class="mod-msg-cover active">
+	                        <h2>标题</h2>
+	                        <div class="edit_msg_cover_box" id="show-video" style="background-color:#f1f1f1; text-align:center;line-height: 155px;">
+	                            视频预览区域
+	                        </div>
+	                        <div class="msg_desc"></div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mpnews -->
+            <div style="display: <if condition="isset($ruleInfo['msgType']) AND $ruleInfo['msgType'] eq 'mpnews'">block<else/>none</if>;" class="row" id="resContentMpnews">
+                <div class="message-content clearfix">
+                	<div id="msgEditFormMpnews" class="col-xs-6 mod-msg-editor">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" placeholder="请输入标题" autocomplete="off" name="mpnews_title">
+                              <span class="help-block">限64个字</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">封面图片<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_mpnews">
+                              <input type="hidden" name="cover_mpnews_id" id="cover_mpnews_id" value="0"/>
+                              <input type="hidden" name="cover_mpnews_path" id="cover_mpnews_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">大小: 不超过2M,支持JPG、PNG格式，较好的效果为大图640*320，小图80*80。 </span>
+
+                                <!-- <input type="checkbox" name="mpnews_pic" value="1"> 封面图片显示在正文中 -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">摘要<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <textarea class="form-control edit_msg_add_desc" name="mpnews_content" autocomplete="off"  style="height: 100px;"></textarea>
+                              <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">作者</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" placeholder="请输入作者" autocomplete="off" name="mpnews_author">
+                              <span class="help-block">限8个字</span>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                            <label>原文链接</label>
+                            <div>
+                              <input type="text" class="form-control" autocomplete="off" name="mpnews_url">
+                              
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>图文点击后效果<sub>*</sub></label>
+                            <div>
+                             <textarea name="mpnews_description" style="width:100%;height:200px; margin-bottom:10px;*width:99%;visibility:hidden;" autocomplete="off">
+                                    </textarea>
+                              <span class="help-block">限20000个字</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg" id="msgEditMpnews">
+	                	<div style="cursor: default;" data-index="0" class="mod-msg-cover active">
+	                        <h2>标题</h2>
+	                        <div class="edit_msg_cover_box" id="show-mpnews" style="background-color:#f1f1f1; text-align:center;">
+	                        	<div style="padding-top: 50px;"> 封面图片<br/>
+										推荐尺寸:640*320像素
+										</div>
+	                        </div>
+	                        <div class="msg_desc"></div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- news -->
+            <div style="display: <if condition="$ruleInfo['msgType'] eq 'news'">block<else/>none</if>;" class="row" id="resContentNews">
+                <div class="message-content clearfix">
+                	<div id="msgEditNews" class="col-xs-6 mod-msg-editor">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" placeholder="请输入图文回复的标题" autocomplete="off" name="title">
+                              <span class="help-block">限64个字</span>
+                            </div>
+                        </div>
+                       <!--  <div class="form-group">
+                            <label class="col-sm-2 control-label">作者</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" placeholder="请输入图文回复的作者" autocomplete="off" name="author">
+                              <span class="help-block">限8个字</span>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">封面<sub>*</sub></label>
+                            <div class="col-sm-10">
+                              <input type="file" id="upload_news">
+                              <input type="hidden" name="cover_news_id" id="cover_news_id" value="0"/>
+                              <input type="hidden" name="cover_news_path" id="cover_news_path" value=""/>
+                                <div class="upload-img-box"></div>
+                                <span class="help-block">大小:2MB以内的JPG、PNG格式，较好的效果为大图640*320，小图80*80。</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>图文点击后效果<sub>*</sub></label>
+                            <div>
+                             <textarea name="description" style="width:100%;height:200px; margin-bottom:10px;*width:99%;visibility:hidden;" autocomplete="off">
+                                    </textarea>
+                              <span class="help-block">限20000个字</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>原文链接</label>
+                            <div>
+                              <input type="text" class="form-control" autocomplete="off" name="url">
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 mod-msg multi" id="msgEditSimulator">
+	                    <div style="cursor: default;" data-index="0" class="multi-first mod-msg-cover active">
+	                        <div class="edit_msg_cover_box">
+	                            <div class="edit_msg_cover_image" style="background-color:#f1f1f1; text-align:center;">封面图片</div>
+	                        </div>
+	                        <h2>标题</h2>
+	                    </div>
+	                    <a id="addMsgItem" class="add" href="javascript:void(0);">
+	                        <span class="plus">+</span>
+	                    </a>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-center" style="margin-top:20px;">
+    	<input type="hidden" id="queryData" name="query" value="">
+   	<button class="btn btn-primary" href="javascript:;">确认</button>
+   
+    <!-- <span >
+    	&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="safe" value="1"> 保密消息&nbsp;&nbsp;&nbsp;&nbsp;
+    	<input type="checkbox" name="longSave" value="1"> 永久保存
+    </span> -->
+</div>
+</form>
+<include file="emotion" />
+
+<script type="text/javascript">
+var JqueryData = {};
+
+$(function(){
+    $.data(JqueryData,'item',  {$message});
+    //提交获取头像和二维码
+    $(document).on('submit', 'form.ajax-form', function (e) {
+        e.preventDefault();
+        var msgType = $('#msgType').val();
+        if(msgType == 'mpnews') {
+            if($('#cover_news_id').val() == '' || $('#cover_news_path') == '' ) {
+                 alert('请上传封面图片！');
+                    return false;
+             }
+            if($('input[name=mpnews_title]').val() == '' ) {
+                 alert('图文标题不能为空！');
+                    return false;
+            }
+        }else if(msgType == 'news'){
+            //当前选择中项
+            var old_active = $('#msgEditSimulator > div.active').attr('data-index');
+            //保存表单数据并清空表单
+            saveMsgFormData(old_active);
+            //clearMsgFormData();
+
+            $('#queryData').val(JSON.stringify($.data(JqueryData,'item')));
+            if($('#queryData').val() == -1) {
+                  alert('图文内容不能为空！');
+                return false;
+            }
+        } else if(msgType == 'text'){
+            if($('#text_content') == '') {
+                alert('回复内容不能为空！');
+                return false;
+            }
+        }
+    });
+
+   // editMsgText();
+});
+</script>
+
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Wechat/js/common.js"></script>
+<script type="text/javascript"><!--
+//多图文编辑器
+var ImageEdit;
+KindEditor.ready(function(K) {
+    ImageEdit = K.create('textarea[name=description]', {
+        resizeType : 1,
+        allowPreviewEmoticons : false,
+        allowImageUpload : true, //允许上传图片
+		uploadJson : '{:U("WechatPublic/editorUpload")}', //服务端上传图片处理URI
+        items : [
+            'fontsize','forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+             'justifyleft', 'justifycenter', 'justifyright', 'image', 'link'],
+        afterChange : function() {
+            this.sync();
+        }
+    });
+});
+//单图文编辑器
+var mpnewsEdit;
+KindEditor.ready(function(K) {
+    mpnewsEdit = K.create('textarea[name=mpnews_description]', {
+        resizeType : 1,
+        allowPreviewEmoticons : false,
+        allowImageUpload : true, //允许上传图片
+		uploadJson : '{:U("WechatPublic/editorUpload")}', //服务端上传图片处理URI
+        items : [
+            'fontsize','forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+             'justifyleft', 'justifycenter', 'justifyright', 'image', 'link'],
+        afterChange : function() {
+            this.sync();
+        }
+    });
+});
+
+// 页面关闭的时候
+/* window.onbeforeunload = function(){
+     return true;
+ }*/
+
+function changeType(type) {
+   // console.log(type);
+    if(type =='news'){
+        $('#resContentMpnews').hide();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').hide();
+        $('#resContentNews').show();
+        $('#resContentText').hide();
+        $('#send-rule').show();
+        editMsgNews();
+        addMsgItem();
+    } else if(type == 'image') {
+    	$('#resContentMpnews').hide();
+    	$('#resContentImage').show();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').hide();
+        $('#resContentNews').hide();
+        $('#resContentText').hide();
+        editMsgImage();
+    } else if(type == 'voice') {
+    	$('#resContentMpnews').hide();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').show();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').hide();
+        $('#resContentNews').hide();
+        $('#resContentText').hide();
+        editMsgVoice();
+    } else if(type == 'video') {
+    	$('#resContentMpnews').hide();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').show();
+    	$('#resContentFile').hide();
+        $('#resContentNews').hide();
+        $('#resContentText').hide();
+        editMsgVideo();
+    } else if(type == 'file') {
+    	$('#resContentMpnews').hide();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').show();
+        $('#resContentNews').hide();
+        $('#resContentText').hide();
+        editMsgFile();
+    } else if(type == 'mpnews') {
+    	$('#resContentMpnews').show();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').hide();
+        $('#resContentNews').hide();
+        $('#resContentText').hide();
+        editMsgMpnews();
+    }else{
+    	$('#resContentMpnews').hide();
+    	$('#resContentImage').hide();
+    	$('#resContentVoice').hide();
+    	$('#resContentVideo').hide();
+    	$('#resContentFile').hide();
+        $('#resContentNews').hide();
+        $('#resContentText').show();
+        $('#send-rule').hide();
+        editMsgText();
+    }
+}
+
+function editMsgText(){
+  $('#text_content').keyup(function(){
+    //console.log('text_content keyup');
+        var cont =$('#text_content').val();
+        var n = 600 - cont.length - cont.split("\n").length + 1;
+        if(n < 0) {
+            alert('限制输入600个字符');
+            return false;
+        }
+        $('#limit-place').text(n);
+        //console.log(cont);
+        $('#show-text').html(emoji(cont));
+    }).click(function(){
+        $('#qywechat_qqface').css('display', 'none');
+    }); 
+
+    $('.js_emoticon').click(function(){
+        $('#qywechat_qqface').css('display', 'block');
+    });
+
+    $('#qywechat_qqface').undelegate('a','click').delegate('a','click', function(){
+        var cont = $('#text_content').val();
+        var emo = $(this).attr('title');
+        $('#text_content').val(cont+'['+emo+']').keyup();
+        $('#qywechat_qqface').css('display', 'none');
+    });
+}
+
+//编辑图文类型表单
+function editMsgNews(){
+    var edit_form = $('#msgEditNews');
+    var active_div;
+    
+    //标题同步到图文
+    edit_form.find('input[name=title]').keyup(function(){
+        active_div = $('#msgEditSimulator > div.active');
+        var t_c = $.trim($(this).val());
+        if(t_c.length>64){
+            alert('限64个字');
+            $(this).val(t_c.substring(0, 64));
+            return false;
+        }else if(t_c.length > 0){
+            active_div.find('h2').html(t_c);
+        }
+    });
+
+    uploadFile('upload_news', 'news');
+}
+
+function editMsgImage() {
+	uploadFile('upload_image', 'image', '上传图片', '*.jpg;');
+}
+
+function editMsgVoice() {
+	uploadFile('upload_voice', 'voice', '上传语音', '*.mp3;*.wma;*.wav;*.amr;');
+}
+
+function editMsgVideo() {
+	 var edit_form = $('#msgEditFormVideo');
+	 //标题同步到图文
+    edit_form.find('input[name=video_title]').keyup(function(){
+        active_div = $('#msgEditVideo > div.active');
+        var t_c = $.trim($(this).val());
+        if(t_c.length>64){
+            alert('限64个字');
+            $(this).val(t_c.substring(0, 64));
+            return false;
+        }else if(t_c.length > 0){
+            active_div.find('h2').html(t_c);
+        }
+    });
+    //添加摘要
+    edit_form.find('.edit_msg_add_desc').keyup(function(){
+        var t = $.trim($(this).val());
+        $('#msgEditVideo').find('.msg_desc').html(t);
+    });
+
+	uploadFile('upload_video', 'video', '本地上传', '*.rm;*.rmvb;*.wmv;*.avi;*.mpg;*.mpeg;*.mp4;');
+}
+
+function editMsgFile() {
+	uploadFile('upload_file', 'file', '本地上传', '*.txt;*.xml;*.pdf;*.zip;*.doc;*.ppt;*.xls;*.docx;*.pptx;*.xlsx;');
+}
+
+function editMsgMpnews() {
+	var edit_form = $('#msgEditFormMpnews');
+
+	 //标题同步到图文
+    edit_form.find('input[name=mpnews_title]').keyup(function(){
+        active_div = $('#msgEditMpnews > div.active');
+        var t_c = $.trim($(this).val());
+        if(t_c.length>64){
+            alert('限64个字');
+            $(this).val(t_c.substring(0, 64));
+            return false;
+        }else if(t_c.length > 0){
+            active_div.find('h2').html(t_c);
+        }
+    });
+    //添加摘要
+    edit_form.find('.edit_msg_add_desc').keyup(function(){
+        var t = $.trim($(this).val());
+        $('#msgEditMpnews').find('.msg_desc').html(t);
+    });
+
+	uploadFile('upload_mpnews', 'mpnews', '上传图片', '*.jpg;*.png,*.gif');
+}
+
+
+//上传图片
+function uploadFile(id, type, title, ext){
+	if (ext == undefined) {
+		ext = '*.jpg; *.png; *.gif;';
+	}
+	if (title == undefined) {
+		title = "上传图片";
+	}
+    /* 初始化上传插件 */
+    $("#"+id).uploadify({
+        "height"          : 30,
+        "swf"             : "__PUBLIC__/Js/uploadify/uploadify.swf",
+        "fileObjName"     : "download",
+        "buttonText"      : title,
+        "uploader"        : Think.APP+"/WechatPublic/uploadPicture/session_id/{:session_id()}/type/"+type,
+        "width"           : 120,
+        'removeTimeout'   : 1,
+        'debug'			  : false,
+        'fileTypeExts'    : ext,
+        "onUploadSuccess" : uploadPicture,
+        'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+    });
+}
+
+//图文上传图片处理
+function uploadPicture (file, data) {
+    console.log(data);
+    var data = $.parseJSON(data);
+    var src = '';
+    if (data.status) {
+        $("#cover_"+data['type']+"_id").val(data.id);
+        src = data.url || '__UPLOAD_URL__' + data.path;
+        $('#cover_'+data['type']+'_path').val(src);
+
+        if(data['type'] == 'news') {
+        	$("#cover_"+data['type']+"_id").parent().find('.upload-img-box').html('<div class="uploader"><img style="width:100%" src="' + src + '"/></div>');
+	        //同步图片到图文
+	        var active_div = $('#msgEditSimulator >div.active');
+	        if(active_div.attr('data-index') == 0){
+	            active_div.find('.edit_msg_cover_box').html('<img style="width:100%" src="' + src + '"/>')
+	        }else{
+	            active_div.find('.mod-msg-item-image').html('<img style="width:70px;height:70px" src="' + src + '"/>')
+	        }
+	    } else if(data['type'] == 'mpnews') {
+	    	$("#cover_"+data['type']+"_id").parent().find('.upload-img-box').html('<div class="uploader"><img style="width:100%" src="' + src + '"/></div>');
+        	$('#show-mpnews').html('<div class="uploader"><img style="width:100%" src="' + src + '"/></div>');
+        } else if(data['type'] == 'image') {
+        	$('#show-image').html('<div class="uploader"><img style="width:100%" src="' + src + '"/></div>');
+        }
+        else if(data['type'] == 'voice') {
+        	$('#show-voice').html('<div class="icon icon_sound"></div>');
+        }
+        else if(data['type'] == 'video') {
+        	$('#show-video').html('<div class="uploader"><img style="width:100%" src="' + src + '"/></div>');
+        }
+        else if(data['type'] == 'file') {
+        	var file_ext = data['path'].substr(-3,3);
+        	$('#show-file').html('<div class="icon_filetype filetype_'+file_ext+'"></div><div class="filetype_content"><div class="filetype_content_name">'+data['name']+'</div><div class="filetype_content_size">'+data['size']+'</div></div>');
+        }
+
+    } else {
+        alert(data.info);
+        //console.log(data.info);
+        setTimeout(function(){
+            $(this).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+
+//图文添加记录
+function addMsgItem() {
+    $('#addMsgItem').unbind('click').click(function() {
+        var active_div,a_d_first,n=0,a_d_first_html,option_html;
+         active_div = $('#msgEditSimulator > div');
+         option_html = '<div class="mod-msg-options edit-msg-cover"><a href="javascript:;" class="msg-icon-edit"><span class="glyphicon glyphicon-edit"></span>编辑</a><a href="javascript:;" class="msg-ico-trash"><span class="glyphicon glyphicon-trash"></span>删除</a></div>';
+        n = active_div.length;
+        //第一条改变样式
+        if(n == 1){
+            a_d_first = active_div.first();
+            a_d_first_html = '<div class="edit_msg_cover_box">'
+                         + a_d_first.find('.edit_msg_cover_box').html()
+                        +'</div>'
+                        + '<h2>'
+                        + a_d_first.find('h2').text()
+                        + '</h2>'
+                        + option_html;
+            active_div.html(a_d_first_html).addClass('multi-first');
+            $('#msgEditSimulator').addClass('multi');
+        } 
+        //最多添加9条记录
+        else if(n==8) {
+            $(this).hide();
+        }
+        div_html = '<div data-index="'+Math.abs(n)+'" class="mod-msg-item"><div class="mod-msg-item-image">缩略图</div><h2></h2>'+option_html+'</div>';
+        //在＋号前插入记录
+        $(this).before(div_html);
+        //保存现在数据
+        saveMsgFormData('add');
+        //清空表单数据
+        clearMsgFormData();
+        //改变游标位置
+        moveArrow(n);
+        //编辑记录
+        editMsgItem();
+        //删除记录
+        deleteMsgItem();
+    });
+}
+
+//获取表单数据
+function saveMsgFormData(index) {
+    var edit_form = $('#msgEditNews');
+    var f_data = {};
+    //获取表单数据
+    f_data['title'] = edit_form.find('input[name=title]').val();
+   // f_data['author'] = edit_form.find('input[name=author]').val();
+    f_data['cover_news_id'] = edit_form.find('input[name=cover_news_id]').val();
+    f_data['cover_news_path'] = edit_form.find('input[name=cover_news_path]').val();
+    f_data['description'] = edit_form.find('textarea[name=description]').val();
+    f_data['url'] = edit_form.find('input[name=url]').val();
+
+    var Item_data;
+    var form_data = new Array();
+    //获取缓存
+    Item_data = $.data(JqueryData,'item');
+    if(undefined == Item_data || Item_data == -1 || typeof(Item_data) == 'string'){
+         Item_data = new Array();
+    }
+    if(index=='add'){
+        Item_data.push( f_data );
+    }else{
+        /*if(f_data['title'] == '' || f_data['cover_id'] == ''){
+            return;
+        }*/
+        Item_data[index] = f_data;
+    }
+    
+    // 为JS对象提供缓存
+    $.data(JqueryData,'item', Item_data);
+    //console.log($.data(JqueryData,'item'));
+}
+
+//清空表单数据
+function clearMsgFormData() {
+    var edit_form = $('#msgEditNews');
+    edit_form.find('input').val('');
+    edit_form.find('textarea').val('');
+    edit_form.find('.upload-img-box').html('');
+   // edit_form.find('.msg-description').css('display', 'block');
+    edit_form.find('.msg-orig-link-mod').css('display', 'block');
+
+    edit_form.find('input[name=url]').val('');
+    ImageEdit.html('');
+}
+//设置表单的值
+function setMsgItemData(data) {
+    //console.log(data);
+    if(undefined == data){
+        return;
+    }
+    var msgType = $('#msgType').val();
+    var edit_form = $('#msgEditNews');
+   
+    if(msgType == 'news') {
+         edit_form.find('input[name=title]').val(data['title']);
+          if(data['cover_news_id']){
+                edit_form.find('input[name=cover_news_id]').val(data['cover_news_id']);
+                edit_form.find('input[name=cover_news_path]').val(data['cover_news_path']);
+                edit_form.find('.upload-img-box').html(
+                    '<div class="uploader"><img style="width:100%" src="' + data['cover_news_path'] + '"/></div>'
+                );
+            }
+            //编辑器
+            edit_form.find('textarea[name=description]').val(data['description']);
+            ImageEdit.html(data['description']);
+            //链接
+            if(data['url']){
+                edit_form.find('input[name=url]').val(data['url']);
+            }
+            //mpnews
+    } else if( msgType == 'mpnews') {
+        edit_form.find('input[name=mpnews_title]').val(data.mpnews_title);
+        edit_form.find('textarea[name=mpnews_content]').html(data.mpnews_content);
+        edit_form.find('input[name=mpnews_author]').val(data.author);
+        edit_form.find('input[name=mpnews_url]').val(data.url);
+         if(data['cover_mpnews_id']){
+            edit_form.find('input[name=cover_mpnews_id]').val(data['cover_mpnews_id']);
+            edit_form.find('input[name=cover_mpnews_path]').val(data['cover_mpnews_path']);
+            edit_form.find('.upload-img-box').html(
+                '<div class="uploader"><img style="width:100%" src="' + data['cover_mpnews_path'] + '"/></div>'
+            );
+        }
+    }
+    
+}
+
+//游标位置
+function moveArrow(n) {
+    $('#msgEditSimulator > div').removeClass('active');
+    $('#msgEditSimulator > div[data-index='+n+']').addClass('active');
+
+}
+//图文编辑记录
+function editMsgItem(){
+    $('#msgEditSimulator > div > .mod-msg-options > .msg-icon-edit').unbind('click').click(function(){
+        //当前选择中项
+        var old_active = $('#msgEditSimulator > div.active').attr('data-index');
+        //要编辑的项
+        var index = $(this).parent().parent().attr('data-index');
+        //console.log(index);
+        //保存表单数据并清空表单
+        saveMsgFormData(old_active);
+        clearMsgFormData();
+        //获取缓存并设置表单
+        var Items_data = $.data(JqueryData,'item');
+        //console.log(Items_data[index]);
+        setMsgItemData(Items_data[index]);
+        moveArrow(index);
+    });
+}
+//图文删除记录
+function deleteMsgItem(){
+    $('#msgEditSimulator > div > .mod-msg-options > .msg-ico-trash').unbind('click').click(function(){
+        //当前选择中项
+        var old_active = $('#msgEditSimulator > div.active').attr('data-index');
+        //要删除的项
+        var parent_top = $(this).parent().parent();
+        var curr_index = parent_top.attr('data-index');
+        parent_top.remove();
+
+        //保存表单数据并清空表单
+        saveMsgFormData(old_active);
+        clearMsgFormData();
+
+        //获取缓存
+        var Items_data = $.data(JqueryData,'item');
+        //删除数据
+        Items_data.splice(curr_index,1);
+        Items_data.sort();
+        //左边项重新排序
+        $('#msgEditSimulator > div').each(function(i){
+            $(this).attr('data-index', i);
+        });
+        //默认选中最后项
+        var last_index = $('#msgEditSimulator > div').length-1;
+        setMsgItemData(Items_data[last_index]);
+        //移动游标
+        moveArrow(last_index);
+        if(last_index<9){
+            $('#addMsgItem').show();
+        }
+    });
+}
+
+function setMessageSetting(){
+	var msgType = $('#msgType').val();
+            var data = $.data(JqueryData,'item');
+            //console.log(data);
+              if(data  != -1) {
+                        if(msgType == 'text') {
+                            $('#text_content').val(data);
+                            $('#show-text').html(emoji(data));
+                        }
+                        else if(msgType == 'image') {
+                        	$('#show-image').html('<div class="uploader"><img style="width:100%" src="' + data.cover_image_path + '"/></div>');
+                        	$('#cover_image_path').val(data.cover_image_path);
+                        	$('#cover_image_id').val(data.cover_image_id);
+                        }
+                        else if(msgType == 'voice') {
+                        	$('#show-voice').html('<div class="icon icon_sound"></div>');
+                        	$('#cover_voice_path').val(data.cover_voice_path);
+                        	$('#cover_voice_id').val(data.cover_voice_id);
+
+                        } 
+	        else if(msgType == 'video') {
+	        	$('#show-video').html('<div class="uploader"><img style="width:100%" src="' + data.cover_video_path + '"/></div>');
+	        	$('#cover_video_path').val(data.cover_video_path);
+				$('#cover_video_id').val(data.cover_video_id);
+				$('#msgEditFormVideo').find('input[name=video_title]').val(data.video_title);
+				$('#msgEditFormVideo').find('textarea[name=video_content]').html(data.video_content);
+				$('#msgEditVideo').find('h2').html(data.video_title);
+				$('#msgEditVideo').find('.msg_desc').html(data.video_content);
+	        }
+	        else if(msgType == 'file') {
+	        	var file_ext = data['cover_file_path'].substr(-3,3);
+	        	$('#show-file').html('<div class="icon_filetype filetype_'+file_ext+'"></div><div class="filetype_content"><div class="filetype_content_name">'+data['name']+'</div><div class="filetype_content_size">'+data['size']+'</div></div>');
+	        	$('#cover_file_path').val(data.cover_file_path);
+				$('#cover_file_id').val(data.cover_file_id);
+	        }
+	        else if(msgType == 'mpnews') {
+		    	$("#cover_mpnews_id").parent().find('.upload-img-box').html('<div class="uploader"><img style="width:100%" src="' + data.cover_mpnews_path + '"/></div>');
+	        	$('#show-mpnews').html('<div class="uploader"><img style="width:100%" src="' + data.cover_mpnews_path + '"/></div>');
+	        	$('#cover_mpnews_path').val(data.cover_mpnews_path);
+				$('#cover_mpnews_id').val(data.cover_mpnews_id);
+	        	$('#msgEditMpnews').find('h2').html(data.mpnews_title);
+	        	$('#msgEditMpnews').find('.msg_desc').html(data.mpnews_content);
+
+	        	var edit_form = $('#msgEditFormMpnews');
+
+    			edit_form.find('input[name=mpnews_title]').val(data.mpnews_title);
+    			edit_form.find('textarea[name=mpnews_content]').html(data.mpnews_content);
+    			edit_form.find('input[name=mpnews_author]').val(data.author);
+    			edit_form.find('input[name=mpnews_url]').val(data.url);
+
+    			if(data.mpnews_pic){
+    				//console.log(data.mpnews_pic);
+    				edit_form.find('input[name=mpnews_pic]').attr('checked','checked');
+    			}
+    			mpnewsEdit.html(data.mpnews_description);
+	        } 
+	        else if( msgType == 'news') {
+	        	var option_html = '<div class="mod-msg-options edit-msg-cover"><a href="javascript:;" class="msg-icon-edit"><span class="glyphicon glyphicon-edit"></span>编辑</a><a href="javascript:;" class="msg-ico-trash"><span class="glyphicon glyphicon-trash"></span>删除</a></div>';
+	        	for(var i in data) {
+	        		if(i==0) {
+	        			$('#cover_news_id').val(data[i]['cover_news_id']).parent().find('.upload-img-box').html('<div class="uploader"><img style="width:100%" src="' + data[i]['cover_news_path'] + '"/></div>');
+	        			$('#cover_news_path').val(data[i]['cover_news_path']);
+	        			var edit_form = $('#msgEditNews');
+	        			edit_form.find('input[name=title]').val(data[i]['title']);
+	        			edit_form.find('input[name=url]').val(data[i]['url']);
+	        			ImageEdit.html(data[i]['description']);
+
+                                                    var first_box = $('#msgEditSimulator> .mod-msg-cover');
+
+			            first_box.find('.edit_msg_cover_box').html('<img style="width:100%" src="' + data[i]['cover_news_path'] + '"/>');
+                                                    first_box.find('h2').html(data[i]['title']);
+                                                   first_box.append(option_html);
+	        		} else {
+	        			div_html = '<div data-index="'+Math.abs(i)+'" class="mod-msg-item">';
+	        			div_html += '<div class="mod-msg-item-image">';
+	        			div_html += '<img style="width:70px;height:70px" src="' + data[i]['cover_news_path'] + '"/></div>';
+	        			div_html += '<h2>'+data[i]['title']+'</h2>'+option_html+'</div>';
+
+	        			$('#addMsgItem').before(div_html);
+
+	        			if (i > 8) {
+	        				$('#addMsgItem').css('display', 'none');
+	        			}
+	        		}
+	        		// 为JS对象提供缓存
+    			//$.data(JqueryData,'item', data[i]);
+	        	}
+                 }
+            }
+
+            //编辑记录
+        editMsgItem();
+        //删除记录
+   /*      deleteMsgItem();
+        addMsgItem();*/
+        changeType(msgType);
+}
+
+function addKeywords() {
+    $('#keywordModal').modal('hide');
+    var karea;
+    karea = $.trim($('#keyword-textarea').val());
+    if( karea == '') {
+        return;
+    } else {
+        var ipt,es,en,h='',n,ks=[],iptArr=[];
+        ipt = $.trim($('#keyword-input').val());
+        n = ipt ? ipt.split(';').length : 0;
+        $('#keyword-textarea').val('');
+        
+        es = '<span class="ui-tag edit-status-key"><label>';
+        en = '</label><a class="glyphicon glyphicon-remove-circle" href="javascript:;"></a></span>';
+        ks = karea.replace(/；/g,';').split(";");
+        for( k in ks){
+            if(k>=10-n) break;
+            h += es+$.trim(ks[k])+en;
+            ipt += (ipt ? ';' : '') + $.trim(ks[k]);
+        }
+        $('#keyword-input').val(ipt);
+        $('#keywords-tags > .add').before(h);
+        if(ipt.split(';').length>=10){
+            $('#keywords-tags > .add').css('display','none');
+        }
+
+        deleteKeywords();
+    }
+}
+function deleteKeywords() {
+    $('#keywords-tags > .edit-status-key > .glyphicon-remove-circle').unbind('click').click(function(){
+        var idx = $('#keywords-tags > .edit-status-key > .glyphicon-remove-circle').index($(this));
+        var ipt = $.trim($('#keyword-input').val());
+        var iptArr = ipt.split(';');
+        iptArr.splice(idx,1);
+        $('#keyword-input').val(iptArr.join(';'));
+        $(this).parent().remove();
+        $('#keywords-tags > .add').css('display','inline-block');
+    });
+}
+
+
+function setMessageUsers(type, data) {
+	var es ='',en='',ks=[], ks=[], h='', ipt='', user_type='';
+
+	//change type
+    user_type = $('#user_type').val();
+    if(user_type != type) {
+    	$('#send_user').val('');
+    	$('#keywords-tags > .edit-status-key').remove();
+    }
+    $('#user_type').val(type);
+
+    //change content
+	ipt = $.trim($('#send_user').val());
+	es = '<span class="ui-tag edit-status-key"><label>';
+    en = '</label><a class="glyphicon glyphicon-remove-circle" href="javascript:;"></a></span>';
+    ks = data.replace(/；/g,';').split(";");
+    for( var k in ks){
+    	if ( ks[k] == '') {
+    		return;
+    	}
+    	kf = ks[k].split(':');
+        h += es + $.trim(kf[1]) + en;
+        ipt += (ipt ? '|' : '') + $.trim(kf[0]);
+    }
+    
+    $('#send_user').val(ipt);
+    
+    $('#keywords-tags > .add').before(h);
+
+	deleteMessageUsers();
+}
+function deleteMessageUsers() {
+    $('#keywords-tags > .edit-status-key > .glyphicon-remove-circle').unbind('click').click(function(){
+        var idx = $('#keywords-tags > .edit-status-key > .glyphicon-remove-circle').index($(this));
+        var ipt = $.trim($('#send_user').val());
+        var iptArr = ipt.split('|');
+        iptArr.splice(idx,1);
+         $('#send_user').val(iptArr.join('|'));
+        $(this).parent().remove();
+        $('#keywords-tags > .add').css('display','inline-block');
+    });
+}
+
+setTimeout(setMessageSetting, 1000);
+--></script>
+
+</block>

@@ -1,0 +1,75 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>统计信息</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="bd">
+			<div class="sys-info">
+				<table>
+					<tbody><tr>
+						<th>会员数</th>
+						<td><a href="{:U('SiteStat/index')}">{$userCount}</a></td>
+					</tr>
+					<tr>
+						<th>论坛帖子</th>
+						<td><a href="{:U('SiteStat/index')}">{$forumPostCount}</a></td>
+					</tr>
+					<tr>
+						<th>站点数</th>
+						<td><a href="{:U('SiteStat/index')}">{$userSiteCount}</a></td>
+					</tr>
+					<tr>
+						<th>应用部署数</th>
+						<td><a href="{:U('SiteStat/index')}">{$userProjectCount}</a></td>
+					</tr>
+					
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+<div style="overflow:hidden:clear:both;height:20px;"></div>
+<div class="columns-mod">
+		<div class="hd cf">
+			<h5>系统信息</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="bd">
+			<div class="sys-info">
+				<table>
+					<tbody><tr>
+						<th>ezSite版本</th>
+						<td>{:C('EZSIZE_VERSION')}</td>
+					</tr>
+					<tr>
+						<th>服务器操作系统</th>
+						<td>{$Think.const.PHP_OS}</td>
+					</tr>
+					<tr>
+						<th>ThinkPHP版本</th>
+						<td>{$Think.VERSION}</td>
+					</tr>
+					<tr>
+						<th>运行环境</th>
+						<td>{$_SERVER['SERVER_SOFTWARE']}</td>
+					</tr>
+					<tr>
+						<th>MYSQL版本</th>
+						<php>
+							$system_info_mysql = M()->query("select version() as v;");
+						</php>
+						<td>{$system_info_mysql.0.v}</td>
+					</tr>
+					<tr>
+						<th>上传限制</th>
+						<td>{:ini_get('upload_max_filesize')}</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+</block>

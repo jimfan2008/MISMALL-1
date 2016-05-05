@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 开发者中心</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row myapp">
+							<span class="col-md-9" style="padding-top: 10px" ><b>正在出售的应用</b></span>
+							<span class="col-md-3" style="text-align: right"><a class="btn">创建应用</a></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="row applist">
+
+						</div>
+
+						<div class="row text-center page">
+							<ul class="pagination"></ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<section id="modal">
+			<div class="modal fade" id="isDeleteAppModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">提示</h4>
+						</div>
+						<div class="modal-body">
+							是否确定删除该应用？
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								取消
+							</button>
+							<button type="button" class="btn btn-info confirm_del">
+								确定
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<include file="Public:developer_footer" />
+		<script type="text/javascript" src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap-paginator.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+		<script>
+			jQuery(function($) {
+				var ajaxGetDeveloperData = {
+					getDeveloperConter : function() {
+						var appConterData;
+						$.ajax({
+							type : "POST",
+							url : APPPATH + "/Developer/getDeveloperSitesForSaleing",
+							data : "",
+							dataType : 'JSON',
+							async : false,
+							success : function(data) {
+								if (data) {
+									appConterData = data;
+								} else {
+									appConterData = "获取数据失败，请稍后在试";
+								}
+							}
+						});
+						return appConterData;
+
+					},
+					getAppInfoHtml : function(appData) {
+						var myAppHtml = [];
+						if (appData['sites']) {
+							$.each(appData['sites'], function(key, value) {
+								myAppHtml.push('<div class="app_info row" style="margin:20px 10px;"><div class="app_logo col-md-2 col-sm-4"><img style="width:155px;height:130px;cursor:pointer;" src="__ROOT__');
+								myAppHtml.push(value['thumbPath']);
+								myAppHtml.push('"app_id= "');
+								myAppHtml.push(value["id"]);
+								myAppHtml.push('"></div><div class="col-md-10 col-sm-20 app-option"><p><span>应用名称:</span><span class="appName">');
+								myAppHtml.push(value["siteName"]);
+								myAppHtml.push('</span></p><p><span>到期时间:</span><span class="appTime">');
+								myAppHtml.push('永久');
+								myAppHtml.push('</span><span> <a class="btn btn-warning delete_btn" data-toggle="modal" data-target="#isDeleteAppModal">删除</a></span></p><p><span>创建时间:</span><span class="setTime">');
+								myAppHtml.push(new Date(parseInt(value["addTime"]) * 1000).toLocaleString().substr(0, 17));
+								myAppHtml.push('</span></p><div><span class="edit"><a class="btn btn-info no-radius app_edit">编辑应用</a></span><span class="edit"><a class="btn btn-info no-radius app_admin">管理后台</a></span><span class="edit"><a class="btn btn-info no-radius sell_template">出售</a></span></div></div></div><hr>');
+							});
+						} else {
+							myAppHtml.push('<div class="notcont"><span>还没有正出售微企应用！赶紧发布应用吧</span></div>');
+						}
+						return myAppHtml.join('');
+
+					},
+
+					goToAppAdmin : function(site_id) {
+						$.ajax({
+							type : "post",
+							url : GROUPPATH + "/Apps/Index/initApps",
+							data : {
+								siteId : site_id
+							},
+							async : false,
+							success : function(result) {
+								if (result == 0) {
+									alert('后台不存在');
+									return false;
+								}
+								window.open(GROUPPATH + "/Apps/WechatMp/appSetting");
+							}
+						});
+
+					},
+					//删除应用
+					deleteApp : function(appId) {
+						var isDelete = '';
+						$.ajax({
+							type : "POST",
+							url : GROUPPATH + '/Developer/deleteUserSiteInfo',
+							data : {
+								siteId : appId
+							},
+							async : false,
+							success : function(data) {
+								isDelete = data;
+							}
+						});
+						return isDelete;
+
+					},
+				};
+
+				// 事件
+				var InitEvent = function() {
+					//单击 确认编辑按钮
+					$(".app_edit").on("click", function() {
+						var app_id = $(this).parents(".app_info").find("img").attr("app_id");
+						window.location = ROOTPATH + "/Qywx/Editor/index/siteId/" + app_id + ".html";
+						_setCookie("from_page", 'developer');
+						// 记录编辑器来路
+					});
+
+					//单击 管理后台按钮
+					$(".app_admin").on("click", function() {
+						var app_id = $(this).parents(".app_info").find("img").attr("app_id");
+						ajaxGetDeveloperData.goToAppAdmin(app_id);
+					});
+					//单击 出售按钮
+					$(".sell_template").unbind("click").on("click", function() {
+						var app_id = $(this).parents(".app_info").find("img").attr("app_id");
+						var dialog = {
+							title : '出售微企应用',
+							width : '660px',
+							lock : true,
+							opacity : 0.3
+						};
+						artDialog.open(GROUPPATH + '/Template/shareTemplate?type=app&siteId=' + app_id, dialog);
+
+					});
+
+					//单击删除
+					$(".delete_btn").on("click", function() {
+						var app_id = $(this).parents(".app_info").find("img").attr("app_id");
+						console.log($("#isDeleteAppModal").height());
+						$("#isDeleteAppModal").attr("data-appid", app_id);
+
+					});
+
+					//确定删除
+					$(".confirm_del").on("click", function() {
+						var app_id = $("#isDeleteAppModal").attr("data-appid");
+						var isDelete = ajaxGetDeveloperData.deleteApp(app_id);
+						if (isDelete < 1) {
+							//删除失败--刷新本页面
+							history.go(0);
+						} else {
+							$(".applist").find("img[app_id='" + app_id + "']").parents(".app_info").next().remove();
+							$(".applist").find("img[app_id='" + app_id + "']").parents(".app_info").remove();
+							$('#isDeleteAppModal').modal('hide');
+							//加载上一页数据
+							if ($(".app_info").length < 1) {
+
+							}
+
+						}
+					});
+
+				};
+				var myappData = ajaxGetDeveloperData.getDeveloperConter();
+				var options = {
+					bootstrapMajorVersion : 3,
+					numberOfPages : 5,
+					totalPages : Math.ceil(myappData["totalCount"] / 5),
+					tooltipTitles : function(type, page, current) {
+
+						switch (type) {
+							case "first":
+								return "首页";
+							case "prev":
+								return "上一页";
+							case "next":
+								return "下一页";
+							case "last":
+								return "末页";
+							case "page":
+								return (page === current) ? "第 " + page + "页" : "第" + page + "页";
+						}
+					},
+					onPageClicked : function(event, originalEvent, type, page) {
+						$.post(APPPATH + "/Developer/getDeveloperSitesForSaleing", {
+							page : page,
+						}, function(data) {
+							data = JSON.parse(data);
+							$(".applist").empty();
+							$(".applist").append(ajaxGetDeveloperData.getAppInfoHtml(data));
+							InitEvent();
+						});
+
+					}
+				};
+
+				$(".applist").append(ajaxGetDeveloperData.getAppInfoHtml(myappData));
+				$(".pagination").bootstrapPaginator(options);
+				InitEvent();
+				$(".developerCenter,.my_saling").parent().addClass("active");
+
+			});
+		</script>
+		</body>
+</html>

@@ -1,0 +1,174 @@
+<include file="Index:top" title="模板中心－设计者" designer="current"/>
+<link type = "text/css" href = "__PUBLIC__/Js/jquery-pager/Pager.css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+<style type="text/css">
+.template_list .tpl_info{height:70px}
+#modal_errormessage{display:none;color:#FF0000;margin-left:10px;}
+
+a{color: #333;text-decoration: none;}
+a:hover{text-decoration: none;}
+.modal{top:160px;overflow:auto;}
+#addName {
+    border: 1px solid #ccc;
+    display: block;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 90%;
+}
+</style>
+<php>
+	$tpl_title = '模板';
+</php>
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<div class="shop_fl fl">
+		<div class="title f-18b" style="text-align: center">
+			<switch name="temp_type" >
+				<case value="5">微观应用</case>
+			<default />
+			　　模块设计者
+			</switch>
+		</div>
+		<ul>
+			<li <if condition="$tpl_type%10 eq 0">class="current"</if>>
+				<a href="{:U('/Template/index/type/'.$temp_type.'0')}">最近编辑</a><p class="border"></p>
+			</li>
+			<if condition="$temp_type lt 5">
+			<li <if condition="$tpl_type%10 eq 1">class="current"</if>>
+				<a href="{:U('/Template/index/type/'.$temp_type.'1')}">我的{$tpl_title}</a><p class="border"></p>
+			</li>
+			</if>
+			<if condition="$temp_type eq 5">
+			<li <if condition="$tpl_type%10 eq 4">class="current"</if>>
+				<a href="{:U('/Template/index/type/54')}">会员分享</a><p class="border"></p>
+			</li>
+			</if>
+			<li <if condition="$tpl_type%10 eq 2">class="current"</if>>
+				<a href="{:U('/Template/index/type/'.$temp_type.'2')}">官方{$tpl_title}</a><p class="border"></p>
+			</li>
+			<li <if condition="$tpl_type%10 eq 3">class="current"</if>>
+				<a href="{:U('/Template/index/type/'.$temp_type.'3')}">空白{$tpl_title}</a><p class="border"></p>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="shop_fr fr">
+		<!--右边搜索star -->
+		<div class="rightsideBar">
+			<div class="fl">
+				<switch name="tpl_type">
+				<case value="11" break="1">最近编辑</case>
+				<case value="11" break="1">我的{$tpl_title}</case>
+				<case value="12" break="1">官方{$tpl_title}</case>
+				<case value="13" break="1">空白{$tpl_title}</case>
+				<case value="21" break="1">最近{$tpl_title}</case>
+				<case value="21" break="1">我的{$tpl_title}</case>
+				<case value="22" break="1">官方{$tpl_title}</case>
+				<case value="23" break="1">空白{$tpl_title}</case>
+				<default />
+					
+				</switch>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!--右边搜索end -->
+		<div　id="productList">
+		<div class="mytemplate_no"><a href="{:U('Template/index?type='.$temp_type.'2')}" >现在开始创建我的模板 >></a></div>
+		<div class="template_no">暂无模板，请选择其他分类</div>
+		<ul class="template_list" id="templateList"></ul>
+			<div class="clear"></div>
+			<div id="pager" style="margin: 0 0 0 188px;"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="modal fade" id="siteName">
+ 	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body" id = "contentWrap"  style="height:290px;">
+				<input type="text" id="addName" placeholder="请输入名称">
+					<div id = "modal_errormessage">该名称已存在</div>
+					<br>
+					<h4>应用图片</h4>
+					<a class="ImagePreview" href="javascript:;">
+				<input type="file" style="position:absolute;cursor:pointer;width:200px;height:150px;-moz-opacity:0;opacity: 0;margin-top:20px;"  name="file" id="inputFile3">
+				<img  id="change_avator"  src="__ROOT__/images/36.jpg"  style="cursor:pointer;width:200px; height:150px;"/>
+				</a>
+			</div>
+			
+			<div class="modal-footer">
+				
+				<button type="button" class="btn btn-primary" id="setNameSureBtn">
+					下一步
+				</button>
+				<button type="button" id="setNameCancleBtn" class="btn btn-default">
+					取消
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<include file="Index:bottom"/>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-pager/jquery.pager.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-tmpl/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="__STATIC__/Home/template.js"></script>
+<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="__PUBLIC__/Js/common.js"></script>
+<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+</script>
+<script id="TemplateDetail" type="text/x-jquery-tmpl">
+ <li>
+ 	{{if  thumbPath>='http'}}
+ 		
+ 	<a href="#"><img src = "${thumbPath}" title="${siteName}" /></a>
+    {{else}}
+    <a href="#"><img src = "__ROOT__${thumbPath}" title="${siteName}" /></a>
+    {{/if}}
+    <div class = "tpl_info">
+    	<p class="name">
+		${siteName}
+		</p>
+        <div class="tpl_right">
+        {{if isShare ==-1 }}
+        	<p class="editTemp" onclick="ezPageCommon.editorBySiteId(${siteTempType}, ${id})" style="width: 100px;margin-left: 55px;">编辑{$tpl_title}</p>
+        {{else}}
+        	    {{if isShare !=2 }}
+	    <!--<p class="view"><a href="${preView}">试用</a></p>-->
+	    {{/if}}
+	    {{if isShare ==2 }}
+	    	<p class="editTemp" onclick="ezPageCommon.setWXSiteName(${siteTempType}, ${id})" style="width: 100px;margin-left: 55px;">使用</p>
+	    {{/if}}
+	    {{if isShare !=2 }}
+	    	<p class="editTemp" onclick="ezPageCommon.setWXSiteName(${siteTempType}, ${id})" style="width: 100px;margin-left: 55px;">使用</p>
+	    {{/if}}
+	{{/if}}
+     	</div>     
+    </div>
+ </li>
+</script>
+<script type="text/javascript" language="javascript">
+/*******我的模板列表为空时显示的内容*********/
+var tpl_type = {$tpl_type};
+ $(document).ready(function() {
+ 	getTemplateList(1, {page:1, type:tpl_type});
+ });
+ PageClick = function(pageclickednumber) {
+	getTemplateList(pageclickednumber, {page:pageclickednumber, type:tpl_type});
+}
+$("#siteName").modal("hide");
+ </script>

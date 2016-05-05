@@ -1,0 +1,128 @@
+<extend name="WechatMp/base"/>
+
+<block name="style">
+<link href="__PUBLIC__/Js/bootstrap/css/bootstrap-switch.min.css" rel="stylesheet"/>
+</block>
+<block name="header">
+    <include file="WechatMp/header"/>
+</block>
+<block name="side">
+    <include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">应用菜单&nbsp;&gt;&gt;&nbsp;<a href="{:U('menuEdit', array('aid' => $appInfo['id']))}">添加菜单</a>
+		
+		<a href="{:U('menusyncApp', array('aid' => $appInfo['id']))}" class="ajax-post" style="margin-left:200px">同步应用菜单</a>
+		  
+		  <div class="pull-right">
+			  <a href="{:U('syncMenu', array('aid' => $appInfo['id']))}" class="ajax-post">同步到微信</a>
+		  </div>
+	  </div>
+	
+	  <!-- Table -->
+	<div class="table-responsive">
+	 <table class="table">
+          <thead>
+            <tr>
+            <th></th>
+              <th class="col-sm-3">标题</th>
+             <!--  <th class="col-sm-1">类型</th>
+              <th class="col-sm-4">链接/KEY值</th> -->
+              <th>排序</th>
+              <th>是否显示</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<volist name="menulist" id="vo">
+				<tr>
+				 <td></td>
+					<td>{$vo.name}</td>
+					<!-- <td><if condition="$vo._child eq ''">{$vo.type}<else/> -- </if></td>
+					<td  class="col-sm-4">
+						<if condition="$vo._child eq ''">
+						<eq name="$vo.type eq view">
+							{$vo.url}
+						<else />
+							{$vo.key}
+						</eq>
+						<else/> -- </if>
+					</td> -->
+					<td>{$vo.sort}</td>
+					<td><input type="checkbox" data-size="small" data-id="{$vo.id}" pid="{$vo.pid}" value="{$vo.status}" data-on-color="primary" data-off-color="danger" data-on-text="是" data-off-text="否" <eq name="vo['status']" value="1">checked</eq> /></td>
+					<td>
+						<a href="{:U('menuEdit', array( 'id' => $vo['id'], 'aid' => $appInfo['id']))}">修改</a> | 
+						<a href="javascript:void(0);" onclick="menuDel({$vo.id})">删除</a>
+					</td>
+				</tr>
+				<volist name="vo._child" id="sub">
+					<tr>
+					 <td></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&#124;&#8212;&#8212; {$sub.name}</td>
+						<!-- <td>{$sub.type}</td>
+						<td  class="col-sm-4">
+							<eq name="$sub.type eq view">
+								{$sub.url}
+							<else />
+								{$sub.key}
+							</eq>
+						</td> -->
+						<td>{$sub.sort}</td>
+						<td><input type="checkbox" data-size="small" data-id="{$sub.id}" pid="{$sub.pid}" value="{$sub.status}" data-on-color="primary" data-off-color="danger" data-on-text="是" data-off-text="否" <eq name="sub['status']" value="1">checked</eq> /></td>
+						<td>
+							<a href="{:U('menuEdit', array( 'id' => $sub['id'], 'aid' => $appInfo['id']))}">修改</a> | 
+							<a href="javascript:void(0);" onclick="menuDel({$sub.id})">删除</a>
+						</td>
+					</tr>
+				</volist>
+			</volist>
+          </tbody>
+        </table>
+       </div>
+	</div>
+
+<div class="row">
+	<div class="alert" role="alert">
+		<p>目前自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。<strong>请注意，创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。</strong>建议测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。</p>
+	</div>
+</div>
+	
+
+</block>
+
+<block name="script">
+
+<script type="text/javascript" src="__PUBLIC__/Js/bootstrap/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript"><!--
+$(function(){
+
+	$('input[type="checkbox"]').bootstrapSwitch('onSwitchChange', function (e) {
+			var mid = $(this).attr('data-id');
+			var status = $(this).val();
+			var pid = $(this).attr('pid');
+			$.post("{:U('menuStatus')}", {id: mid, status: status, pid : pid}, function(resp){
+				if(resp == 'success') {
+					window.setTimeout(function(){location.href = location.href;}, 300);
+				} else if( resp == -2) {
+					handleAjax({'info':'超过限制，一级最多3个，子级最多5个'});
+				}
+			});
+		});
+
+});
+
+function menuDel(mid) {
+	if(confirm('你确定要删除该菜单吗？')){
+		$.post("{:U('menuDelete')}",{id : mid}, function(s){
+			if(s == 'success') {
+				window.setTimeout(function(){location.href = location.href;}, 300);
+			} 
+		});	
+	}
+}
+//-->
+</script>
+</block>
