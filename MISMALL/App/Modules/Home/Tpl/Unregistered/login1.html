@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mismall|登陆</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="__PUBLIC__/Js/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+		<script>
+			var URLPATH = '__URL__';
+			var APPPATH = '__APP__';
+			var GROUPPATH = '__GROUP__';
+			var PUBLICPATH = '__PUBLIC__';
+			var UPLOAD_URL = '__UPLOAD_URL__';
+			var ROOTPATH = '__ROOT__';
+		</script>
+		<style type="text/css">
+			.login-box-warp {
+				margin-left: -40px;
+			}
+			.logo {
+				height: auto;
+				max-height: 114px;
+				max-width: 70px;
+				width: auto;
+				float:left;
+			}
+		</style>
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	</head><!--/head-->
+	<body class="homepage">
+
+		<header id="header">
+
+			<nav class="navbar " role="banner">
+				<div class="container">
+					<div class="navbar-header col-md-3">
+
+						<a class="navbar-brand" href="index.html" ></a>
+					</div>
+
+				</div><!--/.container-->
+			</nav><!--/nav-->
+
+		</header><!--/header-->
+
+		<link href="__PUBLIC__/App/Home/Unregistered/css/login.css" rel="stylesheet">
+
+	<body>
+		<div id="loginmodal">
+			<div class="container">
+
+				<div class="row">
+					<div id="login_bg" class="col-md-4"></div>
+					<div class="col-md-5  login-box-warp" style="background:#e4e4e4 ">
+						<div id="login_box">
+							<div class="logohead">
+								<img  class="logo" src="__PUBLIC__/App/Home/Client/images/logo.png" alt="logo"/>
+								<div style="padding-left: 105px;">
+									  <span style="display:block;color: #666666;font-weight: bold;font-size:20px;">MIS MALL</span>
+									  <span style="color: #989898;font-size:15px;">企业应用定制平台</span>
+								</div>
+							</div>
+							<div style="height:1px;width:450px;border:1px solid #CCCCCC; margin-top:20px;;"></div>
+							<form class="usrPanel" onsubmit="return false;" id="loginform" style="display: block;">
+								<ul class="loginform">
+									<div class="error" style="text-align:center;color:red;min-height: 20px;">
+
+										</div>
+									<li>
+									 <div data-icon="u" style="position: absolute;top: 30px;left: 55px;">
+									 	 <img style="width: 20px;" src="__PUBLIC__/App/Home/Unregistered/images/iconfont-yonghuming.png" />
+									 </div>
+										<input type="text" placeholder="请输入邮箱:xx@xx.com" class="input" id="lf_uname">
+									</li>
+									<li>
+										<div data-icon="p" style="position: absolute;absolute;top: 30px;left: 55px">
+											<img style="width: 20px;" src="__PUBLIC__/App/Home/Unregistered/images/iconfont-mima.png" />
+										</div>
+										<input type="password" placeholder="请输入密码" class="input" id="lf_upass">
+									</li>
+									<li>
+										<button id="submitStatic" data-ing = "确认中...">
+											登录
+										</button>
+										<div style="position:relative; z-index: 2;display:none; width:360px;height:45px;margin-top:-60px;text-align:center;  background:rgba(0,0,0,0);"><img src="/public/App/Home/Home/images/loading.gif" style="margin-top: -50px;">
+										</div>
+									</li>
+									<li>
+										<div style="display:none" id="codeIMG">
+											<div data-icon="" ></div>
+											<input type="text" style="width:100px" maxlength="4" placeholder="验证码" class="input" id="lf_r_code">
+											<img height="37px" width="105px" style="float:left;margin-top:20px;margin-left:4px;" src="__GROUP__/Passport/verifyCode.html" id="lf_r_codeimg">
+											<a style="float:left;margin-top:40px;margin-left:4px;" href="javascript:;" id="a_changeCode">看不清?</a>
+										</div>
+									</li>
+									<li>
+										<label style="display: none;">
+											<input type="checkbox" id="autologin">
+											下次自动登录</label>
+										<label style="float:left;" class="wxlogin-lab">
+											          <label class="wxlogin"></label>
+											          <span style="margin-left:35px;display:block;width:80px"><a href="__URL__/registered.html">我要注册</a></span>
+									  </label>
+										<label style="cursor: pointer;margin-left: 10px;float:left;" id="password"><a href="#">忘记密码？</a></label>
+										<label style="cursor: pointer;margin-left: 10px;float:right;" id="forgetpass">微信登录</label>
+									</li>
+								</ul>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script src="__PUBLIC__/App/Home/Unregistered/js/user.js"></script>
+	</body>
+</html>

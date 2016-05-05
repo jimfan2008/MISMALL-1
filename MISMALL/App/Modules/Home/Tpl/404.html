@@ -1,0 +1,71 @@
+<include file="Public:developer_hearder" title="修改密码"  />
+<link href="__PUBLIC__/App/Home/Home/Css/member.css" rel="stylesheet" type="text/css" />
+<!--中间内容 -->
+<section class="no-margin" style="margin-top: 15px">
+	<div class="container">
+		<div class="row account-info" >
+			<ul class="nav navbar-nav account-info-ul">
+				<li class="account-balance">
+					账户余额：
+				</li>
+				<li class="balance-money">
+
+					<b class="money">￥800.00</b>
+					元
+				</li>
+				<li class="reflect">
+					<span><a class="btn btn-info btn-reflace no-radius">提现</a></span>
+				</li>
+				<li class="transaction-records">
+					<span>交易记录</span>
+					|
+					<span>交易明细</span>
+
+				</li>
+
+			</ul>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2 left">
+				<include file="MyCenter:left_sale" />
+			</div>
+			<div class="col-md-10 ">
+				<div class="row breadCrumb">
+					<span class="col-md-9" style="padding-top: 10px" ><b>修改密码</b></span>
+				</div>
+				<div class="row">
+					<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+				</div>
+				<div class="row updatePwd profile" style="margin:0 10em;">
+					<ul class="nav updatePwd" >
+						<li>
+						<span class="fm_left"> 原密码：</span><span class="cont fl">
+								<input name="" type="password" class="revise" value="" id="bfpassword"/ >
+							</span>
+						</li>
+						<li>
+							<span class="fm_left"> 新密码：</span><span class="cont fl">
+								<input name="" type="password" class="revise" value="" id="newpassword"/ >
+							</span>
+						</li>
+						<li>
+							<span class="fm_left">确认新密码：</span><span class="cont fl">
+								<input name="" type="password" class="revise" value="" id="newpassword2"/ >
+							</span>
+						</li>
+						<li class="save">
+							<input name="" type="submit" class="btn btn-info" value="保存修改" id="savepassword"/>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+<include file="Public:developer_footer" />

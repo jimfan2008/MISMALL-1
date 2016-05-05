@@ -1,0 +1,75 @@
+<include file="Index:top" title="应用商店" shop="current"/>
+<link type = "text/css" href = "__PUBLIC__/Js/jquery-pager/Pager.css" rel="stylesheet" />
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<div class="shop_fl fl">
+		<div class="title f-18b">
+			应用分类
+		</div>
+		<ul>
+			<!-- <li <eq name="shop_type" value="1">class="current"</eq>>
+				<a href="{:U('AppStore/index')}">表单应用</a><p class="border"></p>
+			</li>
+			<li <eq name="shop_type" value="2">class="current"</eq>>
+				<a href="{:U('AppStore/index?type=2')}">模板网站</a><p class="border"></p>
+			</li>
+			<li <eq name="shop_type" value="3">class="current"</eq>>
+				<a href="#">手机应用</a><p class="border"></p>
+			</li>
+			<li <eq name="shop_type" value="4">class="current"</eq>>
+				<a href="#">流程应用</a><p class="border"></p>
+			</li> -->
+			<li <eq name="shop_type" value="5">class="current"</eq>>
+				<a href="{:U('AppStore/index?type=5')}"  style="background:#2795d0;color:white;">场景应用</a><p class="border"></p>
+			</li>
+			<!-- <li <eq name="shop_type" value="6">class="current"</eq>>
+					<a href="{:U('AppStore/viewget_shop?type=6')}">微观应用</a><p class="border"></p>
+			</li>  -->
+		</ul>
+	</div>
+	<div class="shop_fr fr" >
+		<!--右边搜索star -->
+		<div class="rightsideBar" style="display:none;">
+			<div class="fl">
+				<switch name="shop_type" >
+				<case value="2" break="1">模板网站</case>
+				<case value="3" break="1">手机应用</case>
+				<case value="4" break="1">流程应用</case>
+			    <case value="5" break="1">应用</case>
+				<default />
+					表单应用
+				</switch>
+			</div>
+			<div class="search fr">
+				<select name="" class="classify">
+					<option>请选择分类</option>
+					<option>手机应用</option>
+					<option>表单应用</option>
+					<option>网站模板</option>
+					<option>流程应用</option>
+					<option>微信应用</option>
+				</select>
+				<input name="" id="search_title" type="text" class="input_box"/>
+				<input name="" id="search_btn" type="submit" class="btn" value="搜索" />
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!--右边搜索end -->
+		<div　id="productList">
+			<switch name="shop_type" >
+				<case value="1" break="1">
+					<include file="AppStore:shop_list_applist" />
+				</case>
+				<case value="2">
+					<include file="AppStore:shop_list_template" />
+				</case>
+				<case value="5">
+					<include file="AppStore:shop_list_template" />
+				</case>
+			</switch>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<include file="Index:bottom"/>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 开发者中心</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container" id = "content">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00 {$Think.session.uid}</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>基本信息</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="row myInfo " >
+							<div class="baseInfo">
+								<div class="row">
+									<label class="font">头像设置：</label>
+
+									<span class="cont fl"><img height="100" width="100" class="photo img-rounded" src="{$userInfo['userPhoto']}" id="upload_user_photo"> <font class="f-gay">(头像大小为100*100)</font></span>
+									<div id="userimg" class="blue_text" style="margin-top: 10px">
+										<a href="javascript:">上传头像</a>
+									</div>
+								</div>
+								<div class="row">
+									<label class="font">用户：</label>
+									<span class="usertext">{:session('uname')}</span>
+								</div>
+								<div class="row">
+									<label class="font">邮箱：</label>
+									<span class="emailtext">{$userInfo["userEmail"]}</span>
+								</div>
+								<div class="row">
+									<if condition="$userInfo['isValidated'] eq 1">
+										<p style="color: #FF0000">
+												你的信息已经提交，等待审核中。。。
+										</p>
+										<elseif condition="$userInfo['isValidated'] eq 2" />
+											<p style="color: green">
+													你的信息已经通过审核
+											</p>
+											<else />
+											<p style="color: #FF0000">
+												您还没有认证信息或者认证失败？认证信息通过审核后，您开发的应用可以出售到应用商店，获取收益。
+											</p>
+										<a class="btn btn-warning goAuthen" href="baseInfo.html">去认证</a>
+									</if>
+									
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+		</section>
+		<footer id="footer" class="midnight-blue">
+			<div class="container">
+				<div class="footNav"style="text-align: center;">
+					<ul class="">
+						<li>
+							<a  href="{:U('/Developer/index')}">首页</a>
+						</li>
+						<li>
+							<a class="template" href="{:U('/Developer/template')}">模板</a>
+						</li>
+						<li>
+							<a class="helpcenter" href="{:U('/Developer/helpcenter')}">帮助中心</a>
+						</li>
+						<li>
+							<a class="developerCenter" href="{:U('/Developer/developerCenter')}">开发者中心</a>
+						</li>
+		
+						<!--  <li><a href="blog.html">Blog</a></li>
+						<li><a href="contact-us.html">Contact</a></li>    -->
+					</ul>
+				</div>
+				<div style="text-align:center" class="row">
+					<div style="text-align:center;color:#5C5C5C" class="col-lg-12 col-sm-12 col-md-12">
+						<ul>
+							<li>
+								QQ群：363028020
+							</li>
+							<li>
+								&copy;2015 mismall 粤ICP备15005056号-1
+							</li>
+						</ul>
+					</div>
+		
+				</div>
+			</div>
+		</footer><!--/#footer-->
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap-paginator.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+		<script>
+			$(".developerCenter,.member_center").parent().addClass("active");
+			$.ajax({
+				type : "POST",
+				url : GROUPPATH + '/Developer/deleteUserSiteInfo',
+				data : "",
+				async : false,
+				success : function(r) {
+					switch (r) {
+						case "1":
+							$(".goAuthen").text("审核中");
+							break;
+						case "2":
+							$(".goAuthen").text("审核失败");
+							break;
+						case "3":
+							$(".goAuthen").text("审核成功");
+							break;
+						case "4":
+							$(".goAuthen").text("去认证");
+							break;
+					}
+
+				}
+			});
+			$("#userimg").click(function() {
+				art.dialog.open(APPPATH + "/Developer/uploadAvatar", {
+					title : "上传头像",
+					width : 475,
+					height : 442,
+					opacity : 0.3,
+					lock : true,
+					drag : false,
+					close : function() {
+					}
+				});
+			});
+
+		</script>
+		
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$footer = $("#footer"),
+					$content = $("#content");
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height")) - 563;
+				$content.css("margin-bottom",minH);
+			}
+		</script>
+		</body>
+</html>

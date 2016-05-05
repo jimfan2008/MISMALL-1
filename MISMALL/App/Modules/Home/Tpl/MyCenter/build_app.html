@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+	<script type="text/javascript">
+	var APPPATH = '__APP__';
+	$(function() {
+		var userName = "{$user_name}";
+		var	id = {$app_id}; 
+		var appTitle = "{$app_title}";
+		var appName = "app" + id;
+		var webUrl = "http://www.wclouds.net/Apps/Index/login?url="+id;
+		var	appIcoPath = "{$app_icopath}";
+
+		$.ajax({
+			type : "post",
+			url : APPPATH + "/ezApp/Index/buildApp",
+			data : {
+				userName : userName,
+				appName : appName,
+				appTitle : appTitle,
+				appIcoPath : appIcoPath,
+				splashImgPath : "",
+				webUrl : webUrl
+			},
+			dataType : "json",
+			success : function(r) {
+				$.ajax({
+					type : "post",
+					url : APPPATH + "/MyCenter/buildApp",
+					data : {
+						app_id : id,
+						img_url : r.appQRCodeImg
+					},
+					success : function(result) {
+						window.location = APPPATH + '/MyCenter/my_order';
+					}
+				});
+			}
+		});
+
+	}); 
+	</script>
+        <title>正在生成,为您跳转中.....</title>
+	</head>
+    <body>
+    
+    </body>
+</html>

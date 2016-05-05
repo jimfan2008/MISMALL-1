@@ -1,0 +1,175 @@
+<extend name="WechatMp/base"/>
+<block name="header">
+	<include file="WechatMp/header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+<block name="body">
+<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">部门管理 <!-- &nbsp;&nbsp;<a href="javascript:void(0);" onclick="departmentSync()">同步企业号部门 --></a>
+	  </div>
+	
+	  <!-- Table -->
+	<div class="category">
+		<div class="hd cf">
+			<div class="fold">折叠</div>
+			<div class="name">名称</div>
+		</div>
+		{:R('WechatQy/department_tree', array($tree))}
+	</div>
+</div>
+
+<div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+        <h4 class="modal-title">添加部门</h4>
+      </div>
+      <div class="modal-body" style="overflow:hidden">
+      	<div class="form-group" style="overflow: hidden;text-align: right;">
+	     <label class="col-sm-3 control-label">部门名称</label>
+	     <div class="col-sm-6">
+	      <input type="text" class="form-control" value="" id="input-name">
+	     </div>
+	    </div>
+	    <input type="hidden" id="input-parent-id" />
+        <input type="hidden" id="input-group-id" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="submitDepartment()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+
+</block>
+
+<block name="script">
+<script type="text/javascript">
+(function($){
+	/* 分类展开收起 */
+	$(".category dd").prev().find(".fold i").addClass("icon-unfold")
+		.click(function(){
+			var self = $(this);
+			if(self.hasClass("icon-unfold")){
+				self.closest("dt").next().slideUp("fast", function(){
+					self.removeClass("icon-unfold").addClass("icon-fold");
+				});
+			} else {
+				self.closest("dt").next().slideDown("fast", function(){
+					self.removeClass("icon-fold").addClass("icon-unfold");
+				});
+			}
+		});
+
+	/* 三级分类删除新增按钮 */
+	$(".category dd dd .add-sub").remove();
+
+	/* 实时更新分类信息 */
+	$(".category")
+		.on("submit", "form", function(){
+			var self = $(this);
+			$.post(
+				self.attr("action"),
+				self.serialize(),
+				function(data){
+					/* 提示信息 */
+					var name = 'error',msg,info;
+					if(data == 'success'){
+						name = 'success';
+						info = '操作成功';
+					} else {
+						info = data;
+					}
+					msg = self.find(".msg").addClass(name).text(info)
+							  .css("display", "inline-block");
+					setTimeout(function(){
+						msg.fadeOut(function(){
+							msg.text("").removeClass(name);
+						});
+					}, 1000);
+				}
+			);
+			return false;
+		})
+        .on("focus","input",function(){
+            $(this).data('param',$(this).closest("form").serialize());
+
+        })
+        .on("blur", "input", function(){
+            if($(this).data('param')!=$(this).closest("form").serialize()){
+                $(this).closest("form").submit();
+            }
+        });
+})(jQuery);
+
+<!--
+function departmentSync(){
+	$.get('{:U("departmentSync")}', function(s){
+		if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'操作失败：'+ s});
+		}
+	});
+}
+function editDepartment(id,pid, name){
+	$('#input-name').val(name);
+	$('#input-parent-id').val(pid);
+	$('#input-group-id').val(id);
+	$('#keywordModal').modal('show');
+}
+function addDepartment(pid){
+	$('#input-parent-id').val(pid);
+	$('#keywordModal').modal('show');
+}
+function submitDepartment(){
+	var title = $('#input-name').val();
+	var id = $('#input-group-id').val();
+	var pid = $('#input-parent-id').val();
+	if($.trim(title)==''){
+		handleAjax({'info':'部门名称不能为空'});
+		return false;
+	}
+
+	$.post("{:U('departmentEdit')}",{title:title,pid:pid,id:id},function(s){
+		if(s==-1) {
+			handleAjax({'info':'部门名称不能为空'});
+		} else if( s== -2) {
+			handleAjax({'info':'开发者凭据不能为空'});
+		} else if( s== -3) {
+			handleAjax({'info':'部门名称已经存在'});
+		} else if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			$('#keywordModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'操作失败：'+ s});
+			$('#keywordModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		}
+	});
+	
+}
+
+function delDepartment(mid) {
+	if(confirm('你确定要删除该菜单吗？')){
+		$.post("{:U('departmentDelete')}",{id : mid}, function(s){
+			if(s == 'success') {
+				handleAjax({'info':'操作成功','status':true});
+				window.setTimeout(function(){location.href = location.href;}, 300);
+			} else {
+				handleAjax({'info':s});
+			}
+		});	
+	}
+}
+//-->
+</script>
+</block>

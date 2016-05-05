@@ -1,0 +1,86 @@
+<eq name="shop_type" value="2">
+<div class="categoryList" id="categoryList">
+	<ul class="cate">
+		<li id="cate_0"><a href="javascript:void(0);">所有模板</a></li>
+		<volist name="template_category_list" id="category">
+			<li id="cate_{$category.id}"><a href="javascript:void(0);">{$category.nameCN}</a><sapn></sapn></li>
+		</volist>
+	</ul>
+	<ul class="color">
+		<li class="color_all">颜色：</li>
+		<li id="color_0"><a href="javascript:void(0);"><span>All</span></a></li>
+		<volist name="Think.config.TEMPLATE_COLOR" id="color">
+			<li id="color_{$color.id}"><a href="javascript:void(0);"><span style="background:{$color.value}" title="{$color.name}"></span></a><span></span></li>
+		</volist>
+	</ul>
+</div>
+</eq>
+<div class="template_no">暂无模板，请选择其他分类</div>
+<ul class="template_list" id="templateList"></ul>
+<div class="clear"></div>
+<div id="pager" style="margin: 0 0 0 188px;"></div>
+
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-pager/jquery.pager.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-tmpl/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="__STATIC__/Home/template.js"></script>
+<script id="TemplateDetail" type="text/x-jquery-tmpl">
+ <li>
+ 	<a href="{:U('AppStore/shop_detail')}?id=${id}"><img src = "${thumbPath}" title="${siteName}" /></a>
+    <div class = "tpl_info">
+    	<p class="name">${siteName}</p>
+		<p>设计师：${user_name}</p>
+        <p>价格：${priceFormat}</p>
+        <div class="tpl_right">
+	    <p class="view"><a href="{:U('AppStore/shop_detail')}?id=${id}">详情</a></p>
+	    <p class="editTemp" uid="${userId}" onclick="ezPageCommon.editorByTplId(${siteTempType},${id})" style="margin-left: 55px;">购买</p>
+     	</div>     
+    </div>
+ </li>
+</script>
+<script type="text/javascript" language="javascript">
+/*******切换模板菜单*********/
+var shop_type = {$shop_type};
+var currUserId = {$user_id};
+$(function(){
+	$('#categoryList li').click(function(){
+		var this_id = $(this).attr('id');
+		if(this_id == undefined) return;
+		var arr = this_id.split('_');
+		$('#templateList').attr(arr['0'], arr['1']);
+		$('#categoryList > .'+arr['0']+' > li').removeClass('curr');
+		$(this).addClass('curr');
+		$('#templateList').attr('title', '');
+		PageClick(1);
+	});
+	$('#search_btn').click(function(){
+        var title = $('#search_title').val();
+        if(title ==''){
+            alert('请输入要搜索的模板名称');
+        } else {
+    		$('#templateList').attr('title', title);
+    		$('#templateList').attr('sort', '');
+    		$('#templateList').attr('color', '');
+    		$('#templateList').attr('cate', '');
+    		PageClick(1);
+        }
+     });
+});
+/*******分页*******/
+ $(document).ready(function() {
+ 	getTemplateList(1, {page:1,type:shop_type});
+ 	checkUser();
+ });
+PageClick = function(pageclickednumber) {
+   var search = $('#templateList');
+   getTemplateList(pageclickednumber, {page:pageclickednumber,type:shop_type, cate:search.attr('cate'), color:search.attr('color'), sort:search.attr('sort'), title:search.attr('title')});
+   checkUser();
+}
+
+function checkUser(){
+	$('#templateList .editTemp').each(function(){
+		if($(this).attr('uid') == currUserId){
+			$(this).html('使用');
+		}
+	});
+}
+        </script>

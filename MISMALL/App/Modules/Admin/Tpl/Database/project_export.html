@@ -1,0 +1,50 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>项目数据备份</h2>
+    </div>
+    <!-- /标题栏 -->
+    <!-- 应用列表 -->
+    <div class="data-table table-striped">
+        <form id="export-form" method="post" action="__SELF__">
+            <table>
+                <tbody>
+                        <tr>
+                            <td class="num">
+                            备份的网站ID号:     <input <input type="text" class="text input-small"  name="siteId" value="">
+                            </td>
+                              <td class="num">
+                           目标站的用户ID:     <input <input type="text" class="text input-small" name="userId" value="">
+                            </td>
+                              <td class="num">
+                           <input  class="btn" type="submit" name="submit" value="备份">
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+      <div class="main-title" style="margin-top:130px">
+        <h2>目标站项目导入</h2>
+    </div>
+     <div class="data-table table-striped">
+        <form id="export-form" method="post" action="{:U('projectImport')}" enctype="multipart/form-data">
+            <table>
+                <tbody>
+                        <tr>
+                            <td class="num">
+                            上传文件SQL文件<input type="file" class="" name="sqlgz" value="" />(gz格式)
+                            </td>
+                              <td class="num">
+                           <input  class="btn" type="submit" name="submit" value="导入">
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!-- /应用列表 -->
+</block>

@@ -1,0 +1,119 @@
+<include file="Index:top" title="购买的应用" mycenter="current"/>
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<!--左边菜单 -->
+	<include file="MyCenter:left" buy_apply="now"/>
+	<!--右边模块 -->
+	<div class="rightcontent fr">
+		<!-- <div class="breadCrumb f-14b">
+		购买的应用
+		</div> -->
+		<div class="tabs f-14b">
+			<div class="bottomline"></div>
+			<ul >
+				<li class="on orderTab" id="orderAll">
+					<a href="{:U('MyCenter/buy_apply')}"><strong>购买应用</strong></a>
+				</li>
+				<li class="orderTab" id="orderAll">
+					<a href="{:U('MyCenter/publish_apply')}"><strong>发布应用</strong></a>
+				</li>
+			</ul>
+		</div>
+		<div class="buy_apply">
+
+			<if condition="$appNum lt 1">
+				<div class="notcont">
+					<span>还没有购买的任何应用！<a href="../AppStore/index">点击这里</a> 购买您需要的应用吧！</span>
+				</div>
+				<else />
+				<ul>
+					<volist name="appList" id="vo">
+						<li class="appList" >
+							<div class="fl_webpic fl" appid='{$vo.appID}'>
+								<a href="#"><!--img src="{$vo.imgPath}" width="90" height="90" /-->
+								<img width="110" height="110" src="{$vo.imgUrl}" />
+								</a>
+							</div>
+							<div class="fr_cont fl" appid='{$vo.appID}'>
+								<p class="nametitle">
+									<a href="javascript:;">{$vo.appName}</a>
+								</p>
+								<p>								
+									<span class="edit"><a appid='{$vo.appID}' href="javascript:;">更新</a></span>	
+									<span class="del"><a appid='{$vo.appID}' href="javascript:;">删除</a></span>
+								</p>
+							</div>
+						</li>
+					</volist>
+				</ul>
+			</if>
+
+			<div class="clear"></div>
+			<if condition="$appNum lt 10">
+				<div class="page" id="sitePage" style="display:none;">
+					<else />
+					<div class="page"  id="sitePage">
+			</if>
+			<div style="float:left;margin-left:100px;">
+				<ul id="pageSite" class="page-nav-cell" style="margin:0px;"></ul>
+			</div>
+			<div  style="float:left;">
+
+				</span>共<span id="pageSum"></span>页 到第
+				<input name="" type="text"  class="input_box" id="fewPage"/>
+				页
+				<input name="" type="submit" class="btn" id="btnFewPage" value="确定" />
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<script type="text/javascript">
+	var appNum = '{$appNum}';
+	$(function() {
+		var pageSize = 9;
+		if (appNum % pageSize == 0) {
+			$("#pageSum").text(appNum / pageSize);
+		} else {
+			$("#pageSum").text(parseInt(appNum / pageSize) + 1);
+		}
+		//分页
+		var btnObj = $("#btnFewPage"), fewObj = $("#fewPage"), pageSite = 'pageSite';
+		var showObj = $(".appList");
+		myCenterPageSize(pageSize, appNum, btnObj, fewObj, pageSite, showObj);
+
+		$(".fl").on("click", function() {
+			var appid = $(this).attr("appid");
+			$.ajax({
+				type : "post",
+				url : GROUPPATH + "/MyCenter/useAApp",
+				data : {
+					appid : appid
+				},
+				success : function(result) {
+					_setCookie('pageFrom', 'usercenter');
+					window.location = APPPATH + '/Apps/Index/index';
+				}
+			});
+		});
+		$(".del").on("click", function(event) {
+			event.stopPropagation(); 
+			var appid = $(this).children("a").attr("appid");
+			$.ajax({
+				type : "post",
+				url : GROUPPATH + "/MyCenter/delAUserApp",
+				data : {
+					appid : appid
+				},
+				success : function(result) {
+					window.location = GROUPPATH + "/MyCenter/buy_apply";
+				}
+			});
+		});
+
+	});
+</script>
+<include file="Index:bottom"/>

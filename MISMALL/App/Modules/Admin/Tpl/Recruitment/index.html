@@ -1,0 +1,160 @@
+<extend name="Public/base"/>
+<block name="body">
+
+	<style type="text/css">
+		table {
+			width: 95%;
+			margin: 10px auto;
+			border: 0px solid #ccc;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			vertical-align: middle;
+			white-space: nowrap;
+			overflow: hidden;
+			border: 1px solid #ccc;
+		}
+		.resumeID {
+			width: 60px;
+		}
+		.resumeAction {
+			width: 120px;
+		}
+		.resumeDate {
+			width: 160px;
+		}
+		.resumeTop {
+			height: 60px;
+			text-align: left;
+			font-size: 30px;
+			font-weight: 1000;
+			text-indent: 20px;
+			border: 0px;
+		}
+
+		.up {
+			position: relative;
+			top: -18px;
+			margin-left: 5px;
+			width: 0;
+			height: 0;
+			color: rgba(0,0,0,0.5);
+			border-bottom: 9px solid;
+			border-right: 9px solid transparent;
+			border-left: 9px solid transparent
+		}
+		.down {
+			position: relative;
+			top: 16px;
+			margin-left: 5px;
+			width: 0;
+			height: 0;
+			color: rgba(0,0,0,0.5);
+			border-top: 9px solid;
+			border-right: 9px solid transparent;
+			border-left: 9px solid transparent
+		}
+	</style>
+	<h3></h3>
+
+	<table id="resume" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr >
+				<td colspan="4" class="resumeTop">简历列表</td>
+			</tr>
+			<tr style="font-size: 18px; font-weight: 800;">
+
+				<td style="background:#0af">编号</td>
+				<td style="background:#0af">简历名称</td>
+				<td id="resumeDate" style="cursor: pointer;background:#0af" onclick="TableSort('resume','resumeDate',2)">日期<b class="down"></b></td>
+				<td style="background:#0af">操作</td>
+
+			</tr>
+			<volist id="resume" name="list">
+
+				<tr>
+					<td class="resumeID">{$resume.id}</td>
+					<td class="resumeName"><a href="{$resume.resume_addr}{$resume.saveName}">{$resume.realName}</a></td>
+					<td class="resumeDate">{$resume.upLoadDate}</td>
+					<td class="resumeAction"><a class="resumeDelete" href="###{$resume.resume_id}&{$resume.resume_addr}{$resume.saveName}" >删除</a></td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	<script></script>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+var ROOT = '__ROOT__', MODULE_NAME = '{:MODULE_NAME}';
+/**
+* table排序
+* tablID 要排序的Table
+* col 要排序的列
+* num table中有几行不参加排序
+*/
+var sorting = 0;
+var list;
+var listHTML = new Array();
+function TableSort(tableID, col, num) {
+list = document.getElementsByClassName("resumeID");
+var ele = document.getElementsByClassName(col);
+var table = document.getElementById(tableID).rows;
+for (var i = 0; i < list.length; i++) {
+listHTML[i] = list[i].innerHTML;
+}
+if (sorting % 2 == 0) {
+$("#resumeDate").click(function() {
+$('b').removeClass("up").addClass("down");
+});
+//降序
+sorting++;
+for (var k = 0; k < ele.length; k++) {
+for (var j = 0; j < ele.length; j++) {
+if (ele[k].innerHTML > ele[j].innerHTML) {
+temp = table[k + num].innerHTML;
+table[k + num].innerHTML = table[j + num].innerHTML;
+table[j + num].innerHTML = temp;
+}
+}
+}
+} else {
+$("#resumeDate").click(function() {
+$("b").removeClass("down").addClass("up");
+});
+//升序
+sorting++;
+for (var k = 0; k < ele.length; k++) {
+for (var j = 0; j < ele.length; j++) {
+if (ele[k].innerHTML < ele[j].innerHTML) {
+temp = table[k + num].innerHTML;
+table[k + num].innerHTML = table[j + num].innerHTML;
+table[j + num].innerHTML = temp;
+}
+}
+}
+}
+sortID();
+}
+
+function sortID() {
+for (var l = 0; l < list.length; l++) {
+list[l].innerHTML = listHTML[l];
+}
+}
+
+TableSort('resume', 'resumeDate', 2);
+$(".resumeDelete").click(function() {
+var flag = confirm("删除后不能恢复，确定删除吗？");
+var param=$(this).attr("href").split("###")[1];
+var params = param.split("&");
+if (flag) {
+window.location.href=ROOT+"/Admin/Recruitment/deleteResume?resumeId="+params[0]+"&resumeURL="+params[1];
+}
+});
+//导航高亮
+$('.side-sub-menu').find('a[href="{:U('User/index')}"]').closest('li').addClass('current');
+	</script>
+</block>
+

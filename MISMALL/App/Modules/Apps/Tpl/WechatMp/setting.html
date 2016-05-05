@@ -1,0 +1,390 @@
+<extend name="base"/>
+
+<block name="style">
+<style type="text/css">
+.form_label{width: 8em;}
+.loading {
+    margin: auto;
+    position: relative;
+    width: 150px;
+}
+.loading .loading_txt {
+    left: 40px;
+    position: absolute;
+    top: 8px;
+}
+.copy, .wxUsername{cursor: pointer;}
+</style>
+</block>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="Public:apps_leftMenu"/>
+</block>
+
+<block name="body">
+<div class="row">
+	<ul class="nav nav-tabs">
+	  <li class="active"><a data-toggle="tab" href="#accont-home">接口设置</a></li>
+	  <li><a data-toggle="tab" href="#accont-common">授权设置</a></li>
+	  <li><a data-toggle="tab" href="#accont-pay">微信支付</a></li>
+	</ul>
+</div>
+<div class="tab-content form-horizontal">
+  <div class="tab-pane fade active in" id="accont-home">
+  	<div class="sub-item">
+		<h4 class="sub-title">接口设置</h4>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">公众号名称</label>
+	    <div class="col-sm-7">
+	    	<span class="wxUsername">{$wechat.name|default="微信服务"} <i class="glyphicon glyphicon-edit"></i></span>
+	      <!-- <input type="text" class="form-control" name="name" placeholder="微信服务" value="{$wechat.name}">
+	      <span class="help-block">您可以给此公众号起一个名字, 方便下次修改和查看.</span> -->
+	    </div>
+	  </div>
+	  <div class="form-group">
+                    <label class="col-sm-2  control-label">绑定状态</label>
+                    <div class="col-sm-7">
+                    	<eq name="wechat.isBind" value="0">
+                            <span>未验证<i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                            <a href="javascript:;" style="margin-left:20px;" class="noauto_bind">手动验证</a> <a href="javascript:;" style="margin-left:20px;" class="auto_bind">智能绑定</a></span>
+                            <else />
+                              <span>已绑定<i class="glyphicon glyphicon-ok-circle text-danger"></i></span>
+                            </eq>
+                    </div>
+                </div>
+                <div style="display:none;" class="form-group noauto_tips">
+                    <label class="col-sm-2  control-label"></label>
+                    <div style="line-height: 30px;" class="col-sm-7">
+                        1、登录您的微信公众平台，然后点“开发者中心”；<br>
+                        2、点击修改配置，将接口URL、Token和EncodingAESKey复制填入；<br>
+                        3、向绑定的公众号发送文本“绑定升级”；<br>
+                        4、完成验证：<a href="javascript:window.location.reload();">刷新</a><br>
+                    </div>
+                </div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">接口URL</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{:get_host_url('/api.php')}?type=weChat&hash={$wechat['hash']}"  style="width:460px" disabled><a  class="copy" href="javascript:;" data-value="{:get_host_url('/api.php')}?type=weChat&hash={$wechat['hash']}">&nbsp;&nbsp;[复制]</a>
+	      <span class="help-block">设置“微信公众平台接口”配置信息中的接口地址</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">微信Token</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['token']}" style="width:300px" disabled> <a  class="copy" href="javascript:;" data-value="{$wechat['token']}">&nbsp;&nbsp;[复制]</a><!-- <a onclick="tokenGen();" href="javascript:;">生成新的</a> -->
+	      <!-- <span class="help-block">与微信公众平台接入设置值一致，必须为英文或者数字，长度为3到32个字符. 请妥善保管, Token 泄露将可能被窃取或篡改微信平台的操作数据.</span> -->
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">EncodingAESKey<br/>(消息加解密密钥)</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['encodingAESKey']}" style="width:460px" disabled><a  class="copy" href="javascript:;" data-value="{$wechat['encodingAESKey']}">&nbsp;&nbsp;[复制]</a><!--  <a onclick="tokenGen('aes');" href="javascript:;">生成新的</a>  
+	      <span class="help-block">与微信公众号接入设置值一致，必须为英文或者数字，长度为43个字符.</span>-->
+	    </div>
+	  </div>
+	  <if condition="$wechat['qrcode']">
+	<div class="form-group">
+	    <label for="" class="col-sm-2 control-label">二维码</label>
+	    <div class="col-sm-7">
+	      <div data-provides="fileupload" class="fileupload fileupload-new">
+		<div style="width: 160px; height: 160px;" class="fileupload-preview thumbnail">
+		   <img alt="" src="{:getImageUrl($wechat['qrcode'])}">
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  </if>
+  </div>
+  
+  <div class="tab-pane fade" id="accont-common">
+  	<div class="sub-item">
+		<h4 class="sub-title">授权设置</h4>
+	</div>
+	<div class="page-header">
+		<p>
+		  在微信公众平台<span class="text-danger">“功能”->“高级功能”->“开发模式”</span> ，将公众平台申请使用的<span class="text-danger">AppId和AppSecret</span> ，然后填入下边表单。
+		</p>
+		<p>通过认证的订阅号，拥有“自定义菜单”；通过认证的服务号，拥有“自定义菜单”和所有“高级接口”</p>
+		<p></p>
+	</div>
+	  <div class="form-group">
+	    <label for="app_id" class="col-sm-2 control-label">公众号AppId</label>
+	    <div class="col-sm-7">
+	      <input type="text" autocomplete="off" class="form-control" id="app_id" name="app_id" value="{$wechat.app_id}" data-value="{$wechat.app_id}">
+	      <div class="help-block">请填写微信公众平台后台的AppId</div>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="app_secret" class="col-sm-2 control-label">公众号AppSecret</label>
+	    <div class="col-sm-7">
+	      <input type="text" autocomplete="off" class="form-control" id="app_secret" name="app_secret" value="{$wechat.app_secret}" data-value="{$wechat.app_secret}">
+	   	  <div class="help-block">请填写微信公众平台后台的AppSecret</div>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-7">
+	      <button type="button" class="btn btn-primary" onclick="authorSubmit()">提交</button>
+	    </div>
+	  </div>
+  </div>
+<div class="tab-pane fade" id="accont-pay">
+  	<div class="sub-item">
+		<h4 class="sub-title">微信支付</h4>
+	</div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">商户ID</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['pay_id']}" id="wechatPayId" data-value="{$wechat['pay_id']}" style="width:460px">
+	      <span class="help-block">微信支付商户ID,未开通微信支付可不填</span>
+	    </div>
+	  </div>
+	   <div class="form-group">
+	    <label  class="col-sm-2 control-label">商户密钥</label>
+	    <div class="col-sm-8 form-inline">
+	      <input type="text" class="form-control" value="{$wechat['pay_key']}"  id="wechatPayKey"  data-value="{$wechat['pay_key']}" style="width:460px">
+	      <span class="help-block">微信支付商户密钥,未开通微信支付可不填</span>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-7">
+	      <button type="button" class="btn btn-primary" onclick="paySubmit()">提交</button>
+	    </div>
+	  </div>
+  </div>
+ 
+  <div class="modal fade" id="binding_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+        <h4 class="modal-title">智能绑定公众账号</h4>
+      </div>
+      <div class="modal-body">
+      	<div style="padding:10px;">
+                <p style="text-align:center;">智能绑定您的<span style="color: #ff4400;">微信公众号</span>，让您的微店传播更迅速！</p>
+            </div>
+        	<div class="form_item">
+	    <label class="form_label">公众平台用户名</label>
+	    <div class="form_control">
+	      <input type="text" class="input_text" id="wxusername" name="wxusername" onblur="verifyGen()" autocomplete="off">
+	    </div>
+	  </div>
+	  <div class="form_item">
+	    <label class="form_label">公众平台密码</label>
+	    <div class="form_control">
+	      <input type="password" class="input_text"  id="wxpassword" name="wxpassword" autocomplete="off">
+	    </div>
+	  </div>
+	  <div class="form_item" style="display:none">
+	    <label class="form_label">登录验证码</label>
+	    <div class="form_control">
+	      <input type="text" name="verify" id="wxverify" class="input_text" value="" autocomplete="off" width="100px" />
+		  <span class="help-inline"><img src="" id="imgverify"> <a href="javascript:;" onclick="verifyGen()">换一张</a></span>
+	    </div>
+	  </div>
+	  <div style="color:gray;text-align:center;padding:10px;">提示：此处为微信公众平台的账号，尚未申请的请点击>><a href="http://mp.weixin.qq.com" target="_blank">申请</a><<</div>
+            <div id="wxloading" class="loading" style="display:none;">
+                <img src="__PUBLIC__/App/Wechat/images/ico_loading_white.gif">
+                <div class="loading_txt">正在绑定...</div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="ajaxAutoBind()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.zclip/jquery.zclip.min.js"></script>
+<script type="text/javascript">
+<!--
+$(function(){
+$(".copy").each(function(){
+	$(this).zclip({
+		path:'__PUBLIC__/Js/jquery.zclip/ZeroClipboard.swf',
+		copy:function(){
+			return $(this).attr('data-value');
+		},
+		afterCopy: function(){
+		            $("<span id='zclipMsg' style='color:red'/>").insertAfter($(this)).text('复制成功');
+		            window.setTimeout(function(){
+		            	$('#zclipMsg').remove();
+		            }, 3000);
+		        }
+	});
+    });
+
+editCreateInput($(".wxUsername"), 'wxname', '/WechatPublic/editAccount?type=modifyname&weid={$wechat["id"]}');
+/*    $(".wxUsername").click(function() {
+        if (!$(this).hasClass('input')) {
+            var orignalWxname = $.trim($(this).text());
+            $(this).addClass('input').html('<input type="text" value="'+ orignalWxname+'" class="form-control input-sm"/>').find('input').focus().blur(function(){
+                var newWxname=$(this).val();
+                if (newWxname != orignalWxname) {
+                    $.post(   
+                      Think.APP+'/Index/editAccount?type=modifyname',    
+                      {
+                        wxname: newWxname
+                      },
+                      function(data) {
+                         if(data.success){
+                             location.reload(true);
+                         }else if(data.message){
+                             alert(data.message);
+                         }
+                      }, "json");
+                }
+                $(this).parent().removeClass('input').html($(this).val() + ' <i class="glyphicon glyphicon-edit"></i>'); 
+            });
+        }
+    });*/
+
+    $(".noauto_bind").on("click", function(){
+    	$(".noauto_tips").toggle();
+    });
+    $(".auto_bind").on("click", function(){
+    	$("#binding_modal").modal('show');
+    });
+
+});
+//授权设置
+function authorSubmit() {
+	var app_id = $('#app_id').val();
+	var app_secret = $('#app_secret').val();
+	var old_id = $('#app_id').attr('data-value');
+	var odl_secret = $('#app_secret').attr('data-value');
+	if(old_id == app_id && app_secret == odl_secret) {
+		return false;
+	}
+	if(app_id =='') {
+		handleAjax({'info': 'AppId不能为空'});
+		return false;
+	}
+	if(app_secret =='') {
+		handleAjax({'info': 'AppSecret不能为空'});
+		return false;
+	}
+	 $.post(   
+                      Think.APP+'/WechatPublic/editAccount?type=modifysecret&weid={$wechat["id"]}',    
+                      {
+                        app_id : app_id,
+                        app_secret : app_secret
+                      },
+                      function(data) {
+                         if(data.success){
+                             location.reload(true);
+                         }else if(data.message){
+                             alert(data.message);
+                         }
+                     }, "json");
+}
+function paySubmit() {
+	var pay_id = $('#wechatPayId').val();
+	var pay_key = $('#wechatPayKey').val();
+	var old_id = $('#wechatPayId').attr('data-value');
+	var odl_secret = $('#wechatPayKey').attr('data-value');
+	if(old_id == pay_id && pay_key == odl_secret) {
+		return false;
+	}
+	if(pay_id =='') {
+		handleAjax({'info': '商户ID不能为空'});
+		return false;
+	}
+	if(pay_key =='') {
+		handleAjax({'info': '商户密钥不能为空'});
+		return false;
+	}
+	 $.post(   
+                      Think.APP+'/WechatPublic/editAccount?type=modifypay&weid={$wechat["id"]}',    
+                      {
+                        pay_id : pay_id,
+                        pay_key: pay_key
+                      },
+                      function(data) {
+                         if(data.success){
+                             location.reload(true);
+                         }else if(data.message){
+                             alert(data.message);
+                         }
+                     }, "json");
+}
+
+function ajaxAutoBind() {
+	var name = $('#wxusername').val();
+	var pwd = $('#wxpassword').val();
+	var verify = $('#wxverify').val();
+	if(name == '') {
+		handleAjax({'info' : '公众平台用户名不能为空'});
+		return false;
+	}
+	if(pwd == '') {
+		handleAjax({'info' : '公众平台密码不能为空'});
+		return false;
+	}
+	if(verify == '') {
+		handleAjax({'info' : '验证码不能为空'});
+		return false;
+	}
+	$.ajax({
+		url : Think.APP+'/WechatMp/autoBind',
+		type : "POST",
+		dataType : 'JSON',
+		data : {user:name, pwd : pwd, verify : verify},
+		success: function(s) {
+			$('#wxloading').css('display', 'none'); 
+			if(s == -1) {
+				handleAjax({'info' : '输入参数不能为空'});
+				return false;
+			} else if(s==-2) {
+				handleAjax({'info' : '绑定公众账号失败，请手动绑定公众帐号'});
+				$("#binding_modal").modal('hide');
+				return false;
+			} else if(s == 1) {
+				handleAjax({'info' : '绑定成功，即将跳转....', 'status' : true});
+				$("#binding_modal").modal('hide');
+    				window.setTimeout(function(){location.href = location.href;}, 300);
+			} else if( s == 2) {
+				handleAjax({'info' : '绑定公众账号失败'});
+				return false;
+			} else {
+				handleAjax({'info' : '绑定公众账号失败，请手动绑定公众帐号'});
+				$("#binding_modal").modal('hide');
+				return false;
+			}
+		},
+		beforeSend : function(){
+			$('#wxloading').css('display', 'block'); 
+		}
+	});
+}
+//获取验证码
+	function verifyGen() {
+		if ($('#wxusername').val()) {
+			$('#imgverify').attr('src', 'https://mp.weixin.qq.com/cgi-bin/verifycode?username='+$('#wxusername').val()+'&r='+Math.round(new Date().getTime()));
+			$('#imgverify').parent().parent().parent().show();
+		} else {
+			//message('请先输入微信公众平台用户名');
+		}
+	}
+//重新生成TOKEN
+	function tokenGen(aes) {
+		var data
+		if(aes != undefined){
+			data = {'aes' : aes};
+		} else {
+			data = {};
+		}
+		$.get("{:U('WechatPublic/ajaxResetToken', 'weid='.$wechat[id])}", data, function(){
+			location.href="__SELF__";
+		});
+	}
+//-->
+</script>
+</block>

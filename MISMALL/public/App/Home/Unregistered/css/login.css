@@ -1,0 +1,550 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "微软雅黑";
+	overflow-x: hidden;
+}
+li {
+	list-style: outside none none;
+}
+div.row {
+	margin: 0;
+	padding: 0;
+}
+#topnav li, #fixednav li {
+	color: white;
+	cursor: pointer;
+	float: left;
+	font-size: 16px;
+	height: 27px;
+	text-align: center;
+	text-decoration: none;
+	width: 17%;
+}
+.logohead {
+	margin-left: 110px;
+	margin-top: 14px;
+	padding-top: 15px;
+}
+#topnav a:link, #topnav a:visited, #topnav a:hover, #panel_login a:link, #panel_login a:visited, #panel_login a:hover, #topnav {
+	color: white;
+	text-decoration: none;
+}
+a, a img {
+	outline: medium none !important;
+}
+#topnav a, #con_nav a {
+	text-align: center;
+}
+#topnav a#a_show_register:hover, #topnav a#a_show_login:hover {
+	color: #d7cd32;
+}
+.closeVideo {
+	background: none repeat scroll 0 0 #fff;
+	border-radius: 50%;
+	height: 30px;
+	position: absolute;
+	right: -10px;
+	text-align: center;
+	top: -10px;
+	width: 30px;
+	z-index: 99;
+}
+.closeVideo img {
+	margin-top: 9px;
+	transition: all 0.5s ease 0s;
+}
+.closeVideo:hover img {
+	transform: rotate(45deg);
+}
+.c-f-cover {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+#topnav {
+	background: none repeat scroll 0 0 rgba(124, 125, 130, 0.6);
+	left: 0;
+	line-height: 24px;
+	padding: 10px 0;
+	position: absolute;
+	top: 0;
+}
+.backstretch {
+	overflow: hidden;
+	z-index: -999998;
+}
+.dz {
+	padding-top: 2%;
+}
+#panel_login, #enroll {
+	padding: 0 15px;
+	text-align: right;
+}
+#coolintro {
+	position: absolute;
+	text-align: center;
+	top: 29%;
+	width: 100%;
+	z-index: 999;
+}
+.mismallAdv {
+	color: #fff;
+	font-size: 46px;
+	text-align: center;
+}
+#fixednav {
+	background: none repeat scroll 0 0 #000;
+	border-bottom: 4px solid #78b5aa;
+	height: 69px;
+	line-height: 69px;
+}
+#fixednav a {
+	color: #fff;
+	text-align: center;
+}
+.fixednav {
+	position: fixed;
+}
+.appListCover {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+.s6 .hotApp {
+	color: #fff;
+	padding: 0 7%;
+}
+.appListWraper {
+	margin: 0 5%;
+}
+.appItemInner {
+	background: none repeat scroll 0 0 #fff;
+	margin-bottom: 30px;
+	padding: 12px;
+}
+.appItem:hover .appImg {
+	display: none;
+}
+.appItem:hover .app-qrcode {
+	display: block;
+}
+.appItem img {
+	height: 250px;
+	margin: auto;
+	width: 250px;
+}
+.app-qrcode {
+	display: none;
+	max-width: 100%;
+}
+.appItem h5 {
+	margin: 10px 0 0;
+}
+.fixedimg {
+	text-align: center;
+}
+.newslistwrapper {
+	position: relative;
+	width: 100%;
+}
+#newslist {
+	box-shadow: 0 0 30px #eee inset;
+	height: 200px;
+	margin: 0 auto;
+	max-width: 1282px;
+	overflow: hidden;
+	text-align: center;
+	width: 90%;
+}
+#newslist ul {
+}
+#newslist ul li {
+	float: left;
+	min-height: 201px;
+}
+#newslist img {
+	width: 100%;
+}
+.aline {
+	left: 0;
+	position: absolute;
+	width: 100%;
+}
+.newslistwraper {
+	margin: 0 auto;
+}
+#footer {
+	background: none repeat scroll 0 0 black;
+	padding: 20px 0;
+	width: 100%;
+}
+#footer .row {
+	padding: 5px 0;
+}
+#footer_nav a {
+	margin: 0 20px;
+}
+.pin-wrapper {
+	background: none repeat scroll 0 0 #000;
+	z-index: 999999;
+}
+#case_main {
+}
+#boxsss {
+	padding: 10px 0;
+}
+.swiper-container {
+	width: 100%;
+}
+#loginmodal {
+	float: left;
+	height: 100%;
+	left: 0;
+	padding-top: 110px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 11000;
+	overflow: auto;
+}
+#loginmodal .layer {
+	background: none repeat scroll 0 0 #000;
+	height: 100%;
+	left: 0;
+	opacity: 0.3;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+#loginmodal .container .close {
+	background: url("../Home/images/black-x.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+	display: block;
+	height: 12px;
+	position: absolute;
+	right: 8px;
+	top: 8px;
+	width: 12px;
+}
+#loginmodal .container .loginform {
+	color: #000;
+	float: left;
+	margin-top: 0;
+	/*width: 360px;*/
+}
+#panel_logined {
+	color: #00f6ff;
+	display: block;
+	font-size: 14px;
+	height: 80px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+}
+#btn_loginout {
+	cursor: pointer;
+	margin: auto;
+	width: 60px;
+}
+#loginmodal .container .loginform li {
+	float: left;
+	padding: 2px 0;
+	position: relative;
+	width: 100%;
+}
+#loginmodal .container .loginform li h1 {
+	float: left;
+	font-size: 32px;
+	font-weight: bold;
+}
+#loginmodal .container .loginform li span.lr {
+	color: #f7600a;
+	cursor: pointer;
+	float: right;
+	font-size: 12px;
+	font-weight: bold;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 10px;
+}
+#loginmodal .container .loginform li span.lr:hover {
+	text-decoration: underline;
+}
+#loginmodal .container .loginform li div.error {
+	bottom: -15px;
+	color: #ff0000;
+	float: left;
+	height: 20px;
+	left: 0;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 1;
+}
+#loginmodal .container .loginform li input.input {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #fff;
+	background-image: -moz-linear-gradient(center top , #edf3f9, #fff);
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	border-image: none;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset, 0 1px rgba(255, 255, 255, 0.4);
+	color: #7988a3;
+	float: left;
+	font-family: "Helvetica Neue", Helvetica, Verdana, sans-serif;
+	font-size: 14px;
+	margin: 20px 0px 0px 50px;;
+	padding: 10px 30px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+	transition: all 0.25s linear 0s;
+	width: 360px;
+}
+.text {
+	background-color: #fff;
+	background-image: -moz-linear-gradient(center top , #edf3f9, #fff);
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	border-image: none;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset, 0 1px rgba(255, 255, 255, 0.4);
+	color: #7988a3;
+	float: left;
+	font-family: "Helvetica Neue", Helvetica, Verdana, sans-serif;
+	font-size: 14px;
+	padding: 10px 30px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+	transition: all 0.25s linear 0s;
+	margin: 10px 0 10px 45px;
+}
+#loginmodal .container .loginform li input.input:focus {
+	border-color: #84c0ee;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) inset, 0 0 7px #96c7ec;
+	color: #525864;
+	outline: medium none;
+}
+#loginmodal .container .loginform li label {
+	color: #777;
+	float: left;
+	padding: 10px 4px;
+}
+#loginmodal .container .loginform li button, #backPassword {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #FF6600;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-image: none;
+	border-radius: 0px;
+	border-style: none;
+	border-width: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	color: #edf4f9;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 30px 45px;
+	outline: 0 none;
+	padding: 4px 26px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	text-transform: uppercase;
+	vertical-align: middle;
+	/*width: 360px;*/
+}
+.login-box-warp {
+	margin-left: -40px;
+}
+.logo {
+	height: auto;
+	max-height: 114px;
+	max-width: 70px;
+	width: auto;
+	float: left;
+}
+.icon {
+	left: 4px;
+	position: relative;
+	top: 28px;
+	width: 20px;
+}
+.login-containter {
+	margin: 100px auto;
+	max-width: 450px;
+	padding: 20px;
+	background-color: #e4e4e4
+}
+.form-control {
+	padding: 0px 30px;
+}
+.form-group {
+	margin-bottom: 0px;
+}
+.btn-info {
+	background-color: #FF6600;
+	border-width: 0;
+	color: #edf4f9;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: normal;
+	padding: 4px 26px;
+	text-align: center;
+	margin-top: 20px;
+	width: 100%;
+	border-radius: 0;
+}
+.backPassword {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #FF6600;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-image: none;
+	border-radius: 0px;
+	border-style: none;
+	border-width: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	color: #edf4f9;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 30px 0px;
+	outline: 0 none;
+	padding: 4px 26px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+#loginmodal .container .loginform li button:hover {
+	background-color: #519dde;
+}
+#loginmodal .container .active-email-style {
+	color: #333;
+	font-size: 14px;
+	text-align: center;
+}
+#loginmodal .container .active-email-style .active-email-href {
+	color: #999;
+	margin: 10px;
+}
+#loginmodal .container .active-email-style .active-email-href a {
+	color: #f7600a;
+	text-decoration: underline;
+}
+#loginmodal .container .active-email-style input {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #fff;
+	background-image: -moz-linear-gradient(center top , #edf3f9, #fff);
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	border-image: none;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset, 0 1px rgba(255, 255, 255, 0.4);
+	color: #7988a3;
+	float: left;
+	font-family: "Helvetica Neue", Helvetica, Verdana, sans-serif;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 10px 30px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+	transition: all 0.25s linear 0s;
+	width: 300px;
+}
+#loginmodal .container .active-email-style input:focus {
+	border-color: #84c0ee;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) inset, 0 0 7px #96c7ec;
+	color: #525864;
+	outline: medium none;
+}
+#loginmodal .container .active-email-style button {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #4f94cf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-image: none;
+	border-radius: 3px;
+	border-style: none;
+	border-width: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	color: #edf4f9;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin-bottom: 15px;
+	margin-right: 20px;
+	margin-top: 20px;
+	outline: 0 none;
+	padding: 8px 26px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	text-transform: uppercase;
+	vertical-align: middle;
+	width: 120px;
+}
+#loginmodal .container .loginform li h1 span {
+	color: #333333;
+	font-size: 12px;
+	font-weight: 100;
+	margin-left: 10px;
+}
+#loginmodal .container #forget-password {
+	margin-top: 26px;
+	text-align: left;
+}
+#loginmodal .container #forget-password h1 {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+#loginmodal .container #resetPass .resetEmail {
+	left: 5px;
+	padding: 10px 30px;
+	position: relative;
+	top: 20px;
+}
+.wxlogin {
+	background: url("../Home/images/wxlogo.png") repeat scroll 0 0 /28px 28px rgba(0, 0, 0, 0);
+	border-radius: 2px;
+	cursor: pointer;
+	height: 28px;
+	margin-top: -5px;
+	width: 28px;
+}

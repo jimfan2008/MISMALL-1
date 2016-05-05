@@ -1,0 +1,1174 @@
+/**
+ * 	基本属性、数据和动作库样式
+ *  @author 唐苗
+ * 	2015-07-20
+ */
+/*右边设置部分 st*/
+#container .right-menu {
+	width: 400px;
+	height: 636px;
+	background: white;
+	margin-left: 4%;
+	display: none;
+}
+/*右边设置部分头部 st*/
+#container .right-menu .right-top {
+	width: 100%;
+	height: 40px;
+	color: white;
+}
+#container .right-menu .right-top div {
+	width: 33.3%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+#container .right-menu .right-top .set-ctrl-basicElement {
+	color: #666;
+	background: white;
+	margin: 0px;
+	border-right: 1px solid white;
+}
+
+#container .right-menu .right-top .set-ctrl-actionList {
+	background: #bcbcbc;
+}
+#container .right-menu .right-top .set-ctrl-data {
+	width: 135px;
+	background: #bcbcbc;
+	margin: 0px;
+	border-right: 1px solid #fff;
+}
+
+/*右边设置部分头部  ed*/
+
+/*右边设置部分基本属性  操作交互 数据样式公共部分  st*/
+
+#formInputType option {
+	padding: 10px 0;
+}
+
+.slideOutInput {
+	border-bottom: 1px solid #ccc;
+}
+.slideOutInput * {
+	display: none;
+}
+
+.ctrlValue {
+	display:none;
+	height: 35px;
+	line-height: 30px;
+	overflow: hidden;
+	position: absolute;
+	right: 30px;
+	text-align: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 290px;
+}
+
+.formInputArrow {
+	position: absolute;
+	right: 0px;
+	font-size: 20px;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	top: 0px;
+	color: green;
+	display: none;
+}
+
+.inputPanel {
+	display: none;
+	height: 100%;
+	position: absolute;
+	right: -100%;
+	top: 0;
+	width: 100%;
+	background: #f9f9f9;
+	border: 1px solid #eee;
+}
+.ipTitleWrap {
+	height: 35px;
+	background: #2F96B4;
+	line-height: 35px;
+	font-size: 16px;
+	color: #fff;
+}
+.ipp {
+	text-align: center;
+	display: inline-block;
+	width: 33.3%;
+	float: left;
+}
+.ipp.ipBack {
+	cursor: pointer;
+	text-align: left;
+	text-indent: 10px;
+}
+.ipSave {
+	cursor: pointer;
+	float: right;
+	padding-right: 15px;
+	text-align: right;
+	width: 18%;
+}
+.ipSave:hover {
+	background: #41A7C5;
+	cursor: pointer;
+}
+.ipTitle {
+	font-size: 14px;
+}
+.ipEditBox textarea {
+	border-bottom: 1px solid #eee;
+	border-radius: 0;
+	height: 100px;
+	padding: 5px;
+	width: 100%;
+}
+
+.ipEditBox label.buttonType {
+	border: 1px solid #ccc;
+	margin: 15px 9px 0;
+	padding: 6px 15px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+#container .right-menu .basicElementView, #container .right-menu .actionList, #container .right-menu .data {
+	background: white;
+}
+
+#container .right-menu  .actionList div .divider, #container .right-menu  .data div .divider {
+	border-bottom: 1px solid #CCCCCC;
+	margin-top: 10px;
+}
+#container .right-menu  div .frame {
+	width: 78px;
+	height: 22px;
+	float: left;
+	text-align: center;
+	margin-top: -21px;
+	margin-left: 80px;
+	border-left: 1px solid #666;
+	border-top: 1px solid #666;
+	cursor: pointer;
+}
+#container .right-menu  div .frame-child {
+	width: 38px;
+	height: 22px;
+	float: left;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: 0px;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
+}
+#container .right-menu  div .ensure {
+	color: white;
+	background: #66CCFF;
+}
+
+#container .right-menu .operationType, #container .right-menu .actionType {
+	font-size: 15px;
+	height: 32px;
+	line-height: 32px;
+	margin-top: 10px;
+	float: left;
+	width: 31%;
+	margin-right: 2%;
+	text-align: center;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+/*右边设置部分基本属性  操作交互 数据样式公共部分  ed*/
+
+/*右边设置部分基本属性  st*/
+.clearfix {
+	margin-top: 2px;
+}
+#container .right-menu  div .shape-three, #container .right-menu  div .shape-two, #container .right-menu  div .shape-one {
+	border: 1px solid #666;
+	margin-top: 14px;
+}
+#container .right-menu  div .shape-three, #container .right-menu  div .shape-two {
+	margin-left: 25px;
+}
+#container .right-menu  div .shape-one {
+	margin-left: 52px;
+}
+#container .right-menu  .basicElementView div .divider {
+	margin-top: 10px;
+	marign-bottom: 10px;
+	border-bottom: 1px solid #CCCCCC;
+}
+.ez-context-menu-item {
+	min-height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #eee;
+	padding-left: 5px;
+	color: #249ddd;
+	cursor: default;
+}
+.subMenuWrap {
+	width: 100%;
+}
+.settingItem {
+	width: 240px;
+	min-height: 30px;
+	margin: 5px auto;
+	overflow: auto;
+	padding: 8px 5px;
+	font-size: 12px;
+}
+.ez-panel-item {
+	width: 50%;
+	margin-bottom: 15px;
+}
+.ez-left-align {
+	float: left;
+	margin-left: 15px;
+	width: 40%;
+}
+.ez-text-align {
+	float: left;
+}
+.ez-left {
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+}
+.ez-setting-content {
+	float: left;
+	margin-bottom: 5px;
+	margin-left: 15px;
+	margin-top: 5px;
+	width: 96%;
+}
+div.ez-slider {
+	float: left;
+	width: 180px;
+	margin-top: 10px;
+	height: 8px;
+	margin-left: 15px;
+	background: #8a8a8a
+}
+.ez-select {
+	height: 25px;
+	margin-bottom: 0;
+	margin-left: 90px;
+	width: 167px;
+}
+.ez-spinner {
+	float: right;
+	height: 20px;
+	line-height: 13px;
+	border-radius: 5px;
+}
+.ez-spinner input.slideValue {
+	border: 0 none;
+	height: 22px;
+	width: 50px;
+	margin: 0;
+}
+.borderWidth {
+	float: right;
+	width: 100px;
+	margin-right: 80px;
+	margin-top: -10px;
+}
+.borderRadius {
+	float: left;
+	width: 100px;
+	margin-left: 80px;
+	margin-top: -10px;
+}
+#container .right-menu  div .ez-slider {
+	background: #8a8a8a none repeat scroll 0 0;
+	float: left;
+	height: 5px;
+	margin-left: 50px;
+	margin-top: 10px;
+	width: 180px;
+}
+#container .right-menu  div .ez-slider div:first {
+	width: 100%;
+}
+#container .right-menu  div .slider-style {
+	float: left;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+}
+.ctrl-css-switch {
+	padding-top: 5px;
+}
+.ctrl-css-switch-lock {
+	text-align: center;
+	margin-top: 2px;
+}
+.attrDtlPanel {
+	width: 100%;
+	display: none;
+	margin-top: 10px;
+}
+.modifyDataBtn {
+	width: 50%;
+	background: #27a9e3;
+	border-radius: 0px;
+	color: #ffffff
+}
+.modifyDataBtn:hover {
+	background: #009dd9;
+	color: #ffffff
+}
+#container .right-menu  div .basic-small-title {
+	color: #666666;
+	float: left;
+	margin-left: 0px;
+	margin-top: 16px;
+}
+#container .right-menu  div .basic-left {
+	margin-left: -14px;
+	margin-top: 6px;
+}
+
+#container .right-menu  div .item-left {
+	margin-left: -16px;
+}
+#container .right-menu  div .default-design {
+	color: #666;
+	font-size: 14px;
+	margin-left: -30px;
+	margin-top: 6px;
+}
+#container .right-menu  div .editText, #container .right-menu  div .editName, .colsSetting, #container .right-menu  div .font-bold {
+	margin-top: 10px;
+	margin-left: 0;
+	width: 100%;
+}
+
+#container .right-menu  div .color-pannel {
+	display: block;
+	margin-left: 100px;
+	margin-top: -20px;
+}
+
+#container .right-menu  div .text-format {
+	padding-right: 0;
+}
+#container .right-menu  div .button-position-top {
+	margin-top: -5px;
+}
+#container .right-menu  div .changeBackgroundImg {
+	margin-left: 12px;
+	margin-top: 15px;
+}
+#container .right-menu  div .select-position {
+	margin-left: -16px;
+}
+#container .right-menu  div .ui-spinner {
+	margin-left: -60px;
+}
+
+#container .right-menu  div .item-top {
+	margin-top: 0px;
+}
+#container .right-menu  div .borderSingle {
+	margin-top: 10px;
+}
+#container .right-menu  div .slide-left {
+	margin-left: 20px;
+}
+/*右边设置部分基本属性 新增选项的删除图标  st*/
+#container .right-menu .basicElementView div.deleteItem {
+	background: url("../Images/icon.png") no-repeat scroll 0 -325px;;
+	cursor: pointer;
+	float: left;
+	margin-top: 4px;
+	opacity: 0.7;
+	height: 16px;
+	position: absolute;
+	top: 10%;
+	width: 16px;
+}
+.itemDiv .input-group .deleteItem {
+	display: none;
+}
+.itemDiv .input-group:hover .deleteItem {
+	display: block;
+}
+/*右边设置部分基本属性新增选项的删除图标   end*/
+
+/*右边设置部分基本属性设置标题形状的样式  st*/
+.inputSet {
+	text-align: center;
+}
+.inputStyle0 {
+	color: #666;
+	height: 18px;
+	width: 20px;
+	border-right: 1px solid #666;
+	line-height: 18px;
+}
+.inputType0 {
+	width: 65px;
+	height: 20px;
+	cursor: pointer;
+	display: block;
+	border: 1px solid #666;
+	margin-left: -10px;
+	margin-top: 4px;
+}
+.inputType1 {
+	margin-left: 1px;
+	margin-top: 4px;
+}
+.inputType1, .inputType2 {
+	width: 65px;
+	height: 20px;
+	cursor: pointer;
+	display: block;
+	border: 1px solid #666;
+}
+.inputType2 {
+	float: left;
+	margin-left: 20px;
+	margin-top: -14px;
+	border: 1px solid #2f96b4;
+}
+.inputStyle2 {
+	float: left;
+	line-height: 5px;
+	color: #2f96b4;
+}
+.style-three {
+	margin-top: 13px;
+}
+/*右边设置部分基本属性设置标题形状的样式  end*/
+/* 虚拟圆角 */
+#radiusSetting {
+	position: relative;
+	width: 100%;
+	height: 100px;
+}
+#radiusSetting .radiuLeft, #radiusSetting .radiusRight {
+	float: left;
+	width: 70px;
+}
+
+#radiusSetting .radius {
+	float: left;
+	width: 20px;
+	height: 20px;
+}
+#radiusSetting .radiusTopLeft {
+	border-left: 2px solid #CCC;
+	border-top: 2px solid #ccc;
+}
+
+#radiusSetting .radiusBottomLeft {
+	margin-left: 28px;
+	border-right: 2px solid #CCC;
+	border-top: 2px solid #ccc;
+}
+#radiusSetting .radiusTopRight {
+	margin-top: 20px;
+	border-left: 2px solid #CCC;
+	border-bottom: 2px solid #ccc;
+}
+#radiusSetting .radiusBottomRight {
+	margin-left: 28px;
+	margin-top: 20px;
+	border-bottom: 2px solid #ccc;
+	border-right: 2px solid #ccc;
+}
+#radiusSetting .inputLeft {
+	width: 35px;
+	height: 20px;
+	position: absolute;
+	left: 120px;
+	top: 8px;
+}
+
+#radiusSetting .inputRight {
+	width: 35px;
+	height: 100px;
+	position: absolute;
+	left: 260px;
+	top: 8px;
+}
+
+#radiusSetting .radiusBottom {
+	margin-top: 26px;
+}
+/* 虚拟圆角 END*/
+/*定位栏栏位设置样式 st*/
+.colsPreList {
+	position: relative;
+	top: 10px;
+	margin-left: -80px;
+}
+.colsSetting {
+	clear: both;
+}
+.colsPreList span {
+	background: rgba(0, 0, 0, 0) url("../Images/grid.png") no-repeat scroll -3px -2px;
+	box-sizing: content-box;
+	display: block;
+	float: left;
+	height: 26px;
+	margin: 5px;
+	text-align: center;
+	width: 30px;
+}
+.colsPreList span:nth-child(2) {
+	background-position: -37px -2px;
+}
+.colsPreList span:nth-child(3) {
+	background-position: -70px -2px;
+}
+.colsPreList span:hover {
+	outline: 1px solid #7aa3b9;
+}
+
+.colsPreList span i[type="cols6-6"] {
+	background-position: center -60px;
+}
+.colsPreList span i[type="cols4-8"] {
+	background-position: center 0;
+}
+.colsPreList span i[type="cols8-4"] {
+	background-position: center -30px;
+}
+.colsPreList span i[type="cols3-9"] {
+	background-position: center -90px;
+}
+.colsPreList span i[type="cols9-3"] {
+	background-position: center -120px;
+}
+.colsPreList span i[type="cols4-4-4"] {
+	background-position: center -150px;
+}
+.colsPreList span i[type="cols3-6-3"] {
+	background-position: center -180px;
+}
+.colsPreList span i[type="cols4-2-2-4"] {
+	background-position: center -210px;
+}
+.colsPreList span i[type="cols2-4-4-2"] {
+	background-position: center -240px;
+}
+.colsPreList span i[type="cols6-3-3"] {
+	background-position: center -270px;
+}
+/*定位栏栏位设置样式  end*/
+/* 单选复选 排列方式 st */
+.rankDiv label {
+	background: none repeat scroll 0 0 #e8e8e8;
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	float: left;
+	height: 30px;
+	border: 1px solid #E8E8E8;
+	border-radius: 2px;
+}
+.clumrank1 {
+	height: 30px !important;
+	width: 44px;
+	min-width: 10px;
+	margin-top: 1px;
+}
+.clumrank2 {
+	width: 38%;
+	margin: 0 8px;
+	min-width: 10px;
+	width: 19px;
+	margin-right: -5px;
+	margin-top: 3px;
+}
+.clumrank3 {
+	width: 28%;
+	margin: 0 8px;
+	min-width: 10px;
+	width: 16px;
+	margin-right: -5px;
+	margin-top: 3px;
+}
+.rankDiv .on {
+	border: 1px solid #88cc88;
+}
+/* 单选复选 排列方式  end*/
+
+/*右边设置部分基本属性  ed*/
+
+/*右边设置部分数据 st*/
+
+#container .right-menu  .data  .commonValue {
+	height: 37px;
+	color: white;
+	font-size: 16px;
+	line-height: 37px;
+	margin-top: 2px;
+	background: #BCBCBC;
+}
+#container .right-menu  .data  .default-content .remove {
+	background: #ff9933 none repeat scroll 0 0;
+	border: 0 solid white;
+	color: white;
+	float: left;
+	height: 26px;
+	line-height: 26px;
+	margin-left: 310px;
+	margin-top: -28px;
+	width: 45px;
+}
+#container .right-menu  .data  .default-content {
+	overflow-y: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#container .right-menu  .data  .user-logo {
+	width: 105px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 15px;
+	color: white;
+	background: #66CCCC;
+	margin-top: 14px;
+	margin-left: 10px;
+	border: 0px solid white;
+}
+#container .right-menu  .data  .user-name, #container .right-menu  .data .time {
+	width: 105px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 15px;
+	color: #666;
+	margin-top: 14px;
+	margin-left: 25px;
+	border: 1px solid #CCCCCC;
+}
+#container .right-menu .data  .random {
+	width: 105px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 15px;
+	color: #666;
+	margin-top: 14px;
+	margin-left: 10px;
+	border: 1px solid #CCCCCC;
+}
+
+#container .right-menu .data  .design-page-parameter {
+	width: 360px;
+	height: 32px;
+	color: #CCCCCC;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 32px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#container .right-menu .data  .add-new-dynamic-data {
+	width: 145px;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 30px;
+	font-size: 16px;
+	color: white;
+	background: #00CCFF;
+	border: 1px solid #CCCCCC;
+}
+#container .right-menu .data  .members-list {
+	width: 360px;
+	height: 32px;
+	color: #666;
+	font-size: 18px;
+	line-height: 32px;
+	margin-top: 2px;
+	margin-left: 6px;
+}
+#container .right-menu .data  .members-list .member, #container .right-menu .data  .members-list .order {
+	width: 105px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 15px;
+	color: #666;
+	margin-top: 14px;
+	border: 1px solid #CCCCCC;
+}
+#container .right-menu .data  .members-list .member {
+	margin-left: -10px;
+}
+#container .right-menu .data  .members-list .order {
+	margin-left: 25px;
+}
+#container .right-menu  .data  .default-input input {
+	width: 150px;
+}
+
+#container .right-menu  .data  .data-small-title {
+	width: 380px;
+	height: 30px;
+	line-height: 30px;
+	color: #796B87;
+	font-size: 16px;
+	background: #D7D7D7;
+	margin-left: 10px;
+}
+#container .right-menu  .data .line {
+	widht: 100%;
+	height: 1px;
+	background: rgba(0,0,0,0.26);
+	margin: 10px 0px 20px 0px;
+}
+
+#container .right-menu  .data .commonData {
+	margin-bottom: 10px;
+	position: relative;
+}
+#container .right-menu  .data .commonData ul {
+	position: relative;
+}
+#container .right-menu  .data .commonData ul li {
+	width: 31.83%;
+	height: 30px;
+	line-height: 35px;
+	margin-right: 1.5%;
+	margin-bottom: 5px;
+	border: 1px solid #CCCCCC;
+	color: rgba(0,0,0,0.6);
+	text-align: center;
+	font-weight: bold;
+	display: inline-table;
+	margin-top: 15px;
+	cursor: pointer;
+}
+#container .right-menu  .data  .commonDataTitle {
+	background: none repeat scroll 0 0 #f5f5f5;
+	color: rgba(0,0,0,0.3);
+	height: 27px;
+	line-height: 27px;
+	font-size: 13px;
+	margin-bottom: 10px;
+	margin-top: 2px;
+	padding-left: 10px;
+	font-weight: bold;
+}
+#container .right-menu  .data .attrDataSource ul li {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	float: left;
+}
+/*右边设置部分数据  ed*/
+/*右边设置部分操作交互  st*/
+#container .right-menu  div .action-list-small-title {
+	font-size: 16px;
+	margin-left: 15px;
+}
+#container .right-menu  .actionList .frame {
+	border: 0px solid white;
+}
+#container .right-menu  .actionList .click, #container .right-menu  .actionList .inputContent, #container .right-menu  .actionList .enter {
+	width: 83px;
+	height: 32px;
+	font-size: 15px;
+	line-height: 32px;
+	margin-top: 10px;
+	margin-left: 25px;
+}
+#container .right-menu  .actionList .click {
+	color: white;
+	background: #00CCFF;
+}
+#container .right-menu  .actionList .inputContent, #container .right-menu  .actionList .enter {
+	color: #666;
+	border: 1px solid #CCCCCC;
+}
+
+#container .right-menu  .actionList .data-operate, #container .right-menu  .actionList .mini-message {
+	color: #666;
+	border: 1px solid #CCCCCC;
+}
+#container .right-menu  div .select-content {
+	color: #666;
+	background: #66CCFF;
+	margin-top: 8px;
+	margin-left: 25px;
+	border: 0px solid white;
+}
+#container .right-menu  div .select-content select {
+	width: 280px;
+	font-size: 16px;
+	color: #666;
+	background: white;
+}
+#container .right-menu  div .select-content select option {
+	background: white;
+}
+#container .right-menu .set-ctrl-operation .selectedActionType, #container .right-menu .set-ctrl-operation .selectedOperationType {
+	background: none repeat scroll 0 0 #00ccff;
+	color: white;
+	border: 1px solid #ccc;
+}
+
+#container .right-menu #actionSave {
+	margin-top: 15px;
+}
+#container .right-menu select {
+	text-align: center;
+}
+
+#container #ctrlActionList .actionHead {
+	background: #d9edf7;
+}
+
+#container #ctrlActionList .panel-body {
+	padding: 0;
+}
+
+#addActionBtn, #addConActionBtn {
+	cursor: pointer;
+}
+#csActionAry {
+	height: 90px;
+}
+#ctrlActionList {
+	overflow-y: auto;
+	height: 350px;
+}
+
+.actionPanel {
+	margin-bottom: 10px;
+	border-radius: 0;
+}
+
+.actionWarp {
+	padding: 5px 10px;
+}
+
+.actionHead {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background-color: #d9edf7;
+}
+.actionTitle {
+	margin-left: 10px;
+}
+.bg-primary {
+	margin-left: 10px;
+}
+.shUnit:hover [aria-hidden = "true"] {
+	display: block;
+}
+.addNewAction {
+	margin: 20px 0 5px;
+}
+
+/*自动运算css st*/
+.action-zdys-operate .operate {
+	background: none repeat scroll 0 0 #0083ee;
+	border: 1px solid #0083ee;
+	box-shadow: 0 0 4px #0083ee;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	height: 30px;
+	line-height: 28px;
+	margin-right: 5px;
+	opacity: 0.8;
+	text-align: center;
+	width: 30px;
+}
+.action-zdys-operate .clearclr {
+	background: #ff9999;
+	border: 1px solid #ff9999;
+	box-shadow: 0 0 4px #ff9999;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	height: 30px;
+	line-height: 27px;
+	margin-right: 5px;
+	opacity: 0.8;
+	padding: 0 5px;
+	text-align: center;
+}
+.action-zdys-operate .current {
+	background: none repeat scroll 0 0 #c1433e;
+	border: 1px solid #c1433e;
+	box-shadow: 0 0 4px #c1433e;
+}
+.content-zdtc .text {
+	color: #555;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	height: 40px;
+	line-height: 29px;
+	padding: 0 5px;
+}
+/*自动运算css ed*/
+.ItemAttr .deleteItem {
+	background: url("../Images/icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	cursor: pointer;
+	float: left;
+	height: 16px;
+	margin-top: 4px;
+	opacity: 0.7;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	right: -16px;
+	top: 10%;
+	width: 16px;
+}
+#defaultList {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin-top: 2px;
+	margin-left: 15px;
+	width: 150px;
+	font-size: 12px;
+	background: #ffffff;
+	z-index: 1000;
+}
+#defaultList .menu-line {
+	position: relative;
+	float: left;
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 1px;
+	height: 60px;
+	background: #ccc;
+	overflow: hidden;
+	z-index: 99;
+}
+#defaultList .menu-item, #followPanal .menu-item {
+	position: absolute;
+	float: right;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #ffffff;
+	box-shadow: 0px 6px 12px rgba(0,0,0,0.176);
+}
+#defaultList .menu-item li, #followPanal .menu-item li {
+	position: relative;
+	padding-left: 20px;
+	border: 1px solid #f3f3f3;
+	height: 30px;
+	line-height: 2;
+	cursor: pointer;
+	z-index: 98;
+}
+#defaultList .menu-date {
+	position: relative;
+	padding-left: 5px;
+	line-height: 2;
+	border: 1px solid #f3f3f3;
+}
+#defaultList .menu-item li:hover, #followPanal .menu-item li:hover {
+	background: #F5F5F5;
+	z-index: 100;
+}
+#defaultList .menu {
+	height: 30px;
+	line-height: 2;
+}
+
+.caretL {
+	float: right;
+	margin-top: 11px;
+	margin-right: 5px;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	vertical-align: middle;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 6px solid
+}
+
+#defaultList .menuChild {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background: #ffffff;
+	box-shadow: 0px 6px 12px rgba(0,0,0,0.176);
+	z-index: 1000;
+}
+#defaultList .menuChild li {
+	padding-left: 5px;
+	padding-right: 15px;
+	overflow: hidden;
+}
+#defaultList .menuChild li:hover {
+	background: #F6F6F6;
+}
+
+/* 动作三角符*/
+.action-caret {
+	height: 0px;
+	width: 0px;
+	border-left: 20px solid #00CC00;
+	border-bottom: 20px solid transparent;
+	background: transparent;
+	position: absolute;
+	top: 0px;
+}
+
+/* 页面的三角符的颜色*/
+.page-caret {
+	border-left: 20px solid #00CC00;
+}
+
+/* 数据源的三角符的颜色*/
+.dataSousce-caret {
+	border-left: 20px solid #0099ff;
+}
+
+/* 字段的三角符的颜色*/
+.field-caret {
+	border-left: 20px solid #00ccff;
+}
+
+/* 运算符的三角符的颜色*/
+.deng-caret {
+	border-left: 20px solid #669966;
+}
+/* 表单控件的三角符的颜色*/
+.formCtrl-caret {
+	border-left: 20px solid #CC99CC;
+}
+
+/* 表单的三角符的颜色*/
+.form-caret {
+	border-left: 20px solid #993399;
+}
+
+/*右边设置部分操作交互  ed*/
+
+/*右边设置部分 ed*/
+
+label.itemLabel input[type="radio"], label.itemLabel input[type="checkbox"] {
+	display: none;
+}
+
+label.itemLabel span {
+	word-wrap: break-word;
+	word-break: normal;
+}
+label.itemLabel .ui-button-text {
+	padding-left: 0;
+}
+.ctrl label.buttonType {
+	padding: 6px 15px;
+	margin-right: 9px;
+	margin-left: 0;
+	text-align: center;
+	border: solid 1px #ccc;
+}
+/*选项框样式st*/
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding-top: 7px;
+}
+/*选项框样式sted*/
+/*三种激活样式*/
+#myWeb .onChecked {
+	background-color: #41a7c5;
+	color: #fff;
+}
+
+/*轮播图插件样式*/
+.swiperAttr .row {
+	margin: 15px 0;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+.swiperAttr .row img {
+	max-width: 100%;
+}
+
+.addOneWrap {
+	border: 1px solid #eee;
+	height: 100px;
+	padding-top: 10px;
+	position: relative;
+	cursor: pointer;
+}
+
+.addOneWrap:hover .addOneSlider {
+	width: 52px;
+	height: 52px;
+	margin: 8px auto;
+}
+
+.addOneWrap:hover .centerSquir {
+	width: 54px;
+	height: 51px;
+	margin-left: -2px;
+	margin-top: -2px;
+}
+.addOneWrap:hover .centerCircle {
+	top: 17px;
+	left: 17px;
+}
+
+.addOneSlider {
+	border: 2px solid #ccc;
+	height: 47px;
+	margin: 10px auto;
+	position: relative;
+	width: 50px;
+}
+
+.centerSquir {
+	background: #fff none repeat scroll 0 0;
+	height: 50px;
+	margin-left: -2px;
+	margin-top: -4px;
+	transform: rotate(44deg);
+	width: 50px;
+	-ms-transform: rotate(45deg); /* Internet Explorer */
+	-moz-transform: rotate(45deg); /* Firefox */
+	-webkit-transform: rotate(45deg); /* Safari 和 Chrome */
+	-o-transform: rotate(45deg); /* Opera */
+}
+
+.centerCircle {
+	background: #fff;
+	border: 2px solid #ccc;
+	border-radius: 50%;
+	height: 18px;
+	left: 16px;
+	position: absolute;
+	top: 16px;
+	width: 18px;
+}
+

@@ -1,0 +1,284 @@
+/**
+ * 所有控件样式文件
+ * @auther 陈毅
+ * 2015-06-30
+ */
+
+/*页面通用样式 st*/
+.wxqyPage {
+	height: 100%;
+	/*overflow:hidden;*/
+	position:relative;
+}
+.topNavWraper,.bottomNavWraper{
+	display:none;
+	padding-top:5px;
+	position:relative;
+	min-height:40px;
+	background:#53CAC2
+}
+
+.topNavWraper:hover .setNavWraper,.bottomNavWraper:hover .setNavWraper{
+	right:-21px;
+	opacity:1;
+}
+
+.setNavWraper{
+	height: 40px;
+    opacity: 0;
+    background: #2f96b4;
+    position: absolute;
+    right: -25px;
+    top: 0;
+    transition: all 0.2s ease 0s;
+    width: 20px;
+}
+
+.navBgColor{
+	height: 20px;
+	background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==");
+}
+.removeNavBtn{
+	height: 20px;
+	background: #2f96b4 url("../Images/close_wind_icon.png") no-repeat scroll center 1px;
+}
+.removeNavBtn:hover{
+	background-position: center -30px;
+}
+
+.topNavWraper .sp-preview,.bottomNavWraper .sp-preview{
+	position:absolute;
+	top:20px;
+	left:0;
+	width:20px;
+	height:20px;
+	border:1px solid #aaa;
+	background:transparent;
+}
+
+.topNavWraper .ctrl, .bottomNavWraper .ctrl{
+	margin:0;
+}
+.myForm {
+	height: 528px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	position: relative;
+}
+/*页面通用样式 ed*/
+
+/*控件,自定义组件通用样式 st*/
+.ctrl {
+	position: relative;
+	margin:18px 0;
+	padding:2px;
+}
+
+.ctrl:first-child[syscomtype="swiper"],.ctrl:first-child[ctrl-type = "IMAGEBOX"]{
+	margin-top:0;
+}
+.ctrl:first-child[syscomtype="swiper"] .ctrlIconWraper,.ctrl:first-child[ctrl-type = "IMAGEBOX"] .ctrlIconWraper{
+	top:0px;
+	z-index:999;
+}
+/*控件删除图标 st*/
+.ctrlIconWraper {
+	background: #37a1ec url("../Images/close_wind_icon.png") no-repeat scroll center -1px;
+    cursor: pointer;
+    display: none;
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: -16px;
+    width: 17px;
+}
+.ctrlIconWraper:hover{
+	background-position:center -32px 
+}
+
+/*控件删除图标 ed*/
+
+.ctrl textarea {
+	border: 1px solid #ccc;
+	margin-left: 0px;
+	width: 89%;
+}
+
+
+.ctrl[ctrl-type="BUTTON"]:hover .dyna-handle {
+	/*display: block;*/
+}
+
+/*控件通用样式 ed*/
+
+/*是否提交弹出框样式（tm）*/
+.submit_tipWrap {
+	position: absolute;
+	text-align: center;
+	z-index: 50;
+	top: -65px;
+	font-size: 10px;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+	display: none;
+	color: #fff;
+	width: 99%;
+	height: 66px;
+}
+.submitTip {
+	height: 36px;
+	line-height: 36px;
+}
+.submitBtnWraper {
+	height: 30px;
+	line-height: 30px;
+}
+
+.text_font {
+	font-size: 15px;
+}
+.submit_tipWrap button {
+	height: 25px;
+	width: 60px;
+	line-height: 10px;
+}
+/*是否提交弹出框样式（end）*/
+/*控件通用样式 ed*/
+
+/*控件选中样式 st*/
+.ctrlSelected {
+	outline: 1px solid #37aeec;
+}
+/*控件选中样式 ed*/
+
+
+/*定位栏,分栏样式 st*/
+.ctrl[ctrl-type="COLUMN"] {
+	/*border: 1px solid #ccc;*/
+}
+
+div.colInner{
+	min-height: 30px;
+	width: 100%;
+	box-shadow: 0 0 0 1px rgba(100, 100, 100, 0.15) inset;
+}
+
+div.colInner:not(:empty) {
+	/*min-height: 0;*/
+	padding:5px 0;
+}
+
+.ctrl[ctrl-type="COLUMN"]:hover div.colInner,.ctrl[ctrl-type="COLBOX"]:hover div.colInner{
+	box-shadow: 0 0 0 1px rgba(100, 100, 100, 0.15) inset;
+}
+
+div.colInner .ctrl{
+	margin:0 0;
+}
+
+div.colInner .ctrl[ctrl-type="TEXT"]{
+	margin:0;
+}
+div.colInner .ctrl[ctrl-type="TEXT"] div[name]{
+	padding:0;
+}
+
+div.colInner .ctrl[ctrl-type="BUTTON"] input[type = "button"]{
+	border-radius:0;
+}
+
+div.colInner .ctrl[ctrl-type="COLUMN"] {
+    /*outline-offset: 2px;*/
+}
+.ctrl[ctrl-type="COLBOX"] {
+	position: absolute;
+	width: 100%;
+	/*border: 1px solid #ddd;*/  /* 在编辑器中，去年定位栏边框，以保持与预览一致 */
+	z-index: 99;
+}
+
+.ctrl[ctrl-type="COLBOX"]:hover > .dyna-handle {
+	/*display: block;*/
+}
+
+.dyna-handle {
+	display: none;
+	position: absolute;
+	left: 45%;
+	top: 0;
+	width: 33px;
+	height: 12px;
+	background: #fff;
+	border: 1px solid #37a1ec;
+	border-top:0 none;
+	color: #37a1ec;
+	cursor: move;
+	text-align: center;
+	font-size: 7px;
+	z-index: 10;
+}
+.ctrl div.dyna-handle:hover {
+	color: #2F96B4;
+}
+
+.ctrl[ctrl-type = 'BUTTON'] .dyna-handle {
+	/*background: #d0c676;*/
+}
+
+/*定位栏样式 ed*/
+
+/*分栏样式 st*/
+.ctrl[ctrl-type="COLUMN"] [class *="col-md-"] {
+	min-height: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.ctrl[ctrl-type="COLUMN"]:hover .dyna-handle {
+	/*display: block;*/
+}
+
+.colInner .ctrl[ctrl-type="DROPDOWN"] .ctrlWraper{
+	/*padding:0 15px;*/  /*分栏里加了这个就和文本框对不齐了 2015-09-22 cy*/
+}
+
+/*分栏样式 ed*/
+
+.sortIng_helper {
+	border-radius: 3px;
+	border: 1px solid #87C6F3;
+	color: #009DD9;
+	font-size: 12px;
+	line-height: 55px;
+	opacity: 0.8;
+	text-align: center;
+	z-index: 99999;
+	margin-left: 3px;
+}
+.selectedForm .ui-state-highlight {
+	
+	background: #FFE5CD;
+	border: 1px dashed red;
+	
+	font-size: 14px;
+	text-align: center;
+	color: #EC6941;
+	border-radius: 0px;
+}
+/*.drag-title {
+
+ width: 100px;
+ height: 46px;
+ line-height: 46px;
+ display: block;
+ margin-left: 130px;
+ }*/
+/*.drag-handle {
+ width: 88px;
+ height: 20px;
+ line-height: 20px;
+ display: block;
+ margin-left: 130px;
+ border: 1px solid #87C6F3;
+ border-top: 0px;
+ }*/

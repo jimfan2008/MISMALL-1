@@ -1,0 +1,117 @@
+<extend name="base"/>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+<block name="body">
+<div class="panel panel-default">
+	  <div class="panel-heading">粉丝列表
+	  <span style="margin-left:20px;color:#999">如果应用设置了消息推送，客服将接收消息</span>
+		 <div class="pull-right">
+			  <a href="{:U('syncMember')}" class="ajax-post">同步微信粉丝</a>
+		  </div>
+	  </div>
+	  <!-- Table -->
+	<div class="table-responsive">
+	 <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>昵称</th>
+              <th class="col-sm-3">地区</th>
+              <th>性别</th>
+              <th>关注时间</th>
+              <!-- <th>客服</th> -->
+              <!-- <th>分组</th> -->
+            </tr>
+          </thead>
+          <tbody>
+          	<volist name="memberlist" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>
+					<img src="{$vo.userPhoto|get_headimg='46'}" width="23"/> 
+					<a href="{:U('memberSend?id='.$vo[id])}">{$vo.userName}
+					<if condition="$vo['remark'] neq ''">({$vo.remark})</if></a></td>
+					<td>
+						{$vo.country} {$vo.province} {$vo.city}
+					</td>
+					<td>
+						<switch name="vo['sex']">
+							<case value="1">男</case>
+							<case value="2">女</case>
+							<default/>未知
+						</switch>
+					</td>
+					<td>{$vo.regTime|date='Y-m-d',###}</td>
+					<!-- <td>
+						<a href="javascript:void(0);" onclick="setServer({$vo.id})">
+						<eq name="vo['isServer']" value="1">
+							是
+						<else/>
+							否
+						</eq>
+						</a>
+					</td> -->
+					<!-- <td>
+						
+						<select class="form-control" onchange="editGroup(this.value, {$vo.id})">
+							<volist name="memberGroups" key="k" id="gro">
+							<option value="{$k}" <eq name="$k" value="$vo['groupid']">selected</eq>>{$gro}</option>
+							</volist>
+						</select>
+					</td> -->
+				</tr>
+			</volist>
+          </tbody>
+        </table>
+       </div>
+       <div class="pull-right">
+                    {:getPagination($totalCount, $pageRow)}
+                </div>
+	</div>
+</block>
+
+<block name="script">
+
+<script type="text/javascript">
+<!--
+function setServer(id){
+	$.post("{:U('setCustomerService')}", {id : id}, function(s){
+		if(s==-1) {
+			handleAjax({'info' : '用户不存在'});
+		} else if( s== -2) {
+			handleAjax({'info':'没有要更新的数据'});
+		} else if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else if( s != '') {
+			handleAjax({'info': s});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else{
+			return false;
+		}
+	});
+}
+function editGroup(gid, id) {
+	$.post("{:U('editMember')}", {groupid : gid, id : id}, function(s){
+		if(s==-1) {
+			handleAjax({'info' : '用户不存在'});
+		} else if( s== -2) {
+			handleAjax({'info':'没有要更新的数据'});
+		} else if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else if( s != '') {
+			handleAjax({'info': s});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else{
+			return false;
+		}
+	});
+}
+//-->
+</script>
+</block>

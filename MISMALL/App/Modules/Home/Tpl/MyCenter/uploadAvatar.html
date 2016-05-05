@@ -1,0 +1,333 @@
+<include file="Public:header" />
+<title></title>
+<link href="__PUBLIC__/App/Home/MyCenter/Css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css" />
+<style>
+.uppic_big{width:475px; margin:0 auto; background:#fff; height:auto; overflow:hidden;}
+.uppic_big .top_uppic{padding:20px; overflow:hidden;}
+.uppic_big .bot{padding:6px 10px; background:#1776d0; color:#fff; cursor:pointer;}
+.uppic_title{width:100%; line-height:30px;}
+.bigpic_fl{width:302px;}
+.bigpic_fl .bigpic{width:300px; height:300px; border:1px solid #dddddd;overflow:hidden;}
+.bigpic_fl .up_prompt{margin:0px auto;text-align:center; line-height:30px; color:#888;}
+.smallpic_fr{width:105px;}
+.smallpic_fr .b_pic{width:100px; height:100px; border:1px solid #ddd; margin:0;}
+.smallpic_fr .b_pic img{width:100px; height:100px;}
+.smallpic_fr .s_pic{width:75px; height:75px; border:1px solid #ddd; margin:20px 0 0px;}
+.smallpic_fr .s_pic img{width:75px; height:75px;}
+.up_bot{width:100%; padding:20px; background:#efefef; text-align:center;}
+#localImag{height:150px;width:300px;border:1px solid #ccc; display:none;}
+ .top_uppic{padding:20px; overflow:hidden;}
+ .bot{padding:6px 10px; background:#1776d0; color:#fff; cursor:pointer;}
+ .bot{display:inline-block;width:100px;height:30px; text-align:center;overflow:hidden;position:relative;}
+ .bot input {opacity:0;filter:alpha(opacity=0);font-size:100px;position:absolute;top:0;right:0;cursor:pointer}
+
+</style>
+</head>
+
+<body>
+ <div class="uppic_big" id="saveimg" >
+		  <div class="top_uppic">
+			    <div class="bigpic_fl fl">
+			        <div class="uppic_title">照片</div>
+			        <div class="bigpic">
+			             <div class="up_prompt">
+			               <span id="fd" style="margin-top:110px;display:block">
+			                   <p>请选择5MB以内的JPG、GIF、PNG格式的图片</p> 
+			                   <p ><span class="bot">选择图片<input id="Member_headimg" name="image" type="file" onchange="change_image()"></span></p>
+			             </span>
+			             <div id="localImag"><img id="preview"/> </div>  
+			          </div>
+			                
+		     	   </div>
+			  </div>
+		   	  <div class="smallpic_fr fr">
+			      <div class="uppic_title">照片 预览</div>  
+			      <div id="show_img">
+                       <p style="font-size:12px">100×100像素</p>
+                          <div style="height:100px;width:100px;border:1px solid #ccc;overflow:hidden;margin-right:20px;">
+                          <div id="big_img" style="height:100px;width:100px;border:1px solid #ccc;overflow:hidden;margin-right:20px;">
+                          <img id="big_photo" width=-1 height=-1 style="diplay:none"/></div></div>
+                        <p style="font-size:12px;text-align: center; margin-top: 10px;">75×75像素</p>
+                           <div style="height:75px;width:75px;border:1px solid #ccc;overflow:hidden;">
+                           <div id="small_img" style="height:75px;width:75px;border:1px solid #ccc;overflow:hidden;">
+                           <img id="small_photo" width=-1 height=-1 style="diplay:none"/></div></div>
+                  </div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="up_bot"><input id="sliceButton" type="button" value="保存新头像" class="bot"/></div>
+ </div>
+	 
+</body>
+<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script> 
+<script type="text/javascript"   src="__PUBLIC__/Js/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.pack.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+//******切图 开始
+/*setImagePreview()
+*@paramfileObjStrimg表示上传域的ID
+*@parampreviewObjString表示显示图片的ID
+*@paramlocalImgString表示显示图片外层的div的ID*@paramwidth表示显示图片的宽*@paramheight表示显示图片的高*/
+function setImagePreview(fileObj,previewObj,localImg,width,height){
+	    
+     var docObj=document.getElementById(fileObj);
+     var imgObjPreview=document.getElementById(previewObj);
+     $("#Msg_img").css("display","none");
+     var browserVersion = window.navigator.userAgent.toUpperCase();
+     if(browserVersion.indexOf('MSIE')>-1){
+        //IE下，使用滤镜
+        docObj.select();
+        var imgSrc=document.selection.createRange().text;
+        var localImagId=document.getElementById(localImg);//必须设置初始大小
+        localImagId.style.width=width+'px';
+        localImagId.style.height=height+'px';//图片异常的捕捉，防止用户修改后缀来伪造图片
+        try{
+          localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+          localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src=imgSrc;
+         }catch(e){
+          alert("您上传的图片格式不正确，请重新选择!");
+          return false;
+         }
+        imgObjPreview.style.display='none';
+        document.selection.empty();
+     }
+     else if(docObj.files&&docObj.files[0]){
+         //火狐下，直接设img属性
+        imgObjPreview.style.display='block';
+        imgObjPreview.style.width=width+'px';
+        imgObjPreview.style.height=height+'px';
+        //imgObjPreview.src=docObj.files[0].getAsDataURL();
+        //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+        //imgObjPreview.src=window.URL.createObjectURL(docObj.files[0]);
+        if (browserVersion.indexOf("CHROME") >= 1 || browserVersion.indexOf("SAFARI") >= 1) {
+          imgObjPreview.src = window.webkitURL.createObjectURL(docObj.files[0]);
+        }
+        else {
+          imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        }
+     }else{
+        imgObjPreview.style.display='block';
+        imgObjPreview.style.width=width+'px';
+        imgObjPreview.style.height=height+'px';
+    }
+}	
+
+var iwidth; 
+var iheight;
+var scale = 1;
+function change_image(){
+      	//按比例加载图片， 保持图片不变形 ， 只在火狐下支持img.onload;          	
+  	    var obj=document.getElementById("Member_headimg");
+  	    var img =new Image();
+  	    img.src=getPath(obj);
+  	    img.onload = function(){	
+  	    	
+  	    iwidth=img.width ;
+  	    iheight=img.height;
+  	    
+  	   if(iwidth>0&&iheight>0){    
+  		   
+   		  if(iwidth/iheight>=300/300){
+   			
+   			  if(iwidth>300){
+   				  scale=iwidth/300
+   				  iwidth=300;
+   				// iheight=(iheight*250)/img.width;
+   				  iheight=iheight/scale
+   			  }else{
+   				   iwidth=img.width ;
+             	   iheight=img.height;
+   			  }
+   			
+   		  }else{ 
+   			   if(iheight>300){
+   				   scale=iheight/300
+   				   iheight=300;
+   				 // iwidth=(iwidth*150)/img.height;
+   				   iwidth=iwidth/scale;
+   				   
+   			   }else{
+   				   iwidth=img.width ;
+             	   iheight=img.height;
+   			   }
+   		     }
+   		   }
+         	  
+  	   $.ajaxFileUpload({
+             type:"POST",
+           	 url:GROUPPATH+"/MyCenter/uploadAvatar",
+           	 secureuri:false,
+           	 fileElementId:'Member_headimg',
+           	 dataType: 'text',
+           	  success: function(data){
+        	  		json_data = eval('('+data+')');
+        	  		if(json_data.error==1){
+            	  		alert(json_data.message);
+            	  		art.dialog.close();
+            	  	}
+           	   $("#preview").attr("src", json_data.imgUrl);
+               $("#small_photo").attr("src", json_data.imgUrl);
+               $("#big_photo").attr("src", json_data.imgUrl);
+           	   $('#fd').css('display','none');
+           	   $('#localImag').css({
+               	   'display':'block',
+               	   'margin-top': (iheight<300 ? (300-iheight)/2 : 0) +'px'
+                  });
+              }
+           });
+  	   $("#localImag").width(iwidth).height(iheight);
+  	   setImagePreview('Member_headimg','preview','localImag',iwidth,iheight);
+       setImagePreview('Member_headimg','small_photo','small_img',75,75);
+       setImagePreview('Member_headimg','big_photo','big_img',100,100);
+                             
+        //调用截图插件需用的
+        var imgAreaSelectApi = $("#localImag").imgAreaSelect({
+	            aspectRatio:'1:1',//选中区域是正方形
+	            handles:true,
+	            fadeSpeed:200,//出来效果
+	            instance: true,
+	            onSelectChange:avatarView//执行选择后执行的函数
+            });
+           
+        imgAreaSelectApi.setSelection(50, 50, 150, 200, false); 
+        imgAreaSelectApi.setOptions({ show: true }); 
+        imgAreaSelectApi.update();
+      };     	                     
+}
+//裁剪后执行的函数
+function avatarView (img, selection) {
+	   $("#Msg_img").css("display","none"); 
+       if(!selection.width||!selection.height)
+         return;
+         var scaleX=100/selection.width;
+         var scaleY=100/selection.height;
+       if(window.navigator.userAgent.indexOf("MSIE")>=1){
+      	 
+    		$('#big_img').css({
+             width:Math.round(scaleX*iwidth)+'px',
+             height:Math.round(scaleY*iheight)+'px',
+             marginLeft:'-'+Math.round(scaleX*selection.x1)+'px',
+             marginTop:'-'+Math.round(scaleY*selection.y1)+'px'
+             
+             });
+          $('#small_img').css({
+             width:Math.round(scaleX*iwidth*3/4),
+             height:Math.round(scaleY*iheight*3/4),
+             marginLeft:-Math.round(scaleX*selection.x1*3/4),
+             marginTop:-Math.round(scaleY*selection.y1*3/4)});
+      } else{
+         $('#big_photo').css({
+         width:Math.round(scaleX*iwidth)+'px',
+         height:Math.round(scaleY*iheight)+'px',
+         marginLeft:'-'+Math.round(scaleX*selection.x1)+'px',
+         marginTop:'-'+Math.round(scaleY*selection.y1)+'px',
+         });
+       $('#small_photo').css({
+         width:Math.round(scaleX*iwidth*3/4),
+         height:Math.round(scaleY*iheight*3/4),
+         marginLeft:-Math.round(scaleX*selection.x1*3/4),
+         marginTop:-Math.round(scaleY*selection.y1*3/4)
+         });
+
+       }
+      
+       $('#preview').attr('x1',selection.x1*scale);
+       $('#preview').attr('y1',selection.y1*scale);
+       $('#preview').attr('x2',selection.x2*scale);
+       $('#preview').attr('y2',selection.y2*scale);
+       $('#preview').attr('w',selection.width*scale);
+       $('#preview').attr('h',selection.height*scale);
+}
+ $(function(){
+ //给上传区添加onchang事件，调用函数 setImagePreview()
+     $("#Member_headimg").change(function(){});
+    //保存
+    $('#sliceButton').click(function() {
+		//console.log($('#upload_user_photo',window.parent.document).attr('src'));
+
+		var x1 = $('#preview').attr('x1');
+		var y1 = $('#preview').attr('y1');
+		var x2 = $('#preview').attr('x2');
+		var y2 = $('#preview').attr('y2');
+		var w =  $('#preview').attr('w');
+		var h =  $('#preview').attr('h');
+		var pic = $('#preview').attr('src');
+		if(x1==undefined || y1==undefined || x2==undefined || y2==undefined || w==undefined || h==undefined){
+			 alert('请上传图片');
+			return false;
+		}else{
+			$.ajax({
+				type : 'POST',
+				url : GROUPPATH + '/MyCenter/uploadAvatarSave',
+				data : {
+					x1:x1,y1:y1,x2:x2,y2:y2,w:w,h:h,pic:pic
+				},
+				//dataType : 'json',
+				success : function (data){
+					var data =JSON.parse(data);
+					if(data.error){
+						alert(data.message);
+						return false;
+					} else {
+						//alert('上传成功');
+						//生成头像后回调
+						//$('#upload_user_photo',window.parent.document).attr('src', data.imgUrl);
+						var str = data.imgUrl.substring(0,data.imgUrl.indexOf("@"));
+						$('#upload_user_photo',window.parent.document).attr('src',str);
+						art.dialog.close();
+					}
+				}
+			});
+		}
+	});	
+  })
+         
+      //******切图结束
+   function getPath(obj){ 
+		 
+		 if(obj)
+		 { 		
+			var regext = /\.jpg$|\.gif$|\.jpeg$|\.png$/gi;   
+			var objType=obj.value.split('.')[1];
+			
+			if(!regext.test(obj.value))
+			{  
+			      alert("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传！"); 
+			      var newImg=$(obj).attr("id");		   
+			 if(newImg=="upload_image"){      //判断图片类型
+			      var newPreviewImg =document.getElementById("show_img"); 
+			      $("#show_img").css("width","100px");
+			      $("#show_img").css("height","100px");
+			      $("#show_img").css("padding-top","2px");    
+			  }else{
+			      $("#show_img_c").css("width","100px");
+				  $("#show_img_c").css("height","100px");
+				  $("#show_img_c").css("padding-top","2px");
+			      }
+			       return;
+			}
+			else
+			{
+			  if (obj.files)
+				{
+          if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) {
+            return window.webkitURL.createObjectURL(obj.files[0]);
+          }
+          else {
+            return window.URL.createObjectURL(obj.files[0]);
+          }
+				
+			  }else
+			  {
+				  obj.select(); 
+					return document.selection.createRange().text;
+			  }
+			  return obj.value; 
+			}	
+		 }
+		} 
+	   
+</script>
+</html>

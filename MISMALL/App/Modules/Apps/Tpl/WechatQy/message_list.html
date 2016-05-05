@@ -1,0 +1,1022 @@
+<extend name="WechatMp/base"/>
+<block name="header">
+    <include file="WechatMp/header"/>
+</block>
+<block name="side">
+    <include file="Public/apps_leftMenu"/>
+</block>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/rebox/css/jquery-rebox.css">
+<style type="text/css">
+.rebox-button{background-color: #fff;color: #000;opacity: 1}
+.navbar-fixed-top{position: static;}
+#main-container{margin-top: 20px}
+.col_mainInner {
+    height: 85%;
+    position: relative;
+}
+.menu_block, .menu_list {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    min-width: 150px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 20;
+
+}
+.menu_inner_block {
+    border-right: 1px solid #EEEEEE;
+    display: inline-block;
+    margin: 15px -1px 15px -30px;
+    overflow: hidden;
+    padding-right: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 230px;
+}
+.menu_list .menu_inner_block li {
+    position: relative;
+}
+li {
+    list-style: none outside none;
+}
+.menu_list .menu_inner_block li a {
+    overflow: hidden;
+    padding: 6px 25px 6px 0;
+    text-indent: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.menu_list li a {
+    color: #222222;
+    display: block;
+    font-size: 14px;
+    line-height: 32px;
+    text-indent: 25px;
+}
+.menu_list .menu_inner_block .active .icon_hooked {
+    display: inline-block;
+}
+.menu_list .menu_inner_block li .icon_hooked {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 14px;
+}
+.icon_hooked {
+    background-position: -192px -96px;
+    height: 14px;
+    width: 18px;
+}
+.menu_inner_block .image {
+    border-radius: 50%;
+    float: left;
+    height: 30px;
+    margin-left: 15px;
+    width: 30px;
+}
+.border_alpha {
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/*.message_view {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 45px;
+}*/
+.message_list {
+    min-width: 800px;
+    overflow-x: auto;
+    clear: both;
+}
+.message_bar {
+    border-bottom: 1px solid #E5E5E5;
+    color: #D8D8D8;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+}
+.message_filter {
+    border-radius: 2px;
+    color: #777777;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+}.message_filter .title {
+    display: inline-block;
+    padding: 0 8px;
+}.message_filter .icon_arrow {
+    background-position: 5px -58px;
+    height: 16px;
+    position: relative;
+    right: 6px;
+    top: 3px;
+    width: 17px;
+}
+/*.message_items_material_file, .message_items_material_picture, .message_items_material_video, .message_items_material_voice, .message_items_material_word, .message_items_record, .message_items_userMsg {
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 41px;
+}*/
+
+.message_new {
+    border-bottom: 1px solid #E5E5E5;
+    margin-top: 10px;
+}.message_new a {
+    background-color: #F5F9FD;
+    color: #222222;
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    text-decoration: none;
+}
+.message_items .item {
+    border-bottom: 1px solid #E5E5E5;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 28px;
+    padding: 5px 0;
+    position: relative;
+    vertical-align: middle;
+}
+.message_items .item .time {
+    float: right;
+    margin-right: 20px;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 70px;
+}
+.message_items .item .icon_message_dot {
+    display: inline-block;
+    margin: 0 10px 0 20px;
+    opacity: 0;
+    vertical-align: middle;
+}
+.icon_message_dot {
+    background-position: -96px -64px;
+    height: 10px;
+    width: 10px;
+}
+.message_items{position: relative;clear: both;overflow: hidden;}
+.message_items .item .name {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 10%;
+}
+.message_items ul,.message_items li{margin: 0;padding: 0}
+
+.icon_message_reply {
+    background-position: -96px -96px;
+    height: 10px;
+    width: 12px;
+}
+.message_items .item .icon_message_reply {
+    display: inline-block;
+    margin: 0 6px;
+    opacity: 0;
+    vertical-align: middle;
+}
+.message_items .state_reply .icon_message_reply {
+    opacity: 1;
+}
+.message_items .state_unread .title {
+    font-weight: 700;
+}
+
+.message_items .state_unread .icon_message_dot {
+    opacity: 1;
+}
+.message_items .state_unread .name {
+    font-weight: 700;
+}
+.message_items .item .title {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 65%;
+}
+.message_items .item.selected {
+    background-color: #ECECEC;
+}
+
+.message_conversation.close {
+    transform: translate(400px, 0px);
+    transition: all 0.3s ease 0s;
+}
+.message_conversation.open {
+    transform: translate(0px, 0px);
+}
+.message_conversation {
+    background-color: #F8F8F8;
+    bottom: 0;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 0;
+    top: 45px;
+    transition: all 0.4s ease 0s;
+    width: 400px;
+}
+.tips_loading:before {
+    background: url("__PUBLIC__/App/Wechat/images/ico_loading_small.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    content: "";
+    height: 16px;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    vertical-align: middle;
+    width: 16px;
+}
+.userMsg_tips_loading {
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 50px;
+    z-index: 100;
+}
+.mc_header {
+    border-bottom: 1px solid #CCCCCC;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    padding: 0 10px;
+    text-align: center;
+}
+.mc_header .btn {
+    margin-top: 5px;
+}
+.btn_default {
+    background: -moz-linear-gradient(center top , #FDFDFD 0px, #E3E3E3 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #C8C8C8;
+    border-radius: 2px;
+    color: #222222;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+}
+.btn_blue {
+    background: -moz-linear-gradient(center top , #75AFF4 0px, #3E80CF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #2C8EC5;
+    box-shadow: 0 1px 1px 0 rgba(255, 255, 255, 0.3) inset;
+    color: #FFFFFF;
+     height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.mc_header .mc_title {
+    font-size: 16px;
+    height: 40px;
+    left: 50%;
+    line-height: 40px;
+    margin: 0 auto 0 -100px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+}
+.mc_content {
+    bottom: 47px;
+    left: 0;
+    overflow: auto;
+    padding: 10px 0;
+    position: absolute;
+    right: 0;
+    top: 41px;
+}
+.mc_content_item.time {
+    text-align: center;
+}
+.mc_content_item {
+    padding: 10px;
+}
+.mc_content_item .mc_time {
+    background-color: #E1E1E1;
+    border-radius: 2px;
+    color: #777777;
+    display: inline-block;
+    font-size: 12px;
+    min-width: 40px;
+    padding: 2px 5px;
+}
+.mc_content_item.item_left .mc_avatar_wrap {
+    float: left;
+    margin-left: 10px;
+}
+.mc_content_item .mc_avatar_wrap {
+    height: 42px;
+    overflow: hidden;
+    width: 42px;
+}
+.mc_content_item .mc_avatar_wrap img {
+    border-radius: 2px;
+    height: 40px;
+    width: 40px;
+}
+.item_left .mc_text_wrap {
+    background-color: #79A337;
+    float: left;
+    margin-left: 18px;
+}
+.mc_text_wrap {
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+    display: inline-block;
+    margin-top: 1px;
+    padding: 1px;
+    position: relative;
+}
+
+.item_left .mc_text_middle, .mc_text_wrap_green .mc_text_middle {
+    background-color: #E4F0CE;
+}
+.mc_text_middle {
+    border-radius: 4px;
+    padding: 1px;
+}.item_left .mc_text_inner, .mc_text_wrap_green .mc_text_inner {
+    background-color: #C1DD8C;
+    background-image: -moz-linear-gradient(center top , #C1DD8C 0px, #A5C561 100%);
+}
+.mc_text_inner {
+    border-radius: 4px;
+    max-width: 222px;
+    min-height: 28px;
+    min-width: 16px;
+    padding: 4px 8px;
+}.item_left .mc_arrow {
+    display: inline-block;
+    height: 8px;
+    left: -6px;
+    position: absolute;
+    top: 16px;
+}
+.item_left .mc_arrow_wrap {
+    border-color: rgba(0, 0, 0, 0) #79A337 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-width: 4px 6px 4px 0;
+}
+.mc_arrow_wrap {
+    border-style: solid;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.item_left .mc_arrow_middle {
+    border-color: rgba(0, 0, 0, 0) #E4F0CE rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-width: 4px 6px 4px 0;
+    left: 2px;
+    top: 0;
+}
+.mc_arrow_middle {
+    border-style: solid;
+    height: 0;
+    position: absolute;
+    width: 0;
+}.item_left .mc_arrow_inner {
+    border-color: rgba(0, 0, 0, 0) #B9D781 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-width: 4px 6px 4px 0;
+    left: 4px;
+    top: 0;
+}
+.mc_arrow_inner {
+    border-style: solid;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.mc_detail {
+    display: inline-block;
+    vertical-align: middle;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.mc_vertical {
+    display: inline-block;
+    height: 28px;
+    vertical-align: middle;
+}.userVideo_tips_loading {
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+    position: absolute;
+    top: 50%;
+}
+.mc_content_item.item_right .mc_avatar_wrap {
+    float: right;
+    margin-right: 10px;
+}
+.mc_content_item.item_right .mc_user_name {
+    color: #74787C;
+    font-size: 14px;
+    margin-right: 70px;
+    text-align: right;
+}
+.item_right .mc_text_wrap {
+    background-color: #AFAFAF;
+    float: right;
+    margin-right: 18px;
+}
+.item_right .mc_text_middle, .mc_text_wrap_gray .mc_text_middle {
+    background-color: #FDFDFD;
+}
+.item_right .mc_text_inner, .mc_text_wrap_gray .mc_text_inner {
+    background-color: #F3F3F3;
+    background-image: -moz-linear-gradient(center top , #F3F3F3 0px, #E5E5E5 100%);
+}
+.item_right .mc_arrow {
+    display: inline-block;
+    height: 8px;
+    position: absolute;
+    right: 0;
+    top: 14px;
+}
+.item_right .mc_arrow_wrap {
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #AFAFAF;
+    border-width: 4px 0 4px 6px;
+}
+.item_right .mc_arrow_middle {
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #FDFDFD;
+    border-width: 4px 0 4px 6px;
+    right: -4px;
+    top: 0;
+}
+.item_right .mc_arrow_inner {
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #ECECEC;
+    border-width: 4px 0 4px 6px;
+    right: -2px;
+    top: 0;
+}
+.mc_footer {
+    background-color: #ECECEC;
+    border-top: 1px solid #CCCCCC;
+    bottom: 0;
+    left: 0;
+    padding: 8px 10px;
+    position: absolute;
+    right: 0;
+}
+.mc_footer .icon_expression, .mc_footer .icon_picture {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.mc_footer .input_text {
+    margin: 0 6px 0 0;
+    width: 275px;
+}
+.mc_checkbox {
+    display: none;
+    float: left;
+    margin: 15px 8px 0;
+}
+.icon_empty_placeholder {
+    background: url("__PUBLIC__/App/Wechat/images/icon_empty_placeholder.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+}
+.empty_placeholder_wrap {
+    text-align: center;
+}
+.icon_empty_placeholder {
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+}
+.empty_placeholder_text {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.empty_placeholder_message .icon_empty_placeholder {
+    background-position: 0 0;
+}
+.empty_placeholder_picture .icon_empty_placeholder {
+    background-position: -80px -80px;
+}
+.empty_placeholder_text .icon_empty_placeholder {
+    background-position: -80px 0;
+}
+.empty_placeholder_voice .icon_empty_placeholder {
+    background-position: -160px 0;
+}
+.empty_placeholder_graphic .icon_empty_placeholder {
+    background-position: -240px 0;
+}
+.empty_placeholder_contact .icon_empty_placeholder {
+    background-position: 0 -80px;
+}
+.empty_placeholder_video .icon_empty_placeholder {
+    background-position: -160px -80px;
+}
+.empty_placeholder_file .icon_empty_placeholder {
+    background-position: -240px -80px;
+}
+.item_left .mc_image {
+    border: 1px solid #79a337;
+}
+.mc_image {
+    border-radius: 3px;
+    display: block;
+    max-width: 206px;
+}
+.video_unit {
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 10px 0;
+    position: relative;
+    width: 358px;
+}
+</style>
+</block>
+<block name="body">
+<div id="js_message4" class="col_mainInner">
+<div class="tool_bar">
+     <div class="bar_left">
+	     <a href="javascript:;" class="current_app">
+			<img class="img_logo alpha_border" src="{$app.icon}">
+			<span class="name">{$app.name}</span>
+			<!-- <span class="icon icon_arrow"></span> -->
+		</a>
+
+
+	</div>
+
+     <div class="bar_right">
+		 <!--
+          <div class="toolbar_search_form">
+               <input type="text" class="js_search_input input_text" name="" placeholder="">
+               <span class="icon icon_magnifying"></span>
+          </div>
+		  -->
+     </div>
+
+     <h2 class="page_title">消息中心</h2>
+</div>
+
+<div class="js_list_container">
+	<div class="message_view"><!-- <div class="message_view"> -->
+	<div class="message_list">
+		<!-- <div class="message_bar">
+			<a href="javascript:;" class="message_filter">
+				<span class="title">所有消息</span><span class="icon icon_arrow"></span>
+			</a>
+			<div style="display:none;z-index:400;" class="js_menu menu_list">
+				<ul>
+					<li data-day="5"><a href="javascript:;">所有消息</a></li>
+					<li data-day="0"><a href="javascript:;">今天</a></li>
+					<li data-day="1"><a href="javascript:;">昨天</a></li>
+					<li data-day="2"><a href="javascript:;">前天</a></li>
+					<li data-day="3"><a href="javascript:;">更早</a></li>
+					<li data-unreply="1"><a href="javascript:;">未回复</a></li>
+				</ul>
+			</div>
+		</div> -->
+		<div class="message_items hide js_ugEmpty">
+			<div class="message_items_userMsg">
+				<div class="empty_placeholder_wrap empty_placeholder_message">
+					<span class="icon_empty_placeholder"></span>
+					<p class="empty_placeholder_text">没有用户消息</p>
+				</div>
+			</div>
+		</div>
+		<div class="message_items js_ugContainer">
+			<div class="message_items_userMsg">
+				<div class="message_new hide" data-lastmsgid=""><a data-num="0" href="javascript:;">有条新消息</a></div>
+				<ul id="msgList">
+					<!-- <li class="item state_unread state_reply" data-userid="1144001672" data-msgid="4363687142103187492">
+						<p class="time">NaN:27</p>
+						<span class="icon icon_message_dot"></span>
+						<p data-uid="1144001672" class="name js_userCard">陈毅</p>
+						<span class="icon icon_message_reply"></span>
+						<p class="title">6622356</p>
+					</li>
+					<li class="item state_reply" data-userid="1136001732" data-msgid="4363687142103187489">
+						<p class="time">周四17:32</p>
+						<span class="icon icon_message_dot"></span>
+						<p data-uid="1136001732" class="name js_userCard">李常军</p>
+						<span class="icon icon_message_reply"></span>
+						<p class="title">:-)</p>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- </div> -->
+</div>
+
+<div class="message_conversation hide">
+	<div class="tips_loading userMsg_tips_loading hide js_conloading"></div>
+	<div class="mc_header js_conHeaderArea">
+		<a href="javascript:;" class="btn btn_default float-left js_conClose">关闭</a>
+		<!-- <a href="javascript:;" class="btn float-right js_conChooseBtn">选择</a> -->
+		<p class="mc_title js_conUserName"></p>
+	</div>
+	<!-- <div class="mc_header hide js_conCompleteArea" style="display: none;">
+		<a href="javascript:;" class="btn float-left js_conCompleteBtn">返回</a>
+		<a data-all="0" href="javascript:;" class="btn float-right js_chooseAllBtn">全选</a>
+	</div> -->
+	<div class="mc_content js_conBody" style="display: block;">
+	
+	<div style="height:1px" id="conversebottom"></div></div>
+	<div class="mc_footer js_conInputArea">
+	       <a href="javascript:;" class="icon icon_expression js_emoticon"></a>
+                    <input type="text" id="text_content" style="" class="input_text">
+                    <a class="btn btn_blue">发送</a>
+	</div>
+	<div class="mc_footer hide js_conOpeArea" style="display: none;">
+		<a disabled="disabled" class="btn disabled float-left js_conSaveBtn">存入素材库</a>
+		<a href="javascript:;" class="btn float-right btn_margin_left js_conDelAllBtn">删除会话</a>
+		<a disabled="disabled" class="btn disabled float-right js_conDelChooseBtn">删除</a>
+	</div>
+
+	</div>
+</div>
+</div>
+<div id="userCard" class="userCard" data-userid="" style="display:none">
+	<div class="ui-loading js_loading" style="display: none;"></div>
+	<div style="display: block;" class="userCardBody"></div>
+</div>
+ <include file="emotion" />
+<script id="msgItemTpl" type="text/x-jquery-tmpl">
+    <li class="item {{if isRead == 0}}state_unread{{/if}} state_reply" data-userid="${userid}" data-msgid="${id}">
+	<p class="time">${friend_time}</p>
+	<span class="icon icon_message_dot"></span>
+	<p data-uid="${userid}" class="name js_userCard">${userName}</p>
+	<span class="icon icon_message_reply"></span>
+	<p class="title">
+        {{if msgType == 'text'}}
+            ${data['Content']}
+        {{else msgType == 'image'}}
+            [图片]
+        {{else msgType == 'voice'}}
+            [语音]
+        {{else msgType == 'video'}}
+            [视频]
+        {{/if}}
+
+        </p>
+    </li>
+</script>
+<script id="userCardTpl" type="text/x-jquery-tmpl">
+	<div class="userInfo">
+		    <div class="userImg">
+		        <img width="80" height="80" src="${avatar}">
+		    </div>
+		    <div class="userDetail">
+		        <div class="userName ellipsis" title="${name}">${name}</div>
+		        <div class="userAccout ellipsis">100021</div>
+		    </div>
+		</div>
+		<div title="${position}" class="item">
+		    <span>职位:</span>
+		    <span>${position}</span>
+		</div>
+		<div title="${mobile}" class="item">
+		    <span>手机:</span>
+		    <span>${mobile}</span>
+		</div>
+		<div title="${weixinid}" class="item">
+		    <span>微信:</span>
+		    <span>${weixinid}</span>
+		</div>
+		<div title="${email}" class="item">
+		    <span>邮件:</span>
+		    <span>${email}</span>
+		</div>
+		<div title="${department}" class="item">
+		    <span>部门:</span>
+		    <span>${department}</span>
+		</div>
+</script>
+<script type="text/x-jquery-tmpl" id="userMsgTpl">
+        <div>
+            <div class="mc_content_item time">
+                <span class="mc_time">${friend_time}</span>
+            </div>
+
+             <div data-msgid="${id}" class="mc_content_item {{if formUserId}}item_right{{else}}item_left{{/if}} ">
+            <div class="mc_content_wrap clearfix">
+                <input type="checkbox" data-msgid="${id}" data-userid="{{if formUserId}}${formUserId}{{else}}${userid}{{/if}}" class="checkbox mc_checkbox">
+                <div class="mc_avatar_wrap">
+                    <img class="border_alpha js_userCard" src="${user_avatar}" data-uid="{{if formUserId}}${formUserId}{{else}}${userid}{{/if}}">
+                </div>
+                     {{if formUserId}}
+                    <div class="mc_user_name">${user_name}</div>
+                    {{/if}}
+                    <div class="mc_text_wrap">
+                        <div class="mc_text_middle">
+                            <div class="mc_text_inner">
+                                <span class="mc_arrow">
+                                    <span class="mc_arrow_wrap"></span>
+                                    <span class="mc_arrow_middle"></span>
+                                    <span class="mc_arrow_inner"></span>
+                                </span>
+                                 <div class="mc_detail">
+                                 {{if msgType == 'text'}}
+                                    ${data['Content']}
+                                 {{else msgType == 'image'}}
+                                    {{if data['MediaUrl']}}
+                                        <a class="mc_a_img" href="${data['MediaUrl']}"><img class="mc_image" src="${data['MediaUrl']}"></a>
+                                        {{else}}
+                                            [图片]
+                                        {{/if}}
+                                {{else msgType == 'voice'}}
+                                    [语音]
+                                {{else msgType == 'video'}}
+                                    [视频]
+                                {{/if}}
+                            </div><span class="mc_vertical"></span>
+                                <div class="tips_loading userVideo_tips_loading hide"></div>
+                                <!-- 上面的span不要换行 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+</script>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-tmpl/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Wechat/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/rebox/js/jquery-litelighter.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/rebox/js/jquery-rebox.js"></script>
+<script type="text/javascript">
+var apps = {:json_encode($applist)};
+var first_agent_id = {$app.agentId};
+$(function() {
+    $('.mc_detail > a.mc_a_img').rebox();
+        getMessageList(first_agent_id);
+
+    //click message opened chat window
+    messageLi();
+    //close chat window
+    $('.js_conClose').click(function(){
+        $('.message_conversation').removeClass('show').addClass('hide');
+    });
+});
+
+//get user card info.
+function js_user_card() {
+    $('.js_userCard').mouseover(function(){
+                var uid = $(this).attr('data-uid');
+             var top = $(this).offset().top-60;
+                var sid = $('#userCard').attr('data-userid');
+               // console.log(uid,sid);
+                $('#userCard').css({'display':'block','left':'100px','top':top+'px'});
+                if(sid == uid){
+                    return;
+                }
+       getUserCart(uid);
+    }).mouseout(function(){
+       $('#userCard').css('display','none');
+    });
+}
+
+function messageLi() {
+    $('#msgList > li').click(function(){
+        $(this).removeClass('state_unread');
+        $('.message_conversation').removeClass('hide').addClass('show');
+        $('.js_conUserName').html($(this).find('.js_userCard').html());
+        
+        var msg_id = $(this).attr('data-msgid');
+        var uid = $(this).attr('data-userid');
+
+        $('.js_conInputArea').find('input').attr('data-userid', uid).attr('data-msgid', msg_id);
+
+        getUserMessageList(uid, msg_id);
+    }); 
+}
+function getMessageList(agentId) {
+	/*var data = [{
+		'isRead' : 0,
+		'userid' : '100021',
+		'msgId'  : '4363687142103187492',
+		'friend_time' : 'NaN:27',
+		'userName': '陈毅',
+		'content': '6622356'
+	},
+	{
+		'isRead' : 1,
+		'userid' : '10031',
+		'msgId'  : '4363687142103187489',
+		'friend_time' : '周四17:32',
+		'userName': '李常军',
+		'content': ':-)'
+	}];*/
+
+    $.ajax({
+        url: Think.APP+'/WechatQy/getMessageList/agentId/'+agentId,
+        type : "POST",
+        data : {},
+        dataType : 'JSON',
+        success: function(s){
+            if(s === false) {
+                $('.js_ugEmpty').addClass('show');
+            } else {
+                $('#msgItemTpl').tmpl(s).appendTo("#msgList");
+                $('#msgList > li > .title').each(function(){
+                    $(this).html( emoji( $(this).html() ) );
+                });
+                messageLi();
+                 js_user_card() ;
+            }
+        },
+        beforeSend : function(){
+          $('#msgList').html(''); 
+        }
+    });
+
+    setInterval(getNewMessage, 5000);
+     $('.message_new > a').click(function(){
+        location.href= Think.APP+"/WechatQy/messageList/agentid/"+first_agent_id;
+     })
+}
+
+function getUserCart(uid) {
+	var obj = $('#userCard');
+	$.ajax({
+		url: Think.APP+'/WechatQy/getUserCart/uid/'+uid,
+		type : "GET",
+		data : {},
+		dataType : 'JSON',
+		success: function(s){
+			obj.find('.js_loading').css('display','none');
+			obj.find('.userCardBody').css('display', 'block').html('');
+			$('#userCardTpl').tmpl(s).appendTo("#userCard > .userCardBody");
+                                       $('#userCard').attr('data-userid', uid);
+		},
+		beforeSend : function(){
+			obj.find('.js_loading').css('display','block');
+			obj.find('.userCardBody').css('display', 'none');
+		}
+	});
+}
+
+function getUserMessageList(uid, mid) {
+    $.ajax({
+        url: Think.APP+'/WechatQy/getUserMessageList',
+        type : "POST",
+        data : {uid:uid, mid:mid, agentId:first_agent_id},
+        dataType : 'JSON',
+        success: function(s){
+            $('.js_conloading').removeClass('show').addClass('hide');
+           $('#userMsgTpl').tmpl(s).appendTo(".js_conBody");
+           $('.mc_detail').each(function(){
+                var mc_this = $(this);
+                var m_info = $.trim($(this).html());
+                if(m_info == '[图片]' || m_info == '[语音]' || m_info == '[视频]') {
+                    var c_mid = $(this).closest('.mc_content_item').attr('data-msgid');
+                    $.getJSON(Think.APP+'/WechatQy/getMediaInfo/id/'+c_mid, function(data){
+                        if(data.error == '0'){
+                            var c_html = '';
+                            if(data.type== 'image') {
+                                c_html = '<a class="mc_a_img" href="'+data.MediaUrl+'"><img class="mc_image" src="'+data.MediaUrl+'"></a>';
+                                 //c_html = '<a class="mc_a_video" href="http://jq22.qiniudn.com/jq22com.webm" title="" data-rebox-template="video"><img class="mc_image" src="'+data.MediaUrl+'" /></a>';
+                            } else if(data['type'] == 'voice') {
+                                //c_html = '<span class="icon icon_sound"></span><span class="icon_sound_active"></span>';
+                                 c_html = '<audio src="'+data.MediaUrl+'" controls="controls">您的浏览器不支持音频元素。</audio>';
+                            } else if(data['type'] == 'video') {
+                                c_html = '<a href="'+data.MediaUrl+'" title="" data-rebox-template="video"><img src="'+data.ThumbMediaUrl+'" /></a>';
+                            }
+                           // console.log(c_html);
+                            mc_this.html( c_html );
+                            $('.mc_detail > a.mc_a_video').rebox({template:'video'});
+                            $('.mc_detail > a.mc_a_img').rebox();
+                        } else {
+                             mc_this.html( m_info );
+                        }
+                    })
+                } else {
+                    mc_this.html( emoji( m_info ) );
+                }
+            });
+            
+            editMsgText();
+        },
+        beforeSend : function(){
+          $('.js_conloading').removeClass('hide').addClass('show');
+          $('.js_conBody').html('');
+        }
+    });
+}
+
+function editMsgText(){
+    $('#text_content').keyup(function(){
+        var cont = $(this).val();
+        var n = 600 - cont.length - cont.split("\n").length + 1;
+        if(n < 0) {
+            alert('限制输入600个字符');
+            return false;
+        }
+    }).click(function(){
+        $('#qywechat_qqface').css('display', 'none');
+    }); 
+
+    $('.js_emoticon').click(function(){
+        $('#qywechat_qqface').css({
+                'display' : 'block', 
+                'left':'auto',
+                 'top':'auto',
+                  'right' : '10px',
+                  'bottom' : '50px'
+             });
+    });
+
+     $('#qywechat_qqface').undelegate('a','click').delegate('a','click', function(){
+        var cont = $('#text_content').val();
+        var emo = $(this).attr('title');
+        $('#text_content').val(cont+'['+emo+']').keyup();
+        $('#qywechat_qqface').css('display', 'none');
+    });
+
+    //button submit
+    $('.js_conInputArea').find('.btn_blue').click(function(){
+        sendMessage();
+    });
+    //input绑定回车事件
+     $('#text_content').bind('keypress',function(event){
+            if(event.keyCode == "13")    
+            {
+                 sendMessage();
+            }
+    });
+}
+
+function sendMessage()
+{
+    var uid = $('#text_content').attr('data-userid');
+    var text_content = $.trim($('#text_content').val());
+    var mid = $('#text_content').attr('data-msgid');
+    if(text_content == '') {
+        handleAjax({'info': '内容不能为空！'});
+        return false;
+    }
+     $.ajax({
+        url: Think.APP+'/WechatQy/ajaxMessageReplay',
+        type : "POST",
+        data : {agentid:first_agent_id, userid:uid, msgId : mid, content : text_content},
+        //dataType : 'JSON',
+        success: function(s) {
+            if(s == 'success'){
+                handleAjax({'info':'发送成功！','status':true});
+                $('#text_content').val('');
+                var new_content = emoji(text_content);
+
+                var html='<div><div class="mc_content_item time"><span class="mc_time">刚刚</span>             </div>               <div class="mc_content_item item_right " data-msgid="552">             <div class="mc_content_wrap clearfix">                                  <div class="mc_avatar_wrap">                                                <img src="__PUBLIC__/App/Home/Home/images/photo.gif" class="border_alpha">                                      </div><div class="mc_text_wrap">                         <div class="mc_text_middle">                             <div class="mc_text_inner">                                 <span class="mc_arrow">                                     <span class="mc_arrow_wrap"></span>                                     <span class="mc_arrow_middle"></span>                                     <span class="mc_arrow_inner"></span>                                 </span>                                  <div class="mc_detail">'+new_content+'</div><span class="mc_vertical"></span>                                 <div class="tips_loading userVideo_tips_loading hide"></div>                                  </div>                         </div>                     </div>                                      </div>             </div>         </div>';
+                  $(html).appendTo(".js_conBody");
+                $('#msgList > li[data-msgid='+mid+']').find('.title').html(new_content);
+                var e = $('.js_conBody');
+                e[0]['scrollTop'] = e[0]['scrollHeight'];
+            } else {
+                handleAjax({'info': s});
+            }
+        }
+    });
+}
+
+//ajax push message count
+function getNewMessage()
+{
+    $.ajax({
+        url: Think.APP+'/WechatQy/ajaxMessagePush',
+        type : "POST",
+        data : {agentid:first_agent_id},
+        dataType : 'JSON',
+        success: function(s) {
+            if(s['count'] != '0'){
+               $('.message_new').removeClass('hide').addClass('show').attr('data-lastmsgid', s['lastmsgid']);
+               $('.message_new > a').attr('data-num', s['count']).html(s['count']+'有条新消息');
+            }
+        }
+    });
+}
+</script>
+</block>

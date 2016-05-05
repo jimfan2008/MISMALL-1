@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>应用设计器</title>
+
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<link rel="stylesheet" href="__PUBLIC__/Js/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/bootstrap-switch.min.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" />
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/base.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/editor.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/apiManage.css">
+		<!--apiManage-->
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/bootstrap-expand.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/controls.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/changeImage.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/attrLib.css">
+		<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/components.css">
+		<script>
+			var SITECONFIG = {
+				PUBLICPATH : '__PUBLIC__',
+				APPPATH : '__GROUP__',
+				GROUPPATH : '__GROUP__',
+				ROOTPATH : '__ROOT__',
+				SITEID : '{$siteId}',
+				SITENAME : decodeURI('{$siteName}'),
+				SESSIONID : '{:session_id()}',
+				FLOWID : 1,
+				VERSION : "?VERSION=1.0.3"//版本号
+			};
+		</script>
+	</head>
+	<body>
+		<!--遮罩层-->
+		<div id="theMaskLayer"></div>
+		<!-- 编辑器头部菜单栏 st-->
+		<div id = "header">
+			<div class="logo"><img src="__PUBLIC__/App/Home/Client/images/logo.png">
+			</div>
+			<div class = "top-menu">
+				<ul class = "top-menu-list">
+					<li id = "formSave">
+						<span class = "top-menu-icon glyphicon glyphicon-floppy-disk"></span>
+						<span class = "top-menu-text">保存</span>
+					</li>
+					<li id = "formPreView">
+						<span class = "top-menu-icon glyphicon glyphicon-eye-open"></span>
+						<span class = "top-menu-text">预览</span>
+					</li>
+					<!--
+					<li id = "apiManagePanel">
+					<span class = "op-menu-icon glyphicon glyphicon-euro"></span>
+					<span class = "top-menu-text">API</span>
+					</li>
+					-->
+					<li id = "backTo">
+						<span class = "top-menu-icon glyphicon glyphicon-log-out"></span>
+						<span class = "top-menu-text">退出</span>
+					</li>
+
+				</ul>
+			</div>
+			<div class = "tool-menu">
+				<ul class = "top-menu-list">
+					<li id = "copyCtrl" class="toolLi">
+						<span class = "top-menu-copy">复制</span>
+					</li>
+					<li id = "pasteCtrl" class="toolLi">
+						<span class = "top-menu-paste">粘贴</span>
+					</li>
+					<li id = "undoCtrl" >
+						<button class="undo" href="#">
+							撤销
+						</button>
+					</li>
+					<li id = "redoCtrl" >
+						<button class="redo" href="#">
+							恢复
+						</button>
+					</li>
+				</ul>
+			</div>
+			<div class="tipWrap" style="display: none;z-index: 9999;">
+				<img src="__PUBLIC__/App/Qywx/Images/loading.gif" style="width:1em;height:1em;margin-right:4px">
+				</span>
+				<span class="tipWrap_img" style="margin: auto; display: none;"></span>
+			</div>
+		</div>
+		<!-- 编辑器头部菜单栏 ed-->
+
+		<!-- 编辑器主体部分 st-->
+		<div id = "container">
+
+			<!-- 左侧主菜单  st -->
+			<div   class = "editor-block left-main-menu">
+				<ul class = "left-menu-list">
+					<li id="page-manag"  class = "page-manage  left-menu-selected  left-main">
+						<span class = "left-menu-name">页面管理</span>
+					</li>
+					<li id="control-lib" class = "ctrl-lib  left-main">
+						<span class = "left-menu-name">控件库</span>
+					</li>
+					<li  id="component-lib" class = "comp-lib  left-main">
+						<span class = "left-menu-name">组件</span>
+					</li>
+					<li  id="third-lib" class = "comp-lib  left-main">
+						<span class = "left-menu-name">扩展</span>
+					</li>
+				</ul>
+			</div>
+			<!-- 左侧主菜单 ed -->
+
+			<!-- 左侧菜单详细 st -->
+			<div class = "editor-block left-menu-wrap ">
+
+				<!-- 页面管理菜单详细 -->
+				<div class = "menu-block  page-manage-wrap left-block page-manag">
+					<ul class= "page-total">
+						<!-- 微信菜单页面 -->
+						<li class="wx-page">
+							<div class= "wx-menu-page page-title">
+								<span>微信菜单页面</span>
+							</div>
+							<ul class= "wx-menu-list"></ul>
+						</li>
+
+						<!-- 链接页面 -->
+						<li class="link-page">
+							<div class= "link-menu-page page-title">
+								<span class= "link-page-add page-add glyphicon glyphicon-plus" title="新增页面"></span>
+								<span>链接页面</span>
+							</div>
+							<ul class= "link-menu-list">
+
+							</ul>
+						</li>
+
+						<!-- 后台管理页面 -->
+						<li class="backstage-manage-page">
+							<div class= "backstage-menu-page page-title">
+								<span class= "backstage-page-add page-add glyphicon glyphicon-plus" title="新增页面"></span>
+								<span>后台管理页面</span>
+							</div>
+							<ul class= "backstage-menu-list">
+
+							</ul>
+						</li>
+					</ul>
+				</div>
+
+				<!--控件库菜单详细 -->
+				<div class = "menu-block ctrl-lib-wrap control-lib left-block">
+					<ul class = "ctrl-lib-list">
+						<li class = "ctrl-comp ctrl-list-Item" ctrl-type = "TEXTBOX">
+							<span class="ctrl-icon text-icon"> </span>
+							文本框
+						</li>
+						<li class = "ctrl-comp ctrl-list-Item" ctrl-type = "TEXTAREA">
+							<span class="ctrl-icon textarea-icon" > </span>
+							多文本
+						</li>
+						<li class = "ctrl-comp ctrl-list-Item" ctrl-type = "DROPDOWN">
+							<span class="ctrl-icon select-icon"> </span>
+							下拉框
+						</li>
+						<li class="ctrl-comp ctrl-list-Item" ctrl-type = "TIME">
+							<span class="ctrl-icon time-icon"> </span>
+							日  期
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "CHECKBOX">
+							<span class="ctrl-icon option-icon" > </span>
+							选项框
+						</li>
+						<li class="ctrl-comp ctrl-list-Item" ctrl-type = "IMAGE">
+							<span class="ctrl-icon img-icon"> </span>
+							上传图片
+						</li>
+						<li class="ctrl-comp ctrl-list-Item" ctrl-type = "BUTTON">
+							<span class="ctrl-icon button-icon"> </span>
+							按钮 / 提交
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "TEXT">
+							<span class="ctrl-icon text-tag-icon"> </span>
+							文本标签
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "COLBOX">
+							<span class="ctrl-icon box-icon"> </span>
+							定位栏
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "IMAGEBOX">
+							<span class="ctrl-icon img-box-icon"> </span>
+							图片展示
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "COLUMN">
+							<span class="ctrl-icon col-icon"> </span>
+							分栏
+						</li>
+
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "compLogic">
+							<span class="ctrl-icon compLogic-icon"> </span>
+							数据展示
+						</li>
+						<li class = "ctrl-comp  ctrl-list-Item" ctrl-type = "pick">
+							<span class="ctrl-icon pick-icon"> </span>
+							滑动选择
+						</li>
+					</ul>
+				</div>
+
+				<!-- 组件菜单详细 st-->
+				<div class = "menu-block comp-lib-wrap  component-lib left-block">
+					<button class="comp-add" style="display: none">
+						<span class="comp-add-text glyphicon glyphicon-plus">创建数据组件</span>
+					</button>
+					<div class="comp-menu">
+						<div class="comp-nav-title">
+							<a>系统组件</a>
+						</div>
+						<div class="tab-content">
+							<ul class="sys-comp-list">
+								<li class="ctrl-comp sys-comp" ctrl-type="swiper" title="轮播图">
+									<span class="component-name">轮播图</span>
+								</li>
+								<li class="ctrl-comp sys-comp"  ctrl-type="baiduMap" title="百度地图">
+									<span class="component-name">百度地图</span>
+								</li>
+								<li class="ctrl-comp sys-comp"  ctrl-type="cascade" title="省市区级联">
+									<span class="component-name">省市区级联</span>
+								</li>
+								<li class="ctrl-comp sys-comp"  ctrl-type="cusKindEditor" title="富文本">
+									<span class="component-name">富文本</span>
+								</li>
+								<li class="ctrl-comp sys-comp"  ctrl-type="LotteryTurn" style="display:none">
+									<span class="component-name">抽奖转盘</span>
+								</li>
+								<li class="ctrl-comp sys-comp thirdpartyPlugin"  ctrl-type="divider"  title="第三方插件测试">
+									<span class="component-name">分隔符</span>
+								</li>
+								<li class="finishing sys-comp" ctrl-type="layerSwitch" title="完成中...">
+									<span class="component-name">手机翻页</span>
+								</li>
+								<li class="ctrl-comp sys-comp"  title="HTML5." ctrl-type="pageBrowse" style="">
+									<span class="component-name">HTML5</span>
+								</li>
+								<li class="finishing sys-comp"  title="完成中...">
+									<span class="component-name">统计图表</span>
+								</li>
+								<li class="finishing sys-comp"  title="完成中...">
+									<span class="component-name">浮动提示</span>
+								</li>
+								<li class="finishing sys-comp"  title="完成中...">
+									<span class="component-name">点赞</span>
+								</li>
+								<li class="finishing sys-comp"  title="完成中...">
+									<span class="component-name">文件上传</span>
+								</li>
+								<li class="finishing sys-comp" title="完成中...">
+									<span class="component-name">数量加减</span>
+								</li>
+								<li class="finishing sys-comp" title="完成中...">
+									<span class="component-name">省市区级联</span>
+								</li>
+								<li class="finishing sys-comcp"  title="完成中...">
+									<span class="component-name">数据录入</span>
+								</li>
+							</ul>
+							<ul id="my-comp-list">
+
+							</ul>
+
+						</div>
+					</div>
+				</div>
+				<!-- 组件菜单详细 ed-->
+				<!--第三方部分st-->
+				<div class = "menu-block third-wrap third-lib left-block">
+					<ul class = "ctrl-lib-list">
+						<li class = "ctrl-comp the-third ctrl-list-Item" ctrl-type = "">
+							<span class="ctrl-icon "> </span>
+							API
+						</li>
+						<li class = "ctrl-comp ctrl-list-Item" ctrl-type = "">
+							<span class="ctrl-icon " > </span>
+							属性扩展
+						</li>
+						<li class = "ctrl-comp ctrl-list-Item" ctrl-type = "">
+							<span class="ctrl-icon "> </span>
+							组件扩展
+						</li>
+					</ul>
+				</div>
+				<!--第三方部分ed-->
+			</div>
+			<!-- 左侧菜单详细 ed -->
+
+			<!-- 中间设计部分  st -->
+			<div class="editor-block main">
+				<!-- 中间设计部分头部  st -->
+				<div class="mainTop realMaintop">
+					<span class="page-close glyphicon glyphicon-remove" style="display: none" title ="关闭当前页面"> </span>
+					<span class="phoneMod-title-vLline" style="display: none"> | </span>
+					<span class="pageTopTitle pageTop-title"> {:urldecode($siteName)} </span>
+				</div>
+				<!-- 中间设计部分头部 垃圾桶 st -->
+				<div class="mainTop delMainTop" style="display: none">
+					<div id = "topDelCtrl">
+						<div id = "cover"></div>
+						<div id = "body"></div>
+						<div class = "beside b1"></div>
+						<div class = "beside b2"></div>
+						<div class = "beside b3"></div>
+					</div>
+				</div>
+				<!-- 中间设计部分头部 垃圾桶  ed -->
+				<!-- 中间设计部分头部  ed -->
+				<!-- 浏览分页 st -->
+				<!--
+
+				-->
+				<div id="app" style="display:none">
+					<div class="swiper-pagination styh"></div>
+				</div>
+				<!-- 浏览分页 ed -->
+
+				<!-- 中间设计部分主体  st -->
+				<div id="myWeb"></div>
+				<div id="appInitPage">
+					<span>请选中菜单设计页面!</span>
+					<br />
+					<span style="font-size:50px;color:#bbb;">↓</span>
+				</div>
+				<div id = "wxMenu">
+					<div class = "liaotian"></div>
+					<div class = "menuWrap">
+						<ul>
+							<li class="firstMenu toEditMain">
+								<p class = "firstMenuName"></p>
+								<div class = "new_subMenuWrap">
+									<ul>
+										<!-- <li class = "subMenuItem"></li> -->
+
+									</ul>
+								</div>
+							</li>
+							<li class="firstMenu toEditMain">
+								<p class = "firstMenuName"></p>
+								<div class = "new_subMenuWrap">
+									<ul></ul>
+								</div>
+							</li>
+							<li class="firstMenu toEditMain">
+								<p class = "firstMenuName"></p>
+								<div class = "new_subMenuWrap">
+									<ul></ul>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+				<!-- 中间设计部分主体  ed -->
+			</div>
+			<!-- 中间设计部分  ed -->
+
+			<!-- 右边属性设计部分  st -->
+			<div class="editor-block right-menu">
+				<!-- 右边属性设计部分头部  st -->
+				<div class="right-top">
+					<div id="set-ctrl-basic"  class="set-ctrl-basicElement  ctrl-setting-title">
+						基本属性
+					</div>
+					<div id="set-ctrl-data" class="set-ctrl-data   ctrl-setting-title">
+						数据
+					</div>
+					<div id="set-ctrl-operation" class="set-ctrl-actionList  ctrl-setting-title">
+						操作交互
+					</div>
+				</div>
+				<!-- 右边属性设计部分头部  ed -->
+
+				<!-- 右边属性设计部分基本属性列表  st -->
+				<div class=" set-ctrl-panel  basicElementView  set-ctrl-basic">
+
+					<div class = "attrDtlPanel GeneralAttr">
+
+						<div class="setAttrs"></div>
+						<div class = "clear"></div>
+					</div>
+					<div class = "attrDtlPanel styleAttr">
+
+						<div class="setAttrs"></div>
+						<div class = "clear"></div>
+					</div>
+					<div class = "attrDtlPanel ValidateAttr">
+
+						<div class="setAttrs"></div>
+						<div class = "clear"></div>
+					</div>
+					<div class = "attrDtlPanel ItemAttr">
+
+						<div class="setAttrs"></div>
+						<div class = "clear"></div>
+					</div>
+
+				</div>
+				<!-- 右边属性设计部分基本属性列表  ed -->
+
+				<!-- 右边属性设计部分数据列表  st -->
+				<div class="data  set-ctrl-panel  set-ctrl-data"  style="display: none;">
+					<div class="commonValue col-md-12">
+						给控件一个默认内容
+					</div>
+					<div class="col-md-12 default-content">
+						<div class = "attrDtlPanel DataAttr">
+							<div class="setAttrs">
+
+							</div>
+							<div class="frame remove" dataAttr ="clear">
+								清除
+							</div>
+							<div class = "clear"></div>
+							<div class="line"></div>
+							<div class="attrBase commonData" style="display: none;">
+								<div class="commonDataTitle">
+									<span>常用内容</span>
+								</div>
+								<ul></ul>
+							</div>
+
+							<div class="attrParam commonData" style="display: none;">
+								<div class="commonDataTitle">
+									<span>页面参数</span>
+								</div>
+								<ul></ul>
+							</div>
+							<div class="attrCtrl commonData" style="display: none;">
+								<div class="commonDataTitle">
+									<span>控件值</span>
+								</div>
+								<ul></ul>
+							</div>
+							<div class="attrDataSource commonData" style="display: block;">
+								<div class="commonDataTitle">
+									<span>动态数据</span>
+								</div>
+								<div class="add-new-dynamic-data" dataattr="dataSource" childId="addDataSource">
+									新增数据源
+								</div>
+
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 右边属性设计部分数据列表  ed -->
+
+				<!-- 右边属性设计部分操作交互列表  st -->
+				<div class=" set-ctrl-panel  actionList  set-ctrl-operation" style="display:none;">
+					<div class="col-md-12">
+						<div class="col-md-2" style="padding:0 0 0 15px">
+							<div class="basic-small-title action-list-small-title " style="margin-left: 0px">
+								动作
+							</div>
+						</div>
+						<div class="col-md-10 action-operation" style="padding:0px 0 0 9px">
+
+						</div>
+
+					</div>
+					<div class="col-md-12">
+						<div class="divider">
+
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<div class="col-md-2" style="padding:0 0 0 15px">
+							<div class="basic-small-title action-list-small-title " style="margin-left: 0px">
+								类型
+							</div>
+						</div>
+						<div class="col-md-10">
+							<div class="actionType basic-operate selectedActionType" actionTpye="base">
+								基本操作
+							</div>
+							<div class="actionType  data-operate" actionTpye="data">
+								数据操作
+							</div>
+							<div class=" actionType mini-message" actionTpye="wx">
+								微信对接
+							</div>
+							<div class=" actionType mini-message" actionTpye="api">
+								外部API
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="divider">
+
+						</div>
+
+					</div>
+					<div class="col-md-12" style = "margin-bottom:10px;">
+						<div class="basic-small-title action-list-small-title">
+							交互
+						</div>
+						<div class="frame select-content">
+							<select class="action-list">
+								<option >页面跳转</option>
+								<option >控件填充内容</option>
+								<option >运算控件内容值</option>
+								<option >控件是否可用</option>
+								<option >控件是否隐藏</option>
+								<option >提示信息</option>
+							</select>
+						</div>
+
+					</div>
+
+					<div id="ctrlActionList" class="col-md-12"></div>
+					<div id="actionSave" class="col-md-12">
+						<input type="button" value="保存" class="btn btn-success input-sm btn-block">
+					</div>
+				</div>
+				<!-- 右边属性设计部分操作交互列表  ed -->
+
+			</div>
+			<!-- 右边属性设计部分  ed  -->
+
+		</div>
+		<!-- 编辑器主体部分 ed-->
+		<!-- 更换图片窗口  st-->
+		<div id = "subImgFlashMenu" class = "ctrlImgFlash" style="display: none">
+			<div class = "ctrlMenuTitle subMenuTitle">
+				<span>更换图片</span>
+				<span></span>
+			</div>
+			<div class = "subMenuImgList"></div>
+		</div>
+		<!-- 更换图片窗口  ed-->
+		<!-- 单击微信菜单，设置微信菜单时的弹出小面板 st -->
+		<div id="setWXMenu" style="display:none">
+			<div class="settingMenu">
+				<div class="set-wx-menu-item">
+					<p class="menuName">
+						菜单名
+					</p>
+					<p class="setMenuName">
+						<input type="text" historyName="" id="setWxMenuName" placeholder="少于8个汉字或16个字母"/>
+					</p>
+					<span class="closePanel"></span>
+				</div>
+				<div class="set-wx-menu-item disabled-item" id="editPage">
+					设计页面
+				</div>
+				<div class="set-wx-menu-item disabled-item" id="deleteMenu">
+					删除菜单
+				</div>
+				<!-- <div class="set-wx-menu-item disabled-item" id="importTemplate">
+				导入模板
+				</div> -->
+			</div>
+			<div class="custom">
+				<div class="arrow-left"></div>
+				<div class="arrow-left-wrap"></div>
+			</div>
+		</div>
+		<!-- 单击微信菜单，设置微信菜单时的弹出小面板 ed -->
+		
+		<!-- 层切换模板和页面添加模板 start -->
+		<div id="pageTplLib">
+			<div class = "ptlTitle">
+				页面模板库
+				<div class = "close page-tpl-panel-close">
+					<img src = "__IMAGES_URL__close.png"/>
+				</div>
+			</div>
+			<div class = "ptlMenu">
+				<ul>
+					<li class = "title nowMenu" id = "sysPtlList">
+						系统页面模板
+					</li>
+					<li class = "title" id = "myPtlList">
+						我的页面模板
+					</li>
+				</ul>
+			</div>
+			<div class = "pageTplListWrap">
+				<div class = "list sysPtlList">
+					<ul  id="now"></ul>
+					<ul id="template"></ul>
+					<ul id="myTemplate"></ul>
+				</div>
+				<div  class = "list myPtlList">
+					<ul>
+						<li>
+							<img src = "__STATIC__/Images/weig002.jpg"/>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--  层切换模板和页面添加模板 end -->
+
+		<!-- 外部API管理 star-->
+		<!--<div id="apiManage">
+		<div class = "ptlTitle apiManage">
+		API管理
+		<div class = "close page-tpl-panel-close">
+		<img src = "__IMAGES_URL__close.png"/>
+		</div>
+		</div>
+		<div class="api_container">
+		<div class="api_nav">
+		<ul>
+		<li class="api_title">
+		<span>API管理</span><span title="新增API" id="api_add" class="api_add glyphicon glyphicon-plus"></span>
+		</li>
+		<ul class="api_list" id="api_list"></ul>
+		</ul>
+		</div>
+
+		<div class="api_edit">
+		<div class="api_add_modify">
+		<div class="api_baseParam">
+		<div class="api_baseTitle">
+		基本信息
+		</div>
+		<div class="api_baseInfo" id="api_baseInfo">
+		<p>
+		<span>API名称</span>
+		<input type="text" id="api_name" value="" placeholder="请输入名称">
+		</p>
+		<p>
+		<span>API地址</span>
+		<input type="text" id="api_url" value=""  placeholder="请输入URL">
+		</p>
+		<p>
+		<span>提交方式</span>
+		<select id="api_method">
+		<option>GET</option><option>POST</option>
+		</select>
+		</p>
+		</div>
+
+		</div>
+		<p>
+		<button id="api_addParam">
+		添加参数
+		</button>
+		<span>-[是否设置]-设置参数是否在动作设置时显示 -[加入Header]-百度ApiStore执行方式,默认apikey勾选</span>
+		</p>
+		<div class="api_params" id="api_params">
+
+		</div>
+
+		<button id="api_getJson">
+		获取Api结果
+		</button>
+		<div class="api_Result menuTree" id="api_Result"></div>
+		<div class="api_ResultSet" id="api_ResultSet">
+		<div class="api_baseTitle">
+		Api结果设置 [从结果树中选取您想要的返回值]
+		</div>
+		</div>
+		<button id="api_Save" style="width: 180px;height:40px;font-size:16px;background-color:#7fbf4d">
+		保 存
+		</button>
+		</div>
+		</div>
+		</div>
+		</div> -->
+		<!--  外部API end -->
+
+		<!-- 外部API管理 New star-->
+		<div id="apiManage">
+			<div class = "ptlTitle apiManage">
+				API管理
+				<div class = "close page-tpl-panel-close">
+					<img src = "__IMAGES_URL__close.png"/>
+				</div>
+			</div>
+			<div class="api_container">
+				<div class="api_nav">
+					<ul>
+						<li class="api_title">
+							<span>API管理</span><span title="新增API" id="api_add" class="api_add glyphicon glyphicon-plus"></span>
+						</li>
+						<ul class="api_list" id="api_list"></ul>
+					</ul>
+				</div>
+
+				<div class="api_edit">
+					<div class="api_progress">
+						<div class="api_progress_odd api_active_progress fl" id="api_progress_1">
+							1
+						</div>
+						<div class="api_progress_even fl" id="api_progress_2"></div>
+						<div class="api_progress_odd fl" id="api_progress_3">
+							2
+						</div>
+						<div class="api_progress_even fl" id="api_progress_4"></div>
+						<div class="api_progress_odd fl" id="api_progress_5">
+							3
+						</div>
+					</div>
+					<div class="api_progress_tip">
+						<span>设置链接</span><span class="api_tip_null"></span><span>设置参数</span><span class="api_tip_null"></span><span>数据设置</span>
+					</div>
+
+					<div class="api_add_modify">
+
+						<div class="first" id="first">
+							<p>
+								<label>API名称</label>
+								<input type="text" placeholder="请输入名称" id="api_name" />
+							</p>
+							<p>
+								<span class="inputTip">名称长度2-12字符</span>
+							</p>
+							<p>
+								<label>API地址</label>
+								<input type="text" id="api_url" placeholder="请粘贴URL" />
+							</p>
+							<p>
+								<span class="inputTip">粘贴API链接地址(http://...)</span>
+							</p>
+							<p>
+								<label>提交方式</label>
+								<select id="api_method">
+									<option>GET</option><option>POST</option>
+								</select>
+							</p>
+						</div>
+
+						<div class="second" id="second">
+							<div class="param_box">
+								<button class="api_addParam" id="api_addParam">
+									添加参数
+								</button>
+								<span>[是否设置]-设置参数是否在动作设置时显示 -[加入Header]-百度ApiStore执行方式,默认apikey勾选</span>
+								<div class="api_param_list" id="api_param_list">
+
+								</div>
+
+							</div>
+						</div>
+
+						<div class="third" id="third">
+							<div class="api_result_box">
+								<p>
+									<button class="api_addParam" id="api_result_json">
+										获取Api结果
+									</button>
+								</p>
+								<div class="api_result fl menuTree" id="api_result"></div>
+								<div class="api_result_opt fl">
+									<img src="__PUBLIC__/App/Qywx/Images/aliasSet.png" alt="设置Api结果">
+								</div>
+								<div class="api_alias_list fl" id="api_alias_list"></div>
+							</div>
+						</div>
+						<div class="api_btn_box" id="api_btn_box">
+							<button class="api_btn_pre" id="api_btn_pre">
+								上一步
+							</button>
+							<button class="api_btn_next" id="api_btn_next">
+								下一步
+							</button>
+							<button class="api_save" id="api_save">
+								保 存
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 创建数据组件  -->
+		<div id="customcomponent">
+			<div class="customcomponent-up ptlTitle">
+				<span class="component-name">绑定动态数据&nbsp;&nbsp;&gt;</span>
+				<span class="bind-data">&nbsp;设置组件名称&nbsp;&nbsp;&gt;</span>
+				<span class="adjustment-style">&nbsp;页面上调整外观</span>
+				<div class = "close page-tpl-panel-close">
+					<img src = "__IMAGES_URL__close.png"/>
+				</div>
+			</div>
+			<div class="customcomponent-down">
+				<div class="customcomponent-down-one">
+					<div class="data-op-name breadcrumb">
+						<span class="data-list-name" style="font-size: 18px;"> 数据列表</span>
+						<span class="set_addDataSource">设置表单数据</span>
+						<span class="set_externalInterface">设置外部接口</span>
+					</div>
+					<div class="data-list"></div>
+
+				</div>
+				<div class="customcomponent-down-two">
+					<div class="data-op-name breadcrumb">
+						<span class="back-formlist glyphicon glyphicon-arrow-left" title="返回"></span>
+						<span class="filed-name"> </span>
+					</div>
+					<div class="fieldlist"></div>
+					<div class="cp-type">
+						<div class="cp-type-font">
+							组件类型
+						</div>
+						<ul class="cp-type-list">
+							<li class="select-data fieldSelect" type="select">
+								展示数据
+							</li>
+							<li class="modify-data" type="modify-data">
+								修应数据
+							</li>
+							<li class="delete-data" type="delete-data">
+								删除数据
+							</li>
+						</ul>
+					</div>
+
+					<div class="data-operate-btn">
+
+						<span class="next-btn">
+							<input type="button" value="下一步"/>
+						</span>
+					</div>
+
+				</div>
+				<div class="customcomponent-down-thr">
+					<div class="componeww.name" style="margin: 12%">
+						<span style="font-size: 20px">组件名称：</span>
+						<input type="text" class="form-control" name="componentname" placeholder="请输入组件名称" style="width: 78%"/>
+					</div>
+					<div class="setting-data" style="padding: 0% 26%">
+						<span class="pre-btn">
+							<input type="button" name="pre-btn" value="上一步">
+						</span>
+						<span class="complete-btn">
+							<input type="button" name="complete-btn" value="完成">
+						</span>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- 创建数据组件 end-->
+
+		<!-- 添加页面时的模态框  start-->
+		<div class="modal fade bs-example-modal-md" id="pageModal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">添加页面</h4>
+					</div>
+					<div class="modal-body modalContent" >
+
+						<div class="form-group">
+							<label for="newPageName">请输入页面标题：</label>
+							<input type="text" class="form-control" name="newPageName" id="newPageName" placeholder="请输入标题"/>
+							<p class="addNewPageTip" style="display: none;color:red;">
+								用户名不能为空
+							</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消
+						</button>
+						<button type="button" class="btn btn-primary pageNameSaveBtn">
+							确定
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<!-- 添加页面时的模态框  end-->
+
+		<!--增加新页面滑动面板 st-->
+		<div id="pageTplLib">
+			<div class = "ptlTitle">
+				页面模板库
+				<div class = "close">
+					<img src = "__IMAGES_URL__close.png"/>
+				</div>
+			</div>
+			<div class = "ptlMenu">
+				<ul>
+					<li class = "title nowMenu" id = "sysPtlList">
+						系统页面模板
+					</li>
+					<li class = "title" id = "myPtlList">
+						我的页面模板
+					</li>
+				</ul>
+			</div>
+			<div class = "pageTplListWrap">
+				<div class = "list sysPtlList">
+					<ul>
+						<li class="tempItem" tempId="1">
+							<img src = "__STATIC__/Images/weig001.jpg"/>
+							<p>
+								单图页面
+							</p>
+						</li>
+						<li class="tempItem" tempId="2">
+							<img src = "__STATIC__/Images/weig002.png"/>
+							<p>
+								腰部文字
+							</p>
+						</li>
+						<li class="tempItem" tempId="3">
+							<img src = "__STATIC__/Images/weig003.png"/>
+							<p>
+								底部文字
+							</p>
+						</li>
+						<li class="tempItem" tempId="4">
+							<img src = "__STATIC__/Images/weig004.jpg"/>
+							<p>
+								全文背景
+							</p>
+						</li>
+						<!--<li class="tempItem" tempId="5">
+						<img src = "__STATIC__/Images/weig005.png"/>
+						<p>表单背景</p>
+						</li>-->
+						<li class="tempItem" tempId="6">
+							<img src = "__STATIC__/Images/weig006.jpg"/>
+							<p>
+								名画模板
+							</p>
+						</li>
+						<li class="tempItem" tempId="7">
+							<img src = "__STATIC__/Images/weig007.png"/>
+							<p>
+								人物简介
+							</p>
+						</li>
+						<li class="tempItem" tempId="8">
+							<img src = "__STATIC__/Images/weig008.png"/>
+							<p>
+								项目录入
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div  class = "list myPtlList">
+					<ul>
+						<li>
+							<img src = "__STATIC__/Images/weig002.jpg"/>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--增加新页面滑动面板 ed-->
+		<script type = "text/javascript" src = "__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/common.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+		<script src="__PUBLIC__/Js/seaJs/dist/sea.js" ></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/undo.js"></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/ezCommon.js"></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/lotterTurn/jquery.easing.min.js"></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/lotterTurn/jQueryRotate.2.2.js"></script>
+		<script type = "text/javascript" src = "__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js"></script>
+		<script src = "__PUBLIC__/Js/jquery.cropit.js"></script>
+		<script>
+			seajs.config({
+				debug : 2,
+				base : "__PUBLIC__/Js/",
+				alias : {
+					"bootstrap" : "//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js",
+					"bootstrap-switch-css" : SITECONFIG.PUBLICPATH + "/Js/jquery-ui-bootstrap-v0.5/css/bootstrap-switch.min.css",
+					"bootstrap-switch-js" : SITECONFIG.PUBLICPATH + "/Js/jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js",
+					"jqueryUI" : SITECONFIG.PUBLICPATH + "/Js/jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js",
+					"ctrlCommon" : SITECONFIG.PUBLICPATH + "/App/Qywx/Js/ctrlCommon.js" + SITECONFIG.VERSION,
+					"attrLib" : SITECONFIG.PUBLICPATH + "/App/Qywx/Js/attrLib.js" + SITECONFIG.VERSION,
+					"ajaxData" : SITECONFIG.PUBLICPATH + "/App/Qywx/Js/ajaxData.js" + SITECONFIG.VERSION,
+					"pageManage" : SITECONFIG.PUBLICPATH + "/App/Qywx/Js/pageManage.js" + SITECONFIG.VERSION,
+					"compLogic" : SITECONFIG.PUBLICPATH + "/App/Qywx/Js/components/compLogic.js",
+					"swiperJs" : SITECONFIG.PUBLICPATH + "/Js/swipe3.0.6/js/swiper.min.js",
+					"swiperCss" : SITECONFIG.PUBLICPATH + "/Js/swipe3.0.6/css/swiper.min.css",
+					"pageBrowseJs" : SITECONFIG.PUBLICPATH + "/Js/swipe3.0.6/js/swiper.min.js",
+					"pageBrowseCss" : SITECONFIG.PUBLICPATH + "/Js/swipe3.0.6/css/swiper.min.css",
+					"dateCss" : SITECONFIG.PUBLICPATH + "/Js/date/date.css",
+					"date" : SITECONFIG.PUBLICPATH + "/Js/date/date.js",
+					"iScroll" : SITECONFIG.PUBLICPATH + "/Js/date/iscroll.js",
+					"easing" : SITECONFIG.PUBLICPATH + "/Js/lotterTurn/jquery.easing.min.js",
+					"rotateTurn" : SITECONFIG.PUBLICPATH + "/Js/lotterTurn/jQueryRotate.2.2.js",
+				}
+			});
+			seajs.use("__STATIC__/Js/fileLoader.js");
+		</script>
+		<script>
+			$(function() {
+				//读取cookie,判断是否来过
+				var user_id = '{:md5($Think.session.uid)}';
+				if ($.cookie(user_id) != 1) {
+					$('#guide, #searchTip, #searchTip div:eq(0)').show();
+					$('#searchTip div a').click(function() {
+						var currentStep = $(this).parent();
+						currentStep.hide();
+						currentStep.next().show();
+					});
+					$('#searchTip div a:last, #searchTip div span').click(function() {
+						$('#guide, #searchTip').hide();
+					});
+					//添加cookie
+					$.cookie(user_id, '1', {
+						expires : 7
+					});
+				}
+		
+			});
+			
+			
+			
+			
+		</script>
+	
+	</body>
+</html>

@@ -1,0 +1,184 @@
+<include file="Public:header" />
+<link href="__PUBLIC__/App/Home/AppStore/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/App/Home/AppStore/Css/yyshop.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Home/AppStore/Css/Imageplay.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Home/AppStore/Css/Pager.css" />
+
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/goodsminute.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/AppStore/Js/jquery.pager.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/MyCenter/js/company.js"></script>
+<style>
+	.app_input {
+		border: 1px solid #97CBFF;
+		width: 200px;
+		height: 25px
+	}
+</style>
+</head>
+
+<body>
+
+    <div id="login_top"><img src="__PUBLIC__/App/Home/Home/images/logo.jpg"/>
+    </div>
+    <div class="clear"></div>
+    <div id="yyshop_main">
+        <div class="flxx fl">
+            <div class="topline">
+                <p class="curent fl">
+                    <a href="__GROUP__/Index/index">首页</a>><a href="__GROUP__/AppStore/index">应用超市</a>><span></span>
+                </p>
+            </div>
+            <div class="topxx">
+                <div class="fl_xxtw fl">
+                    <p class="tw_pic"><img id="app_logo" src=""/>
+                    </p>
+                    <p class="pre">
+                        <span><strong></strong></span><font >/天/位</font>
+                    </p>
+                    <p>
+                        已有<span class="redfot"><b></b></span>人评论
+                    </p>
+                    <p>
+                        <span class="try"><a id="try">立即试用</a></span>
+                    </p>
+                    <p>
+                        <span class="try buy"><a id="buy">立即购买</a></span>
+                    </p>
+                </div>
+                <div class="fl_xxjx fr">
+                    <div class="jxinfor">
+                        <p class="title2">
+                            <strong>应用介绍</strong>
+                        </p>
+                        <p class="infor_jx"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="lbpic">
+
+                <div class="detail-pic" style="z-index:-1;">
+                    <div id="slideshow" >
+                        <ul class="slides">
+
+                        </ul>
+                        <span class="arrow previous"></span>
+                        <span class="arrow next"></span>
+                        <div id="last">
+                            <b>已经是最后一张了</b>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+            <div class="comment">
+                <div class="tit_list">
+                    <ul>
+                        <li class="commenttype" id="allcomment">
+                            <a href="javascript:;" var="0" style="color:#000">全部评论(<b></b>)</a>
+                        </li>
+                        <li class="commenttype" id="goodcomment">
+                            <a href="javascript:;" val="1">好评(<b></b>)</a>
+                        </li>
+                        <li class="commenttype" id="normalcomment">
+                            <a href="javascript:;" val="2">中评(<b></b>)</a>
+                        </li>
+                        <li class="commenttype" id="badcomment">
+                            <a href="javascript:;" val="3">差评(<b></b>)</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="comment-con">
+                    <ul id="ulComment"></ul>
+                    <div id="pager"></div>
+                    <!--<div class="pages"><a href="#">上一页</a> <span class="curen">2</span> 下一页</div>-->
+                    <div class="fbpl">
+                        <p>
+                            <span class="pl_dj">
+                                <input name="comment-rank" type="radio" id="good" value="1"  class="pl_dj" checked/>
+                                好评</span>
+                            <span class="pl_dj">
+                                <input name="comment-rank" type="radio" id="normal"  value="2" />
+                                中评</span>
+                            <span class="pl_dj">
+                                <input name="comment-rank" type="radio" id="bad" value="3" />
+                                差评</span>
+                        </p>
+                        <p class="fbtitle">
+                            发布评论<span id="fontleng" style="margin-left:530px">还能输入<label id="font">420</label>个字符</span>
+                        </p>
+                        <p>
+                        {:Widget('Editor',array('height'=>'200px','type'=>'simple_comment','number' => 500,'numberId' => 'fontleng','contentName'=>'content','value'=>''))}
+                            </p>
+							<p>
+                            <input id="submitbtn"  type="button" value="发布评论"  class="sent"/>
+                            <span id='tips' style='color:red;margin-left:10px;display:none'><b></b></span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jbxx fr">
+            <div class="title">
+                基本信息
+            </div>
+            <div class="navlist">
+                <ul>
+                    <li>
+                        分类：<strong></strong>
+                    </li>
+                    <li>
+                        版本编号：<strong>1.0</strong>
+                    </li>
+                    <li>
+                        发布时间：<strong></strong>
+                    </li>
+                    <li>
+                        开发者：<strong></strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <!--<div id="login_foot">地址：深圳市龍崗區橫崗鎮銀海工業城</div>
+    -->
+
+    <div id="add_app_dialog" style="display: none; height: 400px; width: 400px; padding: 8px;">
+        <!-- 用户无公司信息则录入 -->
+        <if condition="$hasCompany eq 0">
+            <span style="font-size: 13px">公司名称:</span>
+            <input type="text" id="company_name" name="company_name" class="app_input" onkeyup="getCompanyName(this.value)" />
+            <br/>
+            <br/>
+            <span style="font-size: 13px">二级域名:</span>
+            <input type="text" id="company_domain" name="company_domain" onkeyup="getCompanyDomain(this.value);" class="app_input" />
+            <br/>
+            <br/>
+            <span style="font-size: 12px">二级域名地址: http://<span id="domainurl_addr" style="color:red">www</span>.wclouds.net/</span>
+            <br/>
+            <br/>
+            使用二级域名地址可以直接访问你的应用
+            <br/>
+            <br/>
+            <span style="font-size: 13px">公司LOGO:</span>
+            <input type=file name="upload_company_logo" id="upload_company_logo" onchange="ajaxUploadCompanyLogo();">
+            <br/>
+            <br/>
+            <input type="hidden" id="company_logo" value=""/>
+            <div id="localImag"></div>
+        </if>
+
+        <span style="font-size: 13px">应用部署地址:</span>
+        <input type="text" id="app_url" name="app_url" onkeyup="getAppUrl(this.value);" class="app_input" />
+        <br/>
+        <br/>
+        <span style="font-size: 12px">应用地址: http://www.wclouds.net/<span id="appurl_addr" style="color:red"></span></span>
+    </div>
+</body>
+</html>

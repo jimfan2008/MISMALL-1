@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+#top_banner{float:left;width:100%;position:absolute;z-index:1px;top:0px;left:0px;}
+/* banner1样式 */
+#heard .banner1{float:left;width:100%; height:550px; background:url(../images/banner1.jpg) center 0 no-repeat; position:relative;}
+#heard .banner1 .advert{width:1000px; margin:auto; padding-top:250px;}
+#heard .banner1 .advert .text{float:left;width:100%; height:100px; font-size:40px;color:#fff; font-weight:bold;}
+#heard .banner1 .advert .botton{float:left; width:320px; height:90px; background:url(../images/sprite.png) -2px -147px no-repeat; font-size:40px; color:#fff; text-indent:110px; line-height:86px; display:block; cursor:pointer; margin-left:35px;}
+#heard .banner1 .advert .botton:hover{ background:url(../images/sprite.png) -2px -257px no-repeat;}
+
+/* banner2样式 */
+#heard .banner2{float:left;width:100%; height:550px; background:url(../images/banner2.jpg) center 0 no-repeat; position:relative;}
+#heard .banner2 .advert{width:1000px; margin:auto; padding-top:250px;}
+#heard .banner2 .advert .text{float:left;width:100%; height:100px; font-size:40px;color:#fff; text-align:right; font-weight:bold;}
+#heard .banner2 .advert .botton{float:right; width:320px; height:90px; background:url(../images/sprite.png) -2px -147px no-repeat; font-size:40px; color:#fff; text-indent:110px; line-height:86px; display:block; cursor:pointer; margin-right:60px;}
+#heard .banner2 .advert .botton:hover{ background:url(../images/sprite.png) -2px -257px no-repeat;}
+
+/* 箭头和切换按钮样式 */
+#heard .arrow_fl{width:20px; height:36px; background: url(../images/sprite.png) 0 0 no-repeat; z-index:99; position:absolute; left:50px; top:280px; cursor:pointer;}
+#heard .arrow_fl:hover{background: url(../images/sprite.png) -62px 0 no-repeat;}
+#heard .arrow_fr{width:20px; height:36px; background: url(../images/sprite.png) 0 -60px no-repeat; z-index:99; position:absolute; right:50px; top:280px; cursor:pointer;}
+#heard .arrow_fr:hover{background: url(../images/sprite.png) -62px -60px no-repeat;}
+#heard .change{width:100%;z-index:999; position:absolute;bottom:12px;text-align:center;}
+#heard .change ul{display:block;width:48px;margin:0 auto;}
+#heard .change .change_bot{float:left; width:12px; height:12px; background:url(../images/sprite.png) no-repeat -197px -13px; cursor:pointer; margin:0 3px;}
+#heard .change .change_bot:hover{width:12px; height:12px; background:url(../images/sprite.png) no-repeat -197px -62px; cursor:pointer;}
+#heard .change .change_botover{float:left; width:12px; height:12px; background:url(../images/sprite.png) no-repeat -197px -62px; cursor:pointer;margin:0 3px;}
+
+/* 中间内容 */
+#content{width:1000px; margin:20px auto;}
+#content .shop_pay{width:100%; margin:0 0 35px;}
+#content .shop_pay .shop_fl{width:690px;}
+#content .shop_pay .shop_fl .title{font-weight:bold; font-size:18px; padding:0 0 10px;}
+#content .shop_pay .shop_fl li{float:left; width:108px; margin-right:30px; text-align:center; line-height:20px;}
+#content .shop_pay .shop_fl li .pic_div{padding:10px; border:1px solid #e8e8e8; margin-bottom:5px;}
+#content .shop_pay .shop_fl li .pic_div img{width:90px; height:90px;}
+#content .shop_pay .shop_fl li .name{heigth:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+#content .shop_pay .shop_fl li .price{ color:#F00; margin-bottom:5px;}
+#content .shop_pay .shop_fl li .buy{width:58px; height:28px; margin:auto; border-radius:3px; line-height:28px; background:#0a70a7; color:#fff; cursor:pointer;}
+#content .shop_pay .shop_fl li .buy a{color:#fff; display:block;}
+#content .shop_pay .shop_fl li .buy a:hover{background:#2795d0;border-radius:3px;}
+#content .shop_pay .pay_fr{width:280px;}
+#content .shop_pay .pay_fr .title{font-weight:bold; font-size:18px; padding:0 0 10px;}
+#content .shop_pay .pay_fr .qr_code{width:100%; margin-bottom:15px;}
+#content .shop_pay .pay_fr .qr_code .code{text-align:center;}
+#content .shop_pay .pay_fr .weibo{width:100%; background:#e8e8e8; height:40px; line-height:40px; text-indent:10px;}
+#content .shop_pay .pay_fr .weibo .weibox_list{margin:5px 5px 0 10px;width:35px; height:30px; display:block; cursor:pointer;}
+#content .shop_pay .pay_fr .weibo .sina{background: url(../images/weibo.png) no-repeat 0 0;}
+#content .shop_pay .pay_fr .weibo .sina:hover{background: url(../images/weibo.png) no-repeat 0 -40px;}
+#content .shop_pay .pay_fr .weibo .qq{background: url(../images/weibo.png) no-repeat right 0;}
+#content .shop_pay .pay_fr .weibo .qq:hover{background: url(../images/weibo.png) no-repeat right -40px;}
+
+/* 项目简介 */
+#content .project_list{width:100%; border-top:1px solid #e8e8e8; padding-top:30px;}
+#content .project_list li{float:left; width:222px; margin-right:37px; text-align:center; line-height:40px;}
+#content .project_list li.four{float:right; margin-right:0px;}
+#content .project_list li.disabled{opacity:0.3;filter:alpha(opacity=30);}
+#content .project_list li.disabled a{cursor:default;}
+#content .project_list li .pic_div{background:#cae5f0; padding:6px;}
+#content .project_list li .pic_div:hover{ background:#e8e8e8;}
+#content .project_list li.disabled .pic_div:hover{ background:#cae5f0;}
+#content .project_list li .title{font-size:16px; font-weight:bold;}
+#content .project_list li .msg{color:#666; line-height:24px;}
+#content .project_list li .more{color:#0a70a7;}
+#content .project_list li .more a{color:#0a70a7;}
+#content .project_list li .more a:hover{color:#2795d0; text-decoration:underline;}
+#content .project_list li.disabled .more a:hover{color:#0a70a7; text-decoration:none;}

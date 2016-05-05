@@ -1,0 +1,46 @@
+<include file="Public:header" />
+<link href="__PUBLIC__/App/Home/Login/Css/forgetpassword.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/App/Home/Login/Js/forgetpassword.js"></script>
+</head>
+<body>
+     <div id="container">
+			<div id="top">
+				<img src="__PUBLIC__/App/Home/Home/images/logo.jpg">
+			</div>
+			<div id="middle">
+			    <div class="mod-userbar">
+			       <ul >
+				      <li><a href="__PUBLIC__/login" id="mod-userbar-login">登录</a></li>
+					  <li>|</li>
+				      <li><a href="__PUBLIC__/register">注册</a></li>
+				   </ul>	
+	             </div>
+			   <div class="circuit">
+			       <div class="step">
+			          <div class="writemail" style="background:#c8c8c8;"><strong>填写邮箱</strong></div>
+			          <div class="round bg2" style="margin:42px 100px 0 35px;"><h3 class="hnumb2">1</h3></div>
+			          <div class="arrowup"></div>
+			       </div>
+			       <div class="step">
+			          <div class="writemail" style="background:#51b600"><strong>重置密码</strong></div>
+			          <div class="round" style="margin:42px 100px 0 250px;"><h3 class="hnumb1">2</h3></div>
+			          <div class="arrowdown"></div>
+			       </div>
+			       <div class="step">
+			          <div class="writemail" style="background:#c8c8c8"><strong>完成</strong></div>
+			          <div class="round site3"><h3 class="hnumb3">3</h3></div>
+			       </div>
+			      
+			   </div>
+			   <div class="next">
+			    <div><label >新密码 : </label><input type="password" name="password" id="newpassword" style="width:230px;height:25px;font-size:20px" ><span id="point" style="color:red;font-size:12px">5~15个字符,可使用字母、数字</span></div>
+			    <div><label style="margin-left:-28px">确认新密码 : </label><input type="password" name="password2" id="newpassword2" style="width:230px;height:25px;font-size:20px;margin-top:15px" ><span id="point2" style="color:red;font-size:12px">请您输入确认密码</span></div>
+			       <div class="anext"><input class="btnnext" id="confirm" type="button" value="确定"></div>
+			   </div>
+			</div>
+		</div>
+		<script language="javascript">
+              document.getElementById("newpassword").focus();
+     </script>
+</body>
+</html>

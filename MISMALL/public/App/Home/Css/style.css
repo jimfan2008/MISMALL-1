@@ -1,0 +1,510 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	overflow-x: hidden;
+	font-family: "微软雅黑";
+}
+li {
+	list-style: none;
+}
+div.row {
+	margin: 0;
+	padding: 0;
+}
+#topnav li, #fixednav li {
+	width: 17%;
+	height: 27px;
+	float: left;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+	text-decoration: none;
+}
+#topnav a:link, #topnav a:visited, #topnav a:hover, #panel_login a:link, #panel_login a:visited, #panel_login a:hover, #topnav {
+	color: white;
+	text-decoration: none;
+}
+a, a img {
+	outline: none !important;
+}
+#topnav a, #con_nav a {
+	text-align: center;
+}
+#topnav a#a_show_register:hover, #topnav a#a_show_login:hover {
+	color: #d7cd32;
+}
+
+.closeVideo {
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	width: 30px;
+	height: 30px;
+	background: #fff;
+	border-radius: 50%;
+	z-index: 99;
+	text-align: center;
+}
+.closeVideo img {
+	margin-top: 9px;
+	transition: all 2s;
+	-moz-transition: all .5s; /* Firefox 4 */
+	-webkit-transition: all .5s; /* Safari and Chrome */
+	-o-transition: width .5s; /* Opera */
+}
+.closeVideo:hover img {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+
+/*首屏黑色半透明遮罩层 开始*/
+.c-f-cover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.4);
+}
+/*首屏黑色半透明遮罩层 结束*/
+
+#topnav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	line-height: 24px;
+	background: #373737;
+	background: rgba(124, 125, 130, 0.6);
+	font-size: #fff;
+}
+.backstretch {
+	z-index: -999998;
+	overflow: hidden;
+}
+
+.dz {
+	padding-top: 2%;
+}
+
+#panel_login, #enroll {
+	text-align: right;
+	padding: 0 15px;
+}
+#coolintro {
+	position: absolute;
+	text-align: center;
+	top: 29%;
+	width: 100%;
+	z-index:999;
+}
+
+.mismallAdv {
+	color: #fff;
+	font-size: 46px;
+	text-align: center;
+}
+#fixednav {
+	height: 69px;
+	line-height: 69px;
+	background: #000;
+	border-bottom: 4px solid #78B5AA;
+}
+#fixednav a {
+	color: #fff;
+	text-align: center;
+}
+.fixednav {
+	position: fixed;
+}
+
+.appListCover {
+	background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+
+.s6 .hotApp {
+	padding: 0 7%;
+	color: #fff;
+}
+
+.appListWraper {
+	margin: 0 5%;
+}
+
+.appItemInner {
+	background: #fff;
+	padding: 12px;
+	margin-bottom: 30px;
+}
+
+.appItem:hover .appImg {
+	display: none;
+}
+
+.appItem:hover .app-qrcode {
+	display: block;
+}
+
+.appItem img {
+	width: 250px;
+	height: 250px;
+	margin: auto;
+}
+
+.app-qrcode {
+	max-width: 100%;
+	display: none;
+}
+
+.appItem h5 {
+	margin: 10px 0 0;
+}
+
+.fixedimg {
+	text-align: center;
+}
+.newslistwrapper {
+	position: relative;
+	width: 100%;
+}
+#newslist {
+	height: 200px;
+	overflow: hidden;
+	max-width: 1282px;
+	text-align: center;
+	margin: 0 auto;
+	width: 90%;
+	-webkit-box-shadow: inset 0px 0px 30px #eee;
+	-moz-box-shadow: inset 0px 0px 30px #eee;
+	box-shadow: inset 0px 0px 30px #eee;
+}
+#newslist ul {
+}
+#newslist ul li {
+	float: left;
+	min-height: 201px;
+}
+#newslist img {
+	width: 100%;
+}
+.aline {
+	position: absolute;
+	left: 0;
+	width: 100%;
+}
+.newslistwraper {
+	margin: 0 auto;
+}
+#footer {
+	background: black;
+	width: 100%;
+	padding: 20px 0;
+}
+#footer .row {
+	padding: 5px 0;
+}
+#footer_nav a {
+	margin: 0 20px;
+}
+.pin-wrapper {
+	z-index: 999999;
+	background: #000;
+}
+/* case box */
+#case_main {
+}
+#boxsss {
+	padding: 10px 0;
+}
+.swiper-container {
+	width: 100%;
+}
+
+/*登陆样式（ user） */
+#loginmodal {
+	float: left;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 11000;
+	top: 0px;
+	left: 0px;
+	padding-top: 110px;
+}
+#loginmodal .layer {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1;
+	top: 0px;
+	left: 0px;
+	background: #000;
+	opacity: 0.3;
+	filter: Alpha(Opacity=30);
+}
+#loginmodal .container {
+	margin: 0 auto;
+	width: 400px;
+	padding: 15px 20px;
+	background: #f3f6fa;
+	border-radius: 6px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+	overflow-y: auto;
+	position: relative;
+}
+#loginmodal .container .close {
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: url(../Home/images/black-x.png);
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+#loginmodal .container .loginform {
+	float: left;
+	width: 360px;
+	margin-top: 0px;
+	color: #000;
+}
+#panel_logined {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 80px;
+	display: block;
+	color: #00f6ff;
+	font-size: 14px;
+	text-align: center;
+}
+#btn_loginout {
+	width: 60px;
+	cursor: pointer;
+	margin: auto;
+}
+#loginmodal .container .loginform li {
+	float: left;
+	width: 100%;
+	position: relative;
+	padding: 2px 0;
+}
+#loginmodal .container .loginform li h1 {
+	float: left;
+	font-size: 32px;
+	font-weight: bold;
+}
+#loginmodal .container .loginform li span.lr {
+	float: right;
+	color: #F7600A;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 10px;
+}
+#loginmodal .container .loginform li span.lr:hover {
+	text-decoration: underline;
+}
+#loginmodal .container .loginform li div.error {
+	float: left;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	position: absolute;
+	z-index: 1;
+	left: 0px;
+	bottom: -15px;
+	text-align: center;
+	color: #FF0000;
+	padding: 0px;
+	margin: 0px;
+}
+#loginmodal .container .loginform li input.input {
+	float: left;
+	width: 360px;
+	padding: 10px 30px;
+	font-family: 'Helvetica Neue', Helvetica, Verdana, sans-serif;
+	color: #7988a3;
+	font-size: 14px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+	background-color: #fff;
+	margin-top: 20px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-linear-gradient(top,#edf3f9,#fff);
+	background-image: -moz-linear-gradient(top,#edf3f9,#fff);
+	background-image: -ms-linear-gradient(top,#edf3f9,#fff);
+	background-image: -o-linear-gradient(top,#edf3f9,#fff);
+	background-image: linear-gradient(top,#edf3f9,#fff);
+	border: 1px solid;
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+#loginmodal .container .loginform li input.input:focus {
+	outline: none;
+	color: #525864;
+	border-color: #84c0ee;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+}
+#loginmodal .container .loginform li label {
+	float: left;
+	padding: 10px 4px;
+	color: #777;
+}
+#loginmodal .container .loginform li button {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	outline: 0;
+	border: 0;
+	width: 360px;
+	color: #edf4f9;
+	text-decoration: none;
+	background-color: #4f94cf;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	font-size: 22px;
+	font-weight: bold;
+	padding: 8px 26px 8px 26px;
+	margin-top: 15px;
+	line-height: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+#loginmodal .container .loginform li button:hover {
+	background-color: #519dde;
+}
+#loginmodal .container .active-email-style {
+	font-size: 14px;
+	text-align: center;
+	color: #333;
+}
+#loginmodal .container .active-email-style .active-email-href {
+	color: #999;
+	margin: 10px;
+}
+#loginmodal .container .active-email-style .active-email-href a {
+	color: #F7600A;
+	text-decoration: underline;
+}
+#loginmodal .container .active-email-style input {
+	float: left;
+	width: 300px;
+	padding: 10px 30px;
+	font-family: 'Helvetica Neue', Helvetica, Verdana, sans-serif;
+	color: #7988a3;
+	font-size: 14px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+	background-color: #fff;
+	margin-top: 20px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#edf3f9),to(#fff));
+	background-image: -webkit-linear-gradient(top,#edf3f9,#fff);
+	background-image: -moz-linear-gradient(top,#edf3f9,#fff);
+	background-image: -ms-linear-gradient(top,#edf3f9,#fff);
+	background-image: -o-linear-gradient(top,#edf3f9,#fff);
+	background-image: linear-gradient(top,#edf3f9,#fff);
+	border: 1px solid;
+	border-color: #abbce8 #c3cae0 #b9c8ef;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px rgba(255,255,255,0.4);
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+#loginmodal .container .active-email-style input:focus {
+	outline: none;
+	color: #525864;
+	border-color: #84c0ee;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 0 7px #96c7ec;
+}
+#loginmodal .container .active-email-style button {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	outline: 0;
+	border: 0;
+	width: 120px;
+	color: #edf4f9;
+	text-decoration: none;
+	background-color: #4f94cf;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	font-size: 14px;
+	font-weight: bold;
+	padding: 8px 26px 8px 26px;
+	margin-bottom: 15px;
+	margin-top: 20px;
+	line-height: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+	margin-right: 20px;
+}
+#loginmodal .container .loginform li h1 span {
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 100;
+	color: #333333;
+}
+#loginmodal .container #forget-password {
+	text-align: left;
+	margin-top: 26px;
+}
+#loginmodal .container #forget-password h1 {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+#loginmodal .container #resetPass .resetEmail {
+	position: relative;
+	top: 20px;
+	left: 5px;
+	padding: 10px 30px;
+}
+.wxlogin {
+	background: rgba(0, 0, 0, 0) url("../Home/images/wxlogo.png") repeat scroll 0 0 /28px 28px;
+	border-radius: 2px;
+	cursor: pointer;
+	height: 28px;
+	margin-top: -5px;
+	width: 28px;
+}

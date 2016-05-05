@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 模板</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" template = "active" />
+
+		<div class="modal fade" id="siteName">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title"></h4>
+					</div>
+					<div class="modal-body" id = "contentWrap"  style="height:290px;">
+						<input  id="addName" class="form-control" type="text" maxlength="15" placeholder="请输入名称">
+						<div id = "modal_errormessage">
+							该名称已存在
+						</div>
+						<br>
+						<h4>应用图片</h4>
+						<a class="ImagePreview" href="javascript:;">
+						<!-- <input type="file" style="position:absolute;cursor:pointer;width:200px;height:150px;-moz-opacity:0;opacity: 0;margin-top:20px;"  name="file" id="inputFile3"> -->
+						<img  id="change_avator"  src="__ROOT__/images/36.png"  style="cursor:pointer;width:315px; height:150px;"/> </a>
+					</div>
+					
+					<!-- 图片更换面板 -->
+					<div class = "formWraper">
+						<div class="image-editor">
+							<input type="file" class="cropit-image-input yy" id="upImage" style = "display:none;">
+							<div class="cropit-image-preview"></div>
+							<div class = "zoomWraper">
+								<input type="range" class="cropit-image-zoom-input">
+							</div>
+							<input type="hidden" name="image-data" class="hidden-image-data" />
+						</div>
+						
+						<div class="formBottom">
+							<div class="btns">
+								<div class="btn select-image-btn" id = "another">
+									<span class="icon icon-image"></span>换一张
+								</div>
+								<div class="btn download-btn" id = "sureBtn">
+									<span class="icon icon-box-add"></span>就这样
+								</div>
+								<div class="btn download-btn" id = "cancle">
+									<span class="icon icon-box-add"></span>取消
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+
+						<button type="button" class="btn btn-info" id="setNameSureBtn">
+							下一步
+						</button>
+						<button type="button" id="setNameCancleBtn" class="btn btn-default">
+							取消
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+
+		<section id="template" class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row template-type" >
+					<div  class="col-lg-8 col-sm-8 col-md-8 templateData">
+						<span  class="active" tplType="tpl" >空白模板</span>
+						<span  plType="officialTpl">官方模板</span>
+						<span tplType="myTpl">我的模板</span>
+					</div>
+					<div  class="col-lg-4col-sm-4 col-md-4">
+						<input type="text" placeholder="查找" autocomplete="off" class="form-control search_box no-radius">
+					</div>
+				</div>
+
+				<div>
+					<hr style="margin-top: 10px;border-color: #1ab6b3;" />
+				</div>
+
+			</div>
+
+		</section>
+
+		<section id="templatelist" class="no-margin">
+
+			<div class="container">
+
+			</div>
+
+		</section>
+
+		<section id="template-page">
+			<div class="container">
+				<div class="row text-center">
+					<ul class="pagination">
+
+					</ul>
+				</div>
+			</div>
+
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script type="text/javascript" src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap-paginator.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js?h=1"></script>
+		<script src="__PUBLIC__/Js/common.js"></script>
+		<script src="__PUBLIC__/App/Home/Developer/js/template.js"></script>
+		<script src = "__PUBLIC__/Js/jquery.cropit.js"></script>
+		<script type = "text/javascript">
+			$(function(){ 
+				
+			});
+		</script>
+		
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$paginationWrap = $("#paginationWrap"),
+					$footer = $("#footer"),
+					$templateList = $("#templatelist");
+				
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height")) - $paginationWrap.height();
+				$templateList.css("min-height",minH);
+			}
+		</script>
+	</body>
+</html>

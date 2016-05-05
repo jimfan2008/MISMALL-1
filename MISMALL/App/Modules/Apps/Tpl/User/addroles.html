@@ -1,0 +1,65 @@
+{// 加载头部公共文件 }
+<include file="Public:headerMobile" />
+		
+		<link rel="stylesheet" type="text/css" href ="__PUBLIC__/App/Apps/User/Css/user.css">
+		<script src="__PUBLIC__/App/Apps/User/Js/addrole.js"></script>
+		<script src="__PUBLIC__/Js/vaildate/jquery.validate.js"></script>
+		<script src="__PUBLIC__/Js/jquery-html5Validate-min.js"></script>
+		
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<title>增加角色</title>
+
+</style>
+	</head>
+	<body>
+		
+		<div data-role="page" id="page1" data-theme="a">
+			<div class="header">
+				<a href="#menu" class="nav"></a>
+				增加角色
+				<!--<a href="__URL__/add.html" class="addUsers" style=""  data-ajax="false" data-icon="plus" class="right" ></a>
+				-->
+			</div>
+			<!--<div data-role="header" id="header" data-theme="c" data-position="fixed";>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-theme="c">返回</a>
+				<h1>用户管理</h1>
+				<a href="__GROUP__/FormMobile/index.html" data-icon="grid" data-ajax="false" data-theme="c" >首頁</a>
+			</div>-->
+			<section id="MyProject" style="margin-top:-1em;">
+				<div data-role="content">
+
+					<h2>请完善角色信息：</h2>
+				    
+				     <form method="post" id="addForm2" name="addForm2" data-inset="true" data-theme="c">
+				     	<div  data-role="fieldcontain" >
+				     		
+				     		<div id="success" style="display: none;top: 50%;left:30%;  position:absolute; padding: 20px;border-radius:5px;font-weight:bold; font-size:18px;background: #40E0D0;">注册成功</div>
+	  						<label for="rolename">角色名称:</label>
+	  						<input type="text" name="rolename" id="rolename" placeholder="角色名称" required="true">
+	  						
+						    <label for="level">角色等级</label>
+						    <input type="text" name="level" id="level" placeholder="等级.." required="true">
+						  
+  						</div>
+  						
+  						<input type="button" name="submit" id="submit" data-inline="true" style="background: #005599;color: #FFF"  value="提交" >
+  						
+					</form>
+				</div>
+				<a href="#dialog-active" id="link-dialog"></a>
+			</section>
+		
+		</div>
+				<nav id="menu">
+					<ul>
+						<li class="index"><a href="__GROUP__/FormMobile/index.html"  data-ajax="false">主页</a></li>
+						<li class="roleuser"><a href="__GROUP__/User/index.html"  data-ajax="false">用户管理</a></li>
+						<li class="home"><a href="__GROUP__/FormMobile/home.html" data-ajax="false">信息</a></li>
+						<li class="end"><a href="__GROUP__/Index/login.html" data-ajax="false">退出</a></li>			
+					</ul>
+				</nav>
+
+	</body>
+</html>

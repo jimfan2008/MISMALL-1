@@ -1,0 +1,32 @@
+@charset "utf-8";
+/*头部*/
+#header{width:100%; height:70px; background:#114057; border-bottom:1px solid #000; overflow:hidden;}
+#header .logo{ float:left; margin:12px 0 0 20px; }
+
+#header .user{float:right; margin: 35px 20px 10px 0;}
+#header .user a{color:#FFF;font-family:'微软雅黑',Verdana, Geneva, sans-serif; font-size:12px;}
+
+/*左边菜单*/
+.apps_left{min-height:900px;background:#1b6896;}
+.apps_left ul{color:#FFF; font-size:14px; font-family:'黑体',Verdana, Geneva, sans-serif;list-style:none;margin-left: -39px;}
+.apps_left ul li{-height:80px; border-bottom:1px solid #2696c0; cursor:pointer; list-style: none;}
+.apps_left .signPic{width:14px; height:10px;}
+.apps_left  .clickShow{float:right;}
+
+.mainMenu{ padding:10px 12px 8px 20px;  font-size: 16px; font-family:'微软雅黑'; font-weight: bold;clear: both;}
+.childMenu, .formMenu{-height:60px; background:#2696c0; font-size:16px;overflow: hidden;}
+.childMenu p .formMenu p{height: 35px;line-height: 35px;margin: 0; padding: 0;}
+.childMenu p:hover,.childMenu p.active,.formMenu p:hover,.formMenu p.active{background: #ccc; }
+.childMenu a,.formMenu a{ padding-left: 70px;color: #fff;display:block;}
+.childMenu p:hover,.formMenu p:hover{ -background:#1b6896}
+#main-container {
+    margin-top: auto;
+}
+.container{margin-left: 0;}
+#main-container .row{
+	margin-right: 0;
+}
+#main-container .col-xs-2{
+	padding-right: 0;
+	padding-left: 0;
+}

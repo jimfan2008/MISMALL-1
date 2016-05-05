@@ -1,0 +1,183 @@
+<extend name="Public/base" />
+
+<block name="body">
+
+<div class="main-title">
+		<h2 id="noTitle">{$imageTypeList[$imgTypeId]|default='系统图片'}管理</h2>
+		<div class="auth-botton" style="float:left;margin-left:20px;">
+        <a id="add-group" class="btn" href="{:U('Template/systemImageManager')}">返回系统图片管理</a>
+    </div>
+	</div>
+<!--<div class="cf">
+	<div class="search-form">
+			<div class="sleft">
+				<div class="search-title fl">图片分类:
+				<select name="site_type" id="site-sort-txt">
+					<option value="">所有</option>
+					<volist name="imageTypeList" key="img_key" id="img_value">
+						<option value="{$img_key}" <eq name="imgTypeId" value="$img_key">selected</eq>>{$img_value}</option>
+						 </volist>
+				</select>
+				</div>
+				<input type="text" placeholder="请输入图片名称" value="{$title|default=''}" class="search-input" name="title">
+				<a url="{:U('')}" id="search" href="javascript:;" class="sch-btn"><i class="btn-search"></i></a>
+			</div>
+		</div>	
+</div>-->
+
+	<div class="admin_bar" >
+        <div class="fl">
+            <label><input type="checkbox" onclick="Madmin.check_all('.selitem',this.checked)" value="1">全选</label> 
+            <span class="i_trash_sp sprite"></span> <a onclick="batch_delete();" href="javascript:void(0)">删除选中项</a> 
+            <span class="i_move_sp sprite"></span> <a onclick="batch_move();" href="javascript:void(0)">移动选中项</a>
+            <!--<span class="i_copyclip sprite"></span> <a href="javascript:void(0)" onclick="Madmin.checked_action('.selitem','/meiupic/?ctl=utils&amp;act=copyselectedurl&amp;id=1');">拷贝图片地址</a>
+            --></div>
+        <div class="fr">
+            <div class="bigbutton"><a href="{:U('Template/systemImageAdd','catid='.$imgTypeId)}"><span>上传图片</span></a></div>
+        </div>
+    </div>
+    <div class="innercol grid">
+	<div class="gallary_wrap">
+		<empty name="imageList">
+			<div style="text-align:center;">暂时无图片！</div>
+		<else/>
+		<volist name="imageList" key="key" id="img">
+             <div class="gallary_item">
+                      <div class="item">
+                          <div class="pic_box">
+                              <a href="{:U('Template/systemImageList','catid='.$img['imgTypeId'])}">
+								<img src="{:getImageUrl($img['imgUrl'])}" alt="media" style="max-width:200px;max-height:200px;">
+							</a>
+                          </div>
+                          <div class="pic_ctl">
+                              <ul class="btns">
+                               <li><a title="删除图片" onclick="confirm_delete({$img['id']});" href="javascript:void(0);"><span class="i_littletrash sprite"></span></a></li>
+                               <!--<li><a title="修改" href="{:U('Template/system_image_modify','id='.$img[id])}"><span class="i_edit sprite"></span></a></li>-->
+                               <!--<li><a title="设为封面" onclick="Mui.box.show('/meiupic/?ctl=albums&amp;act=update_cover&amp;pic_id=5');" href="javascript:void(0)"><span class="i_cover sprite"></span></a></li>-->
+                               <!--<li><a title="旋转图片" onclick="Mui.box.show('/meiupic/?ctl=photos&amp;act=rotate&amp;id=5',true);" href="javascript:void(0)"><span class="i_rotate sprite"></span></a></li>-->
+                               <li><a title="移动图片" onclick="move_pic({$img['id']},'{$img['imgName']}')" href="javascript:void(0);"><span class="i_moveto sprite"></span></a></li>
+                               <!--<li><a title="重新上传图片" href="{:U('Template/system_image_reupload','id='.$img[id])}"><span class="i_reupload sprite"></span></a></li>-->
+                               <!--<li><a title="拷贝地址到剪切板" onclick="Mui.bubble.show(this,'/meiupic/?ctl=utils&amp;act=copyurl&amp;id=5',true);Mui.bubble.resize(330);" href="javascript:void(0);"><span class="i_copyclip sprite"></span></a></li>-->                                        </ul>
+                       </div>
+                   </div>
+                   <div class="info">
+                       <div class="title">
+                        <input type="checkbox" value="1" name="sel_id[{$img['id']}]" class="selitem">
+                        <span class="name"><a onclick="Madmin.rename(this,'{:U("Template/system_image_rename","id=$img[id]")}')" href="javascript:void(0)" title="点击重命名" nid="{$img['id']}">{$img['imgName']}</a></span>
+                       </div>
+                       <div class="info_col">
+                           <p class="gray">{$img['hits']}浏览 ,上传于{$img['createTime']|date="Y-m-d",###} </p>
+                           <p> &nbsp;</p>
+                       </div>
+                   </div>
+           </div>
+       </volist>
+       </empty>                    
+    </div>
+    </div>
+	<!-- 分页 -->
+	<div class="page">
+        {$_page}
+    </div>
+	<div id="moveCategory" class="hidden">
+		<div style="padding: 20px; width: 300px;">
+			<div class="form-item">
+	            <label class="item-label fl" for="auth-title" style="padding: 5px;">移动到分类:</label>
+	            <div class="controls">
+	            	<select name="cate" id="move_cate">
+	                	<volist name="imageTypeList" key="type_id" id="type_value">
+	                	<option value="{$type_id}">{$type_value}</option>
+	                	</volist>
+	                </select>
+	            </div>
+            </div>
+     	</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/Js/photo.js"></script>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+<script type="text/javascript">
+$(function(){
+  //导航高亮
+$('.side-sub-menu').find('a[href="{:U('Template/systemImageManager')}"]').closest('li').addClass('current');
+});
+//删除图片
+function confirm_delete(id){
+	if(confirm("确定要删除图片吗?")){
+		window.location = "/Admin/Template/system_image_confirm_delete/id/"+id;
+	}
+}
+//移动单个图片
+function move_pic(id, title){
+	var dialog = art.dialog({
+	    title: '移动图片 - '+title,
+	    content: $('#moveCategory').html(),
+	    width: '400px',
+	    ok:function () {
+	    	$.ajax({
+		    	url:"{:U('Template/system_image_move')}",
+		    	data:{id:id,catid:$('#move_cate').val()},
+		    	type:'GET',
+		    	dataType:'JSON',
+		    	success:function(data){
+		    		alert(data.info);
+			    	if(data.error == 0){
+					    window.location = '__SELF__';
+					}
+			    }
+		    });
+		    dialog.close();
+	        return false;
+	    },
+	    cancel:{}
+	});
+}
+//批量删除
+function batch_delete(){
+	var check_vals = $('.selitem:checked');
+    $.post('{:U("Template/system_image_batch_delete")}',check_vals.serializeArray(),function(data) {
+    	alert(data.info);
+    	if(data.error == 0){
+		    window.location = '__SELF__';
+		}
+    },'JSON');
+	
+}
+//批量移动
+function batch_move(){
+	var dialog = art.dialog({
+	    title: '移动图片分类',
+	    content: $('#moveCategory').html(),
+	    width: '400px',
+	    ok:function () {
+			var check_vals = $('.selitem:checked').serializeArray();
+			var cat_id = $('#move_cate').val();
+			var checkObj = {};
+			for(var i in check_vals){
+				checkObj[check_vals[i]['name']] = check_vals[i]['value'];
+			}
+			checkObj['catid'] = cat_id;
+	    	$.ajax({
+		    	url:'{:U("Template/system_image_batch_move")}',
+		    	data:checkObj,
+		    	type:'POST',
+		    	dataType:'JSON',
+		    	success:function(data){
+		    		alert(data.info);
+			    	if(data.error == 0){
+					    window.location = '__SELF__';
+					}
+			    }
+		    });
+		    dialog.close();
+	        return false;
+	    },
+	    cancel:{}
+	});
+	
+}
+
+</script>
+</block>

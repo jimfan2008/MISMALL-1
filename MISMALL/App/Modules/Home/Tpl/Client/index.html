@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>首页 | mismall</title>
+
+		<!-- core CSS -->
+		<link href="__PUBLIC__/Js/swipe3.0.6/css/swiper.min.css" rel="stylesheet">
+		<include file="Public:client_hearder" />
+		<style type = "text/css">
+			body{
+				background:#f5f5f5;
+			}
+		</style>
+		<section id="main-slider" class="no-margin">
+
+			<div >
+
+				<!-- Swiper -->
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<if condition="isMobile()">
+							<div class="swiper-slide " >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper4.jpg" class="swiper-lazy">
+								<span class = "advText" style = "width:45%;top: 10%;">
+									<p>企业移动</p><p>应用定制</p>
+								</span>
+							</div>
+							<div class="swiper-slide" >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper5.jpg" class="swiper-lazy">
+								<span class = "advText" style = "top: 15%;">
+									管家级服务
+								</span>
+							</div>
+							<div class="swiper-slide" >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper6.jpg" class="swiper-lazy">
+								<span class = "advText" style = "width:45%;top: 10%;">
+									<p>一年</p><p>免费维护</p>
+								</span>
+							</div>
+						<else/>
+							<div class="swiper-slide " >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper1.jpg" class="swiper-lazy">
+								<span class = "advText">企业移动应用定制</span>
+							</div>
+							<div class="swiper-slide" >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper2.jpg" class="swiper-lazy">
+								<span class = "advText">管家级服务</span>
+							</div>
+							<div class="swiper-slide" >
+								<img src="__PUBLIC__/App/Home/Unregistered/images/swiper3.jpg" class="swiper-lazy">
+								<span class = "advText">一年免费维护</span>
+							</div>
+						</if>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+					<!-- Add Arrows -->
+					<!-- <div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div> -->
+				</div>
+
+			</div>
+		</section>
+
+		<section id="feature">
+			<div class="container">
+				<h2 class = "subTitle">优 势</h2>
+				<div class="row">
+					<div class="col-md-3 col-sm-6 ">
+						<div class="img img-desc">
+							<img alt="个性化修改" src="__PUBLIC__/App/Home/Client/images/gxh.png" class="img-responsive">
+						</div>
+						<h3 style="text-align: center; margin-top:20px;font-size:18px;"><b>个性化修改</b></h3>
+					</div>
+					<div class="col-md-3 col-sm-6 ">
+						<div class="img img-desc">
+							<img alt="轻松上手" src="__PUBLIC__/App/Home/Client/images/qsss.png" class="img-responsive">
+						</div>
+						<h3 style="text-align: center;margin-top:20px;font-size:18px; "><b>轻松上手</b></h3>
+					</div>
+					<div class="col-md-3 col-sm-6 ">
+						<div class="img img-desc">
+							<img alt="定制速度快" src="__PUBLIC__/App/Home/Client/images/sdk.png" class="img-responsive">
+						</div>
+						<h3 style="text-align: center;margin-top:20px;font-size:18px; "><b>定制速度快</b></h3>
+					</div>
+					<div class="col-md-3 col-sm-6 ">
+						<div class="img img-desc">
+							<img alt="功能丰富" src="__PUBLIC__/App/Home/Client/images/gnff.png" class="img-responsive">
+						</div>
+						<h3 style="text-align: center;margin-top:20px;font-size:18px; "><b>功能丰富</b></h3>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<section id="function-case">
+			<div class="container">
+				<h2 class = "subTitle">案 例</h3>
+				<div class="row success-case">
+					<volist name = "siteInfo" id="data">
+						<div class = "col-xs-12 col-sm-3  appItem">
+							<div class = "appItemInner">
+								<div class = "imgWraper">
+									<img src = "{$data['thumbPath']}" class = "appImg img-responsive"/>
+									<img src = "__ROOT__/AppStore/qrcode/siteId/{$data.id}.html" class = "app-qrcode"/>
+								</div>
+								<h5 style="text-align:center">{$data['siteName']}</h5>
+							</div>
+						</div>
+					</volist>
+				</div>
+			</div>
+
+		</section>
+		<footer id="footer" class="midnight-blue">
+			<div class="container">
+				<div style="text-align:center" class="row">
+					<div style="text-align:center;padding:11px 0;color:#5C5C5C" class="col-lg-12 col-sm-12 col-md-12">
+						<img height="200px" width="200px" src="__PUBLIC__/App/Home/Developer/images/qjwd-qrcode.jpg" id="weixin">
+					</div>
+				</div>
+
+				<div style="text-align:center" class="row">
+					<div style="text-align:center;color:#5C5C5C" class="col-lg-12 col-sm-12 col-md-12">
+						<ul>
+							<li>
+								QQ群：363028020
+							</li>
+							<li>
+								&copy;2015 mismall 粤ICP备15005056号-1
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</footer><!--/#footer-->
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script src="__PUBLIC__/Js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/Js/swipe3.0.6/js/swiper.min.js"></script>
+		
+		<script src="__PUBLIC__/App/Home/Developer/js/main.js"></script>
+		<script>
+			jQuery(function($) {
+				'use strict',
+				//#main-slider
+				$(function() {
+					var swiper=new Swiper('.swiper-container', {
+						pagination:'.swiper-pagination',nextButton:'.swiper-button-next',prevButton:'.swiper-button-prev',paginationClickable:true,spaceBetween:30,centeredSlides:true,autoplay:2500,autoplayDisableOnInteraction:false
+					});
+				});
+				$(".headerMenu").find("li:first").addClass("active");
+			});
+		</script>
+	</body>
+</html>
+

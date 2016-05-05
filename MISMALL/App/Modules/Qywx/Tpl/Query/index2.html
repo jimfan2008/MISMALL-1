@@ -1,0 +1,228 @@
+{// 加载头部公共文件 }
+<include file="Public:header" />
+
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Designer/Query/Css/index.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Designer/Query/Css/tip-violet.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" />
+
+
+
+<script src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+		var flowID = 1;
+</script>
+<script src="__PUBLIC__/App/Designer/Query/Js/optResult2.js"></script>
+
+<script src="__PUBLIC__/App/Designer/Query/Js/fields2.js"></script>
+<script src="__PUBLIC__/App/Designer/Query/Js/query2.js"></script>
+<script src="__PUBLIC__/App/Designer/Query/Js/system2.js"></script>
+<script src="__PUBLIC__/App/Designer/Query/Js/jquery.poshytip2.js"></script>
+<style>
+	.dropdown-menu .divider{margin: 3px 0;}
+</style>
+
+</head>
+<body>
+	
+	
+<div id="saveMark"></div>
+	<div id="left" class="formLeft">
+		
+		<div class="left_button" ><input disabled="disabled" id="sqlSubmitBtn" type="button" name="submit" value="保 存" style="background-color: rgb(0, 131, 238);"  /></div>
+		<div id="selectStyle">
+			<h5 id="searchByForm">通过表单选择</h5>
+			<h5 id="searchByFields">通过字段选择（多表）</h5>
+			<hr style="margin-top:20px;border:1px solid #ccc">
+		</div>
+		<!--<div id="byFields">
+			<div class="addFields">
+				请输入条件字段：<br />
+				<span><input type="text" placeholder="输入字段" /><img class="addCon" src="/cycc/images/icon_sjyadd.png" ></span>
+				
+			</div>
+			<div id="searchByField">搜索</div>
+		</div>-->
+		<div id="clickTable" style="display: none">
+			<div class="left_header ">
+				请选择备选方案
+			</div>
+			<ul class="left_Fieldlist form-list-wraper">
+				
+			</ul>
+			
+		</div>
+		<div id="byForm" class="list menuSelected">
+			<div class="left_header title">
+				<div class="firstTitle">请选择一个表单查询</div> 
+			</div>
+			<div class="content">
+				<ul class="left_formlist form-list-wraper">
+		
+				</ul>
+			</div>
+			<!-- <div class="left_up">
+				<i><em></em></i>
+			</div>
+			<div class="left_down">
+				<i><em></em></i>
+			</div> -->
+		</div>
+		<div id="byField" class="list" >
+			<div class="left_header title">
+				<div class="firstTitle">选择多个表单查询</div> 
+			</div>
+			<div class="content" style="display: none;">
+				<ul class="form-list-wraper">
+		
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="right">
+		<div class="right_data">
+			<select id="delField">			
+			</select>
+			
+			<ul class="right_data_header" style="height: 32px;">
+				
+			</ul>
+			
+		</div>
+		<div class="right_where" id="whereCondition">
+			<div class="right_where_top">
+				<span class="title">数据筛选</span><i><em></em></i>
+			</div>
+			<div id="right_where_content" style="overflow:hidden;overflow-y:scroll;width:100%;max-height:355px;height:auto;display: none"> 
+			<div class="moreCon" by="single">筛选字段</div>
+			<ul class="right_where_column">
+				
+			</ul>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="right_sql" id="right_sql" isShowCond="true">
+			<div class="right_sql_top">
+				<span class="title">SQL</span><i><em></em></i>
+			</div>
+			<div class="right_sql_content">
+				<a></a> <a id="sqlresult"></a><a id="sqltable"></a><a id="sqlwhere"></a>
+			</div>
+		</div>
+	</div>
+	<!-- 多表筛选表中的筛选字段，可以选择的性的用-->
+	<div >
+		<!-- Modal -->
+<div class="modal fade" id="mySys" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">选择需要的表单控件</h4>
+      </div>
+      <div class="modal-body">
+        <div  id="select_fields"  	data-options="iconCls: 'icon-save'">
+		<div>
+			<table id="select_table_fields">
+				
+			</table>
+		</div>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary selectConfirm">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+	</div>
+	
+	<div id="saveDlg"></div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	//
+		$(".moreCon").click(function(){
+		
+				$("#mySys").modal("show");
+		});
+		$(".selectConfirm").on("click", function(){
+			$("#select_fields table:first").find("input[field!=main]").each(function(e) {
+
+				var name = $(this).attr("name");
+				var cvalue = $(this).attr("value");
+				if ($(this).prop("checked")) {
+					$(".right_where_column").find("li[fname=" + cvalue + "]").css("display", "block");
+				} else {
+	
+					$(".right_where_column").find("li[fname=" + cvalue + "]").css("display", "none");
+				}
+			});
+			$("#select_fields table:first").find("input[field!=main]").each(function(e) {
+
+				var name = $(this).attr("name");
+				var cvalue = $(this).attr("value");
+				if ($(this).prop("checked")) {
+					$(".right_where_column").find("li[fname=" + cvalue + "]").css("display", "block");
+				} else {
+	
+					$(".right_where_column").find("li[fname=" + cvalue + "]").css("display", "none");
+				}
+			});
+			$("#mySys").modal('hide');
+		});
+		
+		
+		
+		/**
+	 * 控件左侧菜单的显示或隐藏（手风琴效果）
+	 */
+	function MenuCtrler() {
+		$(".list").click(function() {
+			if ($(this).hasClass("menuSelected"))
+				return;
+			if ($(this).hasClass("pageMgr")) {
+		
+			} else if ($(this).hasClass("formList")) {
+				$("#webSetting").show();
+				$("#ctrlAttrSetting").hide();
+				$("#formAttrSetting").show();
+				//$("#ctrlArea").css("width", "50%").find("#phoneWrap").css("float", "");
+			} else if ($(this).hasClass("ctrlList")) {
+				$("#webSetting").show();
+				$("#ctrlAttrSetting").show(), $("#formAttrSetting").hide(), $("#ctrlAttrSetting").show();
+				//$("#ctrlArea").css("width", "50%").find("#phoneWrap").css("float", "");
+			} else {
+				$("#webSetting").show();
+				//$("#ctrlArea").css("width", "50%").find("#phoneWrap").css("float", "");
+			}
+			$(".menuSelected").removeClass("menuSelected").find(".content").slideUp("fast");
+			$(this).find(".content").slideDown("fast");
+			$(this).addClass("menuSelected");
+		});
+		$(".page").click(function() {
+			if ($(this).hasClass("pageSelected")) {
+				$(this).removeClass("pageSelected").find("ul").slideUp("fast");
+				return;
+			};
+			$(".pageSelected").removeClass("pageSelected").find("ul").slideUp("fast");
+			$(this).find("ul").slideDown("fast");
+			$(this).addClass("pageSelected");
+		});
+		$(".setMenuWrap").click(function(e) {
+			e.stopPropagation();
+		});
+	}
+		
+		
+	});
+		
+	</script>
+</body>
+</html>

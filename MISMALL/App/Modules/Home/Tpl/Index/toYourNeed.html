@@ -1,0 +1,124 @@
+<include file="Index:top" title="需求发布" need="current"/>
+<link rel="stylesheet" href="__STATIC__/Css/bootstrap-expand.css">
+<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/bootstrap-switch.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+<link rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css"> 
+<link rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/dropdown.css">
+<script src="__PUBLIC__/App/Home/Home/index.js"></script>
+
+<div class="toNeed_main">
+
+	<div id="ajaxmask">
+		<div class="ajaxmessage">
+			<span class="mas_img" style="margin:auto;color:white;">数据提交成功</span>
+		</div>
+	</div>
+	<div class="main-box">
+		<div class="main-box-right">
+			<div class="mainText">
+				<br>
+				<br>
+				<p class="boldFont">
+					<span >请选择类型：</span>
+					<select class="text" id="nowSelected">
+						<option>微网站</option><option>微信应用</option><option>企业移动应用</option>
+					</select>
+				</p>
+				<br>
+				
+				<p class="boldFont">
+					<span>简单描述一下需求:</span>
+				</p>
+				<p class="textInner">
+					<input class="text requestTitle" type="text" name="mytext"  placeholder="简单描述一下需求吧"/>
+				</p>
+				<p class="writeTitle">
+					<div class="b_main writeTitle" >
+						<div class="borderNeed">
+							标题字数应该为2到30个
+						</div>
+						<div class="out">
+							<div class="in"></div>
+						</div>
+					</div>
+				</p>
+				<br>
+				<p class="boldFont">
+					<span>您愿意出多少钱？</span>
+				</p>
+				<p class="textInner">
+					<img src="__STATIC__/Home/images/money.jpg"><input class="text requestMoney" type="text" name="mytext" placeholder="您愿意出的价钱是？"  />
+					<!-- <span style="color:#C0C0C0;">合理的定价可以吸引更多专业的服务商</span> -->
+				</p>
+				<p class="writeMoney">
+					<div class="b_main writeMoney" >
+						<div class="borderNeed">
+							赏金最低不能低于100.00元
+						</div>
+						<div class="out">
+							<div class="in"></div>
+						</div>
+					</div>
+				</p>
+				<br>
+				<p class="boldFont">
+					<span>您要求完成的时间？</span>
+				</p>
+				<p class="textInner">
+					<img src="__STATIC__/Home/images/date.jpg"><input id="datetimepicker" class="text requestDate" type="text" name="mytext" placeholder="" />
+					<span style="color:#C0C0C0;">您希望服务商何时能完成您的需求？</span>
+				</p>
+				<p class="writeDate">
+					<div class="b_main writeDate" >
+						<div class="borderNeed">
+							需求完成时间无效
+						</div>
+						<div class="out">
+							<div class="in"></div>
+						</div>
+					</div>
+				</p>
+		
+				<br>
+				<p class="boldFont">
+					<span >详细描述一下需求:</span>
+				</p>
+				<p class="textInner" >
+					<textarea class="text requestContent" type="text" name="mytext"></textarea>
+				</p>
+				<p class="writeContent">
+
+					<div class="b_main writeContent" >
+						<div class="borderNeed">
+							请输入要求内容
+						</div>
+						<div class="out">
+							<div class="in"></div>
+						</div>
+					</div>
+				</p>
+				<br>
+				<!-- <p style="font-size: 15px; margin-left: 50px;">
+				<input class="text" type="file" name="mytext" style="width: 200px;height:30px ;border:1px solid #CCCCCC;"/>
+				</p>
+				-->
+				<p  class="addText" style="font-size: 15px;margin-left: 300px;">
+					<button class="addRequest">
+						提交
+					</button>
+				</p>
+			</div>
+
+			<!-- <div class="blank">
+			<img src="__STATIC__/Home/images/arrow.jpg">您要发布什么类型的需求？
+			</div> -->
+
+		</div>
+	</div>
+</div>
+<include file="Index:bottom"/>
+
+</body>
+</html>
+

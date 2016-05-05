@@ -1,0 +1,408 @@
+<include file="Index:top" title="应用" salecenter="current"/>
+<!--中间内容 -->
+
+<div class="clear"></div>
+<div id="content">
+	<!--左边菜单 -->
+	<include file="MyCenter:left_sale" my_viewget="now"/>
+	<!--右边模块 -->
+	<div class="rightcontent fr">
+		<div class="breadCrumb f-14b">
+			微观应用
+
+		</div>
+		<!-- <div class="tabs f-14b">
+		<div class="bottomline"></div>
+		<ul >
+		<li class="on orderTab" id="orderAll">
+		<a href="{:U('MyCenter/web_wx')}"><strong>微企应用</strong></a>
+		</li>
+		<li class="orderTab" id="orderAll">
+		<a href="{:U('MyCenter/buy_wq')}"><strong>购买应用</strong></a>
+		</li>
+		</ul>
+		</div> -->
+		<div class="web_case">
+			<ul>
+				<if condition="$siteNum lt 1">
+					<div class="notcont">
+						<span>还没有微观应用！<a href="{:U('Template/index?type=52')}">点击这里</a> 创建您的应用吧！</span>
+					</div>
+					<else />
+
+					<!-- 获取站点数据 -->
+					<volist name="userSite" id="vo" key="k">
+
+						<if condition="$k lt 6">
+							<li class="siteList">
+								<else />
+							<li class="siteList" style="display: none;">
+						</if>
+						<div class="fl_webpic fl" >
+							<img id="{$vo.id}" src="{$vo.thumbPath}"  style="width:155px;height:130px;cursor:pointer;"/></span>
+						</div>
+
+						<div class="modal fade" id="siteName">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">
+											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">应用图片设置</h4>
+									</div>
+									<div class="modal-body" id = "contentWrap"  style="height:170px;margin-left:180px;">
+<a class="ImagePreview " href="javascript:;">
+				<input type="file" style="cursor:pointer;position:absolute;width:165px;height:130px;margin-top:4px;-moz-opacity:0;opacity: 0;"size="1" multiple="" id="inputFile{$key}" name="file"><img src="{$info['img']|default='__ROOT__/images/36.jpg'}" class="img_avatar"  style="cursor:pointer; width:165px; height:130px;margin-top:4px;">
+				</a>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" id="setNameSureBtn">
+											确定
+										</button>
+										<button type="button" id="setNameCancleBtn" class="btn btn-default">
+											取消
+										</button>
+									</div>
+								</div><!-- /.modal-content -->
+							</div><!-- /.modal-dialog -->
+						</div>
+
+						<div class="fr_cont fl" style="  width: 400px;">
+							<p>
+								<span class="fl">应用名称：</span><span class="f-gay2 fl">
+									<input name="siteName" type="text" class="revise_text" value="{$vo.siteName}" oldName="{$vo.siteName}" disabled="disabled" style="border-style:none;background:#fff;margin-top:-5px;" />
+								</span>
+								<span class="revise fl"><a href="javascript:;">&nbsp;</a></span>
+								<span class="blue_text btnModify"  style="display:none;" > <a href="javascript:" class="confrim" value="{$vo.id}">确定</a><a href="javascript:" class="giveup" style="margin-left:20px;">放弃修改</a></span>
+								<span class="blue_text errorMessage" style="margin-left: 10px; display: none;"> <a style="color:red;" href="javascript:"></a> </span>
+							</p>
+							<!--
+							<p>
+							<span class="fl">访问域名：</span>
+							<span class="f-gay2 fl"><a href="{$vo.preView}" target="_blank">{$vo.preView}</a></span>
+							</p>
+							-->
+							<p>
+								<span class="fl">到期时间：</span><span class="f-gay2 fl">永久</span><span class="del_web"><a href="javascript:">删除</a></span>
+							</p>
+							<p>
+								<span class="fl">创建时间：</span><span class="f-gay2 fl">{$vo.addTime||date='Y-m-d H:i:s',###}</span><span class="fl">查看次数：</span><span class="f-gay2 fl">{$vo.clickCount}</span>
+							</p>
+							
+							<p>
+								<span class="edit"><a  id="{$vo.id}" class="app_edit" href="javascript:;" >编辑应用</a></span>
+								<if condition="$vo[userProjectId] gt 0">
+								<span class="edit" onclick="goToAppAdmin({$vo.id});"><a href="javascript:;">微观数据</a></span>
+								</if>
+								<span class="edit"><a  href="{:U('/ViewGet/Editor/preview/siteId/'.$vo['id'])}" >预览</a></span>
+								<span class="edit" onclick="shareTemplate({$vo.id});"><a href="javascript:;">分享</a></span> 
+							</p>
+						</div>
+						<div class="qrcode fl">
+							<img src="__ROOT__/Index/qrcode?url=/ViewGet/Index/preview/siteId/{$vo['id']}">
+						</div>
+						<div class="del_dr" >
+							<div class="confirm_canle">
+								<p class="confirm_del" value="{$vo.id}">
+									确定
+								</p>
+								<p class="cancel_del" style="margin-left: 30px;">
+									取消
+								</p>
+							</div>
+						</div>
+						</li>
+					</volist>
+
+				</if>
+
+			</ul>
+			<if condition="$siteNum lt 6">
+				<div class="page" id="sitePage" style="display:none;">
+					<else />
+					<div class="page"  id="sitePage">
+			</if>
+			<div style="float:left;margin-left:100px;">
+				<ul id="pageSite" class="page-nav-cell" style="margin:0px;"></ul>
+			</div>
+			<div  style="float:left;">
+
+				</span>共<span id="pageSum"></span>页 到第
+				<input name="" type="text"  class="input_box" id="fewPage"/>
+				页
+				<input name="" type="submit" class="btn" id="btnFewPage" value="确定" />
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<!--样式文件-->
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+<!-- 脚本库文件 -->
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-pager/jquery.pager.js"></script>
+<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="__PUBLIC__/Js/jquery.ImagePreview.js"></script>
+<script src="__PUBLIC__/Js/common.js"></script>
+<script src="__PUBLIC__/Js/layer/layer.min.js"></script>
+
+<script  type="text/javascript">
+	//更换图片事件所需的一些全局变量
+	var $this_now = null;
+	var $panelObj = $("#siteName");
+	var siteId = 0;
+	//点击图片，更换图片
+	$('.fl_webpic').click(function() {
+		$this_now = $(this).find('img');
+		siteId = $this_now.attr('id');
+		$panelObj.modal("show");
+		var ob_image = $(this).parent().find('.ImagePreview');
+		var iptid = ob_image.find('input').attr('id');
+		ob_image.undelegate('#'+iptid,'change').delegate('#'+iptid,'change', function() {
+		      $.ajaxFileUpload({
+		         type:"POST",
+		         url:ROOTPATH+"/MyCenter/ajaxUpload",
+		         secureuri:false,
+		         fileElementId:iptid,
+		         dataType: 'JSON',
+		          success: function(data){
+		            var json = eval('('+data+')');
+		            //console.log(data,json);
+		            ob_image.find('.img_avatar').attr('src', json.image);
+		          }
+		       });
+		})
+	});
+	//取消按钮事件
+	$("#setNameCancleBtn").click(function() {
+		$panelObj.modal("hide");
+	});
+	//确定按钮事件
+	$("#setNameSureBtn").click(function() {
+		var imgData = $.trim($(".ImagePreview").find("img").attr("src"));
+		$this_now.attr('src', imgData);
+		$panelObj.modal("hide");
+		$(".ImagePreview").find("img").attr("src", "__ROOT__/images/36.jpg");
+		var data = {};
+		data['siteId'] = siteId;
+		data['imgData'] = imgData;
+		$.ajax({
+			type : "POST",
+			url : ROOTPATH + "/MyCenter/updateASiteImg",
+			data : data,
+			success : function(result) {
+
+			}
+		});
+
+	});
+	//点击时设置cookie
+	$(".app_edit").click(function() {
+		var id = $(this).attr("id");
+
+		window.location = ROOTPATH + "/ViewGet/Editor/index/siteId/" + id + ".html";
+		_setCookie("from_page", 'mycenter');
+		// 记录编辑器来路
+
+	});
+
+	var siteSum = '{$siteNum}';
+	var pIndex;
+	$(function() {
+		var pageSize = 6;
+		pageSizeSum(siteSum, pageSize);
+		//分页
+		var btnObj = $("#btnFewPage"), fewObj = $("#fewPage"), pageSite = 'pageSite';
+		var showObj = $(".siteList");
+		pIndex = myCenterPageSize(pageSize, siteSum, btnObj, fewObj, pageSite, showObj);
+
+		//修改站点名称
+		$(".siteList").find(".revise").each(function() {
+			$(this).click(function() {
+				var parentObj = $(this).parent("p");
+				var reviseObj = parentObj.find(".revise_text");
+				reviseObj.removeAttr("disabled").css({
+					"border-style" : "",
+					"border" : "solid 1px #fff"
+				}).focus();
+				$(this).hide();
+				parentObj.find(".btnModify").show();
+			});
+		});
+
+		//放弃修改
+		$(".siteList").find(".giveup").each(function() {
+			$(this).click(function() {
+				var parentObj = $(this).parents("p");
+				parentObj.find(".revise_text").attr("disabled", "disabled").css({
+					"border-style" : "",
+					"border" : "solid 1px #fff"
+				}).val(parentObj.find(".revise_text").attr("oldName"));
+				parentObj.find(".btnModify").hide();
+				parentObj.find(".errorMessage").hide();
+				parentObj.find(".revise").show();
+			});
+		});
+		//确定修改
+		$(".siteList").find(".confrim").each(function() {
+			$(this).click(function() {
+				var parentObj = $(this).parents("p");
+				var textObj = parentObj.find(".revise_text");
+				var field_value = textObj.val();
+				var oldValue = textObj.attr("oldName");
+				var siteId = $(this).attr("value");
+				var field_name = textObj.attr('name');
+				if (field_value == "") {
+					parentObj.find(".errorMessage").show().find("a").text("项目名称不能为空!");
+					return false;
+				}
+				if (field_name == 'siteUrlPath') {
+					var reg = new RegExp(/^[a-zA-Z0-9]*$/gi);
+					if (! reg.test(siteName)) {
+						parentObj.find(".errorMessage").show().find("a").text("项目名称只能使用字母和数字!");
+						return false;
+					}
+				}
+				$.ajax({
+					url : GROUPPATH + '/MyCenter/editUserSite',
+					data : {
+						"id" : siteId,
+						name : field_name,
+						"value" : field_value
+					},
+					type : 'POST',
+					dataType : 'JSON',
+					success : function(data) {
+						if (data.error == 0) {
+							parentObj.find(".btnModify").hide();
+							textObj.attr("disabled", "disabled").css({
+								"border-style" : "",
+								"border" : "solid 1px #fff"
+							}).val(field_value);
+							parentObj.find(".revise").show();
+							parentObj.find(".errorMessage").hide();
+						} else {
+							textObj.val(oldValue);
+							parentObj.find(".errorMessage").show().find("a").text(data.info);
+							return false;
+						}
+					}
+				});
+			});
+		});
+
+		//删除站点
+		$(".del_web").click(function() {
+			$(this).parents(".siteList").find(".del_dr").show();
+		});
+		//取消删除
+		$(".cancel_del").click(function() {
+			$(this).parents(".siteList").find(".del_dr").hide();
+		});
+
+		//确定删除
+		$(".confirm_del").click(function() {
+			var thisSite = $(this).parents(".siteList");
+			var tempId = $(this).attr("value");
+			if (tempId == "")
+				return;
+			thisSite.fadeOut(function() {
+				$(this).remove();
+				$.ajax({
+					type : "POST",
+					url : GROUPPATH + '/MyCenter/deleteUserSiteInfo',
+					data : {
+						siteId : tempId
+					},
+					success : function(data) {
+						if (data < 1) {
+							//删除失败--刷新本页面
+							history.go(0);
+						} else {
+							siteSum -= 1;
+							if (siteSum <= pageSize) {
+								$("#sitePage").hide();
+								$(".siteList").show();
+							} else {
+								showObj = $(".siteList");
+								var index = pIndex.pageIndex;
+								if (showObj.size() == (index - 1) * 5) {
+									index -= 1;
+								}
+								pageSizeSum(siteSum, pageSize);
+								pIndex = myCenterPageSize(pageSize, siteSum, btnObj, fewObj, pageSite, showObj);
+								//保存原来页面数--第几页
+								pIndex.pageIndex = index;
+								myCenterPageIndex(pIndex, index, showObj);
+							}
+							//站点数量小于等于0时
+							if (siteSum <= 0) {
+								$(".web_case").wrap("<div class='notcont'><span>还没有微观应用！<a href='{:U('Template/index?type=52')}'>点击这里</a> 创建您的应用吧！</span></div>");
+
+								$(".notcont").show();
+							}
+
+						}
+					}
+				});
+			});
+		});
+
+	});
+	//分享模板
+	function shareTemplate(site_id) {
+
+		var dialog = {
+			title : '微观分享',
+			width : '660px'
+		};
+		artDialog.open(GROUPPATH + '/Template/shareTemplate?type=app&is_free=1&siteId=' + site_id, dialog);
+	}
+
+	//显示总几页
+	function pageSizeSum(siteNum, pageSize) {
+		if (siteNum % pageSize == 0) {
+			$("#pageSum").text(siteNum / pageSize);
+		} else {
+			$("#pageSum").text(parseInt(siteNum / pageSize) + 1);
+		}
+	}
+
+	function editSiteProject(site_id) {
+		$.ajax({
+			type : "post",
+			url : GROUPPATH + "/Designer/Factory/initFactory",
+			data : {
+				siteId : site_id
+			},
+			async : false,
+			success : function(result) {
+				window.open(GROUPPATH + "/Designer/Factory/index");
+			}
+		});
+	}
+
+
+	function goToAppAdmin(site_id){
+	    	$.layer({
+		        type: 2,
+		        title: [
+		            '微观数据', 
+		            'background:#2795d0; height:40px; color:#fff; border:none;' //自定义标题样式
+		        ], 
+		        border:[0],
+		        area: ['93%', '93%'],
+		        iframe: {src: GROUPPATH + "/ViewGet/Index/getDataList/siteId/"+site_id}
+		    })
+	    }
+</script>
+<include file="Index:bottom"/>

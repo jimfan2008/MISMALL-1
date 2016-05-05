@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <title>MISMALL平台开发</title>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/base.css">
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Develop/DevelopControl.css">
+    <script type="text/javascript">
+            var ROOTPATH = "__ROOT__";
+            var PUBLIC = "__PUBLIC__";
+    </script>
+</head>
+<body>
+    <div id="header">
+           <div class="logo"><img src="__PUBLIC__/App/Home/Client/images/logo.png">
+            </div>
+            <div class="top-menu">
+                
+            </div>
+    </div>
+    
+    <div id="main" class="container" formId="">
+        <div class="m-left col-md-2">
+            <div class="dTypeList col-md-2">
+                    <ul class="col-md-12">
+                        <li class="dItem dSelectItem"><span class="d1">控件开发</span></li>
+                        <li class="dItem"><span class="d1">组件开发</span></li>
+                        <li class="dItem"><span class="d1">属性开发</span></li>
+                        <li class="dItem"><span class="d1">动作开发</span></li>
+                         <li class="dItem"><span class="d1"></span></li>
+                </ul>
+            </div>
+            <div class="dConlist col-md-10">
+                <ul class="col-md-12" id="ctrlList">
+                        <volist name="ctrlList" id="vo">
+                                 <li class="conItem" value="{$vo.id}"><span class="d1">{$vo.ctrlName}</span></li>
+
+                        </volist>
+                        <!--conSelectItem-->
+                </ul>
+                <div class="col-md-12 addControl">
+                    <span>开发新控件</span>
+                </div>
+            </div>
+        </div>
+
+          <!--右边-->
+        <div class="col-md-10 m-right">
+            <div class="col-md-12 direction">
+                <span>开发新控件</span>
+            </div>
+            <div class="row">
+                    
+                <div class="col-md-11 content">
+                        <div class="col-md-2"></div>
+                        <!--控件基本设置-->
+                        <div class="col-md-8 setArea selectedSetting" id="setConBasicInfo">
+                             <form role="form" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件名</label>
+                                    <input type="text" class="form-control f-con" id="ctrlName" placeholder="控件名称">
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="exampleInputFile">控件图标</label>
+                                    <div class="row">
+                                             <div class="col-md-3 upImg">
+                                                <p class="upLoadIcon">上传图标</p>
+                                                 <input type="file" id="imgFile" name="imgFile">
+                                             </div>
+                                             <div class="col-md-4"> <img src="" alt="" id="imgUpload" class="f-con"></div>
+                                    </div>
+                                </div>
+                                <div class="checkbox form-group">
+                                     <label>
+                                      <input type="checkbox" id="dataField" class="f-con"> 创建字段
+                                     </label>
+                                </div>
+                                 <button type="button" class="btn btn-default btn-operation" id="basicInfo" layer="setConFacade"  next="next">下一步</button>
+                            </form>
+                        </div>
+                         <!--控件外观设置-->
+                         <div class="col-md-8 setArea" id="setConFacade">
+                             <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件结构</label>
+                                    <textarea class="form-control f-con" rows="6" placeholder="粘贴控件html结构内容" id="ctrlHTML"></textarea>
+                                </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">控件样式</label>
+                                    <textarea class="form-control f-con" rows="6" placeholder="粘贴控件css内容" id="ctrlCSS"></textarea>
+                                </div>
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConBasicInfo">上一步</button>
+                                 <button type="button" class="btn btn-default btn-operation"  layer="setConAttr" next="next">下一步</button>
+                             </form>
+                         </div>
+                            <!--控件属性设置-->
+                         <div class="col-md-8 setArea" id="setConAttr">
+                             <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件属性</label>
+                                    <div class="col-md-12">
+                                             <div class="checkbox">
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 标题</label>
+                                               </div>
+                                        </div>
+                                </div>
+               
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConFacade" >上一步</button>
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConAction" next="next">下一步</button>
+                             </form>
+                         </div>
+                            <!--控件动作设置-->
+                         <div class="col-md-8 setArea" id="setConAction">
+                             <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件动作</label>
+                                    <div class="col-md-12">
+                                             <div class="checkbox">
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                                    <label class="col-md-3"><input type="checkbox"> 页面跳转</label>
+                                               </div>
+                                        </div>
+                                </div>
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConAttr" >上一步</button>
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConData" next="next">下一步</button>
+                             </form>
+                         </div>
+                             <!--控件数据设置-->
+                         <div class="col-md-8 setArea" id="setConData">
+                             <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件数据</label>
+                                   
+                                </div>
+                                 
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConAction" >上一步</button>
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConRelease"  next="next">下一步</button>
+                             </form>
+                         </div>
+                           <!--控件发布-->
+                         <div class="col-md-8 setArea" id="setConRelease">
+                             <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">控件发布</label>
+                                   
+                                </div>
+                                 
+                                 <button type="button" class="btn btn-default btn-operation" layer="setConData" >上一步</button>
+                                 <button type="button" class="btn btn-default btn-operation"  next="next">完成</button>
+                             </form>
+                         </div>
+                        <div class="col-md-2"></div>
+                        
+                </div>
+               <div class="col-md-1">
+                    <div class="steps">
+                        <p class="stepItem complete"></p>
+                        <p class="stepline"></p>
+                         <p class="stepItem"></p>
+                        <p class="stepline"></p>
+                         <p class="stepItem"></p>
+                        <p class="stepline"></p>
+                         <p class="stepItem"></p>
+                        <p class="stepline"></p>
+                         <p class="stepItem"></p>
+                        <p class="stepline"></p>
+                         <p class="stepItem"></p> 
+                        
+                    </div>
+               </div>
+
+
+            </div>
+
+        </div>
+       <!-- <div class="m-right">
+            <div class="direction">
+                <span>控件开发</span>
+            </div>
+            <div id="basicInfo">
+                    <div class="content">
+                         <div class="conName">
+                            <span class="conTit">控件名</span>
+                            <input type="text" class="form-control" placeholder="123">
+                        </div>
+                        <div class="conIcon">
+                              <span class="conTit">控件图标</span>
+                        </div>
+                    </div>
+                   
+            </div>
+        </div>-->
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ezCommon.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/App/Qywx/Develop/DevelopControl.js"></script>
+</body>
+</html>

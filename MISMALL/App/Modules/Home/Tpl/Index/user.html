@@ -1,0 +1,121 @@
+<div id="loginmodal" style="display:none;">
+	<div class="layer"></div>
+	<div class="container">
+		<a href="javascript:;" class="close"></a>
+		<form id="loginform" onsubmit="return false;" class = "usrPanel">
+			<ul class="loginform">
+				<li>
+					<h1>登录<span></span></h1>
+					<span class="lr" id="to_register">没有帐号,现在注册?</span>
+					<div class="error"></div>
+				</li>
+				<li>
+					<div data-icon="u"></div>
+					<input id="lf_uname" class="input" type="text" placeholder="邮箱:xx@xx.com" />
+				</li>
+				<li>
+					<div data-icon="p"></div>
+					<input id="lf_upass" class="input" type="password" placeholder="密码"  />
+				</li>
+				<li >
+					<div id="codeIMG" style="display:none" >
+					<div data-icon=""></div>
+					<input id="lf_r_code" class="input" type="text" placeholder="验证码" maxlength="4" style="width:100px" />
+					<img id="lf_r_codeimg" src="{:U('/Passport/verifyCode')}" width="105px" height="37px" style="float:left;margin-top:20px;margin-left:4px;" />
+					<a id="a_changeCode" href="javascript:;" style="float:left;margin-top:40px;margin-left:4px;">看不清?</a>
+					</div>
+				</li>
+				<li>
+						<label style="display: none;">
+						<input id="autologin" type="checkbox" />
+						下次自动登录</label>
+						<label class="wxlogin-lab" style="float:left;"><label class="wxlogin" ></label><span style="margin-left:35px;display:block;width:80px">微信登录</span></label>
+						<label id="forgetpass" style="cursor: pointer;margin-left: 10px;float:right;">忘记密码？</label>
+				</li>
+				<li>
+					<button>
+						登录
+					</button>
+					<div style="position:relative; z-index: 2;display:none; width:360px;height:45px;margin-top:-60px;text-align:center;  background:rgba(0,0,0,0);"><img style="margin-top: -50px;" src="__STATIC__/Home/images/loading.gif"/>
+				</li>
+			</ul>
+		</form>
+		<form id="registerform" onsubmit="return false;" class = "usrPanel">
+			<ul class="loginform">
+				<li>
+					<h1>用户注册</h1>
+					<span class="lr" id="to_login">有帐号,直接登录?</span>
+					<div class="error"></div>
+				</li>
+				<li>
+					<div data-icon="u"></div>
+					<input id="lf_r_uname" class="input" type="text" placeholder="邮箱:xx@xx.com(请填写真实有效邮箱)" />
+				</li>
+				<li>
+					<div data-icon="p"></div>
+					<input id="lf_r_upass" class="input" type="password" placeholder="密码" />
+				</li>
+			
+				
+				<li>
+					<button>
+						注册
+					</button>
+					<div style="position:relative; z-index: 2;display:none; width:360px;height:45px;margin-top:-60px;text-align:center;  background:rgba(0,0,0,0);"><img style="margin-top: -50px;" src="__STATIC__/Home/images/loading.gif"/></div>
+				</li>
+			</ul>
+		</form>
+		<div id="active-email"  class="active-email-style usrPanel">
+			 帐号还未激活，请点击邮箱中的链接完成激活！
+			<div class="active-email-href">邮件已发送至您的邮箱<a target="_self" href="javascript:;"></a></div>
+			<div style="text-align: center;"><button target="_self">查收邮件</button><button style="background-color: #4F94D4">重新激活</button></div>
+		</div>
+		<div id="forget-password" class="active-email-style usrPanel">
+			<h1>忘记密码</h1>
+			<div id="forget-password-send">
+				输入您的电子邮件地址，我们会发送一个链接重置您的密码！
+				<div><div data-icon="u" style="position: relative;top: -3px;left: -2px;"></div><input id="lf_f_uname" class="input" type="text" placeholder="邮箱:xx@xx.com" /></div>
+				<div style="text-align: center;" class="error"></div>
+				<div  style="text-align: center;"><button>发送</button><button style="background-color: #4F94D4">关闭</button></div>
+			</div>
+			<div id="forget-password-href" style="display: none;">
+				<div class="active-email-href">已发送忘记密码邮件至<a href="javascript:;"></a></div>
+				<div style="text-align: center;"><button>查收邮件</button><!--<button style="background-color: #4F94D4">重新发送</button>--></div>
+			</div>
+		</div>
+		
+		<form id="resetPass" onsubmit="return false;" class = "usrPanel">
+			<ul class="loginform">
+				<li>
+					<h1>重置密码</h1>
+					<div class="error"></div>
+				</li>
+				<li>
+					<div data-icon="u"></div>
+					<div class="resetEmail">{$findemail}</div>
+				</li>
+				<li>
+					<div data-icon="p"></div>
+					<input id="lf_s_upass" class="input" type="password" placeholder="密码" />
+				</li>
+				<li>
+					<div data-icon="p"></div>
+					<input id="lf_s_rupass" class="input" type="password" placeholder="重复密码" />
+				</li>
+				<li>
+					<button>确定</button>
+				</li>
+			</ul>
+		</form>
+		<input type="hidden" id="isActive" value="{$isActive}">
+		
+	</div>
+</div>
+<script>
+		$(function(){
+			$(".wxlogin-lab").click(function(){
+				var urls = encodeURIComponent('{:U("Passport/wechatLogin", false,false,false,true)}');
+			window.location.href =( "https://open.weixin.qq.com/connect/qrconnect?appid=wxe1d40ff22b2a5303&redirect_uri="+urls+"&response_type=code&scope=snsapi_login&state=#wechat_redirect");
+			})
+		});
+	</script>

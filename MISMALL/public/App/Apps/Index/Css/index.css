@@ -1,0 +1,414 @@
+@charset "utf-8";
+/* CSS Document */
+/*后台管理页面css by fanwenbin*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: #ffffff;
+	text-decoration: none;
+}
+ul, li {
+	list-style: none;
+}
+.clear {
+	clear: both;
+}
+
+/*头部*/
+#header {
+	width: 100%;
+	height: 70px;
+	background: #114057;
+	border-bottom: 1px solid #000;
+	overflow: hidden;
+}
+#header .logo {
+	float: left;
+	margin: 12px 0 0 20px;
+}
+
+#header .user {
+	float: right;
+	margin: 35px 20px 10px 0;
+}
+#header .user a {
+	color: #FFF;
+	font-family: '微软雅黑', Verdana, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+/*左边菜单*/
+.apps_left {
+	background: #1b6896;
+}
+.apps_left ul {
+	color: #FFF;
+	font-size: 14px;
+	font-family: '黑体', Verdana, Geneva, sans-serif;
+	list-style: none;
+}
+.apps_left ul li {
+	-height: 80px;
+	border-bottom: 1px solid #2696c0;
+	cursor: pointer;
+	list-style: none;
+}
+.apps_left .signPic {
+	width: 14px;
+	height: 10px;
+}
+.apps_left .clickShow {
+	float: right;
+}
+
+.mainMenu {
+	padding: 10px 12px 8px 20px;
+	font-size: 16px;
+	font-family: '微软雅黑';
+	font-weight: bold;
+	clear: both;
+}
+.childMenu ,.formMenu{
+	-height: 60px;
+	background: #2696c0;
+	font-size: 16px;
+	overflow: hidden;
+}
+.childMenu p,.formMenu p {
+	height: 35px;
+	line-height: 35px;
+	margin: 0;
+	padding: 0;
+}
+.childMenu p:hover,.formMenu p:hover, .childMenu p.active , .formMenu p.active{
+	background: #ccc;
+}
+.childMenu a, .formMenu a {
+	padding-left: 70px;
+	color: #fff;
+	display: block;
+}
+.childMenu p:hover,.formMenu p:hover  {
+	-background: #1b6896
+}
+#main-container {
+	margin-top: auto;
+}
+.container {
+	margin-left: 0;
+}
+#content .col-xs-2 {
+	padding-right: 1%;
+	padding-left: 0;
+}
+
+/*手机模型部分头部 st*/
+
+#pcContent {
+	border: 1px solid #ccc;
+	margin:auto;
+	width: 340px;
+}
+
+#pcContent .mainTop {
+	width: 100%;
+	height: 40px;
+	color: #FFFFFF;
+	background: black;
+}
+#pcContent .mainTop span {
+	font-size: 17px;
+	background: black;
+}
+#pcContent .mainTop .pageTop-title {
+	line-height: 40px;
+	margin-left: 20px;
+}
+
+/*手机模型部分头部  ed*/
+
+#pcContent #myWeb {
+	width: 100%;
+	height: 528px;
+	background: white;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/*页面通用样式 st*/
+.wxqyPage {
+	position:relative;
+	overflow: hidden;
+	height: 100%;
+}
+.myForm {
+	position: relative;
+	height: 100%;
+	overflow-y: auto;
+	/*border-top: 1px solid transparent;*/
+}
+
+/*表单模式窗口样式*/
+#modal-form {
+	overflow: hidden
+}
+#modal-form .dyna-handle {
+	display: none
+}
+
+.modal-dialog {
+	margin: 70px auto
+}
+
+/*end 表单模式窗口样式*/
+
+.formInputArrow{
+	position: absolute; 
+	right: 0px; 
+	font-size: 20px; 
+	text-align: center; 
+	width: 30px; 
+	height: 30px; 
+	top: 5px;
+	color:green;
+	display:none;
+}
+
+/*控件通用样式 st*/
+.ctrl {
+	position: relative;
+	margin: 18px 0;
+}
+
+.ctrl:first-child[syscomtype="swiper"], .ctrl:first-child[ctrl-type = "IMAGEBOX"] {
+	margin-top: 0;
+}
+.ctrl:only-child {
+	margin: 0;
+}
+.form-horizontal .control-label {
+	text-align: center
+}
+#siteContent label {
+	font-weight: normal;
+}
+
+.ctrl[ctrl-type="TEXT"] div[name] {
+	padding: 5px;
+}
+
+.ctrl textarea {
+	color: #808080;
+	border: 1px solid #ccc;
+	margin-left: 0px;
+	width: 89%;
+	padding: 4px;
+}
+
+.form-control {
+	width: 90%;
+}
+[ctrl-type="compLogic"] [rowunit = "n"] {
+	margin-left: 0;
+	margin-right: 0;
+}
+/*控件通用样式 ed*/
+
+/*控件选中样式 st*/
+.ctrlSelected {
+	outline: none;
+}
+/*控件选中样式 ed*/
+
+/*控件删除图标 st*/
+.dyna-handle, .ctrlIconWraperl, .submit_tipWrap {
+	display: none;
+}
+/*控件删除图标 ed*/
+
+/*定位栏样式 st*/
+.ctrl[ctrl-type="COLBOX"] {
+	position: absolute;
+	width: 100%;
+}
+
+.ctrl[ctrl-type="COLBOX"] .colInner {
+	padding: 10px;
+}
+
+/*定位栏样式 ed*/
+
+/*单选,多选控件样式*/
+label.itemLabel input[type="radio"], label.itemLabel input[type="checkbox"] {
+	display: none;
+}
+label.itemLabel span {
+	padding-left: 2px;
+}
+
+/*三种原始样式*/
+.ctrl label.buttonType{
+	padding: 3px 8px;
+	margin:5px 9px 5px 0;
+	text-align: center;
+	border: solid 1px #ccc;
+	font-size:14px;    
+}
+
+.radioImgOval {
+	border: 1px solid #999;
+	border-radius: 50%;
+	padding: 10px 16px;
+	margin-left: 0px;
+	text-align: center;
+}
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+	margin-bottom: 0;
+	margin-top: 5px;
+	padding-top: 7px;
+}
+/*三种激活样式*/
+#siteContent .onChecked {
+	background-position: 0 -40px;
+	background-color: #41a7c5;
+	color: #fff;
+}
+
+div.row[ctrl-type="compLogic"] div[rowUnit] {
+	padding: 5;
+	/*margin: 0px -3px;*/  /*加了水平－3px的外边距，组件在预览时，页面会出现横向滚动条*/
+	margin:0;
+}
+
+div.dynamicName {
+	display: none;
+	position: relative;
+	font-size: 11px;
+	font-weight: 500;
+	left: 0px;
+}
+
+div.row[ctrl-type="compLogic"] div[rowUnit]:before {
+	content: "";
+	width: 0;
+	height: 0;
+}
+
+div.row[ctrl-type="compLogic"] div[rowUnit] [class *= 'col-'] {
+	/*background: #fff;*/
+	outline: 0;
+	outline-offset: 0;
+}
+
+div[rowUnit] [class *= 'col-'] .colInner {
+	border: 0;
+}
+
+div.colInner {
+	width: 100%;
+	padding: 0 10px;
+}
+
+.colInner img {
+	margin: auto;
+}
+
+#progress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+	background: rgba(100,200,50,0.5);
+	font-size: 20px;
+	color: red;
+	text-align: center;
+	line-height: 100px;
+}
+
+#imgBoxProgressData{
+    bottom: 0;
+    color: red;
+    font-size: 20px;
+    height: 100px;
+    left: 0;
+    line-height: 75px;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+}
+
+#imgBoxProgressBar{
+	background: rgba(0, 200, 0, 0.8) none repeat scroll 0 0;
+    bottom: 0;
+    color: red;
+    font-size: 12px;
+    height: 20px;
+    left: 0;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 0;
+}
+
+div.row[ctrl-type="compLogic"],div.row[ctrl-type="compLogic"] .row,{
+padding: 0px 2px;
+margin: 0px;
+background: none;
+}
+div.row[ctrl-type="compLogic"] div[class*="col-"],{
+border-width: 0px;
+}
+/**save form 、data submit css start**/
+.tipWrap {
+	background: #4b5a6b;
+	/*box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);*/
+	display: none;
+	font-size: 25px;
+	color: red;
+	height: 60px;
+	line-height: 60px;
+	position: absolute;
+	text-align: center;
+	width: 360px;
+	left: 35%;
+	top: -6px;
+	z-index: 100;
+	position: fixed;
+	opacity: 0.6;
+}
+
+#mask {
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 133%;
+	z-index: 99;
+	top: 0px;
+	left: 0px;
+	background: #666666;
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+#mask .message {
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	background: #000;
+	z-index: 100;
+	width: 40%;
+	height: 80px;
+	margin: auto;
+	font-size: 25px;
+	text-align: center;
+	line-height: 80px;
+	border-radius: 8px;
+	opacity: 0.7;
+}

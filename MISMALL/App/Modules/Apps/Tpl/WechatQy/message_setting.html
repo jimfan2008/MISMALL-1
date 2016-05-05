@@ -1,0 +1,150 @@
+<extend name="mobileBase"/>
+<block name="style">
+<style type="text/css">
+.thumbnail img{max-height:200px}
+.mod-msg {
+    background-color: none;
+    border: 0;
+    border-radius: 0px;
+    min-height: 100px;
+    padding: 0;
+    width: auto;
+}
+.edit_msg_cover_box{width: auto}
+.filetype_content{width: 100px}
+.thumbnail{cursor: pointer;}
+.row .active{
+	border: 1px solid #0000FF;
+}
+</style>
+</block>
+<block name="body">
+<div id="xc_list" class="row" style="margin-top:20px">
+  <volist name="list" id="vo">
+	<div class="col-xs-4" data-id="{$vo.id}">
+		<div class="thumbnail">
+		<switch name="msgType">
+		    <case value="image">
+		    	<img src="{$vo['data']['cover_image_path']}">
+		    	<div class="caption">
+			        <p>{$vo['data']['cover_image_id']|get_cover='name'}</p>
+			    </div>
+		    </case>
+		    <case value="voice">
+		    	<div class="icon icon_sound">
+		    		<audio src="{$vo['data']['cover_voice_path']}" controls="controls"></audio>
+		    	</div>
+		    	<div class="caption">
+			        <p>{$vo['data']['cover_voice_id']|get_cover='name'}</p>
+			    </div>
+		    </case>
+		    <case value="file">
+		    	<php>$file_ext = substr($vo['data']['cover_file_path'], -3, 3)</php>
+		    	<div class="caption">
+		    		<div class="icon_filetype filetype_{$file_ext}"></div>
+		    		<div class="filetype_content">
+		    			<div class="filetype_content_name">{$vo['data']['cover_file_id']|get_cover='name'}</div>
+		    			<div class="filetype_content_size">{$vo['data']['cover_file_id']|get_cover='size'}</div></div>
+			        <p></p>
+			    </div>
+		    </case>
+		    <case value="video">
+		    	<div class="caption">
+		    		<h3>{$vo['data']['video_title']}</h3>
+		    	</div>
+		    	<img src="{$vo['data']['cover_video_path']}">
+		    	<div class="caption">
+		    		<p>{$vo['data']['video_content']}</p>
+		    	</div>
+		    </case>
+		    <case value="mpnews">
+		    	<div class="caption">
+		    		<h3>{$vo['data']['mpnews_title']}</h3>
+		    	</div>
+		    	<img src="{$vo['data']['cover_mpnews_path']}">
+		    	<div class="caption">
+		    		<p>{$vo['data']['mpnews_content']}</p>
+		    	</div>
+		    </case>
+		    <case value="news">
+		    <div class="mod-msg multi">
+		    	<volist name="vo['data']" id="new">
+		    	<if condition="$key eq 0">
+		    	 <div class="mod-msg-cover"  style="cursor: default;">
+                    <div class="edit_msg_cover_box">
+                        <div class="edit_msg_cover_image">
+                        	<img style="width:100%" src="{$new.cover_news_path}">
+                        </div>
+                    </div>
+                    <h2>{$new.title}</h2>
+                 </div>
+                 <else/>
+                <div class="mod-msg-item">
+                	<div class="mod-msg-item-image">
+                		<img src="{$new.cover_news_path}" style="width:70px;height:70px"/>
+                	</div>
+                	<h2>{$new.title}</h2>
+                </div>
+                </if>
+                </volist>
+        	</div>
+		    </case>
+		    <case value="text">
+		      <div class="caption">
+		        <p>{$vo.data}</p>
+		      </div>
+		    </case>
+		    <default/>
+		    	<div class="caption">
+		        <p>{$vo.data}</p>
+		      </div>
+		</switch>
+	    </div>
+	</div>
+  </volist>
+ 
+</div>
+<div class="row">
+	<div class="form-group">
+		<button type="button" class="btn btn-primary" id="btn-submit" disabled="false">选择素材</button>
+		<button class="btn btn-default" id="btn-canl">取消</button>
+	</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Wechat/js/common.js"></script>
+<script type="text/javascript">
+var mid = '';
+var msgType = '{$msgType}';
+	$(function(){
+		if(msgType == 'text') {
+			$('.caption p').each(function(){
+				$(this).html(emoji($(this).html()));
+			});
+		}
+		$('#xc_list > .col-xs-4').click(function(){
+			var thumbnail = $(this).find('.thumbnail');
+			if ( thumbnail.hasClass('active') ) {
+				thumbnail.removeClass('active');
+				$('#btn-submit').attr('disabled', true).removeClass('btn-danger');
+				return;
+			}
+
+			$('#xc_list > .col-xs-4 > .thumbnail').removeClass('active');
+			thumbnail.addClass('active');
+			 mid = $(this).attr('data-id');
+			$('#btn-submit').attr('disabled', false).addClass('btn-danger');
+		});
+		$('#btn-canl').click(function(){
+			art.dialog.close();
+		});
+		$('#btn-submit').click(function(){
+			//artDialog.open.origin.document.getElementById('msgType-id').value = mid;
+			artDialog.open.origin.setMessageSetting(mid);
+			art.dialog.close();
+		});
+	});
+</script>
+</block>

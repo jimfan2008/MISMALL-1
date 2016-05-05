@@ -1,0 +1,33 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+#content .comment{width:100%; margin:10px 0;background:#fff; color:#000;}
+#content .comment .tit_list{width:100%; height:35px; line-height:35px;  background:#C9E4EF;}
+#content .comment .tit_list ul{padding:0 20px;margin:0px 0px 0px 0px;}
+#content .comment .tit_list li{float:left; margin:0 2px;}
+#content .comment .tit_list li a{color:#fff; padding:0 10px; display:block;}
+/*#content .comment .tit_list li a:hover{background:#fff; color:#000;}*/
+#allcomment{background:#fff;}
+#content .comment .tit_list li.curent{background:#fff; color:#000;}
+#content .comment .tit_list li.curent a{background:#fff;color:#000;}
+#content .comment .comment-con{width:100%; margin-top:8px;}
+#content .comment .comment-con li{ line-height:25px; margin:5px 0; }
+#content .comment .comment-con li .plinetop{width:100%;padding:10px;}
+#content .comment .comment-con li .plfl{width:25%; color:#A7A7A7;}
+#content .comment .comment-con li .name{}
+#content .comment .comment-con li .time{text-align:center;}
+#content .comment .comment-con li .plinerow{padding:0px;height:1px;width:100%;background:#F3F3F3;overflow:hidden;}
+#content .comment .comment-con li .plinfor{padding:10px;width:100%;}
+#content .comment .pages{width:100%; height:30px; line-height:30px; text-align:center; color:#000; margin-top:10px;}
+#content .comment .pages .curen{color:#fff; background:#075cac; padding:2px 8px;}
+#content .comment .pages a{color:#000;}
+#content .comment .pages a:hover{text-decoration:underline;} 
+#content .comment .fbpl{padding:5px 30px; margin:20px 0; background:#fff;}
+#content .comment .fbpl p{margin:6px 0;}
+#content .comment .fbpl .pl_dj{padding-right:10px; line-height:25px;}
+#content .comment .fbpl .fbtitle{font-size:14px;}
+#content .comment .fbpl .input{height:110px; width:710px; border:1px solid #88bde7; padding:5px; line-height:20px;}
+#content .comment .fbpl .input:hover{border:1px solid #0e9ed0;}
+#content .comment .fbpl .sent{width:100px; padding:8px 10px; text-align:center; color:#fff; font-size:14px; background:#1577d0; cursor:pointer; vertical-align:middle; font-weight:bold;}
+#content .comment .fbpl .sent:hover{background:#0e9ed0;}
+

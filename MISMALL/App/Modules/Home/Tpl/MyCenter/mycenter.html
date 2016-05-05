@@ -1,0 +1,320 @@
+<include file="Public:header" />
+
+<!-- 自定义样式文件 -->
+<link href="__PUBLIC__/App/Home/MyCenter/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/App/Home/MyCenter/Css/my_center.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="user_top"><img src="__PUBLIC__/App/Home/Home/images/logo.jpg"/>
+    </div>
+    <div id="user_curen">
+        <a href="__GROUP__/Index/index">首页</a> ><a href="javascript:">个人中心</a>
+    </div>
+    <div id="user_main">
+        <div class="fl navlist">
+            <div class="title">
+                个人中心
+            </div>
+            <ul class="ultype">
+				 <li class="type"  id="myinfo">
+                    <a selmark="true" href="javascript:" style="background:#705ef0;color:#fff">个人信息</a>
+                </li>
+                <if condition="$companyInfo neq '' ">
+                    <li class="type"  id="mycompany">
+                        <a selmark="false" href="javascript:" >公司信息</a>
+                    </li>
+                </if>
+                <li class="type"  id="mysite">
+                    <a selmark="false" href="javascript:" >我的站点</a>
+                </li>
+				<li class="type"  id="myapps">
+                    <a selmark="false" href="javascript:">我部署的应用</a>
+                </li>
+                <li class="type"  id="myproject">
+                    <a selmark="false" href="javascript:" >我发布的项目</a>
+                </li>
+                <li class="type"  id="mytemplate">
+                    <a selmark="false" href="javascript:" >我分享的模板</a>
+                </li>
+				<li class="type"  id="myorders" >
+                    <a selmark="false" href="javascript:" >我的订单</a>
+                </li>
+            </ul>
+        </div>
+        <div class="fr czcenter" id="orderInfo" style="display:none">
+            <div class="cztitle">
+                <ul>
+                    <li class="nav current">
+                        <a style="color:#000" href="javascript:;">所有订单</a>
+                    </li>
+                    <li class="nav">
+                        <a href="javascript:;">待付款</a>
+                    </li>
+                    <li class="nav">
+                        <a href="javascript:;">已付款</a>
+                    </li><!--
+                    <li class="nav">
+                        <a href="javascript:;">即将到期</a>
+                    </li>
+                --></ul>
+            </div>
+            <div class="ts"></div>
+            <div class="czcont">
+                <table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#fff"  class="rodertab">
+                    <tr class="tr_title">
+                        <td width="18%" align="center" bgcolor="#EFEFEF"><strong>订单编号</strong></td>
+                        <td width="23%" align="center" bgcolor="#EFEFEF"><strong>项目名称</strong></td>
+                        <td width="7%" align="center" bgcolor="#EFEFEF"><strong>单价
+                        <br />
+                        （元）</strong></td>
+                        <td width="8%" align="center" bgcolor="#EFEFEF"><strong>使用天数
+                        <br />
+                        （天）</strong></td>
+                        <td width="7%" align="center" bgcolor="#EFEFEF"><strong>用户数
+                        <br />
+                        （个）</strong></td>
+                        <td width="7%" align="center" bgcolor="#EFEFEF"><strong>金额数
+                        <br />
+                        （元）</strong></td>
+                        <td width="11%" align="center" bgcolor="#EFEFEF"><strong>到期时间</strong></td>
+                        <td width="7%" align="center" bgcolor="#EFEFEF"><strong>状态</strong></td>
+                        <td width="12%" align="center" bgcolor="#EFEFEF"><strong>操作</strong></td>
+                    </tr>
+
+                </table>
+                <div class="d-page">
+                    <ul id="page" class="page-nav-cell" ></ul>
+                </div>
+
+            </div>
+        </div>
+
+		<div class="fr czcenter" id="appdetails" style="display:none">
+            <div class="cztitle">
+                <ul>
+                    <li class="a ">
+                        <a href="#">我部署的应用</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="czcont">
+                <div class="mydingdan">
+                    <ul id="applist"></ul>
+                </div>
+                <div class="d-page">
+                    <ul id="pagea" class="page-nav-cell" ></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="fr czcenter" id="projectInfo" style="display:none">
+            <div class="cztitle">
+                <ul>
+                    <li class="a ">
+                        <a href="#">我发布的项目</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="czcont">
+                <div class="mydingdan">
+                    <ul id="projectlist"></ul>
+
+                </div>
+                <div class="d-page">
+                    <ul id="pageProject" class="page-nav-cell" ></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人信息-->
+        <div id="myMessage" class="fr czcenter">
+            <div class="cztitle">
+                <ul>
+                    <li class="userpwd" id="myMessageli">
+                        <a href="javascript:" style="color:#000;background:#fff">个人中心</a>
+                    </li>
+                    <li class="userpwd" id="updatepwdli">
+                        <a href="javascript:">修改密码</a>
+                    </li>
+                </ul>
+            </div>
+            <div  id="myMessagediv" class="grxxcont" style="display:block">
+                <ul>
+                    <li>
+                        <p class="name fl">
+                            用户名：
+                        </p>
+                        <p id="username" class="datum_box fl" userId="{$uid}">
+                            <strong></strong>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="name fl">
+                            Email：
+                        </p>
+                        <p class="datum_box fl">
+                            <input id="emailtext" class="input" type="text" disabled="disabled" style="border-style:none;background:#fff"/>
+                            <span id="btnrevise" class="revise"><a href="javascript:">点击修改注册邮箱</a></span>
+                            <span  id="emailerror" style="float:right;margin-left:10px;display:none"><a href="javascript:" style="color:red"></a></span>
+                            <input type="button" value="确认" id="confrim" onclick="confrimClick()" style="display: none">
+                            <input type="button" value="放弃修改" id="giveup" onclick="giveupClick()" style="display: none">
+                        </p>
+                    </li>
+                    <li class="heard_div">
+                        <p class="name fl">
+                            头像设置：
+                        </p>
+                        <p class="datum_box fl">
+                            <span class="heard_span"><img src="http://ezsite-images.stor.sinaapp.com/topic/none_header.gif" width="100" height="100"  class="heard_img" id="upload_user_photo"/> <font class="heard_describe">(头像大小为100*100)</font></span>
+                            <span class="heard_upname"><span id="userimg" class="revise"><a href="javascript:">上传头像</a></span></span>
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- 修改密码 -->
+            <div id="updatepawddiv" class="grxxcont" style="display:none">
+                <ul>
+                    <li>
+                        <p class="name fl">
+                            原密码：
+                        </p>
+                        <p  class="datum_box fl">
+                            <input id="bfpassword" name="textfield" type="password" value=""  class="input"/>
+                        </p><p id="betips" class="password_error fl" style="display:none"></p>
+                    </li>
+                    <li>
+                        <p class="name fl">
+                            新密码：
+                        </p>
+                        <p class="datum_box fl">
+                            <input id="newpassword"  name="textfield" type="password"  value=""  class="input"/>
+                            </p><p id="newtips" class="password_error fl" style="display:none"></p>
+                    </li>
+                    <li>
+                        <p class="name fl">
+                            确认新密码：
+                        </p>
+                        <p class="datum_box fl">
+                            <input  id="newpassword2" name="textfield" type="password"  value=""  class="input"/>
+                        </p><p id="newtips2" class="password_error fl" style="display:none"></p>
+                    </li>
+                    <li class="keep_div">
+                        <input id="savepassword" name="" type="button" value="保存修改" class="keep" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <if condition="$companyInfo neq '' ">
+            <div id="companyInfo" class="fr czcenter" style="display:none">
+                <div class="cztitle">
+                    <ul>
+                        <li class="userpwd">
+                            <a href="javascript:" style="color:#000;background:#fff">公司信息</a>
+                        </li>
+                    </ul>
+                </div>
+                <div  class="grxxcont" style="display:block">
+                    <ul>
+                        <li style="height:auto;">
+                            <p class="name fl">
+                                公司名称：
+                            </p>
+                            <p class="datum_box fl">
+                                <input type="text" id="company_name" name="company_name" value="{$companyInfo.name}" class="input" onkeyup="getCompanyName(this.value)"/>
+                            </p>
+                            <br/>
+                        </li>
+                        <li style="height:auto;">
+                            <p class="name fl">
+                                公司二级域名：
+                            </p>
+                            <p class="datum_box">
+                                <input type="text" id="company_domain" name="company_domain" value="{$companyInfo.domain}" class="input" onkeyup="getCompanyDomain(this.value);" />
+                                &nbsp;&nbsp;使用二级域名地址可以直接访问你的应用
+                                <br/>
+                                <span style="font-size: 12px">二级域名地址: http://<span id="domainurl_addr" style="color:red">{$companyInfo.domain|default='www'}</span>.wclouds.net/</span>
+                                <br/>
+                            </p>
+                        </li>
+                        <li style="height:auto;">
+                            <p class="name fl">
+                                公司LOGO：
+                            </p>
+                            <p class="datum_box fl">
+                                <input type=file name="upload_company_logo" id="upload_company_logo" onchange="ajaxUploadCompanyLogo();"/>
+                                <br/>
+                                <br/>
+                                <input type="hidden" id="company_logo" value="{$companyInfo.logo|base64_encode}"/>
+                                <input type="hidden" id="company_id" value="{$companyInfo.id|default=0}"/>
+                            </p>
+                            <p id="localImag"><img src="{$companyInfo.logo}" width="120" height="80" />
+                            </p>
+                            <br/>
+                        </li>
+                        <li style="height:auto;">
+                            <p class="name fl">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                            <p>
+                                <input type="button" class="submit"  value="保存修改" />
+                            </p>
+                            <br/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </if>
+        <!-- 分享的模板 -->
+        <div class="fr czcenter" id="templateInfo" style="display:none">
+            <div class="cztitle">
+                <ul>
+                    <li class="a ">
+                        <a href="#">我分享的模板</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="czcont">
+                <div class="mydingdan">
+                    <ul id="templateList"></ul>
+
+                </div>
+                <div class="d-page">
+                    <ul id="pageTemplate" class="page-nav-cell" ></ul>
+                </div>
+            </div>
+        </div>
+        <div class="fr czcenter" id="siteInfo" style="display:none">
+            <div class="cztitle">
+                <ul>
+                    <li class="a ">
+                        <a href="#">我的站点</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="czcont">
+                <div class="mydingdan">
+                    <ul id="siteList"></ul>
+
+                </div>
+                <div class="d-page">
+                    <ul id="pageSite" class="page-nav-cell" ></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</body>
+<!-- 脚本库文件 -->
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+
+<!-- 自定义脚本文件 -->
+<script type="text/javascript" src="__PUBLIC__/App/Home/MyCenter/Js/mycenter.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/MyCenter/Js/page.js"></script>
+<script type="text/javascript" src="__PUBLIC__/App/Home/MyCenter/Js/company.js"></script>
+
+</html>

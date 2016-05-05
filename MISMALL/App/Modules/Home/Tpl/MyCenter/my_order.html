@@ -1,0 +1,296 @@
+<include file="Public:client_hearder" />
+<!--中间内容 -->
+<div class="clear"></div>
+<div id="content">
+	<!--左边菜单 -->
+	<include file="MyCenter:left" my_order="now"/>
+	<!--右边模块 -->
+	<div class="rightcontent fr">
+		<!--添加右边模块应用-->
+		<div class="fr czcenter" id="orderInfo" style="height: 545px">
+			<div class="cztitle">
+				<ul>
+					<li class="current" count="{$orderAllNum}" id="allorders">
+						<a style="color:#000" href="javascript:;">所有订单</a>
+					</li>
+					<li class="current" count="{$orderStayNum}" id="noplay">
+						<a href="javascript:;" >待付款</a><!--<div class="tishiCount">2</div>-->
+						<p class="msg_layer">
+							{$orderStayNum}
+						</p>
+					</li>
+					<li class="current" count="{$orderHasNum}" id="alplay">
+						<a href="javascript:;" >已付款</a>
+					</li>
+					<!--	<li class="current" count="{$orderExpireNum}" id="expiring">
+					<a href="javascript:;" >即将到期</a>
+					<p class="msg_layer">{$orderExpireNum}</p>
+					</li> -->
+				</ul>
+			</div>
+			<div class="ts"></div>
+			<div class="czcont">
+				<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#fff"  class="rodertab">
+					<tr class="tr_title">
+						<td width="18%" align="center" bgcolor="#EFEFEF"><strong>订单编号</strong></td>
+						<td width="23%" align="center" bgcolor="#EFEFEF"><strong>项目名称</strong></td>
+						<td width="7%" align="center" bgcolor="#EFEFEF"><strong>单价
+						<br />
+						（元）</strong></td>
+						<td width="8%" align="center" bgcolor="#EFEFEF"><strong>使用天数
+						<br />
+						（天）</strong></td>
+						<td width="7%" align="center" bgcolor="#EFEFEF"><strong>用户数
+						<br />
+						（个）</strong></td>
+						<td width="7%" align="center" bgcolor="#EFEFEF"><strong>总金额
+						<br />
+						（元）</strong></td>
+						<!--<td width="11%" align="center" bgcolor="#EFEFEF"><strong>到期日期</strong></td>-->
+						<td width="7%" align="center" bgcolor="#EFEFEF"><strong>状态</strong></td>
+						<td width="12%" align="center" bgcolor="#EFEFEF"><strong>操作</strong></td>
+					</tr>
+
+				</table>
+				<div class="d-page">
+					<ul id="page" class="page-nav-cell" ></ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		var paytype = "allorders";//payTotal = $.trim($("#allorders").attr("count"));
+		var orderAllNum = '{$orderAllNum}';
+		var orderStayNum = '{$orderStayNum}';
+		var orderHasNum = '{$orderHasNum}';
+		var orderExpireNum = '{$orderExpireNum}';
+		var lodtype = true;
+		var pageIndex;
+
+		var orderinfo = function(paytype, payTotal, lodtype) {
+			var p = new Page('page');
+			p.recordCount = payTotal;
+			p.numericButtonCount = 5;
+			p.pageSize = 5;
+			p.addListener('pageChanged', function() {
+				if (lodtype) {
+					pageIndex = p.pageIndex;
+				} else {
+					p.pageIndex = pageIndex;
+				}
+				if (isNaN(pageIndex))
+					return;
+				$.ajax({
+					type : "POST",
+					url : GROUPPATH + "/MyCenter/ajaxGetOrderList",
+					data : {
+						paytype : paytype,
+						page : pageIndex
+					},
+					async : false,
+					dataType : 'JSON',
+					success : function(data) {
+						if (data == null) {
+							$(".rodertab").css("display", "none");
+							$(".d-page").css("display", "none");
+							$(".ts").text("");
+							$(".ts").append(' <div class="point">还没有相关订单信息 <a href="__GROUP__/AppStore/index" >点击这里</a>购买您需要的应用吧！</div>');
+							if (paytype == "noplay" || paytype == "allorders") {
+								$("#noplay").find(".msg_layer").remove();
+							}
+							return;
+						} else {
+							$(".czcont").show();
+							$(".tr_info").remove();
+							var list = "";
+							$.each(data, function(i, v) {
+								list += '<tr class="tr_info" orderNo=' + v.orderNo + '>';
+								list += '<td cid=' + v.orderNo + ' ;">' + v.orderNo + '</td>';
+								if (v.orderType == 1) {
+									list += '<td ><a href="__GROUP__/AppStore/shop_detail?id=' + v.releaseID + '"><div style="cursor:pointer" class="div_proimg"><img width="72" height="72" id="4" src="' + v.projectImage + '"></div><div class="proname">' + v.projectName + '</a></div></td>';
+									list += '<td >' + v.appPrice + '</td>';
+									list += '<td class="dayNum">共' + v.dayNum + '<br />剩余：15</td>';
+									list += '<td class="userNum">' + v.userNum + '</td>';
+								} else {
+									list += '<td ><a href="__GROUP__/AppStore/index/type/2.html"><div style="cursor:pointer" class="div_proimg"><img width="72" height="72" id="4" src="' + v.projectImage + '"></div><div class="proname">' + v.projectName + '</a></div></td>';
+									list += '<td >' + v.appPrice + '</td>';
+									list += '<td class="dayNum">——</td>';
+									list += '<td class="userNum">——</td>';
+								}
+								list += '<td>' + v.tradeMoney + '</td>';
+								if (v.orderStatus == 0) {
+									//	list += '<td>&mdash;&mdash;</td>';
+									list += '<td>待付款</td>';
+									list += '<td align="center" bgcolor="#FFFFFF"><p class="edit"><a href="';
+									//ezsite ezQ
+									if( v.orderType == 2) {
+										list += '__GROUP__/Template/order_confim?oid=' + v.ID;
+									} else {
+										list += '__GROUP__/AppStore/confirmbuy?id=' + v.ID;
+									}
+									list += '">付款</a></p><p class="del"><a href="#" class="delOrder" ordertype=' + paytype + ' nodetype="no" value = ' + v.ID + '>删除</a></p></td></tr>';
+								} else {
+									//list += '<td>具体的时间</td>';
+									list += '<td>已付款</td>';
+									list += '<td align="center" bgcolor="#FFFFFF"><p class="edit intoApp" appid="' + v.releaseID + '"><a href="#">查看</a></p><p class="del"><a href="#" class="delOrder" ordertype=' + paytype + '   value = ' + v.ID + '>删除</a></p></td></tr>';
+								}
+							});
+							$(".rodertab").find("tr").after(list);
+							$(".rodertab").css("display", "block");
+							$(".d-page").css("display", "block");
+							$(".point").remove();
+							$(".tr_info td").attr("align", "center").attr("bgcolor", "#ffffff").css({
+								"border" : "1px solid",
+								"border-color" : "#d7d7d7"
+							});
+						}
+						lodtype = true;
+						//删除订单
+						$(".delOrder").click(function() {
+							var obj = $(this);
+							var type = obj.attr("orderType");
+							var id = obj.attr("value");
+							delOrder(obj, id, type);
+						});
+						if (orderStayNum == 0) {
+							$("#noplay").find(".msg_layer").remove();
+						}
+						// 查看
+						$(".intoApp").click(function() {
+							var id = $(this).attr("appid");
+							$.ajax({
+								type : "post",
+								url : GROUPPATH + "/AppStore/tryAProject",
+								data : {
+									pubid : id
+								},
+								success : function(result) {
+									window.location = APPPATH + '/Apps/Index/index';
+								}
+							});
+						});
+
+					}
+				});
+				p.render();
+			});
+			p.initialize();
+		};
+		orderinfo(paytype, orderAllNum, lodtype);
+		//分类显示订单信息;
+		$(".current").click(function() {
+			$(".current").removeClass("ab");
+			$(this).addClass("ab");
+			$(".current a").css({
+				"background" : "#0E9ED0",
+				"color" : "#fff"
+			});
+			$(this).find("a").css({
+				"background" : "#fff",
+				"color" : "#000"
+			});
+			pageIndex = 1;
+			if ($(this).attr("id") == "allorders") {
+				orderinfo($(this).attr("id"), orderAllNum, lodtype);
+			} else if ($(this).attr("id") == "noplay") {
+				orderinfo($(this).attr("id"), orderStayNum, lodtype);
+			} else if ($(this).attr("id") == "alplay") {
+				orderinfo($(this).attr("id"), orderHasNum, lodtype);
+			}
+		});
+		function delOrder(obj, id, type) {
+			var orderNo = obj.parents(".tr_info").attr("orderNo");
+			var showObj, num = 0;
+			if (confirm("是否确认要删除信息！")) {
+				$.ajax({
+					type : "POST",
+					url : GROUPPATH + "/MyCenter/delAUserOrderInfo",
+					data : {
+						order_id : id
+					},
+					success : function(data) {
+						if (data == "0") {
+							history.go(0);
+							return false;
+						}
+						if (data == "1") {
+							$(".tr_info[orderNo='" + orderNo + "']").remove();
+							showObj = $(".czcont");
+							switch(type) {
+								case "allorders":
+									var nodeType = obj.attr("nodeType");
+									if (nodeType == "no") {
+										orderStayNum -= 1;
+										if (orderStayNum == "0") {
+											$("#noplay").find(".msg_layer").remove();
+										} else {
+											$("#noplay").find(".msg_layer").text(orderStayNum);
+										}
+									} else if (nodeType == "expiring") {
+										orderExpireNum -= 1;
+										$("#expiring").find(".msg_layer").text(orderExpireNum);
+									}
+									orderAllNum -= 1;
+									num = orderAllNum;
+									break;
+								case "noplay":
+									orderStayNum -= 1;
+									orderAllNum -= 1;
+									if (orderStayNum == "0") {
+										$("#noplay").find(".msg_layer").remove();
+										$(".ts").append(' <div class="point">还没有相关订单信息 <a href="__GROUP__/AppStore/index" >点击这里</a>购买您需要的应用吧！</div>');
+										$(".czcont").hide();
+									} else {
+										$("#noplay").find(".msg_layer").text(orderStayNum);
+									}
+									//$("#noplay").attr("count", orderStayNum);
+									//$("#allorders").attr("count", orderAllNum);
+									num = orderStayNum;
+									break;
+								case "alplay":
+									orderHasNum -= 1;
+									orderAllNum -= 1;
+									if (orderStayNum == "0") {
+										$("#noplay").find(".msg_layer").remove();
+										$(".ts").append(' <div class="point">还没有相关订单信息 <a href="__GROUP__/AppStore/index" >点击这里</a>购买您需要的应用吧！</div>');
+										$(".czcont").hide();
+									} else {
+										$("#noplay").find(".msg_layer").text(orderStayNum);
+									}
+									//$("#alplay").attr("count", orderHasNum);
+								//	$("#allorders").attr("count", orderAllNum);
+									num = orderHasNum;
+									break;
+								case "expiring":
+									orderExpireNum -= 1;
+									orderAllNum -= 1;
+									$("#expiring").find(".msg_layer").text(orderExpireNum);
+									num = orderExpireNum;
+									break;
+							}
+							if (num <= 5) {
+								showObj.find(".d-page").css("display", "none");
+								showObj.find(".tr_info").show();
+								pageIndex -= 1;
+							} else {
+								lodtype = false;
+								if (num % 5 == 0) {
+									pageIndex -= 1;
+								}
+							}
+							orderinfo(type, num, lodtype);
+						}
+					}
+				});
+			}
+		}
+ $(".clientMemberCenter,.myApp").parent().addClass("active");
+	}); 
+</script>
+<include file="Public:client_footer" />

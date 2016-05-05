@@ -1,0 +1,37 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>系统图片管理</h2>
+		<div class="auth-botton" style="float:left;margin-left:20px;">
+	        <a id="add-group" class="btn" href="{:U('Template/systemImageAdd')}">上传图片</a>
+	    </div>
+	</div>
+
+	<div class="tab-wrap">
+		<div class="tab-content">
+			<div class="gallary_wrap grid">
+			<volist name="imageList" id="img">
+			　　<div class="gallary_item album idx">
+					<div class="pic_box">
+						<a href="{:U('Template/systemImageList','catid='.$img['imgTypeId'])}">
+							<if condition="$img['info']">
+							<img src="{:getImageUrl($img['info']['imgUrl'])}" style="max-width:200px;max-height:200px;">
+							<else/>
+							<img src="__ROOT__/images/no_photo.png" style="max-width:200px;max-height:200px;">
+							</if>
+						</a>
+				</div>
+				<div class="info">
+					<div class="title">
+						<span class="name"><a href="{:U('Template/systemImageList','catid='.$img['imgTypeId'])}">{$img['imgTypeName']}</a></span>
+					</div>
+					<p class="gray">{$img['count']|default=0}张图片</p>
+				</div>
+			</div>
+			</volist>						
+		</div>
+		</div>
+	</div>
+</block>
+

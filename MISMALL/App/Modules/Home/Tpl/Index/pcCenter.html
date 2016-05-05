@@ -1,0 +1,167 @@
+<style>
+	.s1 {
+		padding-top: 2%;
+	}
+	.s2 {
+		height: 350px !important;
+		background: rgba(0,0,0,0.5);
+	}
+	.s3 {
+		height: 350px !important;
+	}
+	.s4 {
+		height: 350px !important;
+	}
+	.s5 {
+		height: 350px !important;
+	}
+	.s1 h2, .s5 h2 {
+		color: #78b5aa;
+		padding-left: 6%;
+		padding-top: 4%;
+	}
+	.s1 p, .s5 p {
+		font-size: 18px;
+		color: #888;
+		padding-left: 6%;
+		letter-spacing: 3px;
+		margin-top: 5%;
+	}
+	.s2, .s4, .s5 {
+		position: relative;
+	}
+	.s1-cover {
+		background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+		height: 1830px;
+		position: absolute;
+		width: 100%;
+		z-index: 2;
+	}
+	.s2 h2 {
+		color: #78b5aa;
+		padding-right: 6%;
+		padding-top: 16%;
+	}
+	.s2 p {
+		font-size: 18px;
+		color: #ccc;
+		padding-right: 6%;
+		letter-spacing: 3px;
+		margin-top: 5%;
+	}
+	.s4 h2 {
+		color: white;
+		padding-right: 6%;
+		padding-top: 16%;
+	}
+	.s4 p {
+		font-size: 18px;
+		color: #ccc;
+		padding-right: 6%;
+		letter-spacing: 3px;
+		margin-top: 5%;
+	}
+	.s3 h2, .s5 h2 {
+		color: #78b5aa;
+		padding-right: 6%;
+		padding-top: 16%;
+		text-align: right;
+	}
+	.s3 p, .s5 p {
+		font-size: 18px;
+		color: #ccc;
+		padding-right: 6%;
+		letter-spacing: 3px;
+		text-align: right;
+		margin-top: 5%;
+	}
+	.s3 h2, .s5 h2 {
+		text-align: left;
+	}
+
+	.s3 p, .s5 p {
+		text-align: left;
+	}
+
+</style>
+<!-- MAIN -->
+<section id="main_page">
+	<div class="row" style="position: relative;">
+		<div class = "s1-cover col-md-12" style="position: absolute;z-index: 2;height:100%;"></div>
+		<div class="row whitebg s1">
+			<div class="col-lg-6 col-sm-6 col-md-6 text-center">
+				<img style="margin-top:1%;margin-left:8%" src="__PUBLIC__/App/Home/Images/dz.png"  class="img-responsive"/>
+			</div>
+			<div class="col-lg-6 col-sm-6 col-md-6 text-left"  style="margin-top:1%">
+				<h2>定制</h2>
+				<p>
+					个性化DIY
+				</p>
+			</div>
+		</div>
+		<div class="row s2" style="background:#202325;">
+			<div class="col-lg-6 col-sm-6 col-md-6 text-left"  style="float: right;right:-3%;position:absolute;z-index: 1;">
+				<h2>交互</h2>
+				<p>
+					24小时免费私人产品经理
+				</p>
+			</div>
+			<div class="col-md-12">
+				<img style="height:350px" src="__PUBLIC__/App/Home/Images/jh.jpg"  class="img-responsive"/>
+			</div>
+		</div>
+
+		<div class="row whitebg s3">
+			<div class="col-lg-6 col-sm-6 col-md-6 ">
+				<img class="img-responsive" src="__PUBLIC__/App/Home/Images/yy.png" style="margin-top:1%;margin-left:8%">
+			</div>
+			<div class="col-lg-6 col-sm-6 col-md-6" style="display: block;float: right;margin-right: -3%;">
+				<h2>易用</h2>
+				<p>
+					像做PPT一样容易
+				</p>
+			</div>
+		</div>
+
+		<div class="row s4">
+			<div class="col-lg-6 col-sm-6 col-md-6 text-left" style="margin-top:5%;position:absolute;z-index: 1;left:53%">
+				<h2>分享</h2>
+				<p>
+					秀出创意，赚大钱
+				</p>
+			</div>
+			<div class="col-md-12">
+				<img style="float: right;position:absolute;z-index: 0; right:0%;" src="__PUBLIC__/App/Home/Images/fx.jpg"  class="img-responsive"/>
+			</div>
+
+		</div>
+
+		<div class="row s5" style = "margin-left:0;">
+			<div class="col-lg-6 col-sm-6 col-md-6 ">
+				<img class="img-responsive" src="__PUBLIC__/App/Home/Images/yjs.png" style="margin-top:1%;margin-left:8%">
+			</div>
+			<div class="col-lg-6 col-sm-6 col-md-6" style="mmargin-top:3%;">
+				<h2>云计算</h2>
+				<p>
+					按需使用，省心省钱
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row s6" style = "margin-left:0;background:white">
+		<h2 class = "hotApp">热门案例</h2>
+		<div class = "container">
+			<div class = "row">
+				<volist name = "siteInfo" id="data">
+					<div class = "col-xs-12 col-sm-3 appItem">
+						<div class = "appItemInner">
+							<img src = "{$data['thumbPath']}" class = "appImg img-responsive"/>
+							<img src = "__ROOT__/AppStore/qrcode/siteId/{$data.id}.html" class = "app-qrcode"/>
+							<h5 style="text-align:center">{$data['siteName']}</h5>
+						</div>
+					</div>
+				</volist>
+			</div>
+		</div>
+	</div>
+</section><!-- MAIN END -->

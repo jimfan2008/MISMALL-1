@@ -1,0 +1,572 @@
+#topHeader{
+	height:30px;
+	background:#f5f5f5;
+	line-height:30px;
+}
+
+.df-menuWrap{
+	width:500px;
+	height:30px;
+}
+.df-menuWrap p{
+	float:left;
+	margin-left:50px;
+}
+.df-menuWrap p.designerTitle{
+	font-size:16px;
+	margin-right:30px;
+}
+#ruleContent{
+	border:1px solid #ccc;
+	min-width:1200px;
+	overflow:auto;
+}
+
+.myRuleListTitle{
+	height:33px;
+	line-height:30px;
+	padding:2px;
+	font-size:12px;
+	background:#f5f5f5;
+	font-weight:bold;
+}
+.myRuleListWrap{
+	overflow:auto;
+}
+
+.myRuleListWrap > ul li{
+	background:rgba(200,200,200,0.15);
+	padding:0 5px;
+	padding-bottom:5px;
+	margin:5px 0;
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+	
+}
+
+.dsOpt{
+	width:50px;
+	height:25px;
+	float:right;
+	display:none;
+}
+span.dsName{
+	display:block;
+	width:120px;
+	height:30px;
+	float:left;
+	overflow:hidden;
+}
+.dsEdit,.dsDel{
+	float:left;
+	width:25px;
+	height:25px;
+	margin-top:3px;
+	background:url(../../../../../images/del_image_icon.png) no-repeat;
+}
+.dsEdit:hover,.dsDel:hover{
+	background-color:#f5f5f5;
+}
+
+.dsEdit{
+	background-position:0 2px
+}
+.dsDel{
+	background-position:-33px 2px; 
+}
+input#editDsName{
+	width:120px;
+	border:1px solid #ccc;
+}
+
+.tableWrap{
+	height:30px;
+	line-height:30px;
+}
+.isExpand{
+	width:20px;
+	height:20px;
+	float:left;
+	margin-top:8px;
+	background:url(../../../../../images/men_icon.png) no-repeat 0 -108px;
+}
+.firstTableName{
+	background:url(../../../../../images/men_icon.png) no-repeat 0 -143px;
+}
+.tableNameWrap{
+	float:left;
+}
+.tableCkBox{
+	margin-top:4px;
+	width:20px;
+	height:100%;
+	float:right;
+}
+.fieldListWrap{
+	display: none;
+}
+
+.firstTableFields{
+	display: block;
+}
+
+.fieldListWrap ul{
+	margin-left:40px;
+}
+.fieldListWrap ul li{
+	height:25px;
+	line-height:25px;
+	margin:2px;
+	background:rgba(200,200,200,0.05);
+	font-size:12px;
+}
+
+.topTip{
+	margin:10px 0;
+}
+
+.ruleTable{
+	max-width: 100%;
+	border-collapse:collapse;
+}
+.ruleTable tr th{
+	padding:5px 0;	
+	text-align:center
+}
+.ruleTable tr td,.ruleTable tr th{
+	border:1px solid #aaa;
+	min-width: 190px;
+	padding:2px;
+}
+.selectForm{
+	width:100%;
+}
+.selectFormField .inputField{
+	min-width:190px;
+	height:100%;
+	font-size:12px !important;
+	border:1px solid #ccc;
+	border-radius:0!important;
+}
+
+.searchPanel{
+	position:absolute;
+	background:#fff;
+	width:190px;
+	overflow:hidden;
+	display:none;
+	font-size:12px;
+	padding:5px 0;
+	border: 1px solid #aaa;
+}
+
+.searchPanel ul li{
+	height:30px;
+	padding:5px;
+	margin:2px 0;
+	cursor:pointer;
+	overflow:auto;
+	line-height:22px;
+}
+.searchPanel ul li:hover{
+	background:#f5f5f5;
+}
+
+.sFieldTitle{
+	float:left;
+}
+
+.tti{
+	font-size:11px;
+	color:#ccc;
+}
+
+.sTableTitle{
+	float:left;
+	width:59%;
+	overflow:auto;
+	text-align:right;
+}
+.logicWrap{
+	width:50px;
+	height:27px;
+}
+.conditionWrap{
+	height:30px;
+}
+
+.condition{
+	float:left;
+	margin-left:5px;
+}
+
+.logic, .relation{
+	height:27px;
+}
+.condValue{
+	border:1px solid #ddd;
+}
+
+.selectResultItem{
+	background:#f5f5f5;
+}
+
+.add-condition,.min-condition{
+	margin:0 8px;
+	cursor:pointer;
+}
+.add-condition:hover,.min-condition:hover{
+	background:#eee
+}
+
+
+.RuleWrap{
+	height:40%;
+	overflow:auto;
+	border-bottom:1px solid #ccc;
+}
+.fieldDataListWrap{
+}
+
+.fieldTitleList{
+	border-collapse:collapse;
+}
+
+.fieldHead{
+	background:#f5f5f5;
+}
+
+.fieldTitleList th{
+	position:relative;
+	min-width:93px;
+	height:33px;
+	font-weight:bold;
+	font-size:12px;
+	background:#f9f9f9f9;
+	border-right:1px solid #eee;
+	padding-right:2px;
+	cursor:pointer;	
+}
+
+.fieldTitleList th:hover .fieldOption{
+	background:#eee;
+}
+
+.fieldTitle,.fieldOption{
+	float:left;
+	width:75px;
+	height:100%;
+	text-align:center;
+	line-height:33px;
+}
+.fieldTitle{
+	overflow:hidden;
+}
+.fieldOption{
+	position:relative;
+	width:15px;
+}
+
+.optionWrap{
+	position:absolute;
+	width:80px;
+	top:10px;
+	left:46px;
+	text-align:center;
+	display:none;
+}
+.optionArrowWrap{
+	position:relative;
+	width:25px;
+	height:25px;
+	margin:auto;
+}
+.arrow1,.arrow2{
+	position:absolute;
+	left:0;
+	top:2px;
+	width:0;
+	height:0;
+	border:10px solid #eee;
+	border-left-color:transparent;
+	border-right-color:transparent;
+	border-top-color:transparent;
+}
+.arrow2{
+	border:10px solid #fff;
+	left:0px;
+	top:5px;
+	border-left-color:transparent;
+	border-right-color:transparent;
+	border-top-color:transparent;
+}
+.fieldTitleWrap{
+	width:80px;
+	height:50px;
+	text-align:center;
+	padding:2px 5px;
+	font-size:12px;
+	background:rgba(200,200,200,0.15);
+	float:left;
+}
+.optionList{
+	background:#fff;
+	color:#888;
+	font-weight:normal;
+	box-shadow:0 2px 5px 3px rgba(200,200,200,0.3);
+	cursor:pointer
+}
+.optionList ul li{
+	height:28px;
+	line-height:28px;
+}
+.optionList ul li.fieldSortAsc{
+	background:url(../images/dataFilter_menu.png) no-repeat -5px -7px;
+}
+.optionList ul li.fieldSortDesc{
+	background:url(../images/dataFilter_menu.png) no-repeat -5px -34px;
+}
+.optionList ul li.fieldSelected{
+	background:url(../images/dataFilter_menu.png) no-repeat -5px -62px;
+}
+.optionList ul li:hover{
+	background-color:#f5f5f5;
+}
+
+.addNewFieldWrap{
+	float:left;
+	width:33px;
+	background:rgba(200,200,200,0.4);
+	height:30px;
+	line-height:33px;
+	margin-top:2px;
+	margin-left:1px;
+	font-size:25px;
+	text-align:center;
+	cursor:pointer;
+	color:#aaa
+}
+.addNewFieldWrap:hover{
+	background:rgba(200,200,200,0.5);
+	color:#888
+}
+
+.inputFieldWrap{
+	float:left;
+	width:100px;
+	height:34px;
+	line-height:33px;
+	padding:0 2px;
+}
+
+#newFieldTitle{
+	width:100%;
+	height:30px;
+	margin-right:2px;
+	padding:2px;
+	border:1px solid #ccc;
+	border-radius: 0;
+}
+
+
+/*过滤字段面板*/
+#contentWrap .form-Wrap{
+	min-height: 30px;
+	margin-bottom:10px;
+	padding:10px 0;
+	border-bottom:1px solid #f1f1f1;
+}
+#contentWrap .form-name{
+	float:left;
+	margin:5px;
+	width:20%;
+}
+#contentWrap .form-field{
+	float:left;
+	width:72%;
+}
+#contentWrap .form-field li{
+	float:left;
+	margin:5px 15px 5px 0;
+}
+
+/*过滤条件*/
+.condition-conter ul li {
+	float: left;
+	margin: 4px;
+	width: 100%;
+}
+.condition-conter ul li .value {
+	position: relative;
+}
+.condition-conter ul li .r1{
+	float:left;
+}
+.condition-conter ul li .r1 select{
+	height:30px;
+	width:80px;
+}
+.condition-conter ul li .w1{
+	height:30px;
+	width:80px;
+	display: block;
+}
+.glyphicon{
+	line-height:2;
+	left:4px;
+}
+.condition-conter ul li .tit {
+	background: none repeat scroll 0 0 #0e9ed0;
+	border-radius: 2px;
+	color: #fff;
+	display: block;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 30px;
+	margin-left: 0px;
+	overflow: hidden;
+	text-indent: 8px;
+	white-space: nowrap;
+	width: 120px;
+}
+.condition-conter ul li .value .change_Tj {
+	height:30px;
+	width:80px;
+}
+.condition-conter ul li .selecCon {
+	height:30px;
+	width:80px;
+}
+.condition-conter ul li .with_2{
+	margin-left:0px;
+}
+.view-data table td, .view-data table th {
+	border-right: 1px dotted #ccc;
+	border-bottom: 1px dotted #ccc;
+}
+.condition-conter ul li  .add-condition,.condition-conter ul li  .min-condition {
+	left: 5px;
+	cursor: pointer;
+}
+.condition-conter ul li  .addselect {
+	border: 0 solid #cccccc;
+	border-radius: 3px 0 0 3px;
+	box-shadow: 0 0 3px #cccccc;
+	display: table-cell;
+	font-size: 12px;
+	left: 1px;
+	padding: 5px 0;
+	text-indent: 0;
+	width: 49px;
+}
+#btnFilter{
+	display:none;
+	margin:20px 0 0 200px;
+}
+/*菜单设置*/
+#setFilterMenu{
+	position:absolute;
+	top : 65%;
+	left : 360px;
+	width : 140px;
+	min-height:80px;
+	background : #FFFFFF;
+	border-radius : 5px;
+	border : 1px solid #CCCCCC;
+	z-index:999;
+	
+	padding-bottom:10px;
+}
+#setFilterMenu .title{
+	width : 100%;
+	height : 25px;
+	text-align : center;
+	line-height : 25px;
+	background : #f5f5f5;
+}
+#setFilterMenu .menu-item{
+	width:100%;
+	height:25px;
+	line-height:25px;
+	border-bottom:1px solid #f1f1f1;
+	cursor:pointer;
+	padding-left:5px;
+	font-size:12px;
+	font-weight:bold;
+	color:#666;
+}
+#setFilterMenu .menu-item:hover{
+	background:#E0ECFF;
+}
+#setFilterMenu .menu-item .more{
+	margin-right:8px;
+	float:right;
+}
+#setTimeList .editNum{
+	height:16px;
+	width:30px;
+	padding:0 5px;
+	border:0px;
+	border:1px solid #CCC;
+}
+#setTimeList .btnEditNum{
+	float:right;
+	display:none;
+	background:#CCC;
+	padding:3px;
+	height:18px;
+	line-height:15px;
+	font-size:10px;
+	background:#0e9ed0;
+	margin:5px 0 0 5px;
+	color:#FFF
+}
+#setTimeList .setTimeNum:hover .btnEditNum{
+	display:block;
+}
+.arrow-left{
+	 border-width:12px; 
+	 border-color:transparent #FFFFFF transparent transparent;  
+	 border-style:dashed solid dashed dashed; 
+	 border-left:none;
+	 position:absolute;
+	 left:-12px;
+	 top:27px;
+	 z-index:9999;
+}
+.arrow-left-wrap{
+	 border-width:14px; 
+	 border-color:transparent #CCCCCC transparent transparent;  
+	 border-style:dashed solid dashed dashed; 
+	 border-left:none;
+	 position:absolute;
+	 left:-14px;
+	 top:25px;
+}
+
+#systemList,#formCtrlList,#fromSubQuery,.dataSetFiledWrap,#paramItem{
+	position:relative;
+	left:133px;
+	top:-25px;
+	display:none;
+	min-height:50px;
+	border:1px solid #CCC;
+}
+.dataSetFiledWrap{
+	left:125px;
+}
+.dataSetFiled{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin-bottom:5px;
+}
+
+/*子查询*/
+.dataSaveTips{
+	height:20px;
+	color:red;
+	font-size:12px;
+	margin-top:10px;
+}

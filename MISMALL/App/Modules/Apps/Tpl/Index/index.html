@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>云台</title>
+	<link type="text/css" rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/base.css" />
+	<link type="text/css" rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/App/Qywx/Css/bootstrap-expand.css">
+	<link rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css">
+	<link type="text/css" rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Apps/Index/Css/index.css"/>
+	 
+	 <link rel="stylesheet" href="__STATIC__/Index/Js/src/mmGrid.css">
+     <link rel="stylesheet" href="__STATIC__/Index/Js/src/theme/bootstrap/mmGrid-bootstrap.css">
+     <link rel="stylesheet" href="__STATIC__/Index/Js/src/mmPaginator.css">
+     <link rel="stylesheet" href="__STATIC__/Index/Js/src/theme/bootstrap/mmPaginator-bootstrap.css">
+	<style type="text/css">
+	  .operationbtn{margin-bottom:5px}
+	  .operationbtn .btn{margin-left: 5px}
+	</style>
+	<script>
+		var SITECONFIG = {
+				PUBLICPATH : '__PUBLIC__',
+				APPPATH : '__GROUP__',
+				GROUPPATH : '__GROUP__',
+				ROOTPATH : '__ROOT__',
+				SITEID : '{$Think.session.ez_site_id}',
+				SITENAME : decodeURI('{$siteName}'),
+				SESSIONID : '{:session_id()}',
+				FLOWID : 1,
+				PAGEID :  '{$pageId}',
+				VERSION : "?VERSION=1.0.0"//版本号
+			};
+	</script>
+</head>
+
+<body>
+   <include file="Public/headerAdmin"/>
+    <div id="content" >
+    	<div class="col-xs-2">
+    	  <include file="Public/apps_leftMenu"/>
+    	</div>
+
+		<!------数据展示列表---->
+		<main> </main>
+		
+		<!------表单模式窗口----->
+		<div class="modal fade" id="modal-form">
+			<div class="modal-dialog">
+				<div class="modal-content" style="background: none repeat scroll 0 0 #f5f5f5">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">title</h4>
+					</div>
+					<div class="modal-body" >
+						<div id="siteContent" class="right">
+							
+						</div>
+						<div id="mask" style = "display:none">
+							<div class="message">
+								<span class="mas_img" style="margin:auto;"><img src="__ROOT__/images/loading.gif" style="width:1.4em;height:1.4em;"/></span>
+								<span class="mas_text" style="color:#FFFFFF;"></span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default modifySureBtn"  data-dismiss="modal">确定</button>
+						<button type="button" class="btn btn-default"  data-dismiss="modal">关闭</button>
+					</div>
+					<div id="mask" style = "display:none">
+						<div class="message">
+							<span class="mas_img" style="margin:auto;"><img src="__ROOT__/images/loading.gif" style="width:1.4em;height:1.4em;"/></span>
+							<span class="mas_text" style="color:#FFFFFF;"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <!------底部 ----->
+    <div id="footer"> </div>
+	
+	<script src="__PUBLIC__/Js/seaJs/dist/sea.js" ></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/vaildate/jquery.validate.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/ezCommon.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type = "text/javascript" src = "__PUBLIC__/Js/jquery.cropit.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+	
+	<script type="text/javascript" src="__STATIC__/Index/Js/plugins.js"></script>
+	<script type="text/javascript" src="__STATIC__/Index/Js/src/mmGrid.js"></script>
+	<script type="text/javascript" src="__STATIC__/Index/Js/src/mmPaginator.js"></script>
+	
+	<script>
+		var host = location.host;
+		if(host == "www.mismall.cn"){
+			$(".logo").find("img").attr("src","__PUBLIC__/App/Qywx/Images/Mismall1.png") ;
+		}else{
+		 	$(".logo").find("img").attr("src","__PUBLIC__/App/Qywx/Images/edit-logo.png") ;
+		}
+
+	//	Global.ezType = "ezQ"; 
+		seajs.config({
+			debug : 2,
+			base : "__PUBLIC__/Js/",
+			alias : {
+				//"bootstrap-switch" : "jquery-ui-bootstrap-v0.5/js/bootstrap-switch.min.js",
+				"ImagePreview" : "jquery.ImagePreview.js?h=28",
+				"bootstrap" : "jquery-ui-bootstrap-v0.5/assets/js/bootstrap.min.js",
+				//"jqueryUI" : "jquery-ui-bootstrap-v0.5/assets/js/jquery-ui-1.10.0.custom.min.js",
+				//"datetimepicker" : "datetimepicker/js/bootstrap-datetimepicker.min.js",
+				//"datetimelang" : "datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js",
+				"ajaxData" :SITECONFIG.PUBLICPATH + "/App/Qywx/Js/ajaxData.js",
+				"dateCss" : SITECONFIG.PUBLICPATH + "/Js/date/date.css",
+				"date" : SITECONFIG.PUBLICPATH + "/Js/date/date.js",
+				"iScroll" : SITECONFIG.PUBLICPATH + "/Js/date/iscroll.js"
+			}
+		});
+		seajs.use("__STATIC__/Index/Js/In.fileLoader.js?h=13");
+		$(".col-md-1").addClass("col-xs-1");
+		$(".col-md-2").addClass("col-xs-2");
+		$(".col-md-3").addClass("col-xs-3");
+		$(".col-md-4").addClass("col-xs-4");
+		$(".col-md-6").addClass("col-xs-6");
+		$(".col-md-8").addClass("col-xs-8");
+		$(".col-md-9").addClass("col-xs-9");
+		$(".col-md-10").addClass("col-xs-10");
+		$(".col-md-11").addClass("col-xs-11");
+		$(".col-md-12").addClass("col-xs-12");
+	</script>
+	<script type="text/javascript" src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</body>
+</html>

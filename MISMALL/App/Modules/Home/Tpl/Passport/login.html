@@ -1,0 +1,113 @@
+<include file="Public:after_body" />
+        <title>用户登录</title>
+        <link rel="stylesheet" type="text/css" href="__STATIC__/Login/Css/main.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/Login/Css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/Login/Css/style.css" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/Login/Css/animate-custom.css" />
+		<script  type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
+		<!--<script language="JavaScript" type="text/javascript" src="__STATIC__/Login/js/login.js"></script>-->
+		<script type="text/javascript" src="__STATIC__/Index/Js/ez.login.js"></script>
+    </head>
+    <body>
+    	<div id = "header">
+			<h5><img id = "logo" src = "http://ezsite-images.stor.sinaapp.com/logo_small.png"/>开发者登录/注册</h5>
+		</div>
+        <div class="container">
+            <header>
+				<nav class="codrops-demos">
+				</nav>
+            </header>
+            <section>				
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                                <h1>登　录</h1> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" >您的电子邮件</label>
+                                    <input name="email" id="email" required="required" type="text" placeholder="mymail@mail.com"/><span id="e-error"></span>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p">密码</label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> <span id="p-error"></span>
+                                </p>
+                                <p class="keeplogin"> 
+									<input type="checkbox" name="rememberLogin" id="rememberLogin" value="1" /> 
+									<label for="loginkeeping">记住登录状态</label>
+								</p>
+                                <p class="login button"> 
+                                    <input type="button" id="loginbtn" value="登录" /> 
+								</p>
+                                <p class="change_link">
+									还不是会员？
+									<a href="#toregister" class="to_register">加入我们</a>
+								</p>
+                        </div>
+
+                        <div id="register" class="animate form">
+                                <h1>用户 注 册</h1> 
+                                <!--<p> 
+                                    <label for="usernamesignup" class="uname" data-icon="u">您的用户名<span id = "duplicateName">该用户名已被注册</span></label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                </p>
+                                --><p> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" > 您的邮箱</label>
+                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">您的密码 </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">请确认您的密码 </label>
+                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p class="signin button"> 
+									<input type="button" onclick="ajaxRegister()" id = "regSubmit" value="注册"/> 
+								</p>
+                                <p class="change_link">  
+									已经是会员？
+									<a href="#tologin" class="to_register"> 直接登录 </a>
+								</p>
+                        </div>	
+                    </div>
+                </div>  
+            </section>	
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+$(function(){
+	$('#regSubmit').click(function(){
+		ajaxRegister();
+	});
+
+});
+function ajaxRegister()
+{
+	$.ajax({
+		url:APPPATH+"/Passport/ajaxRegister",
+		type:"POST",
+		dataType: 'JSON',
+		data:{
+			'username' : $('#usernamesignup').val(),
+			"email" : $("#emailsignup").val(),
+			"password" : $("#passwordsignup").val(),
+			"password_confirm" : $("#passwordsignup_confirm").val(),
+		},
+		success:function(result){
+			//if(result['status']==1){
+			//	window.location.href=APPPATH+"/Templete/index";
+			//}else 
+			if(result['status']==1 || result['status']==2){
+			    window.location.href=APPPATH+"/MyCenter/mycenter";
+			}else{
+				$("#p-error").text('('+result["message"]+')').css({'display':'inline','color':'red','font-size':'11px'});
+				return false;
+			}
+		}
+	});
+}
+</script>

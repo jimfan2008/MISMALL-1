@@ -1,0 +1,413 @@
+.editorLogicDesign {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	background: #FFFFFF;
+	min-width: 1200px;
+	z-index: 999;
+}
+.editorLogicDesign button {
+	outline: 0px;
+}
+.editorLogicDesign .top {
+	width: 100%;
+	height: 60px;
+	margin: 0 auto;
+	background: #006699;
+	z-index: 999;
+}
+.editorLogicDesign .main {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0px auto;
+	border-top: 1px solid transparent;
+	min-width: 1200px;
+}
+.editorLogicDesign .left {
+	position: relative;
+	float: left;
+	height: 100%;
+	background: #F5F5F5;
+	min-width: 240px;
+}
+.editorLogicDesign .logicConetent {
+	float: left;
+	width: 190px;
+}
+.editorLogicDesign .right {
+	position: relative;
+	float: left;
+	width: 70%;
+	height: 100%;
+	background: #F6efF6;
+	overflow-y: scroll;
+}
+.editorLogicDesign .left .logic-menu {
+	float: left;
+}
+.editorLogicDesign .left .logic-menu li {
+	list-style: none;
+	width: 50px;
+	padding: 20px 10px;
+	text-align: center;
+	color: #F2F2F2;
+	border: 1px solid #FFFFFF;
+	font-size: 18px;
+	background: #39B3D7;
+	cursor: pointer;
+}
+.editorLogicDesign .left .logic-menu:first-child {
+	border: 0;
+}
+.editorLogicDesign .left .logic-menu li:hover {
+	background: #39B3E7;
+}
+.editorLogicDesign .handleLogicType {
+	height: 35px;
+	background: #5CB712;
+	padding-left: 10px;
+	line-height: 30px;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+}
+.editorLogicDesign .handleLogicList li {
+	height: 30px;
+	margin-left: 20px;
+	text-align: center;
+	line-height: 30px;
+	width: 80%;
+}
+.editorLogicDesign .control {
+	float: left;
+	padding-top: 20px;
+}
+.editorLogicDesign .handleLogic {
+	display: block;
+	float: left;
+	width: 100%;
+}
+.editorLogicDesign .left .handleLogic-content {
+	background: #2ca5e2 none repeat scroll 0 0;
+	color: #ffffff;
+	font-size: 12px;
+	margin-top: 5px;
+}
+.editorLogicDesign .handleLogic-content .conditionContent  input {
+	width: 119px;
+}
+.editorLogicDesign .handleLogic-content .conditionContent  span {
+	padding-left: 3px;
+}
+.editorLogicDesign .logicList {
+	margin: 5px;
+}
+.editorLogicDesign .conditionContent {
+	position: relative;
+	min-height: 25px;
+	background: #D58512;
+}
+.editorLogicDesign .conditionText {
+	display: inline-block;
+	float: left;
+	color: #FFFFFF;
+	padding: 5px 3px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.editorLogicDesign .conditionContent  .condition, .editorLogicDesign .left .conditionFor {
+	position: relative;
+	display: inline-block;
+	float: left;
+	min-width: 25px;
+	min-height: 20px;
+	margin: 7px 0 0;
+	background: #ffffff;
+}
+.editorLogicDesign .result {
+	min-height: 30px;
+	border-left: 5px solid #D58512;
+	border-bottom: 5px solid #D58512;
+	overflow: hidden;
+}
+.editorLogicDesign .right .result {
+	min-height: 100px;
+}
+.editorLogicDesign .result .logicList {
+	margin: 2px 0 0 2px;
+}
+.editorLogicDesign .doubleBranch > .result {
+	border-bottom: 0px solid #D58512;
+}
+.editorLogicDesign .save {
+	text-align: center;
+	clear: none;
+	margin: 15px 0 0 0;
+}
+.editorLogicDesign .save button {
+	width: 80px;
+	height: 35px;
+	margin: 10px;
+	background: #39B3D7;
+	cursor: pointer;
+}
+.editorLogicDesign .arithmetic {
+	float: left;
+}
+.editorLogicDesign .left .operator input {
+	position: relative;
+	width: 30px;
+	border: 1px solid #F5F5F5;
+}
+.editorLogicDesign .right .operator input {
+	position: relative;
+	width: 90px;
+	border: 1px solid #F5F5F5;
+}
+.editorLogicDesign .left .operator {
+	margin: 10px 0 0;
+	padding: 5px;
+	text-align: center;
+	background: #5CB712;
+}
+.editorLogicDesign .right .operator {
+	float: left;
+	padding: 4px;
+	border-left: 1px solid #f5f5f5;
+	border-top: 1px solid #f5f5f5;
+	box-shadow: 1px 1px 1px 0 #555;
+	text-align: center;
+	background: #5CB712;
+}
+.editorLogicDesign .logicLeft, .editorLogicDesign .logicRight {
+	float: left;
+	min-width: 32px;
+	min-height: 20px;
+	margin: 0 5px 0 5px;
+	background: #FFFFFF;
+}
+.editorLogicDesign .logicOperatorList {
+	float: left;
+	width: 30px;
+	color: #FFFFFF;
+}
+.editorLogicDesign .operatorList {
+	display: inline-block;
+	color: #FFFFFF;
+	width: 30px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+.editorLogicDesign-highlight {
+	display: inline-block;
+	height: 25px;
+	width: 50%;
+	border: 1px dashed blue
+}
+.editorLogicDesign .panel-body {
+	padding: 0px;
+}
+.editorLogicDesign .actionPanel {
+	margin: 10px;
+}
+.editorLogicDesign .removeLogic {
+	border-radius: 50%;
+	box-shadow: 0 0 9px -1.5px #000000;
+	color: red;
+	height: 50px;
+	margin: 11px;
+	padding: 10px 0;
+	text-align: center;
+	width: 100px;
+	position: absolute;
+	bottom: 20px;
+	background: rgba(0,0,0,0.1);
+	z-index: 999;
+}
+.editorLogicDesign .actionHead button.close {
+	display: none;
+}
+.editorLogicDesign .innerLink .addCondition {
+	display: none;
+}
+.editorLogicDesign .logicConetent li, .editorLogicDesign .operator, .editorLogicDesign .logicList {
+	cursor: move;
+}
+.editorLogicDesign .right .condition, .editorLogicDesign .right .logicContent {
+	min-width: 125px;
+}
+.editorLogicDesign .ui-state-disabled {
+	opacity: 1;
+}
+.editorLogicDesign .ui-state-highlight:after {
+	content: "放在这里";
+	line-height: 25px;
+	text-align: center;
+	background: rgba(0,0,0,0.1);
+}
+.editorLogicDesign .removeLogic .ui-state-highlight:after {
+	content: "删除";rgba(0,0,0,0);
+}
+.editorLogicDesign .ui-state-highlight {
+	height: 25px;
+	width: 80%;
+	margin: 20px auto;
+	border: 1px dashed red;
+	text-align: center;
+	font-size: 16px;
+	background: rgba(0,0,0,0.1);
+}
+.editorLogicDesign .removeLogic .ui-state-highlight {
+	color: red;
+	font-weight: bold;
+	margin: -30px 0 0 -45px;
+	border: 0;
+	background: rgba(0,0,0,0);
+}
+.editorLogicDesign .condition .ui-state-highlight, .editorLogicDesign .logicContent  .ui-state-highlight {
+	margin: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.1);
+}
+.editorLogicDesign .left .conditionFor input {
+	display: none;
+}
+.editorLogicDesign  .conditionFor {
+	float: left;
+	margin: 7px 0 0;
+}
+.editorLogicDesign .right .conditionFor input {
+	padding: 0px;
+	border: 5px solid #8fa5f5;
+	border-radius: 0px;
+}
+.editorLogicDesign .left .logicConetent .tempLogic {
+	display: none;
+}
+.editorLogicDesign .left .logicConetent .control {
+	display: block;
+}
+.editorLogicDesign .variableContent {
+	text-align: center;
+	height: 90px;
+}
+.editorLogicDesign .creatVariableWin {
+	display: none;
+	position: absolute;
+	left: 60px;
+	top: 120px;
+	width: 400px;
+	background: #FFFFFF;
+	box-shadow: 0px 0px 1px 0px #000;
+	z-index: 10;
+}
+.editorLogicDesign .variableTitle {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background: #00438A;
+	color: #FFFFFF;
+}
+.editorLogicDesign .variableTitle .title {
+	padding-left: 10px;
+}
+.editorLogicDesign .variableTitle .close {
+	color: #FFFFFF;
+	float: right;
+	font-size: 14px;
+	margin: 6px;
+	opacity: 1;
+}
+
+.editorLogicDesign .variableTitle .close:hover {
+	color: #CCCCCC;
+	animation: close 1s;
+	-moz-animation: close 1s;
+	-webkit-animation: close 1s;
+	-o-animation: close 1s;
+	animation-fill-mode: forwards;
+}
+.editorLogicDesign .creatVariableWin .variableContent {
+	text-align: center;
+	height: 90px;
+	padding-top: 30px;
+	maring-left: 0px;
+}
+
+.editorLogicDesign .variableContent span {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding-right: 0px;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+.editorLogicDesign .addVariable {
+	background: #ffffff none repeat scroll 0 0;
+	border: 1px solid #cdf;
+	margin-top: 10px;
+}
+
+.editorLogicDesign .variableFoot {
+	border-top: 1px solid #ccc;
+	padding: 10px 0;
+	text-align: center;
+}
+
+.editorLogicDesign .variableFoot .add {
+	margin-right: 20px;
+}
+.editorLogicDesign .mask {
+	background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+	display: none;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: 3;
+}
+.editorLogicDesign .variableItem {
+	position: relative;
+	border: 1px solid rgba(0, 156, 213, 0.8);
+	margin: 10px;
+}
+.editorLogicDesign .variableItem .variableItemName {
+	display: inline-block;
+	overflow: hidden;
+	padding:0  25px 0 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%
+}
+.editorLogicDesign .variableItem .remove {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.editorLogicDesign .variableItem:hover .editorLogicDesign .variableItem .remove {
+	display: block;
+}
+
+.editorLogicDesign .prompt {
+	display: none;
+	color: red;
+	margin: 7px -20px;
+	width: 100%;
+}
+@keyframes close{
+0% {
+transform: rotate(0deg);
+}
+
+50% {
+transform: rotate(180deg);
+}
+100%{
+transform: rotate(360deg);
+}
+}

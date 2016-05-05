@@ -1,0 +1,48 @@
+{// 加载头部公共文件 }
+<include file="Public:header" />
+<link href="__PUBLIC__/App/Home/Index/Css/index.css" rel="stylesheet"
+type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/App/Home/Index/Js/index.js"></script>
+</head>
+<body>
+	<div id="top">
+		<div class="logo">
+			<img src="__PUBLIC__/App/Home/Home/images/logo.jpg" />
+		</div>
+		<div class="help">
+			<div class="loginname">
+				{$uname}
+			</div>
+			<ul class="help_menulist">
+				<li>
+					<a href="__GROUP__/MyCenter/mycenter">个人中心</a>
+				</li>
+				<li>
+					<a href="__GROUP__/Passport/logout">退出</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="menumap">
+		<img src="__PUBLIC__/App/Home/Index/Images/menu_map.png" border="0"
+		usemap="#Map" />
+		<map name="Map" id="Map">
+			<area shape="poly"
+			coords="223,106,174,136,174,193,227,221,278,192,277,134"
+			href="__GROUP__/AppStore/index" />
+			<area shape="poly"
+			coords="228,233,230,292,282,324,332,292,332,233,280,203"
+			id="factory" href="#" />
+			<area id="team" shape="poly"
+			coords="394,202,344,228,343,289,395,319,446,288,447,229"
+			href="__GROUP__/TeamManage/teamList" />
+			<area shape="poly"
+			coords="287,134,286,193,339,221,388,191,388,132,336,104"
+			href="__GROUP__/Home/Index/applist" />
+			<area shape="poly" coords="55,201,3,233,5,292,56,320,108,290,106,228"
+			href="__GROUP__/AppCenter/recruit" />
+		</map>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,402 @@
+/**
+ * 数据筛选器外观样式
+ * 表单列表，操作步骤
+ * @author  皮振华
+ */
+/*头部*/
+html, body {
+	height: 100%;
+	width: 100%;
+	background: #f5f5f5;
+}
+#header {
+	width: 100%;
+	height: 50px;
+	background: #485868;
+	border-bottom: 1px solid #ccc;
+}
+.logo {
+	width: 78px;
+	height: 46px;
+	float: left;
+	margin-left: 100px;
+	margin-top: 4px;
+}
+.logo img {
+	width: 90px;
+	height: 40px;
+}
+#backToEditor {
+	color: white;
+	float: right;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 89px;
+	cursor: pointer;
+}
+/*正文*/
+#main {
+	width: 100%;
+	height: 90%;
+	padding: 0;
+	margin: 0;
+}
+
+/*正文-左边*/
+#main .m-left {
+	height: 100%;
+	border-right: 1px solid #CCC;
+	padding: 0;
+}
+#main .m-left .col.md-2, #main .m-left .col.md-6, #main .m-left .col.md-12 {
+	margin: 0;
+	padding: 0;
+}
+.dataTitle {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-bottom: 1px solid #CCC;
+	background: #BCBCBC;
+}
+#dataSourceList {
+	padding: 0;
+	margin: 0;
+}
+#dataSourceList .dataItem {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-bottom: 1px solid #CCC;
+	cursor: pointer;
+}
+
+#dataSourceList .dataItem:hover, #dataSourceList .selectDataItem {
+	background: #009DD9;
+	color: #FFF;
+}
+.liHover, .addHover {
+	background: #009DD9;
+	color: #FFF;
+}
+/*正文--右边*/
+.m-right {
+	margin: 0;
+	padding: 0;
+}
+.m-right .guide {
+	height: 40px;
+	line-height: 40px;
+	padding-left: 5px;
+	font-size: 16px;
+	color: #666;
+	border-bottom: 1px solid #CCC;
+	margin-left: 4%;
+}
+/*正文--右边--数据源设置区域*/
+.settingDataArea {
+	background: #FFF;
+	margin-left: 4%;
+	margin-top: 20px;
+	border-radius: 5px;
+}
+.setArea {
+	padding: 20px;
+	display: none;
+}
+.selectedArea {
+	display: block;
+}
+.setArea .formList {
+	min-height: 300px;
+	width: 100%;
+	margin: 0 0 20px 0;
+}
+.btnF {
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857;
+	margin-bottom: 0;
+	padding: 6px 12px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+.formItem, .fieldItem, .resultsItem {
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 5px 10px;
+	background-color: #fff;
+	border-color: #ccc;
+	color: #333;
+}
+.formItem:hover, .fieldItem:hover, .resultsItem:hover {
+	border: 1px solid #5CB85C;
+}
+.selectedForm, .selectedField, .selectedRe {
+	background: #5CB85C;
+	color: #FFF;
+}
+
+.setWhere, .dataEffect, .dataView {
+	padding: 0;
+}
+
+#dataViewOperation .dataView {
+	padding: 0;
+}
+
+.fieldTitle {
+	background: #f5f5f5;
+	color: #666;
+	border: 1px solid #CCC;
+}
+#setDataWhere .selFieldWhere .fieldIterm {
+	padding: 0;
+}
+.panel-body {
+	padding: 10px 10px 0px 10px;
+}
+.table .dataContent {
+	border: 1px solid #CCC;
+}
+.table-message {
+	display: block;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	color: #CCC;
+	text-align: center;
+	padding: 10px 0;
+}
+#existName {
+	padding-top: 31px;
+	color: red;
+	display: none;
+}
+/*条件设置区域*/
+#setDataWhere .panel-body {
+	position: relative;
+}
+.seeEffect {
+	position: absolute;
+	bottom: 10px;
+}
+.setField {
+	width: 100%;
+	height: 35px;
+	margin-bottom: 10px;
+}
+.setField .r1 {
+	display: block;
+	float: left;
+}
+.setField .setAndOr {
+	width: 80px;
+}
+.setField .orWhere, .setField .relation, .setField .w_relation {
+	width: 80px;
+	height: 30px;
+	border: 1px solid #CCC;
+	margin-top: 1px;
+}
+.setField .fieldTit {
+	width: 160px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: #5CB85C;
+	color: #FFFFFF;
+	margin-top: 1px;
+}
+.setField .condVal {
+	border-radius: 0;
+	margin-top: 1px;
+}
+.setField .add-condition, .setField .min-condition {
+	width: 30px;
+	height: 30px;
+	padding: 0 8px;
+	cursor: pointer;
+	margin-top: 2px;
+	line-height: 30px;
+}
+
+/*设置条件 条件选择值*/
+#setFilterMenu {
+	position: absolute;
+	z-index: 99;
+	top: 300px;
+	left: 500px;
+	border: 1px solid #CCC;
+	padding: 8px 10px;
+	border-radius: 5px;
+	display: none;
+	background: #FFF;
+}
+#setFilterMenu .menu-item {
+	width: 100%;
+	height: 30px;
+	border-bottom: 1px solid #CCC;
+	line-height: 30px;
+	cursor: pointer;
+}
+#setFilterMenu .more {
+	float: right;
+	margin-top: 6px;
+}
+
+#systemList, #formCtrlList, #fromSubQuery, #paramItem {
+	display: none;
+	border: 1px solid #ccc;
+	left: 125px;
+	min-height: 50px;
+	position: relative;
+	top: -30px;
+	padding-left: 10px;
+	background: #FFF;
+	border-radius: 5px;
+}
+/*数据集样式*/
+.dataSetFiledWrap {
+	position: relative;
+	top: -25px;
+	display: none;
+	min-height: 50px;
+	border: 1px solid #CCC;
+	left: 102px;
+	padding: 5px;
+	background: white;
+	border-radius: 5px;
+}
+.dataSetFiled {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+}
+.dataSaveTips {
+	height: 20px;
+	color: red;
+	font-size: 12px;
+	margin-top: 10px;
+}
+.dataSetName {
+	overflow: hidden;
+}
+.arrow-left {
+	border-color: transparent #ffffff transparent -moz-use-text-color;
+	border-style: dashed solid dashed none;
+	border-width: 12px 12px 12px medium;
+	left: -12px;
+	position: absolute;
+	top: 27px;
+	z-index: 9999;
+}
+.arrow-left-wrap {
+	border-color: transparent #cccccc transparent -moz-use-text-color;
+	border-style: dashed solid dashed none;
+	border-width: 14px 14px 14px medium;
+	left: -14px;
+	position: absolute;
+	top: 25px;
+}
+
+.setField .noValue {
+	display: none;
+	color: red;
+	padding-top: 8px;
+	position: absolute;
+}
+
+/*步骤数区域*/
+.steps {
+	padding: 0;
+	text-align: center;
+	margin-top: 30px;
+}
+.steps p {
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.steps .stepItem {
+	width: 35px;
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #CCC;
+	border-radius: 50%;
+	position: relative;
+}
+.steps .stepItem .prompt {
+	display: inline-block;
+	position: absolute;
+	line-height: 15px;
+	z-index: 2;
+	left: 23px;
+	top: 10px;
+	width: 80px;
+	heigth: 15px;
+	color: #666;
+}
+
+.steps .stepline {
+	height: 50px;
+	width: 1px;
+	background: #CCC;
+	margin-left: 20px;
+}
+.steps .complete {
+	background: #485868;
+	color: #FFF;
+	border: none;
+}
+.steps {
+	counter-reset: num 0;
+}
+.steps .stepItem:before {
+	content: counter(num);
+	counter-increment: num;
+}
+
+/*提示框*/
+#tipBox {
+	background: none repeat scroll 0 0 #666666;
+	display: none;
+	height: 100%;
+	left: 0;
+	opacity: 0.7;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+}
+#tipBox .tipMessage {
+	background: none repeat scroll 0 0 #000;
+	border-radius: 5px;
+	font-size: 20px;
+	height: 80px;
+	left: 35%;
+	line-height: 80px;
+	margin: auto;
+	opacity: 1;
+	position: absolute;
+	text-align: center;
+	top: 36%;
+	width: 30%;
+	z-index: 200;
+}
+#tipBox .tipClose {
+	color: white;
+	position: absolute;
+	top: -32%;
+	right: 10px;
+	font-size: 15px;
+	cursor: pointer;
+}

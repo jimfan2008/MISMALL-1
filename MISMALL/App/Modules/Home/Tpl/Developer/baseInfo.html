@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 基本信息认证</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>基本信息</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="authenProcess row">
+							<div class="stepflex" id="sflex03">
+								<dl class="first ">
+									<hr />
+									<dt class="s-num active">
+										1
+									</dt>
+									<dd>基本信息</dd>
+								</dl>
+								<dl class="normal">
+									<hr />
+									<dt class="s-num">
+										2
+									</dt>
+									<dd>服务</dd>
+								</dl>
+								<dl class="last">
+									<dt class="s-num">
+										3
+									</dt>
+									<dd>实名认证</dd>
+								</dl>
+							</div>
+						</div>
+						<div class="myInfo profile"  page="1">
+
+							<div class="row">
+								<label class="itemTitle">手机号码 *：</label>
+								<span class="itemValue">
+									<input id="consigneeMobile" type="text" value=""  maxlength="11" />
+								</span>
+								<span class="msg_red error" style="display: none"> </span>
+							</div>
+							<div class="row baseInfo">
+								<label class="font itemTitle">QQ *：</label>
+								<span class="itemValue">
+									<input id="qqNum" type="text" value=""  maxlength="12" />
+								</span>
+								<span class="msg_red error" style="display: none"> </span>
+							</div>
+							<div class="row baseInfo">
+								<label class="font itemTitle">所在地 *：</label>
+								<span class="itemValue">
+									<select id="provinceDiv" class="sele">
+										<option>请选择</option>
+									</select>
+									<select id="cityDiv" class="sele" >
+										<option >请选择</option>
+									</select>
+									<select id="countyDiv" class="sele" >
+										<option>请选择</option>
+									</select>
+								</span>
+								<span class="msg_red error" style="display: none"> </span>
+
+							</div>
+							<div class="row" class="font">
+								<label class="itemTitle">联系地址 *：</label>
+								<span class="itemValue">
+									<input id="consigneeAddress" type="text" value=""  maxlength="20"/>
+								</span>
+								<span class="msg_red error" style="display: none"> </span>
+							</div>
+							<div class="row" style="text-align: center">
+								<span> <a class="btn btn-warning next-btn" href="#" style="width:100px;">下一步</a></span>
+							</div>
+						</div>
+
+						<div class="row profile hide" page="2" style="margin:0px 10px;" >
+							<div class="row">
+								<form id="businessform" >
+									<div class="row describe">
+										<span style="line-height: 40px"> 牛人自述</span>
+										<textarea id="describe" class="form-control" placeholder="请简单描述下您的技能优势，当然也可写一段有趣的自述..." maxlength = "500" style="min-height: 150px">
+									 </textarea>
+										<span class="error "></span>
+									</div>
+									<div class="row experience">
+										<span style="line-height: 40px"> 牛人的经历</span>
+										<textarea id="experience" class="form-control" style="min-height: 200px" maxlength = "500">
+									 </textarea>
+										<span class="error "></span>
+									</div>
+									<div class="row">
+										<span style="line-height: 40px"> 熟悉的行业</span>
+										<ul class="familiarlist">
+											<li familType = "1">
+												电商
+											</li>
+											<li familType="2">
+												o2o
+											</li>
+										</ul>
+
+										<span class="error "></span>
+									</div>
+									<div class="row submitDiv" style="margin: 20px auto;text-align:center ">
+										<a class="btn btn-warning" href="#" style="width: 150px">下一步</a>
+
+									</div>
+							</div>
+							</form>
+
+						</div>
+
+						<div class="row  cardDiv hide " page="3" >
+							<div class="row">
+								<p style="color: #FF0110;padding-left: 162px;">
+									您所上传的身份证信息只做为本平台实名认证，不做其他使用
+								</p>
+							</div>
+							<div class = "validImgsWrap">
+								<div class="row">
+									<div class="col-md-3">
+										<span class="font">身份证正面:</span>
+									</div>
+									<div class="col-md-4">
+										<div class = "idImgWraper">
+											<div class = "validTip">
+												<span style = "font-size:36px;">+</span><br/>
+												点击上传身份证正面照片
+											</div>
+											<img class="img-responsive picPositive" src=""/>
+											<input class = "uploadImgFile idCardFront" type="file" name="idCardFront">
+											<input id="idCardFront" type="hidden" value="">
+											<div class="imgBoxProgressData">
+												<div class = "dataVal"></div>
+												<div class="imgBoxProgressBar"></div>
+											</div>
+											
+										</div>
+									</div>
+									<div class="col-md-5">
+										<img  class="img-responsive" src="__PUBLIC__/App/Home/Developer/images/id-front-small.jpg"/>
+									</div>
+								</div>
+	
+								<div class="row">
+									<div class="col-md-3">
+										<span class="font">身份证反面:</span>
+									</div>
+									<div class="col-md-4">
+										<div class = "idImgWraper">
+											<div class = "validTip">
+												<span style = "font-size:36px;">+</span><br/>
+												点击上传身份证反面照片
+											</div>
+											<img class="img-responsive picPositive" src=""/>
+											<input class="uploadImgFile idCardBack" type="file" name="idCardBack">
+											<input id="idCardBack" type="hidden" value="">
+											<div class="imgBoxProgressData">
+												<div class = "dataVal"></div>
+												<div class="imgBoxProgressBar"></div>
+											</div>
+										</div>
+	
+									</div>
+									<div class="col-md-5">
+										<img  class="img-responsive" src="__PUBLIC__/App/Home/Developer/images/id-back-small.jpg" />
+									</div>
+								</div>
+	
+								<div class="row">
+								<div class="col-md-3">
+									<span class="font">手持身份证:</span>
+								</div>
+								<div class="col-md-4">
+									<div class = "idImgWraper">
+										<div class = "validTip">
+											<span style = "font-size:36px;">+</span><br/>
+											点击上传手持身份证正面照片
+										</div>
+										<img class="img-responsive picPositive" src=""/>
+										<input class="uploadImgFile idCardHand" type="file" name="idCardHand">
+										<input id="idCardHand" type="hidden" value="">
+										<div class="imgBoxProgressData">
+											<div class = "dataVal"></div>
+											<div class="imgBoxProgressBar"></div>
+										</div>
+									</div>
+
+								</div>
+								<div class="col-md-5">
+									<img  class="img-responsive" src="__PUBLIC__/App/Home/Developer/images/id-hand-small.jpg"/>
+								</div>
+							</div>
+							</div>
+							<div class="row">
+								<p style="color: #FF0110;padding-left: 162px;">
+									我们的工作人员会在1-2个工作日内完成审核，请注意查收邮件！
+								</p>
+							</div>
+
+							<div class="row" style="text-align: center; margin-bottom: 20px;">
+								<span> <a class="btn btn-warning ok-btn" href="#" style="width: 150px">完成</a></span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script src='__PUBLIC__/App/Qywx/Js/components/cascade/city.js'></script>
+		<script src="__PUBLIC__/App/Home/Developer/js/certifyoption.js"></script>
+		<script type = "text/javascript">
+			$(function(){
+				footBottom();
+			});
+			$(window).resize(function(){
+				footBottom();
+			})
+			
+			function footBottom(){
+				var $header = $("#header"),
+					$footer = $("#footer"),
+					$content = $(".no-margin");
+				//console.log($(window).height(),$header.height(),parseInt($footer.css("height")),$paginationWrap.height());
+				var minH = $(window).height() - $header.height() - parseInt($footer.css("height"))-16;
+				$content.css("min-height",minH);
+			}
+		</script>
+
+		</body>
+</html>

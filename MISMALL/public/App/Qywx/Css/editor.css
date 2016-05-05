@@ -1,0 +1,1083 @@
+/**
+ * 表单设计器编辑器样式文件，区别于控件样式
+ * 设计器页面总体分上下两部分，上部分为顶部工具栏，下部分为设计区，其中下部又分四部分，左边为各个菜单栏，中间手机模型部分和右边的属性，动作设置区
+ * @auther 熊明月、唐苗
+ * 2015-06-26
+ */
+
+body {
+	background: #E4E4E4;
+}
+
+/*编辑器头部 st*/
+#header {
+	width: 100%;
+	height: 50px;
+	background: #485868;
+	border-bottom: 1px solid #ccc;
+}
+.logo {
+	width: 78px;
+	height: 46px;
+	float: left;
+	margin-left: 100px;
+	margin-top: 4px;
+}
+.logo img {
+	width: 90px;
+	height: 40px;
+}
+#header .top-menu, #header .tool-menu {
+	height: 50px;
+	color: #FFF;
+	font-family: "Microsoft Yahei";
+	overflow: hidden;
+	float: left;
+}
+#header .tool-menu #undoCtrl, #header .tool-menu #redoCtrl {
+	width: 50px;
+	line-height: 50px;
+	color: #666;
+}
+#header .tool-menu #undoCtrl:hover, #header .tool-menu #redoCtrl:hover {
+	background-color: #0a70a7;
+}
+#header .tool-menu #undoCtrl .undo, #header .tool-menu #redoCtrl .redo {
+	border: 0;
+	background: transparent;
+	color: white;
+	cursor :pointer;
+}
+#header .top-menu {
+	font-size: 18px;
+	margin-left: 6%;
+}
+#header .tool-menu {
+	display: none;
+	float: right;
+	font-size: 15px;
+	margin-right: 80px;
+}
+#header .top-menu li {
+	width: 120px;
+	height: 50px;
+	float: left;
+	margin-left: 0px;
+	line-height: 50px;
+	padding: 0 25px;
+	cursor: pointer;
+}
+#header .tool-menu li {
+	width: 40px;
+	height: 50px;
+	text-align: center;
+	float: left;
+	line-height: 50px;
+	margin-left: 0;
+	cursor: pointer;
+}
+#header .top-menu li:hover, #header .tool-menu .toolLi:hover {
+	background-color: #0a70a7;
+}
+.top-menu-text {
+	float: right;
+}
+#formSave .top-menu-icon {
+	background-position: 0 -53px;
+}
+#formPreView {
+	display: none;
+}
+#formPreView .top-menu-icon {
+	background-position: 0 -90px;
+}
+#backTo .top-menu-icon {
+	background-position: 0 -242px;
+}
+.tipWrap {
+	color: #fff;
+	display: none;
+	font-size: 24px;
+	height: 60px;
+	line-height: 58px;
+	position: fixed;;
+	text-align: center;
+	width: 360px;
+	opacity: 0.8;
+	z-index: 100;
+	background: #4b5a6b;
+}
+
+/*编辑器头部 ed*/
+
+/***********************/
+/*编辑器主体部分 st*/
+#container {
+	min-width: 1200px;
+	min-height: 500px;
+}
+
+.editor-block {
+	float: left;
+}
+
+/*左侧主菜单 st*/
+.left-main-menu {
+	width: 48px;
+	height: 650px;
+	background: #BCBCBC;
+	border-top: 1px solid #FFF;
+	border-left: 1px solid #FFF;
+	color: #FFF;
+	font-size: 18px;
+	font-family: "Microsoft Yahei";
+}
+.left-menu-list {
+
+}
+.left-menu-list  li {
+	width: 46px;
+	height: 146px;
+	padding: 20px 9px;
+	text-align: center;
+	border-bottom: 1px solid #FFF;
+	cursor: pointer;
+}
+.left-menu-list .left-menu-selected {
+	background: #009DD9;
+}
+
+.ctrl-lib .left-menu-name {
+	margin-top: 20px;
+	display: block;
+}
+.comp-lib .left-menu-name {
+	margin-top: 28px;
+	display: block;
+}
+/*左侧主菜单 ed*/
+
+/*左侧菜单详细 st*/
+.left-menu-wrap {
+	position: relative;
+	width: 270px;
+	height: 650px;
+	background: #FFF;
+	border-top: 1px solid #FFF;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	font-family: "Microsoft Yahei";
+}
+
+.menu-block {
+	display: none;
+}
+/*左侧菜单详细 ed*/
+
+/*页面管理详细tab*/
+.page-manage-wrap {
+	width: 270px;
+	/*overflow-x: hidden;
+	 overflow-y: auto;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+}
+.wx-page, .link-page, .backstage-manage-page {
+	width: 268px;
+	min-height: 200px;
+}
+/*左侧页面管理菜单滚动条*/
+.wx-menu-list, .link-menu-list, .backstage-menu-list {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.page-total {
+
+}
+.page-title {
+	width: 268px;
+	height: 36px;
+	line-height: 36px;
+	color: #333;
+	background: #BCBCBC;
+	margin-left: 1px;
+	font-size: 16px;
+}
+.page-common {
+	width: 268px;
+	height: auto;
+	line-height: 34px;
+	border-top: 1px solid #ccc;
+	cursor: pointer;
+	position: relative;
+}
+.page-secmenu {
+	width: 248px;
+	left: 20px;
+}
+.modNameInput {
+	position: absolute;
+	left: 10px;
+	top: 2px;
+	z-index: 21;
+	display: none;
+}
+.hideIco {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	display: none;
+	left: 0px;
+	top: 0px;
+	z-index: 20;
+}
+.link-page .edit-name .modNameInput, .link-page .edit-name .hideIco, .backstage-manage-page .edit-name .modNameInput, .backstage-manage-page .edit-name .hideIco {
+	display: block;
+}
+.page-total span {
+	margin-left: 12px;
+	cursor: pointer;
+}
+.page-common span {
+	color: #666;
+	font-size: 14px;
+	cursor: pointer;
+	width: 190px;
+	display: block;
+}
+.edit_pageName {
+	display: none;
+	height: 20px;
+	margin-left: 10px;
+	position: absolute;
+	right: 62px;
+	top: 6px;
+	width: 20px;
+	font-size: 15px;
+}
+.edit_saveName {
+	display: none;
+	height: 20px;
+	margin-left: 10px;
+	position: absolute;
+	right: 20px;
+	top: 8px;
+	width: 20px;
+	font-size: 15px;
+}
+.delete_page {
+	display: none;
+	height: 20px;
+	position: absolute;
+	right: 13px;
+	top: 8px;
+	width: 20px;
+	font-size: 15px;
+}
+.save_page {
+	display: none;
+	height: 20px;
+	position: absolute;
+	right: 38px;
+	top: 6px;
+	width: 20px;
+	font-size: 15px;
+}
+
+.page-common > div:hover .edit_pageName, .page-common > div:hover .delete_page, .page-common > div:hover .save_page, .page-secmenu:hover .edit_pageName, .page-secmenu:hover .delete_page, .page-secmenu:hover .save_page {
+	display: inline-block;
+}
+.link-page .page-common:hover .edit_pageName, .link-page .page-common:hover .save_page, .link-page .page-common:hover .delete_page {
+	display: inline-block;
+}
+.backstage-manage-page .page-common:hover .edit_pageName, .backstage-manage-page .page-common:hover .save_page, .backstage-manage-page .page-common:hover .delete_page {
+	display: inline-block;
+}
+.page-add {
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFF;
+	float: right;
+	line-height: 34px;
+	margin-right: 14px;
+	cursor: pointer;
+}
+.page-add:hover {
+	color: #ff9933;
+}
+/***********************/
+
+/***********************/
+/*控件库详细tab*/
+.ctrl-lib-wrap {
+	width: 270px;
+	height: 648px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+.ctrl-lib-list {
+	width: 270px;
+	height: 650px;
+}
+
+/*编辑器左侧控件或组件列表中，每一个控件或组件都有的的通用类 st*/
+.ctrl-comp {
+	width: 50%;
+	height: 90px;
+	float: left;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+	cursor: move;
+}
+.ctrl-lib-list > li:hover, .sys-comp-list > li:hover, .backstage-menu-list > li:hover, .wx-menu-list > li > div:hover, .wx-menu-list > li > ul > li:hover, .link-menu-list > li:hover, .menuWrap > ul > li:hover, .new_subMenuWrap > ul > li:hover, #editPage:hover, #deleteMenu:hover {
+	background-color: #eee;
+	color: #333;
+	filter: none;
+	text-decoration: none;
+}
+.finishing {
+	width: 50%;
+	height: 90px;
+	float: left;
+	display: none;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+	background-color: #EEEEEE;、
+}
+/*编辑器左侧控件或组件列表中，每一个控件或组件都有的的通用类 ed*/
+
+.ctrl-icon {
+	width: 40px;
+	height: 40px;
+	display: block;
+	margin: 16px auto 0;
+	cursor: move;
+	background: url(../Images/ctrl-icon.png);
+}
+.text-icon {
+	background-position: 0px 0px;
+}
+.textarea-icon {
+	background-position: 0px -44px;
+}
+.select-icon {
+	background-position: 0px -90px;
+}
+.time-icon {
+	background-position: 0px -136px;
+}
+.radio-icon {
+	background-position: 0px -182px;
+}
+.option-icon {
+	background-position: 0px -228px;
+}
+.img-icon {
+	background-position: 0px -274px;
+}
+.button-icon {
+	background-position: 0px -318px;
+}
+.text-tag-icon {
+	background-position: 0px -456px;
+}
+.box-icon {
+	background-position: 0px -180px;
+}
+.img-box-icon {
+	background-position: 0px -410px;
+}
+.col-icon {
+	background-position: 0px -355px;
+}
+.compLogic-icon{
+	background-position: 0px -503px;
+	height:32px;
+	margin-bottom:9px;
+}
+.pick-icon{
+	background-position: 0px -546px;
+	height:32px;
+	margin-bottom:9px;
+}
+
+/***********************/
+
+/***********************/
+/*组件详细tab*/
+.comp-lib-wrap {
+	width: 270px;
+	height: 648px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.comp-add {
+	width: 230px;
+	height: 38px;
+	margin: 10px 20px 20px;
+	background: #00CCFF;
+	border: none;
+	color: #FFF;
+	font-size: 18px;
+	font-family: "黑体";
+	line-height: 40px;
+	cursor: pointer;
+}
+.comp-add:hover {
+	background: #009dd9;
+}
+.comp-add-text {
+	font-weight: 600;
+}
+.comp-menu {
+	width: 100%;
+	height: 40px;
+}
+.comp-nav-title {
+
+}
+.comp-nav-title {
+	width: 100%;
+	height: 40px;
+	background: #D7D7D7;
+	border: 1px solid #CCC;
+	border-left: none;
+	box-sizing: border-box;
+	text-align: center;
+	cursor: pointer;
+}
+.comp-nav-title a {
+	line-height: 40px;
+	color: #333;
+	text-decoration: none;
+	font-size: 16px;
+}
+.component-name {
+	line-height: 90px;
+	text-align: center;
+}
+.tab-content {
+	overflow: hidden;
+}
+/***********************/
+
+/*手机模型部分 st*/
+#container .main {
+	position: relative;
+	width: 340px;
+	min-height: 570px;
+	margin-top: 20px;
+	margin-left: 4%;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+/*手机模型部分头部 st*/
+#container .main .mainTop, .topMenuList {
+	width: 100%;
+	height: 40px;
+	color: #FFFFFF;
+	background: black;
+}
+#container .main .mainTop span {
+	font-size: 17px;
+	background: black;
+}
+#container .main .mainTop .pageTop-title {
+	line-height: 40px;
+	margin-left: 10px;
+}
+#container .main .mainTop .page-close {
+	line-height: 40px;
+	margin-left: 4%;
+	background-position: 0 -1082px;
+	cursor: pointer;
+}
+#container .main .mainTop .phoneMod-title-vLline {
+	padding: 0 5px;
+}
+
+/*手机模型部分头部  ed*/
+/*手机模型部分主体  st*/
+#container .main #myWeb {
+	width: 100%;
+	height: 528px;
+	background: white;
+	position: relative;
+	display: none;
+}
+/* 请选中菜单设计页面!  */
+#appInitPage {
+	overflow: hidden;
+	text-align: center;
+	margin-top: 200px;
+	font-size: 16px;
+}
+#app {
+	position: absolute;
+	left: 340px;
+}
+
+#app .styh span {
+	height: 27px;
+	width: 27px;
+	margin-top: 5px;
+}
+/* 微信菜单样式 st */
+#wxMenu {
+	border-top: 1px solid #ccc;
+	height: 40px;
+	width: 100%;
+	position: absolute;
+	bottom: -2px;
+}
+#wxMenu li {
+	margin: auto;
+	font-weight: bold;
+}
+
+.editMenuN {
+	border: 1px solid #cccccc;
+	width: 85px;
+}
+.liaotian {
+	background: url("../Images/icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-right: 1px solid #ccc;
+	float: left;
+	height: 37px;
+	width: 45px;
+}
+.menuWrap {
+	width: 295px;
+	position: absolute;
+	float: right;
+	left: 45px;
+}
+.menuWrap ul > li.firstMenu {
+	position: relative;
+	width: 33.33%;
+	height: 37px;
+	line-height: 36px;
+	border-right: 1px solid #ccc;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+.menuWrap ul > li.firstMenu:last-child {
+	border-right: 0;
+}
+.menuWrap ul > li.nodeMenu {
+	height: 35px;
+	width: 100%;
+	position: relative;
+	border: 1px solid #ccc;
+}
+.new_subMenuWrap {
+	position: absolute;
+	bottom: 39px;
+	min-width: 100%;
+	min-height: 35px;
+	border: 1px solid #ccc;
+	background: #fff;
+	z-index: 999;
+	display: none;
+}
+
+.toEditMain {
+	background: url("../Images/icon.png") no-repeat 46px -347px;
+}
+.addSubMenuBtn {
+	background: url("../Images/icon.png") no-repeat 47px -412px;
+}
+/* 设置微信菜单时弹出的小面板 st */
+#setWXMenu {
+	position: absolute;
+	top: 65%;
+	left: 360px;
+	width: 160px;
+	background: #FFFFFF;
+	border-radius: 5px;
+	border: 1px solid #CCCCCC;
+	z-index: 999;
+	box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
+	padding-bottom: 10px;
+}
+#setWXMenu .title {
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	background: #f5f5f5;
+}
+#setWXMenu .disabled-item {
+	cursor: not-allowed;
+	color: #CCC;
+}
+.closePanel {
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: 20px;
+	height: 20px;
+	background: #f9f9f9 url("../Images/icon.png") no-repeat 4px -819px;
+	border-radius: 50%;
+	margin: 3px;
+	cursor: pointer;
+}
+.closePanel:hover {
+	background-position: 4px -844px
+}
+.settingMenu {
+	width: 100%;
+	margin: auto;
+}
+.settingMenu .set-wx-menu-item {
+	border-bottom: 1px solid #eee;
+	color: #249ddd;
+	cursor: pointer;
+	height: 30px;
+	padding-left: 10px;
+	clear: both;
+	line-height: 30px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.settingMenu .set-wx-menu-item:first-child {
+	height: 70px;
+}
+.settingMenu .set-wx-menu-item:not(:first-child)
+:hover {
+	background: #f5f5f5;
+}
+.set-wx-menu-item .setMenuName {
+	width: 140px;
+}
+.set-wx-menu-item p {
+	padding: 0;
+	margin: 0;
+}
+#setWxMenuName {
+	width: 100%;
+	height: 25px;
+	margin-top: -4px;
+	padding: 0 5px;
+	border: 1px solid #CCC;
+}
+.arrow-left {
+	border-width: 13px;
+	border-color: transparent #FFFFFF transparent transparent;
+	border-style: dashed solid dashed dashed;
+	border-left: none;
+	position: absolute;
+	left: -12px;
+	top: 28px;
+	z-index: 9999;
+}
+.arrow-left-wrap {
+	border-width: 15px;
+	border-color: transparent #ddd transparent transparent;
+	border-style: dashed solid dashed dashed;
+	border-left: none;
+	position: absolute;
+	left: -16px;
+	top: 26px;
+}
+
+/* 设置微信菜单时弹出的小面板 ed */
+
+/* 微信菜单样式 ed */
+
+/*手机模型部分主体  ed*/
+/*手机模型部分 ed*/
+
+/* 右面滑出的页面模板列表 st */
+#pageTplLib, #customcomponent, #apiManage {
+	position: absolute;
+	width: 0;
+	height: 500px;
+	right: 0;
+	top: 0px;
+	background: #fff;
+	box-shadow: 0 0 5px 5px rgba(100,100,100,0.5);
+	overflow: hidden;
+	z-index: 999;
+}
+#theMaskLayer {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 3;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+.ptlTitle {
+	position: relative;
+	height: 50px;
+	background: #2795d0;
+	line-height: 30px;
+	padding: 0 5px;
+	font-size: 16px;
+	color: #fff
+}
+div.close {
+	background: #fff;
+	border-radius: 50%;
+	height: 64px;
+	position: absolute;
+	right: -31px;
+	top: -34px;
+	width: 64px;
+	opacity: 0.5
+}
+.close img {
+	position: absolute;
+	top: 37px;
+	left: 12px;
+	transition: all 0.3s ease-in-out 0s;
+}
+.close:hover img {
+	transform: rotate(90deg);
+}
+.ptlMenu ul {
+	margin: 0;
+}
+.ptlMenu {
+	height: 30px;
+	background: #f0f0f0;
+	line-height: 30px;
+	padding: 0 5px;
+	font-size: 14px;
+	color: #aaa;
+	display: none;
+}
+.ptlMenu li.nowMenu {
+	background: #fff;
+	color: #2795d0;
+}
+.ptlMenu li {
+	float: left;
+	width: 100px;
+	height: 30px;
+	margin-right: 20px;
+	text-align: center;
+	cursor: pointer;
+}
+.pageTplListWrap {
+	display: none;
+}
+
+.pageTplListWrap .list li {
+	width: 120px;
+	height: 230px;
+	margin-top: 20px;
+	margin-left: 20px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	overflow: hidden;
+	text-align: center;
+}
+
+.pageTplListWrap .list li img {
+	height: 194px;
+	margin-top: 5px;
+	width: 109px;
+	transition: all 0.2s ease 0s;
+	-webkit-transition: all 0.2s ease 0s;
+}
+.pageTplListWrap .list li:first-child img {
+	border: 1px solid #ccc;
+}
+.pageTplListWrap .list li:hover img {
+	box-shadow: 0 0 2px 2px rgba(0, 100, 200, 0.5);
+}
+
+.pageTplListWrap .list li p {
+	margin-top: 8px;
+	color: #555;
+}
+
+.pageTplListWrap .list li .pageTplMask {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	display: none;
+}
+
+.myPtlList {
+	display: none;
+}
+/* 右面滑出的页面模板列表 ed */
+
+/* 右面滑出的创建组件列表 */
+.customcomponent-up {
+	text-align: center;
+}
+.customcomponent-up span {
+	line-height: 45px;
+	font-size: 15px;
+}
+.customcomponent-down {
+	width: 2850px;
+	line-height: 30px;
+	position: relative;
+}
+
+.customcomponent-down-one, .customcomponent-down-two, .customcomponent-down-thr {
+	float: left;
+	height: 100%;
+	width: 950px;
+	overflow-y: auto;
+}
+
+.set_addDataSource {
+	background-color: #4d90fe;
+	color: #fff;
+	cursor: pointer;
+	float: right;
+	font-family: "黑体";
+	font-size: 16px;
+	padding: 0 27px;
+}
+.set_externalInterface {
+	background-color: #ff9932;
+	color: #fff;
+	cursor: pointer;
+	float: right;
+	font-family: "黑体";
+	font-size: 16px;
+	padding: 0 27px;
+	margin-right: 10px;
+}
+.set_addDataSource:hover, .set_externalInterface:hover {
+	background-color: #0362fd !important;
+	color: #fff !important;
+}
+.set_externalInterface:hover {
+	background-color: #c24f02 !important;
+	color: #fff !important;
+}
+.customcomponent-down-two .data-op-name input:hover {
+	background: #009DD9;
+}
+.customcomponent-down-two .data-list, .fieldlist {
+	width: 88%;
+	height: 70%;
+	min-height: 350px;
+	margin: 0 5%;
+}
+.customcomponent-down-two .formcontent, .fieldcontent {
+	width: 50%;
+	min-height: 500px;
+	height: 70%;
+	float: left;
+}
+.customcomponent-down-two .data-list, .cp-type {
+	height: 90%;
+	margin-left: 6%;
+	width: 88%;
+}
+.customcomponent-down-two .cp-type {
+	height: 14%;
+	margin-left: 6%;
+	width: 88%;
+}
+.customcomponent-down-two .data-list, .cp-type .cp-type-list {
+	padding-top: 2%;
+}
+.cp-type .cp-type-list {
+	float: left;
+	height: 14%;
+	width: 80%;
+}
+.cp-type .cp-type-font {
+	float: left;
+	width: 15%;
+	font-size: 20px;
+	height: 14%;
+	line-height: 70px;
+}
+.fieldSelect {
+	background-color: #00ccff;
+}
+.customcomponent-down-two .data-list, .cp-type .cp-type-list .cp-type-li {
+	padding-top: 2%;
+}
+
+.customcomponent-down-two .data-operate-btn {
+	width: 44%;
+	height: 10%;
+	margin: 15% 20%;
+}
+.customcomponent-down-two .data-operate-btn span input {
+	margin: 5% 0 0 33%;
+}
+.customcomponent-down-two .data-operate-btn span input, .pre-btn input, .complete-btn input {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #7fbf4d;
+	background-image: -moz-linear-gradient(center top , #7fbf4d, #63a62f);
+	border-image: none;
+	border-style: solid;
+	border-width: 1px;
+	color: #fff;
+	font: bold 15px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	padding: 10px 0 8px;
+	text-align: center;
+	text-shadow: 0 -1px 0 #4c9021;
+	width: 215px;
+	height: 40px;
+}
+
+.customcomponent-down-two .data-operate-btn span input:hover, .pre-btn input:hover, .complete-btn input:hover {
+	background-color: #76b347;
+	background-image: -moz-linear-gradient(center top , #76b347, #5e9e2e);
+	box-shadow: 0 1px 0 0 #8dbf67 inset;
+	cursor: pointer;
+}
+.customcomponent-down-two .data-operate-btn span input:active, .pre-btn input:active, .complete-btn input:active {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: #5b992b #5b992b #538c27;
+	border-image: none;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 0 8px 4px #548c29 inset, 0 1px 0 0 #eeeeee;
+}
+.formInfoList > li, .item-ul > li, .cp-type-list > li {
+	border: 1px solid #ccc;
+	float: left;
+	text-align: center;
+	width: 140px;
+	margin: 5px 0 0 10px;
+	cursor: pointer;
+}
+.formInfoList > li:hover, .item-ul > li:hover, .cp-type-list > li:hover {
+	background-color: #00ccff;
+}
+.back-formlist {
+	background-color: #35aa47;
+	color: white;
+	text-shadow: none;
+	background-image: none;
+	border: 0 none;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	cursor: pointer;
+	display: inline;
+	filter: none;
+	font-size: 18px;
+	text-align: center;
+	outline: medium none;
+	padding: 2px 27px;
+}
+.back-formlist:hover {
+	background-color: #1d943b !important;
+	color: #fff !important;
+}
+
+.customcomponent-down-two .filed-name {
+	font-size: 14px;
+	color: #ffffff;
+	background-color: #e02222;
+	float: right;
+	padding: 0 27px;
+}
+#prompt span {
+	color: red;
+	font-weight: bold;
+	font-size: 15px;
+}
+.setting-data span {
+	margin-right: 20px;
+}
+/* 右面滑出的创建组件列表 end*/
+
+/*新增页面的模态框 start*/
+#pageModal {
+	top: 25%;
+}
+.modalContent {
+	height: 110px;
+	min-height: 10px;
+	min-width: 10px;
+}
+#newPageName {
+	margin-top: 15px;
+}
+/*新增页面的模态框 end*/
+/**  form error css start**/
+.formCtrl .valid_error, .error {
+	color: #fc4343
+}
+.formCtrl .valid_error, .validsuccess {
+	background-image: url(../Images/ok.png);
+	background-repeat: repeat-y;
+	width: 16px;
+	height: 16px;
+	float: right;
+	position: inherit;
+	margin-top: -20px;
+}
+
+/** end form error css **/
+
+/*****头部垃圾桶 st******/
+#topDelCtrl {
+	background: #ccc none repeat scroll 0 0;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	border-top: 1px solid #fff;
+	height: 30px;
+	left: 48%;
+	position: absolute;
+	top: 8px;
+	width: 35px;
+}
+.mainTop:hover #cover {
+	transform: rotate(-30deg);
+	top: -14px;
+	left: -11px;
+	-webkit-transform: rotate(-30deg);
+	-moz-transform: rotate(-30deg);
+	-o-transform: rotate(-30deg);
+}
+#cover {
+	background: #ccc none repeat scroll 0 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	height: 4px;
+	left: -2px;
+	position: absolute;
+	top: -7px;
+	transition: all 0.2s ease 0s;
+	width: 39px;
+}
+.beside {
+	background: #aaa none repeat scroll 0 0;
+	height: 20px;
+	left: 19%;
+	position: absolute;
+	top: 5px;
+	width: 4px;
+}
+.b2 {
+	left: 47%;
+}
+.b3 {
+	left: 73%;
+}
+/*****头部垃圾桶 ed******/

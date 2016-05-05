@@ -1,0 +1,76 @@
+<div class="apps_left">
+	<ul class="menuUl">
+		<!--公众号管理-->
+		<if condition="isset($wechat[wechatType]) && $wechat[wechatType] eq 0">
+		<li  class="appLeftMenu">
+			<div  class="mainMenu">
+				<img class="signPic" src="__PUBLIC__/App/Apps/Index/Images/gongzhonghao.png"/>
+				公众号管理
+				<img class="clickShow" src="__PUBLIC__/App/Apps/Index/Images/show.png"/>
+			</div>
+			<div class="childMenu" > 
+				<div style="line-height: 1px;"></div>
+				<eq name="is_supper_wechat" value="0">
+				<p name="mp_setting"><a href="{:U('WechatMp/setting')}">账号设置</a></p>
+				</eq>
+				<p name="mp_app_homeinfo"><a href="{:U('WechatMp/appHomeInfo')}">首页配置</a></p>		
+				<p name="mp_app_setting"><a href="{:U('WechatMp/appSetting')}">应用配置</a></p>
+				<eq name="is_supper_wechat" value="0">
+				<p name="mp_subscribe"><a href="{:U('WechatMp/subscribe')}">首次关注回复</a></p>
+				<p name="mp_keyword"><a href="{:U('WechatMp/keywordList')}">关键词回复</a></p>
+				</eq>
+				<if condition="$wechat['app_id'] AND $wechat['app_secret']">
+					<!-- <p name="mp_menu"><a href="{:U('WechatMp/menuList')}">自定义菜单</a></p> 
+					<p name="mp_group"><a href="{:U('WechatMp/groupList')}">粉丝分组</a></p>-->
+					<p name="mp_member"><a href="{:U('WechatMp/memberList')}">粉丝列表</a></p>
+					<eq name="is_supper_wechat" value="0">
+					<p  name="mp_message"><a href="{:U('WechatMp/messageList')}">消息管理</a></p>
+					</eq>
+				</if>
+			</div>
+		</li>
+		<!--企业号管理-->
+		<elseif condition="isset($wechat[wechatType]) && $wechat[wechatType] eq 1" />
+		<li  class="appLeftMenu">
+			<div  class="mainMenu">
+				<img class="signPic" src="__PUBLIC__/App/Apps/Index/Images/gongzhonghao.png"/>
+				企业号管理
+				<img class="clickShow" src="__PUBLIC__/App/Apps/Index/Images/show.png"/>
+			</div>
+			<div class="childMenu" > 
+				<div style="height: 13px; line-height: 1px;"></div>
+				<p name="qy_setting"><a href="{:U('WechatQy/setting')}">账号设置</a></p>
+				<p name="qy_app"><a href="{:U('WechatQy/appSetting')}">应用配置</a></p>
+				<p name="qy_menu"><a href="{:U('WechatQy/menuList')}">应用菜单</a></p>
+				<p name="qy_group"><a href="{:U('WechatQy/group')}">权限管理</a></p>
+				<p name="qy_manager"><a href="{:U('WechatQy/managerList')}">管理员管理</a></p>
+				<p name="qy_department"><a href="{:U('WechatQy/department')}">管理部门</a></p>
+				<p name="qy_member"><a href="{:U('WechatQy/memberList')}">管理成员</a></p>
+				<p name="qy_send"><a href="{:U('WechatQy/sendMessage')}">群发消息</a></p>
+				<p name="qy_message"><a href="{:U('WechatQy/messageList')}">消息中心</a></p>
+			</div>
+		</li>
+		</if><!--end 企业号-->
+		
+		<li class="appLeftMenu">
+			<div  id="formDataManage" class="mainMenu">
+				<img class="signPic" src="__PUBLIC__/App/Apps/Index/Images/yemian.png"/>
+					表单数据管理
+				<img  class="clickShow" src="__PUBLIC__/App/Apps/Index/Images/show.png"/>
+			</div>
+			<div id="formList" class="formMenu" >                    	           
+			</div>                
+		</li>  
+		
+		<li class="appLeftMenu">
+			<div  id="pageManage" class="mainMenu">
+				<img class="signPic" src="__PUBLIC__/App/Apps/Index/Images/yemian.png"/>
+					页面管理
+				<img  class="clickShow" src="__PUBLIC__/App/Apps/Index/Images/show.png"/>
+			</div>
+			<div id="pageChild" class="childMenu" >                    	           
+			</div>                
+		</li> 
+	</ul>
+	
+</div>

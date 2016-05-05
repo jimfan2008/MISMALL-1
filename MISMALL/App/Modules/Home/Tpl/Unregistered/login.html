@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mismall | 登陆</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="__PUBLIC__/Js/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	    <link href="__PUBLIC__/App/Home/Unregistered/css/login.css" rel="stylesheet">
+		<script>
+			var URLPATH = '__URL__';
+			var APPPATH = '__APP__';
+			var GROUPPATH = '__GROUP__';
+			var PUBLICPATH = '__PUBLIC__';
+			var UPLOAD_URL = '__UPLOAD_URL__';
+			var ROOTPATH = '__ROOT__';
+			var redirect_url = '{$Think.session.redirect_url}';
+		</script>
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	</head><!--/head-->
+
+
+	<body>
+		<div class="row">
+			<div class="login-containter">
+				<div style="border:1px solid #ddd;padding:10px 20px;border-radius:4px;" id="login_box">
+					<div on="selection" ng-switch="" class="animate-switch-container">
+						<div ng-switch-when="login" class="animate-switch ng-scope">
+							<div class="center-block ">
+								<div style="clear: right;float: left">
+									<img  class="" src="__PUBLIC__/App/Home/Client/images/logo.png" alt="logo" style="height:75px;width: 130px; margin-right: 20px;"/>
+								</div>
+								<div class="text-mb" style="padding-top: 10px;">
+									<span style="display:block;color: #666666;font-weight: bold;font-size:20px;">MIS MALL</span>
+									<span style="color: #989898;font-size:15px;">企业应用定制平台</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<form class="usrPanel loginform" onsubmit="return false;" id="loginform" style="background-color:;margin-top:20px;text-align:center">
+						<div class="error "  style="height:1px;border:1px solid #CCCCCC;margin:50px 0px 10px 0px; color: red;"></div>
+						<div class="form-group m-b-xs">
+							<div data-icon="p" class="icon" style="">
+								<img style="width: 20px;" src="__PUBLIC__/App/Home/Unregistered/images/iconfont-yonghuming.png" />
+							</div>
+							<input type="text" class="form-control input-md ng-pristine ng-valid" placeholder="电子邮箱" autofocus=""  ng-model="user.email" name="email" id="lf_uname">
+						</div>
+						<div class="form-group m-b-xs">
+							<div data-icon="p" class="icon" style="">
+								<img style="width: 20px;" src="__PUBLIC__/App/Home/Unregistered/images/iconfont-mima.png" />
+							</div>
+							<input type="password" class="form-control input-md ng-pristine ng-valid" placeholder="请输入密码" autofocus="" ng-model="user.email" name="email" id="lf_upass">
+						</div>
+						<div style="display:none;text-align:left; margin-top: 25px;" id="codeIMG">
+							<input type="text"  class="form-control input-md ng-pristine ng-valid"  style="width:110px;float:left; margin-right: 10px; padding-left: auto" maxlength="4" placeholder="验证码"  id="lf_r_code">
+							<img height="37px" width="105px" style="float:left;margin-left:4px;" src="__GROUP__/Passport/verifyCode.html" id="lf_r_codeimg">
+							<a style="float:left;margin-top:20px;margin-left:4px;" href="javascript:;" id="a_changeCode">看不清?</a>
+						</div>
+						<button id="submitStatic" class="btn btn-info" style="margin-bottom: 10px" data-ing = "确认中...">
+							登入
+						</button>
+						<label style="display: none;">
+							<input type="checkbox" id="autologin">
+							下次自动登录 </label>
+
+						<div class="" style="text-align: left;margin-top:52px;">
+							<span class="" style="margin-right: 20px;"><a href="__URL__/registered.html" target="_blank">免费注册</a></span>
+							<span class="" style="margin-right: 20px;"><a href="__URL__/backPassword.html">忘记密码？</a></span>
+							<span class="" style="margin-left: 130px;"><a href="#">微信登入</a></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+		<script src="__PUBLIC__/App/Home/Unregistered/js/user.js"></script>
+	</body>
+</html>

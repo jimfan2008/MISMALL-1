@@ -1,0 +1,39 @@
+﻿一、命名规范(驼峰命名法)，如下是每个命名的细分：
+  1、类：首字母大写和后缀"Class"。例如：
+     var PersonClass = function(){};
+  2、DOM和Jquery对象：
+     a、DOM对象，例如：
+        ·页面元素(htm)，例如：var htmContainer;
+        ﻿·XML(xml)，例如：var xmlControl;
+     b、Jquery对象，例如：
+        ·页面元素(htm)，例如：var htmContainer;
+        ﻿·XML(xml)，例如：var xmlControl;
+  3、方法：加前缀“_”，例如：
+     function _getName(){};
+  4、变量：
+     a、整数(int)，例如：var intAge = 1;
+     b、小数(float)，例如：var floatPrice = 10.1;
+     c、字符串(string)，例如：var stringName = 'pmxing';
+     d、布尔(bool)，例如：var boolIsShow = true;
+     e、Object对象(object)，例如：var objectPerson = {};
+     f、数组(array)，例如：var arrayCars = new Array();
+  5、参数：
+     跟类|对象|方法|变量的命名一样，根据传的参数类型命名。
+二、注释：
+  1、文件头注释：
+     大概简述下该文件是用作什么用途的，同时标注好创建人。
+     注释格式如：
+     /*!
+      * 说明：主要用于表单设计器解析。
+      * 创建者：彭明星
+      */
+  2、功能未实现完的代码：
+     例如：// TODO 未处理IE6-8的兼容性
+  3、其他注释：
+     a、标注一段代码，例如：
+        /* 遍历节点 BEGIN */
+          $($elments).each(function(){});
+        /* 遍历节点 END */
+     b、一些重要的方法、代码必须加上注释。
+
+PS：前端主要代码规范必须按照上述规范来执行。

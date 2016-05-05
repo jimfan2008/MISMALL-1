@@ -1,0 +1,137 @@
+<extend name="WechatMp/base"/>
+<block name="style">
+	<style type="text/css">
+	#main-container{margin-top: 20px;min-height:auto;}
+	.col-xs-2{width: auto;}
+	</style>
+</block>
+<block name="body">
+<form id="myForm" class="form-horizontal" role="form" method="post" action="__SELF__">
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">成员名称</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="name" value="{$info.name}">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">UserID</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" placeholder="成员唯一标识，不可更改，不支持中文" name="userid" value="{$info.userid}">
+	      <span class="help-block">对应管理端的帐号，企业内必须唯一</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">微信号</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="weixinid" value="{$info.weixinid}">
+	      <span class="help-block">若与员工扫描的微信匹配，则允许关注</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">手机</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="mobile" value="{$info.mobile}">
+	      <span class="help-block">若该手机对应的微信与员工扫描的微信匹配，则允许关注</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">邮箱</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="email" value="{$info.email}">
+	      <span class="help-block">若未匹配到员工的微信，则通过邮箱来验证身份</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">所在部门</label>
+	    <div class="col-sm-6">
+	    	<volist name="departmentList" id="dep">
+	    	<label class="checkbox-inline">
+			  <input type="checkbox" name="department[]" value="{$dep['depId']}" <if condition="in_array($dep['depId'], (array)$info['department'])">checked</if>>{$dep['name']}
+			</label>
+	      </volist>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label  class="col-sm-2 control-label">职位</label>
+	    <div class="col-sm-6">
+	      <input type="text" autocomplete="off" class="form-control" name="position" value="{$info.position}">
+	      <span class="help-block"></span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-7">
+	      <button type="button" onclick="bnt_submit()" class="btn btn-primary">提交</button>
+	    </div>
+	  </div>
+</form>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+<!--
+var errMsg = [];
+errMsg['-1'] = 'UserID不能为空！';
+errMsg['-2'] = 'UserID企业内必须唯一';
+errMsg['-3'] = '成员名称不能为空！'	;
+errMsg['-4'] = '成员名称必须唯一';
+errMsg['-5'] = '微信号、手机、邮箱三种信息不可同时为空';
+errMsg['-6'] = '微信号必须唯一';
+errMsg['-7'] = '手机号格式不正确';
+errMsg['-8'] = '手机号必须唯一';
+errMsg['-9'] = '邮箱格式不正确';
+errMsg['-10'] = '邮箱必须唯一';
+errMsg['-11'] = '请选择部门';
+	
+function bnt_submit(){
+	
+	//取消默认动作，防止表单两次提交
+        //e.preventDefault();
+        //禁用提交按钮，防止重复提交
+        var form = $('#myForm');
+       // $('[type=button]', form).addClass('disabled');
+
+        //获取提交地址，方式
+        var action = form.attr('action');
+        var method =form.attr('method');
+
+        //检测提交地址
+        if (!action) {
+            return false;
+        }
+
+        //默认提交方式为get
+        if (!method) {
+            method = 'get';
+        }
+
+        //获取表单内容
+        var formContent = form.serialize();
+
+        //发送提交请求
+        var callable;
+        if (method == 'post') {
+            callable = $.post;
+        } else {
+            callable = $.get;
+        }
+        callable(action, formContent, function (a) {
+            if(a == 'success'){
+            	handleAjax({'info':'操作成功','status':true});
+            	setTimeout(function(){parent.location.reload(false);},1000);
+            } else if(errMsg[a] == undefined){
+            	handleAjax({'info': a});
+            } else {
+            	handleAjax({'info': errMsg[a]});
+            	
+            }
+          //  $('[type=submit]', form).removeClass('disabled');
+        });
+
+        //返回
+        return false;
+}
+//
+--></script>
+</block>

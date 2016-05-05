@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 技能设置</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>我的名片</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="authenProcess row">
+							<div class="stepflex " id="sflex03">
+								<dl class="first ">
+									<dt class="s-num ">
+										基本信息
+									</dt>
+
+								</dl>
+								<dl class="hr">
+									<hr />
+								</dl>
+								<dl class="normal ">
+									<dt class="s-num active">
+										服务
+									</dt>
+
+								</dl>
+								<dl class="hr">
+									<hr />
+								</dl>
+								<dl class="last ">
+									<dt class="s-num">
+										实名认证
+									</dt>
+
+								</dl>
+							</div>
+						</div>
+						<div class="row profile" style="margin:0px 10px;" >
+							<div class="row">
+								<form id="businessform" >
+									<div class="row describe">
+										<span style="line-height: 40px"> 牛人自述</span>
+										<textarea id="describe" class="form-control" placeholder="请简单描述下您的技能优势，当然也可写一段有趣的自述..." maxlength = "500" style="min-height: 150px">
+									 </textarea>
+										<span class="error "></span>
+									</div>
+									<div class="row experience">
+										<span style="line-height: 40px"> 牛人的经历</span>
+										<textarea id="experience" class="form-control" style="min-height: 250px" maxlength = "500">
+									 </textarea>
+										<span class="error "></span>
+									</div>
+									<div class="row">
+										<span style="line-height: 40px"> 熟悉的行业</span>
+										<ul class="familiarlist	">
+											<li>
+												电商
+											</li>
+											<li>
+												o2o
+											</li>
+										</ul>
+
+										<span class="error "></span>
+									</div>
+									<div class="row submitDiv" style="margin: 20px auto;text-align:center ">
+										<a class="btn btn-warning" href="#" style="width: 150px">下一步</a>
+
+									</div>
+							</div>
+							</form>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			</div>
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script type="text/javascript">
+			$(function() {
+				$(".developerCenter,.my_card").parent().addClass("active");
+
+				$(".describe,.experience").find("textarea").text("");
+				$(".submitDiv").find(".btn").on("click", function() {
+					var describeText = $.trim($(".describe").find("textarea").val());
+					var experienceText = $.trim($(".experience").find("textarea").val());
+
+					if (describeText && experienceText) {
+						if ($(".familiarlist").find(".active").length < 1) {
+							$(".familiarlist").next(".error").text("请至少选择一项").css("display", "block");
+						} else {
+							$(".familiarlist").next(".error").text("").css("display", "none");
+
+							$.ajax({
+								type : 'POST',
+								url : APPPATH + "/Developer/saveBusinessCard",
+								data : {
+									'describeText' : describeText,
+									'experienceText' : experienceText
+								},
+								success : function(data) {
+									if (data) {
+										$(".submitDiv").find(".message").text("");
+										$(".submitDiv").find(".message").text('保存成功');
+										window.location = URLPATH + "/certifyInfo.html";
+									} else {
+										$(".submitDiv").find(".message").text('保存失败');
+									}
+
+								}
+							});
+
+						}
+					} else {
+						$(".submitDiv").find(".message").text("");
+						if (!describeText) {
+							$("#describe").next().text("描述不能为空").css("display", "block");
+						}
+						if (!experienceText) {
+							$("#experience").next().text("经历不能为空").css("display", "block");
+						}
+					}
+				});
+
+				$("#describe").on("blur", function() {
+					var describeText = $.trim($(this).val());
+					if (describeText) {
+						$("#describe").next().text("").css("display", "none");
+					} else {
+						$("#describe").next().text("描述不能为空").css("display", "block");
+					}
+
+				});
+
+				$("#experience").on("blur", function() {
+					var experienceText = $.trim($(this).val());
+					if (experienceText) {
+						$("#experience").next().text("").css("display", "none");
+					} else {
+						$("#experience").next().text("经历不能为空").css("display", "block");
+					}
+
+				});
+
+				$(".familiarlist").find("li").on("click", function() {
+					if ($(this).hasClass("active")) {
+						$(this).removeClass("active");
+					} else {
+						$(this).addClass("active");
+					}
+
+				});
+
+			});
+
+		</script>
+
+		</body>
+</html>

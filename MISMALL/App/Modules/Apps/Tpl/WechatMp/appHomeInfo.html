@@ -1,0 +1,130 @@
+<extend name="WechatMp/base"/>
+<block name="header">
+	<include file="WechatMp/header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+
+<block name="body">
+	<div class="sub-item">
+		<h4 class="sub-title">公众号首页配置</h4>
+	</div>
+	<div class="row">
+		<!-- 公众号首页配置 -->
+		<div class="col-xs-6">
+	    	<div class="message-content clearfix">
+	    		<!-- 标题 -->
+	            <div class="form-group">
+	                <label class="col-sm-2 control-label">标题<sub>*</sub></label>
+	                <div class="col-sm-10">
+	                  <input type="text" class="form-title form-control" placeholder="请输入标题" autocomplete="off" name="mpnews_title" value="{$info['title']}">
+	                  <span class="help-block">限64个字</span>
+	                </div>
+	            </div>
+	            <!-- 封面图片 -->
+	            <div class="form-group">
+	            	<div>
+		                <label class="col-sm-2 control-label">封面图片<sub>*</sub></label>
+						<div class=" col-sm-10 upload_area upload_box" style="padding-left: 16px">
+							<a class="ImagePreview border_alpha upload_box upload_area" href="javascript:;">
+								<input type="file" style="position:absolute;left:0;opacity:0;z-index:100;cursor:pointer;width:165px;height:130px;margin-top:4px" size="1" multiple="" class="ignore" name="file" id="inputFile3"><img src="{$info['img']|default='__ROOT__/images/36.jpg'}" class="img_avatar" id="change_avator" style="cursor:pointer; width:165px; height:130px;margin-top:4px;">
+							</a>
+							<p style="margin-top:10px;" class="gray">注：支持JPG、PNG格式，较好的效果为大图640*320，小图80*80。</p>
+						</div>
+	                </div>
+
+	            </div>
+	            <div style="clear:both"></div>
+	            <!-- 摘要 -->                    
+	            <div class="form-group" style="margin-top:20px;">
+	                <label class="col-sm-2 control-label">摘要<sub>*</sub></label>
+	                <div class="col-sm-10">
+	                  <textarea class="form-control edit_home_info_desc " name="mpnews_content" autocomplete="off"  style="height: 100px;">{$info["info"]}</textarea>
+	                  <span class="help-block"></span>
+	                </div>
+	            </div>
+	            <!-- 原文链接 -->
+	            <div class="form-group">
+	                <label class="col-sm-2 control-label">原文链接</label>
+	                <div class="col-sm-10">
+	                  <input type="text" class="form-control form-link" autocomplete="off" name="mpnews_url" value="{$info['url']}">	                  
+	                </div>
+	            </div>                    
+	        </div>
+	        <!-- 确定按钮 -->
+	        <div class="row text-center" style="">
+				<button id="homeInfosubmit" class="btn btn-primary" href="javascript:;">确认</button>
+			</div>
+		</div>               
+
+   	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+$(function(){
+	//upload logo
+	$('a.ImagePreview').undelegate('#inputFile3','change').delegate('#inputFile3','change', function() {
+	      $.ajaxFileUpload({
+	         type:"POST",
+	         url:Think.APP+"/WechatPublic/ajaxUpload",
+	         secureuri:false,
+	         fileElementId:'inputFile3',
+	         dataType: 'JSON',
+	          success: function(data){
+	            var json = eval('('+data+')');
+	            //console.log(data,json);
+	            $('#change_avator').attr('src', json.image);
+	            
+	          }
+	       });
+	})
+
+	$("#homeInfosubmit").click(function(){
+		var formTitle = $(".form-title").val(),
+		imgSrc = $.trim($("#change_avator").attr("src")),
+		formDesc = $(".edit_home_info_desc").val(),
+		formLink = $(".form-link").val();
+		if(formTitle =="" || formTitle == undefined){
+			alert("标题不能为空");
+			return;
+		}
+		if(formTitle.length > 64){
+			alert("标题长度不得大于64");
+			return;
+		}
+		if(imgSrc == "undefined"){
+			alert("图片路径不得为空");
+			return;
+		}
+		if(formDesc == "undefined"){
+			alert("描述不得为空");
+			return;
+		}
+		if(formDesc .length > 200){
+			alert("描述文字长度不得大于200");
+			return;
+		}
+	        
+	        $.ajax({
+	        	type :"post",
+	        	url : Think.ROOT+"/Apps/WechatMp/saveIndexSeting",
+	        	data:{
+	        		"title" :formTitle,
+	        		"img_data" : imgSrc,
+	        		"info_content" :formDesc,
+	        		"url" : formLink
+	        	},
+	        	async: false,
+	        	success :function(r){
+	        		if(r){
+	        			alert("设置成功");
+	        		}
+	        	}
+	        });
+	});
+});
+</script>
+</block>

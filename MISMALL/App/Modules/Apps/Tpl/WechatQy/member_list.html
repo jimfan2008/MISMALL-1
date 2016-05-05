@@ -1,0 +1,124 @@
+<extend name="WechatMp/base"/>
+<block name="header">
+	<include file="WechatMp/header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+<block name="body">
+<div class="panel panel-default">
+	  <div class="panel-heading">成员列表 &nbsp;&nbsp; 
+	  <!--  <a href="javascript:void(0);" onclick="sync()">同步企业号成员</a> -->
+	  <a href="javascript:void(0)" onclick="editMember(0)">新增成员</a></div>
+
+	<div class="table-responsive">
+	 <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>姓名</th>
+              <th>部门</th>
+              <th>帐号</th>         
+              <th>手机</th>
+              <th>邮箱</th>
+              <th>职位</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<volist name="memberlist" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>
+					<img src="{$vo.avatar|get_headimg='46'}" width="23"/> 
+					<a href="javascript:void(0)" onclick="editMember('{$vo.id}')">{$vo.name}</a></td>
+					<td>
+						<php>
+							$vo['department'] = (array) $vo['department'];
+							if( $vo['department']) {
+								$deps = array();
+								foreach($vo['department'] as $dep) {
+									array_push($deps, $groups[$dep]);
+								}
+								echo join(',', $deps);
+							}
+						</php>
+					</td>
+					<td>{$vo.userid}</td>
+					<td>{$vo.mobile}</td>
+					<td>{$vo.email}</td>
+					<td>{$vo.position}</td>
+					<td>
+						<switch name="vo['status']">
+							<case value="0">禁用</case>
+							<case value="1">已关注</case>
+							<case value="2">已冻结</case>
+							<case value="4">未关注</case>
+							<default/>未知
+						</switch>
+						<if condition="$vo['status'] eq 0">
+							<a href="javascript:void(0)" onclick="editStatus('{$vo.id}', 1)">&nbsp;&nbsp;启用</a>
+						<else/>
+							<a href="javascript:void(0)" onclick="editStatus('{$vo.id}', 0)">&nbsp;&nbsp;禁用</a>
+						</if>
+						<a href="javascript:void(0)" onclick="editStatus('{$vo.id}', -1)">&nbsp;&nbsp;删除</a>
+					</td>
+				</tr>
+			</volist>
+          </tbody>
+        </table>
+       </div>
+	</div>
+
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/jquery.artDialog.source.js?skin=blue"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+<!--
+
+function editMember(id) {
+	if(id == undefined){
+			id = 0;
+		}
+		art.dialog.open(Think.APP + '/WechatQy/editMember/id/'+id, {
+		title : id ? "编辑成员" : "新增成员",
+		width : 700,
+		height : 800,
+		opacity : 0.3,
+		lock : true,
+		id : 'relation_form'
+	});
+}
+
+function editStatus(id, status) {
+	$.get("{:U('editMemberStatus')}", {id:id,status:status}, function(s){
+		if(s==-1) {
+			handAjax({'info' : '状态不存在'});
+		} else if( s== -2) {
+			handleAjax({'info':'用户不存在'});
+		} else if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else if( s != '') {
+			handleAjax({'info': s});
+		} else{
+			return false;
+		}
+	});
+}
+
+function sync(){
+	$.get('{:U("memberSync")}', function(s){
+		if(s == 'success') {
+			handleAjax({'info':'操作成功','status':true});
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'操作失败：'+ s});
+		}
+	});
+}
+//-->
+</script>
+</block>

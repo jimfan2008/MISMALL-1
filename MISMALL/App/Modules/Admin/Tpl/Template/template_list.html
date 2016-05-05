@@ -1,0 +1,229 @@
+<extend name="Public/base" />
+
+<block name="style"></block>
+
+<block name="body">
+
+<div class="main-title">
+		<h2>模板列表管理</h2>
+		<div class="auth-botton" style="float:left;margin-left:20px;">
+        <a id="add-group" class="btn" href="{:U('Template/templateAdd')}">新 增</a>
+    </div>
+	</div>
+<div class="cf">
+	<div class="search-form">
+			<div class="sleft">
+				<div class="search-title fl">模板类型:
+				<select name="temp_type" id="temp-sort-txt">
+					<option value="0" <eq name="temp_type" value="0">selected</eq>>网站模板</option>
+					<option value="1" <eq name="temp_type" value="1">selected</eq>>微企模板</option>
+					<option value="2" <eq name="temp_type" value="2">selected</eq>>ezApp模板</option>
+					<option value="3" <eq name="temp_type" value="3">selected</eq>>微观模板</option>
+				</select>
+				</div>
+				<div class="search-title fl">网站类型:
+				<select name="site_type" id="site-sort-txt">
+					<option value="">所有</option>
+					<volist name="site_type_list" id="site">
+						<option value="{$site['id']}" <eq name="site_type" value="$site['id']">selected</eq>>{$site.name}</option>
+						 </volist>
+				</select>
+				</div>
+				
+				<!--<div class="drop-down">
+					<span data="" class="sort-txt" id="site-sort-txt">所有</span>
+					<i class="arrow arrow-down"></i>
+					<ul class="nav-list hidden" id="site-type-menu">
+						<li><a value="" href="javascript:;">所有</a></li>
+						<volist name="site_type_list" id="site">
+							<li><a href="{:U('?type='.$site['id'])}">{$site.name}</a></li>
+						 </volist>
+					</ul>
+				</div>-->
+				
+				<div class="search-title fl">模板分类:
+					<select name="cate" id="category-sort-txt">
+						<option value="">所有</option>
+						<volist name="template_category_list" id="category">
+							<option value="{$category['id']}" <eq name="template_cate" value="$category['id']">selected</eq>>{$category.nameCN}</option>
+								<if condition="is_array($category['child'])">
+									<volist name="category['child']" id="sub">
+									<option value="{$sub['id']}" <eq name="template_cate" value="$sub['id']">selected</eq>>&nbsp;&nbsp;&nbsp;&nbsp;|--{$sub.nameCN}</option>
+									</volist>
+								</if>
+							 </volist>
+					</select>
+				</div>
+				
+				<!--<div class="drop-down">
+					<span data="" class="sort-txt" id="category-sort-txt">所有</span>
+					<i class="arrow arrow-down"></i>
+					<ul class="nav-list hidden" id="template-category-menu">
+						<li><a value="" href="javascript:;">所有</a></li>
+						<volist name="template_category_list" id="category">
+							<li><a href="{:U('?type='.$category['id'])}">{$category.nameCN}</a></li>
+							<if condition="is_array($category['child'])">
+								<volist name="category['child']" id="sub">
+									<li><a href="{:U('?type='.$sub['id'])}">&nbsp;&nbsp;&nbsp;&nbsp;|--{$sub.nameCN}</a></li>
+								</volist>
+							</if>
+						 </volist>
+					</ul>
+				</div>
+				
+				--><div class="search-title fl">模板颜色:
+					<select name="color" id="color-sort-txt">
+					<option value="">所有</option>
+					<volist name="template_color_list" id="color">
+						<option value="{$color['id']}" <eq name="color" value="$color['id']">selected</eq>>{$color.name}</option>
+						 </volist>
+					</select>
+				</div>
+				
+				<!--<div class="drop-down">
+					<span data="" class="sort-txt" id="color-sort-txt">所有</span>
+					<i class="arrow arrow-down"></i>
+					<ul class="nav-list hidden" id="template-color-menu">
+						<li><a value="" href="javascript:;">所有</a></li>
+						<volist name="template_color_list" id="color">
+							<li><a href="{:U('?type='.$color['id'])}">{$color.name}</a></li>
+						 </volist>
+					</ul>
+				</div>
+				--><input type="text" placeholder="请输入模板名称或者编号" value="{$title|default=''}" class="search-input" name="title">
+				<a url="{:U('')}" id="search" href="javascript:;" class="sch-btn"><i class="btn-search"></i></a>
+			</div>
+            <div class="btn-group-click adv-sch-pannel fl">
+                <button class="btn">高 级<i class="btn-arrowdown"></i></button>
+                <div class="dropdown cf" style="display: none;">
+                	<div class="row">
+                		<label>更新时间：</label>
+                		<input type="text" placeholder="起始时间" value="{$time_start|default=''}" class="text input-2x" name="time-start" id="time-start"> -
+                		<input type="text" placeholder="结束时间" value="{$time_end|default=''}" class="text input-2x" name="time-end" id="time-end">
+                	</div>
+                	<div class="row">
+                		<label>设计师：</label>
+                		<input type="text" placeholder="请输入用户名" value="{$designer|default=''}" class="text input-2x" name="designer">
+                	</div>
+                </div>
+            </div>
+		</div>	
+</div>
+	<!-- 模板列表 -->
+	<div class="template_list">
+	<empty name="templateList">
+		<div style="text-align:center;">暂时无内容！</div>
+	<else/>
+	<ul>
+		<volist name="templateList" key="key" id="tpl">
+		<li <if condition="$key gt 0 AND $key%5 eq 0">style="margin:15px 0px 15px 20px"</if>>
+			<p class="temp_pic"><img src="{:getImageUrl($tpl['thumbPath'],150,120,true)}" width="150" height="120" title="{$tpl.templateName}" /></p>
+			<p class="name">编号：<span class="f-black-b">{$tpl.sitePath}</span></p>
+			<p class="name">名称：<span class="f-black-b" title="{$tpl.siteName}">{:sub_str($tpl['siteName'],0,14,false)}</span> </p>
+			<p class="name">分类：<span class="f-black-b">{$templateCategoryArray[$tpl['siteCategoryId']]}</span></p>
+			<p class="name">设计师：<span class="f-black-b">{$tpl['user_name']}</span></p>
+			<p class="name">价格：<span class="f-black-b">{:currency($tpl['price'])}</span></p>
+			<div class="floating">
+				<span class="modify_temp fl"><a href="{:U('templateEdit?id='.$tpl['id'])}">修改</a></span><span class="del_temp fr"><a href="{:U('templateRemove?id='.$tpl['id'])}">删除</a></span>
+			</div>
+		</li>
+		</volist>
+	</ul>
+	</empty>
+	</div>
+	<!-- 分页 -->
+	<div class="page">
+        {$_page}
+    </div>
+
+</block>
+
+<block name="script">
+<link href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/Js/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var temp_type = $('#temp-sort-txt').val();
+		var site_type = $("#site-sort-txt").val();
+		var tpl_category = $("#category-sort-txt").val();
+		var tpl_color = $("#color-sort-txt").val();
+		var search_query = '';
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+
+        search_query += 'temp_type=' + temp_type + "&";
+		if(site_type != ''){
+			search_query += 'type=' + site_type + "&";
+        }
+		if(tpl_category != ''){
+			search_query += 'cate=' + tpl_category + "&";
+        }
+		if(tpl_color != ''){
+			search_query += 'color=' + tpl_color + "&";
+        }
+        query = search_query + query;
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+	/* 状态搜索子菜单 */
+	/*
+	$(".search-form > .sleft > .drop-down").hover(function(){
+			$(this).children(".nav-list").removeClass("hidden");
+		},function(){
+			$(this).children(".nav-list").addClass("hidden");
+		});
+		
+	$(".search-form > .sleft > .drop-down li").find("a").each(function(){
+		$(this).click(function(){
+			var data_div = $(this).parent().parent().parent().children('.sort-txt');
+			var text = $(this).text();
+			data_div.text(text).attr("data",$(this).attr("value"));
+			$(this).parent().parent().addClass("hidden");
+		})
+	});
+	*/
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+    $('#time-start').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+	    minView:2,
+	    autoclose:true
+    });
+
+    $('#time-end').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+	    minView:2,
+	    autoclose:true
+    });
+
+    $('.template_list li').hover(function(){
+		$(this).children('.floating').css('display','block');
+        },function(){
+        $(this).children('.floating').css('display','none');
+     });
+
+  //导航高亮
+	$('.side-sub-menu').find('a[href="{:U('Template/templateList')}"]').closest('li').addClass('current');
+
+});
+
+</script>
+</block>

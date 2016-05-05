@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>mismall | 开发者中心</title>
+
+		<!-- core CSS -->
+		<include file="Public:developer_hearder" />
+
+		<style type="text/css">
+			.profile > .row {
+				margin: 15px 0;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row account-info" >
+					<ul class="nav navbar-nav account-info-ul">
+						<li class="account-balance">
+							账户余额：
+						</li>
+						<li class="balance-money">
+
+							<b class="money">￥0.00</b>
+							元
+						</li>
+						<li class="reflect" style="margin-top:8px">
+							<span><a class="btn btn-info btn-warning btn-reflace no-radius">提现</a></span>
+						</li>
+						<li class="transaction-records">
+							<span>交易记录</span>
+							|
+							<span>交易明细</span>
+
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 left">
+						<include file="Developer:left_sale" />
+					</div>
+					<div class="col-md-10 ">
+						<div class="row breadCrumb">
+							<span class="col-md-9" style="padding-top: 10px" ><b>基本信息</b></span>
+						</div>
+						<div class="row">
+							<hr style="height: 2px;background-color: #2795d0;margin-right: 15px;margin-top:5px;">
+						</div>
+						<div class="authenProcess row">
+							<div class="stepflex " id="sflex03">
+								<dl class="first ">
+									<dt class="s-num ">
+										基本信息
+									</dt>
+
+									<dd></dd>
+								</dl>
+								<dl class="hr">
+									<hr />
+								</dl>
+								<dl class="normal ">
+									<dt class="s-num">
+										服务
+									</dt>
+
+								</dl>
+								<dl class="hr">
+									<hr />
+								</dl>
+								<dl class="last ">
+									<dt class="s-num active">
+										实名认证
+									</dt>
+
+								</dl>
+							</div>
+						</div>
+
+						<div class="row  cardDiv " >
+							<div class="row">
+								<p style="color: #FF0110;padding-left: 162px;">
+									您所上传的身份证信息只做为本平台实名认证，不做其他使用
+								</p>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<span class="font">身份证正面:</span>
+								</div>
+								<div class="col-md-4">
+									<img class="img-responsive picPositive" src="__APP__/images/36.jpg"/>
+									<input id="idCardPositive" class="" type="file" name="idCardPositive">
+									<input class="idCardUrl" type="hidden" value="" name="idCardUrl">
+									<div class="imgBoxProgressData"></div>
+									<div class="imgBoxProgressBar"></div>
+								</div>
+								<div class="col-md-5">
+									<img  src=""/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<span class="font">身份证反面:</span>
+								</div>
+								<div class="col-md-4">
+									<img class="img-responsive picBack" src="__APP__/images/36.jpg"/>
+									<input id="idCardBack" class="" type="file" name="idCardBack">
+									<input class="idCardUrl" type="hidden" value="" name="idCardUrl">
+									<div class="imgBoxProgressData"></div>
+									<div class="imgBoxProgressBar"></div>
+
+								</div>
+								<div class="col-md-5">
+									<img src="__PUBLIC__/App/Home/Developer/images/id-back-small.jpg" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<span class="font">手持身份证:</span>
+								</div>
+								<div class="col-md-4">
+									<img class="img-responsive picFront" src="__APP__/images/36.jpg"/>
+									<input id="idCardFront" class="" type="file" name="idCardFront">
+									<input class="idCardUrl" type="hidden" value="" name="idCardUrl">
+									<div class="imgBoxProgressData"></div>
+									<div class="imgBoxProgressBar"></div>
+
+								</div>
+								<div class="col-md-5">
+									<img src="__PUBLIC__/App/Home/Developer/images/id-front-small.jpg"/>
+								</div>
+							</div>
+							<div class="row">
+								<p style="color: #FF0110;padding-left: 162px;">
+									我们的工作人员会在1-2个工作日完成审核（不包括周六周日），我们会以邮件通知您！
+								</p>
+							</div>
+
+							<div class="row" style="text-align: center; margin-bottom: 20px;">
+								<span> <a class="btn btn-warning next-btn" href="#" style="width: 150px">完成</a></span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<include file="Public:developer_footer" />
+		<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+		<script>
+			//身份证认证
+			$(".img-responsive").on("click", function() {
+				$(this).next(["input=file"]).click();
+			});
+			$("#idCardPositive ,#idCardBack,#idCardFront").unbind("change").change(function() {
+				if (!checkImgFile(this)) {
+					return;
+				}
+				$(this).parent().find(".imgBoxProgressData").show();
+				var fd = new FormData();
+				var url = APPPATH + "/Index/ajaxUpload";
+				fd.append(this.name, this.files[0]);
+				upload(fd, url, $(this).parent());
+			});
+
+			function upload(fd, url, $obj) {
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', url, true);
+				var $ProgressData = $obj.find('.imgBoxProgressData');
+				var $ProgressBar = $obj.find('.imgBoxProgressBar');
+				$ProgressData.html("0%").show();
+				$ProgressBar.html("").width(0).show();
+				xhr.upload.onprogress = function(ev) {
+					var percent = 0;
+					if (ev.lengthComputable) {
+						percent = 100 * ev.loaded / ev.total;
+						var finalPercent = parseInt(percent);
+						if (finalPercent == 100) {
+							$ProgressBar.html("请稍候...");
+						}
+						console.log(finalPercent);
+						$ProgressData.html(finalPercent + '%');
+						$ProgressBar.width(percent * 2);
+					}
+				};
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						var data = xhr.responseText;
+						var json = JSON.parse(data);
+						$obj.find("img").attr('src', json.image).unbind("load").bind("load", function() {
+							setTimeout(function() {
+								$ProgressData.fadeOut();
+								$ProgressBar.fadeOut();
+								$('.imgBoxProgressData').hide();
+							}, 1000);
+						});
+						$obj.find("input[type=hidden]").val(json.image);
+					}
+				};
+				xhr.send(fd);
+			}
+
+			/**
+			 * 过滤图片文件大小和类型  只允许上传jpg|gif|png|jpeg格式，且大小不超过800K的图片
+			 * target input[type = "file"] 对象
+			 */
+			function checkImgFile(target) {
+				//检测上传文件的类型
+				if (!(/(?:jpg|gif|png|jpeg)$/i.test(target.value))) {
+					alert("只允许上传jpg|gif|png|jpeg格式的图片");
+					if (window.ActiveXObject) {
+						target.select();
+						document.selection.clear();
+					} else if (window.opera) {
+						target.type = "text";
+						target.type = "file";
+					} else {
+						target.value = "";
+						return false;
+					}
+
+				}
+
+				//检测上传文件的大小
+				var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+				var fileSize = 0;
+				var size = fileSize / 1024;
+				if (isIE && !target.files) {
+					var filePath = target.value;
+					var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+					var file = fileSystem.GetFile(filePath);
+					fileSize = file.Size;
+				} else {
+					fileSize = target.files[0].size;
+				}
+
+				if (size > 4096) {
+					alert("文件大小不能超过4M");
+					if (window.ActiveXObject) {
+						target.select();
+						document.selection.clear();
+					} else if (window.opera) {
+						target.type = "text";
+						target.type = "file";
+					} else {
+						target.value = "";
+					}
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+		</script>
+
+		</body>
+</html>

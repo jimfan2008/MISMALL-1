@@ -1,0 +1,218 @@
+<extend name="base"/>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="qy_side"/>
+</block>
+<block name="body">
+<div class="row">
+	<div class="tool_bar">
+		<h2 class="page_title">应用中心</h2>
+	</div>
+	<div class="app_view">
+
+		<div style="" class="app_box_item open border_none">
+			<!--<span class="app_box_title">已启用</span>-->
+			<ul style="padding-top:25px;" class="app_box js_agent_box">
+				<!-- 插入 agent-item -->
+			<volist name="applist" id="app">
+			<li class="item" data-id="{$app.id}">
+				<a class="logo_img border_alpha" href="javascript:void(0);">
+					<span class="app_stop_text" <eq name="app['status']" value="0">style="display:block;"</eq>>已禁用</span>
+					<img class="img_logo" src="{$app.icon}" style="width:80px;height:80px;">
+					</a>
+				<h3 class="name">{$app.name}</h3>
+				<if condition="$app[appId] gt 0">
+				<h3 class="name" style="margin-top:10px"><a href="{:U('/Qywx/Editor/index', array('siteId' => $app[appId]))}">编辑应用</a></h3>
+				<h3 class="name" style="margin-top:10px"><a href="{:U('WechatQy/menuList', array('aid' => $app['id']))}">自定义菜单</a></h3>
+				</if>
+			</li>
+			</volist>
+
+			<!-- <li class="item">
+				<a class="logo_img border_alpha" href="javascript:void(0);">
+					<span class="app_stop_text" style="display:block;">已禁用</span>
+					<img class="img_logo" src="http://mmbiz.qpic.cn/mmbiz/uiavt8DZviaTdHguicaAia574iaKhhaXEVXFveywtbEMTxCZeIUR7ulfxESXSMRTxpjPuHWtz5lKNROvxl5vKATbbibg/0" style="width:80px;height:80px;">
+					</a>
+				<h3 class="name">请假</h3>
+				<h3 class="name" style="margin-top:10px"><a href="#">编辑应用</a></h3>
+			</li>
+
+			<li class="item">
+				<a class="logo_img border_alpha" href="#app/detail/1063000810">
+					<span class="app_stop_text">已禁用</span>
+					<img class="img_logo" src="http://mmbiz.qpic.cn/mmbiz/HnvQMsqCZbbGckml77h2ZvuOFujs5AmtFUB6LmhEIK8UYTTsdBmdU2EzTicM8uY9y9eB8N4eBAyaM9XNDlUQmZQ/0" style="width:80px;height:80px;">
+					</a>
+				<h3 class="name">任务安排</h3>
+				<h3 class="name" style="margin-top:10px"><a href="#">编辑应用</a></h3>
+			</li> -->
+
+			
+			<li class="item_add js_add_app">
+					<a class="logo" href="javascript:void(0);"></a>
+					<h3 class="name">创建新应用</h3>
+				</li>
+			</ul>
+		</div>
+		<div style="border-bottom: none;display:none;" class="app_box_item close border_none">
+			<span class="app_box_title">已禁用</span>
+			<ul class="app_box js_agent_close_box">
+				<!-- 插入 agent-item -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+        <h4 class="modal-title">应用配置</h4>
+      </div>
+      <div class="modal-body form_details" style="overflow:hidden">
+	      <div class="form_item form_item_avatar">
+			<div class="upload_area upload_box"><!-- 上传中的状态，加class名：upload_loading -->
+				<a class="avatar border_alpha upload_box upload_area" href="javascript:;">
+				<input type="file" style="position:absolute;left:0;opacity:0;z-index:100;cursor:pointer;width:120px;height:120px;" size="1" multiple="" class="ignore" name="file" id="inputFile3"><img src="__PUBLIC__/App/Wechat/images/appstore_avatar_default.png" class="img_avatar" id="change_avator">
+					<span class="loading"></span>
+					<span style="display:none;" class="add_logo">添加应用Logo</span>
+					<span class="edit_logo">编辑</span>
+				</a>
+				<p style="margin-top:10px;" class="gray">注：为了最佳的显示效果，推荐上传图片尺寸为640x640，大小不超过2M。</p>
+			</div>
+		</div>
+      	<div class="form_item">
+	     <label class="form_label">应用ID</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" value="" id="agentId" placeholder="微信企业号创建应用时生成的应用ID" />
+	     </div>
+	    </div>
+      	<div class="form_item">
+	     <label class="form_label">应用名称</label>
+	     <div class="form_control">
+	      <input type="text" class="input_text" value="" id="app-name" placeholder="2-16个字" />
+	     </div>
+	    </div>
+	    <div class="form_item">
+	     <label class="form_label">功能介绍</label>
+	     <div class="form_control">
+	      <textarea class="input_text" id="app-description" rows="4" placeholder="描述该应用的功能与特色，长度为4-120个字"></textarea>
+	     </div>
+	    </div>
+	    <div class="form_item">
+	     <label class="form_label">状态</label>
+	     <div class="form_control">
+	      <input type="checkbox" checked="true" value="1" id="app-status"> 开启
+	      <span style="color:#999;margin-left:20px">选择表示启动应用，否则禁用</span>
+	     </div>
+	    </div>
+	    <input type="hidden" value="" id="app-id">
+	    <input type="hidden" value="0" id="app-appid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="addApps()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</block>
+<block name="script">
+<script type="text/javascript"   src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js_add_app').click(function(){
+		window.location.target="_blank";
+		window.location.href=Think.ROOT+"/AppStore/index/type/5.html";
+	});
+
+	$('.js_agent_box > li').click(function(){
+		var aid = $(this).attr('data-id');
+		$.getJSON(Think.APP+'/WechatQy/ajaxGetAppInfo/aid/'+aid, function(s){
+			if(s == false) {
+				handleAjax({'info':'操作失败：应用不存在'});
+				return;
+			}
+			if(s.icon){
+				$('#change_avator').attr('src', s.icon);
+			}
+			$('#agentId').val(s.agentId);
+			//当应用ID为0时禁止修改
+			if(s['appId'] == 0){
+				$('#agentId').addClass('form-control').prop('disabled', true);
+				$('#app-status').prop('checked', true).prop('disabled', true);
+			}
+			$('#app-name').val(s['name']);
+			$('#app-description').val(s['description']);
+			$('#app-id').val(s['id']);
+			$('#app-appid').val(s['appId']);
+			if(s['status']) {
+				$('#app-status').prop('checked', true);
+			}
+
+			$('#appModal').modal('show');
+		});
+	})
+	//upload logo
+	$('a.avatar').undelegate('#inputFile3','change').delegate('#inputFile3','change', function() {
+	    $.ajaxFileUpload({
+         type:"POST",
+         url:Think.APP+"/Public/ajaxUpload",
+         secureuri:false,
+         fileElementId:'inputFile3',
+         dataType: 'JSON',
+          success: function(data){
+            var json = eval('('+data+')');
+            //console.log(data,json);
+            $('#change_avator').attr('src', json.image);
+            
+          }
+       });
+	})
+});
+
+function addApps(){
+	var post = {};
+	post['agentId'] = parseInt($('#agentId').val());
+	post['name'] = $.trim($('#app-name').val());
+	post['description'] = $.trim($('#app-description').val());
+	post['id'] = parseInt($('#app-id').val());
+	post['appId'] = parseInt($('#app-appid').val());
+	post['icon'] = $('#change_avator').attr('src');
+	if( $('#app-status').prop('checked') == true) {
+		post['status'] = 1;
+	} else {
+		post['status'] = 0;
+	}
+
+	var last_icon = post['icon'].lastIndexOf('/');
+	if(post['icon'].substring(last_icon+1, 100) == 'appstore_avatar_default.png') {
+		alert('请上传应用图片');
+		return false;
+	}
+
+	if(post['name'].length <2 || post['name'].length>16) {
+		alert('应用名称2-16个字');
+		return false;
+	}
+	/*if(post['description'].length <4 || post['description'].length>120){
+		alert('描述该应用的功能与特色，长度为4-120个字');
+		return false;
+	}*/
+
+	//console.log(post);
+	$.post(Think.APP+"/WechatQy/editAppInfo", post, function(s){
+		if(s=='1'){
+			handleAjax({'info':'操作成功','status':true});
+			$('#appModal').modal('hide');
+			window.setTimeout(function(){location.href = location.href;}, 300);
+		} else {
+			handleAjax({'info':'操作失败：'});
+		}
+	})
+}
+</script>
+</block>

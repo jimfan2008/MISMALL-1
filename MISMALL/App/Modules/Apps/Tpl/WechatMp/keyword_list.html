@@ -1,0 +1,65 @@
+<extend name="base"/>
+<block name="header">
+	<include file="header"/>
+</block>
+<block name="side">
+	<include file="Public/apps_leftMenu"/>
+</block>
+<block name="body">
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">规则列表 <div class="pull-right"><a href="{:U('keyword')}">新增</a></div></div>
+	
+	  <!-- Table -->
+	<div class="table-responsive">
+	 <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>规则名称</th>
+              <th>信息类型</th>
+              <th>关键字</th>
+              <th>设置时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<volist name="keywordsList" id="vo" key="k">
+				<tr>
+					<td>{$k}</td>
+					<td>{$vo.ruleName}</td>
+					<td>    <if condition="$vo['msgType'] eq 'mpnews' "> 单图文
+						    <elseif condition="$vo['msgType'] eq 'news' "/>多图文
+						    <else /> 文本
+						    </if>
+    					</td>
+					<td>{$vo.keywords}</td>
+					<td>{$vo.updateTime|date='Y-m-d H:i:s',###}</td>
+					<td><span onclick="setStatus(this, {$vo['id']})" style="cursor: pointer;" class="glyphicon <if condition="$vo['status'] eq 1">glyphicon-ok text-success<else/>glyphicon-remove text-danger</if>"></span></td>
+					<td>
+					<a href="{:U('keyword?id='.$vo['id'])}">编辑</a>
+						
+					</td>
+				</tr>
+			</volist>
+          </tbody>
+        </table>
+       </div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+function setStatus(id, val){
+	$.get(Think.APP+"/WechatMp/keywordStatus?id="+val,function(data){
+		if(data == 0){
+			$(id).removeClass('glyphicon-ok text-success').addClass('glyphicon-remove text-danger');
+		} else if(data == 1){
+			$(id).removeClass('glyphicon-remove text-danger').addClass('glyphicon-ok text-success');
+		}
+	})
+}
+
+</script>
+</block>

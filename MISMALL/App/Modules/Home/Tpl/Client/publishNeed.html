@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<link rel="stylesheet" href="__STATIC__/Css/bootstrap-expand.css">
+		<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/bootstrap-switch.min.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/Js/jquery-ui-bootstrap-v0.5/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css">
+		<link rel="stylesheet" href="__PUBLIC__/Js/datetimepicker/css/dropdown.css">
+		<title>mismall | 发布需求</title>
+
+		<!-- core CSS -->
+		<include file="Public:client_hearder" />
+		<style type="text/css">
+			#helpMenu li a {
+				padding: 4px 15px;
+			}
+		</style>
+
+		<section class="no-margin" style="margin-top: 15px">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 " >
+						<div class="toNeed_main">
+
+							<div id="ajaxmask">
+								<div class="ajaxmessage">
+									<span class="mas_img" style="margin:auto;color:white;">数据提交成功</span>
+								</div>
+							</div>
+							<div class="main-box">
+								<div class="main-box-right">
+									<div class="mainText">
+										<br>
+										<br>
+										<br>
+
+										<p class="boldFont">
+											<span>应用类型</span>
+										</p>
+										<p class="textInner">
+											<input class="text requestTitle" type="text" name="mytext"  placeholder="请输入应用类型"/>
+										</p>
+										<p class="writeTitle">
+											<div class="b_main writeTitle" style="display: none;margin-top:-10px;margin-left: 370px">
+												<div class="borderNeed">
+													请输入应用类型
+												</div>
+												<div class="out">
+													<div class="in"></div>
+												</div>
+											</div>
+										</p>
+										<br>
+										<p class="boldFont">
+											<span>您的预算是多少？</span>
+										</p>
+										<p class="textInner">
+											<img src="__STATIC__/Home/images/money.jpg" style="width: 30px;height: 36px;border-bottom-left-radius:3px;border-top-left-radius:3px">
+											<input class="text requestMoney" type="text" name="mytext" placeholder="请输入您的预算"  />
+											<!-- <span style="color:#C0C0C0;">合理的定价可以吸引更多专业的服务商</span> -->
+										</p>
+										<p class="writeMoney">
+											<div class="b_main writeMoney" style="display: none;margin-left: 368px;margin-top: -20px">
+												<div class="borderNeed">
+													请填写您的预算
+												</div>
+												<div class="out">
+													<div class="in"></div>
+												</div>
+											</div>
+										</p>
+										<br>
+										<p class="boldFont">
+											<span>您要求完成的时间？</span>
+										</p>
+										<p class="textInner">
+											<img src="__STATIC__/Home/images/date.jpg" style="width: 30px;height: 36px;border-bottom-left-radius:3px;border-top-left-radius:3px">
+											<input id="datetimepicker" class="text requestDate" type="text" name="mytext" placeholder="" />
+										</p>
+										<p class="writeDate">
+											<div class="b_main writeDate" style="display: none;margin-left: 370px;margin-top: -20px">
+												<div class="borderNeed">
+													需求完成时间无效
+												</div>
+												<div class="out">
+													<div class="in"></div>
+												</div>
+											</div>
+										</p>
+
+										<br>
+										<p class="boldFont">
+											<span >详细描述一下需求:</span>
+										</p>
+										<p class="textInner" >
+											<textarea class="text requestContent" type="text" name="mytext"></textarea>
+										</p>
+										<p class="writeContent">
+
+											<div class="b_main writeContent" style="display: none;margin-left: 710px;margin-top: -120px">
+												<div class="borderNeed">
+													请输入要求内容
+												</div>
+												<div class="out">
+													<div class="in"></div>
+												</div>
+											</div>
+										</p>
+										<br>
+										<p  class="addText" style="font-size: 15px;margin-left: 300px;">
+											<button class="addRequest">
+												发布需求
+											</button>
+										</p>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+
+		<include file="Public:client_footer" />
+		<script src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
+		<script src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script src="__PUBLIC__/Js/common.js"></script>
+		<script src="__PUBLIC__/App/Home/Home/index.js?h=1"></script>
+		<script>
+			$(".publishNeed").parent().addClass("active");
+			//需求发布页面日期控件实现
+			$('#datetimepicker').datetimepicker({
+			language:"zh-CN",//汉化
+			weekStart:1,todayBtn:1,autoclose:1,//选择日期后自动关闭
+			format:'yyyy/mm/dd',//选择日期后，文本框显示的日期格式
+			pickDate:true,pickTime:true,todayHighlight:1,startView:2,minView:2,//选择日期后，不会再跳转去选择时分秒
+			forceParse:0
+			});
+		</script>
+		</body>
+</html>

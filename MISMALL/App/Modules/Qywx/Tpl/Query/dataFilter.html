@@ -1,0 +1,228 @@
+
+<include file="Public:header_query" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Qywx/Query/Css/dataFilter.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" />
+<script src="__PUBLIC__/Js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="__PUBLIC__/Js/ezCommon.js"></script>
+<script src="__PUBLIC__/App/Qywx/Query/Js/dataFilter.js"></script>
+</head>
+<body>
+	<div id = "header" class = "df-to-menu-bar">
+		<div class = "df-menuWrap">
+			<p>
+				<input type = "button" class="btn btn-primary btn-xs" id = "save" value = "保存">
+			</p>
+			<p>
+				<input type = "button" class="btn btn-primary btn-xs" id = "exit" value = "退出">
+			</p>
+		</div>
+	</div>
+	<div id = "main">
+		<div class = "mainLeft">
+			<div class = "tableListTitle">
+				我的表单
+			</div>
+			<div class = "tableListWrap" >
+				<!-- 表单列表 -->
+				<ul></ul>
+			</div>
+			<div class = "dataSetListTitle" >
+				我的查询列表
+			</div>
+			<div class = "myDataSet" style="height:50%;">
+				<ul></ul>
+			</div>		
+		</div>
+		<div class = "mainRight">
+			<div class = "dataTableWrap">
+				<div class = "fieldDataListWrap">
+					<table class = "fieldTitleList">
+						<tr class="fieldHead"></tr>
+					</table>
+					<!-- <div class="inputFieldWrap">
+					<input type="text" id="newFieldTitle" placeholder = "输入查询字段">
+					<div class="searchPanel" style="display: none;">
+					<ul></ul>
+					</div>
+					</div> -->
+					<div class = "addNewFieldWrap" title = "添加一个查询字段">
+						+
+					</div>
+				</div>
+			</div>
+			<div class = "dataCondition">
+				<div class = "condTitle">
+						<i>在下面添加过滤条件</i>
+						<button class="btn btn-xs btn-primary setFilterField" type="button" style="margin-left:20px;">设置过滤字段</button>
+						<i>显示数据条数</i>
+						<input type="text" id="whereCount" style="width:30px;height:30px;" value="10" placeholder="为空或输入0显示所有"/>
+						<i>*为空或输入0显示所有数据*</i>
+
+						<span> <input type="checkbox" id="resultCount" name="resultCount" /><i>显示总记录条数</i>
+						<i></i></span>
+						 
+				</div>
+				<div class = "condWraper">
+					<table class = "condContent" style="display:none;">
+						<tr>
+							<td>
+								
+								<div class="input-group">
+									  <input type="text" class="form-control">
+									  <div class="input-group-btn">
+									    <!-- Button and dropdown menu -->
+									  </div>
+									</div>
+							</td>
+							<td>
+								
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<div class="condition-conter" >
+						<ul class="right_where_column">
+							
+						</ul>
+						<div>
+							<button id="btnFilter" type="button" class="btn btn-primary input-sm">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 数据集命名模态框 -->
+	<div class="modal fade dataSetModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">数据集保存</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<input type="text"  class="form-control dataSetName" placeholder="数据集名称" />
+						<p class="dataSaveTips"></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary savaBtn">
+						确定
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						取消
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div class="modal fade" id="filterField">
+	 	<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">字段名</h4>
+				</div>
+				<div class="modal-body" id = "contentWrap">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-primary" id="SureBtn">
+						确定
+					</button>
+					<button type="button" id="CancleBtn" class="btn">
+						取消
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+	
+	<div id="setFilterMenu" style="display:none">
+			<div class="setFilter">
+				<div class="menu-item disabled-item" id="setSystem"><span>系统变量</span><span class="glyphicon  glyphicon-play more"></span>
+					<div id="systemList">
+						<div class="menu-item" s_type="STAFFID" s_tit="当前用户ID" >当前用户ID</div>
+						<div class="menu-item" s_type="USERNAME" s_tit="当前用户名称" >当前用户名称</div>
+						<div class="menu-item" s_type="SysDBDateTime" s_tit="当前系统时间">当前系统时间</div>
+					</div>
+				</div>
+				<div class="disabled-item" id="setTimeList">
+						<div class="menu-item selectTime" s_type="thisday" s_tit="今天">今天</div>
+						<div class="menu-item selectTime" s_type="thismouthfirstday" s_tit="当月的第一天">当月的第一天</div>
+						<div class="menu-item selectTime" s_type="thismouthlastday" s_tit="当月最后一天">当月最后一天</div>
+						<div class="menu-item setTimeNum" s_type="preday" s_tit="今天前n天">
+							  <span>当天前<input type="text" class="editNum" value="1">天</span>
+							  <span class="btnEditNum">确定</span>
+						</div>
+						<div class="menu-item setTimeNum" s_type="nextday" s_tit="今天后n天">
+							<span>当天后<input type="text" class="editNum" value="1">天</span>
+							<span class="btnEditNum">确定</span>
+						</div>
+						<div class="menu-item setTimeNum" s_type="premonth" s_tit="比本月小n月">
+							<span>比本月小<input type="text" class="editNum" value="1">月</span>
+							<span class="btnEditNum">确定</span>
+						</div>
+						
+					<div style="clear: both;"></div>
+				</div>
+				<div class="menu-item disabled-item" id="setFormCtrl"><span>表单控件</span><span class="glyphicon  glyphicon-play more"></span>
+					<div id="formCtrlList">
+						
+					</div>
+				</div>
+				<!-- 设置查询条件为子查询 -->
+				<div class="menu-item disabled-item" id="subQuery">数据集</span><span class="glyphicon  glyphicon-play more"></span>
+					<div id="fromSubQuery">
+					
+					</div>
+				</div>
+				<div class="menu-item disabled-item" id="pageParamId"><span>当前页接收的参数</span><span class="glyphicon  glyphicon-play more"></span>
+					<div id="paramItem">
+					</div>
+				</div>
+				<div class="menu-item disabled-item" id="layerId"><span>制作层ID</span></span>
+				</div>
+				<div class="menu-item disabled-item" id="setNull">空值</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="custom">
+			  <div class="arrow-left"></div>
+			  <div class="arrow-left-wrap"></div>
+			</div>
+		</div>
+
+		<div class="modal fade">
+  <div class="modal-dialog" id="saveTplModal">
+    <div class="modal-content">
+      <div class="modal-body">
+        模板保存名称：<input type="text" name="saveTplModalInput" id="saveTplModalInput" value =' + title + ' />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary saveTplModalBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+		<div id="saveTplModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">    
+		<div class="modal-content">模板保存名称：<input type="text" name="saveTplModalInput" id="saveTplModalInput" value =' + title + ' />
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button><button type="button" class="btn btn-primary saveTplModalBtn">保存</button>
+		</div>
+		</div>
+		</div>
+</body>
+</html>

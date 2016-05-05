@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* 首页头部样式 */
+#heard{width:100%; height:550px; margin:auto;position:relative;overflow:hidden;}
+/*导航样式 */
+#heard .navmenu{width:100%; height:80px;position:absolute;z-index:100;top:0px;left:0px;}
+#heard .navmenu .layer{width:100%; height:80px; opacity:0.2; filter: Alpha(Opacity=20);border-bottom:1px solid #FFF; z-index:0; position:absolute; top:0px; left:0px;}
+#heard .navmenu .menu{width:1000px; height:80px; margin:0 auto; color:#fff; position:relative;}
+#heard .navmenu .menu a{color:#fff;}
+#heard .navmenu .menu a:hover{color:#00f6ff;}
+#heard .navmenu .menu .logo{width:150px; height:60px; margin:10px 50px 0 0;}
+#heard .navmenu .menu .user_layer{width:190px; position:relative; padding-top:10px;}
+#heard .navmenu .menu .user_layer .usertext{float:right; width:90px; height:25px; line-height:25px; text-align:center; position:relative;}
+#heard .navmenu .menu .user_layer .usertext_layer{width:90px; height:25px; border-radius:12px; border:1px solid #fff; z-index:0; position:absolute; right:0px; top:10px;opacity:0.4; filter: Alpha(Opacity=40);}
+#heard .navmenu .menu ul{padding:27px 0 0;}
+#heard .navmenu .menu li{float:left; font-size:14px; font-weight:bold; line-height:50px;}
+#heard .navmenu .menu li a{padding:0 5px; display:block; margin:0 15px;}
+#heard .navmenu .menu li a:hover,#heard .navmenu .menu li a.current{border-bottom:3px solid #00f6ff;}
+#heard .navmenu .menu .user_login{color:#00f6ff; height:80px; font-size:14px; background:url(../images/userlogin_show.png) no-repeat right 50px; text-align:right; position:absolute; top:0; right:0; display:block;}
+#heard .navmenu .menu .user_login:hover{background:#2795d0;}
+#heard .navmenu .menu .user_login:hover div{display:block;}
+#heard .navmenu .menu .user_login a{color:#00f6ff; padding:40px 20px 20px 10px; line-height:20px; display:block;background:url(../images/userlogin_show.png) no-repeat right 50px}
+#heard .navmenu .menu .user_login a:hover{background-color:#2795d0; color:#fff;}
+#heard .navmenu .menu .user_login div{float:left;width:100%;height:40px;line-height:40px;text-align:center;display:none;cursor:pointer;background:url(../images/userlogin_show.png) repeat-x left -39px #2795d0;}
+#heard .navmenu .menu .user_login div:hover{color:#fff;}

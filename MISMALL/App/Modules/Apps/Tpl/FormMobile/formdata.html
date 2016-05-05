@@ -1,0 +1,254 @@
+{// 加载头部公共文件 }
+<include file="Public:headerMobile" />
+	<link href ="__PUBLIC__/App/Apps/FormMobile/Css/form.css" rel="stylesheet" type="text/css" >
+		<script type="text/javascript" src="__PUBLIC__/App/Apps/FormMobile/Js/iscroll.js"></script>
+		<title>数据</title>
+		<style type="text/css">
+			#pullUp.loading .pullUpIcon {
+				background-position: 0 100%;
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0ms;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			#pullUp .pullUpIcon {
+				-webkit-transform: rotate(-180deg) translateZ(0);
+			}
+			#pullUp.flip .pullUpIcon {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+
+			@-webkit-keyframes loading {
+			from {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+			to {
+				-webkit-transform: rotate(360deg) translateZ(0);
+			}
+			}
+		</style>
+		<script type="text/javascript">
+			var FORMID = _getUrlParas('formid') ? _getUrlParas('formid') : 0;
+
+			var page = 1;
+			var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
+			$(function() {
+				// 获取表单数据信息
+				_commonAjax({
+					url : GROUPPATH + "/Form/getFormDataInfo",
+					data : {
+						formid : FORMID,
+						page : 1,
+						records :10
+					},
+					async : false,
+					success : function(r2) {
+						var $databody = $("#datalist");
+						$databody.empty();
+						$.each(r2, function(key, val) {
+							key++;
+							_commonAjax({
+								url : GROUPPATH + '/Form/getFormFieldInfo',
+								data : {
+									formid : FORMID
+								},
+								dataType : 'text',
+								async : false,
+								success : function(r) {
+									var r = JSON.parse(r);
+									var $formdata = '';
+									var $liRow = $('<div class="big_list"  number="'+val["ID"]+'"><div class="fl_count">'+val["ID"]+'</div><div class="fl_datalist"><a data-ajax="false" href="' + URLPATH + '/form.html?formid=' + FORMID + '&dataid=' + val["ID"] + '"><ul class="dataRow"></ul></a></div><div class="fr_del"><a data-rel="dialog" onclick="getDataId(' + val["ID"] + ')" href="#dialog" class="icon-delete" title="Delete"></a></div></a></div>');
+									$.each(r, function(q) {
+										if (this['fieldTitle'].length > 5)
+											this['fieldTitle'] = this['fieldTitle'].substring(0, 5) + "...";
+									    if(val[this["fieldName"]].length > 15)
+										   val[this["fieldName"]] = val[this["fieldName"]].substring(0, 15) + "...";
+								     //如果是日期类型，且数据库是0000值时
+                                    if(this['fieldName'].indexOf("CCTime") == 0 && val[this["fieldName"]] == "0000-00-00 00:0..."){
+                                          val[this["fieldName"]] = "";
+                                      }
+										 $formdata	 += '<li><p class="fl_name" filed=' + this['fieldName'] + '>' + this['fieldTitle'] + '</p><p class="fl_data">' + val[this["fieldName"]] + '</p></li><div class="clear"></div>';
+									});
+									$liRow.find(".dataRow").append($formdata);
+									$databody.append($liRow);
+									/**获取数据列表集**/
+								}
+							});
+						});
+						page++;
+					}
+				});
+			});
+
+			function getDataId(dataid) {
+				$(".ui-dialog").click(function() {
+					var isdelete = $(this).attr("type");
+					if (isdelete == "true") {
+						var ids = new Array();
+						ids.push(dataid);
+						var data = {};
+						data['formid'] = FORMID;
+						data['ids_arr'] = ids;
+						_commonAjax({
+							url : GROUPPATH + '/Form/delFormDataRecord',
+							data : {
+								data_str : JSON.stringify(data)
+							},
+							dataType : 'text',
+							success : function(r) {
+								if (Boolean(r)) {
+									$("div[number="+dataid+"]").remove();
+								} else
+									alert("删除失败");
+							}
+						});
+					}
+				});
+
+			}
+
+
+			/**
+			 * 滚动翻页 （自定义实现此方法）
+			 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
+			 */
+			function pullUpAction() {
+				setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+				_commonAjax({
+					url : GROUPPATH + "/Form/getFormDataInfo",
+					data : {
+						formid : FORMID,
+						page : page,
+						records : 10
+					},
+					async : false,
+					success : function(r2) {
+						if(r2 == ""){
+							$("#pullUp").find(".pullUpLabel").text("没有更多的数据了");
+						}else{
+							var $databody = $("#datalist");
+							$.each(r2, function(key, val) {
+								_commonAjax({
+									url : GROUPPATH + '/Form/getFormFieldInfo',
+									data : {
+										formid : FORMID
+									},
+									dataType : 'text',
+									async : false,
+									success : function(r) {
+										var r = JSON.parse(r);
+										var $formdata = '';
+										 var $liRow = $('<div class="big_list"  number="'+val["ID"]+'"><div class="fl_count">'+val["ID"]+'</div><div class="fl_datalist"><a data-ajax="false" href="' + URLPATH + '/form.html?formid=' + FORMID + '&dataid=' + val["ID"] + '"><ul class="dataRow"></ul></a></div><div class="fr_del"><a data-rel="dialog" onclick="getDataId(' + val["ID"] + ')" href="#dialog" class="icon-delete" title="Delete"></a></div></a></div>');
+										$.each(r, function(q) {
+											if (this['fieldTitle'].length > 5)
+												this['fieldTitle'] = this['fieldTitle'].substring(0, 5) + "...";
+										     if(this['fieldName'].length > 15)
+											   this['fieldName'] = this['fieldName'].substring(0, 15) + "...";
+											  //如果是日期类型，且数据库是0000值时
+											     if(this['fieldName'].indexOf("CCTime") == 0 && val[this["fieldName"]] == "0000-00-00 00:0..."){
+                                          val[this["fieldName"]] = "";
+                                      }
+											  $formdata	 += '<li><p class="fl_name" filed=' + this['fieldName'] + '>' + this['fieldTitle'] + '</p><p class="fl_data">' + val[this["fieldName"]] + '</p></li><div class="clear"></div>';
+										});
+										$liRow.find(".dataRow").append($formdata);
+										$databody.find(".big_list:last").after($liRow);
+									}
+								});
+	
+							});
+							page++;
+							myScroll.refresh();
+						}
+					}
+				});
+				// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+				}, 100);	// <-- Simulate network congestion, remove setTimeout from production!
+			}
+
+			/**
+			 * 初始化iScroll控件
+			 */
+			function loaded() {
+				pullUpEl = document.getElementById('pullUp');
+				pullUpOffset = pullUpEl.offsetHeight;
+				myScroll = new iScroll('wrapper', {
+					scrollbarClass : 'myScrollbar', /* 重要样式 */
+					useTransition : false, /* 此属性不知用意，本人从true改为false */
+					onRefresh : function() {
+						if (pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+						}
+					},
+					onScrollMove : function() {
+						if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'flip';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始更新...';
+							this.maxScrollY = this.maxScrollY;
+						} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+							this.maxScrollY = pullUpOffset;
+						}
+					},
+					onScrollEnd : function() {
+						if (pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'loading';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+							pullUpAction();
+							// Execute custom function (ajax call?)
+						}
+					}
+				});
+
+				setTimeout(function() {
+					document.getElementById('wrapper').style.left = '0';
+				}, 100);
+			}
+
+			//初始化绑定iScroll控件
+			document.addEventListener('touchmove', function(e) {
+				e.preventDefault();
+			}, false);
+			document.addEventListener('DOMContentLoaded', loaded, false);
+
+		</script>
+		
+	</head>
+	<body>
+
+		<div data-role="page" id="formdata">
+			<div class="header">
+				<a href="#menu" class="nav"></a>
+				数据集
+			</div>
+			<div id="wrapper">
+				<div id="scroller">
+					  <div  id="datalist" data-role="content">
+					  </div>
+
+					<div id="pullUp">
+						<span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多...</span>
+					</div>
+				</div>
+			</div>
+		    	<include file="Public:leftMenu" />
+		   </div>
+			<nav data-role="page" id="dialog" >
+				<div data-role="header" data-theme="c">
+					<h1>友情提示</h1>
+				</div>
+	
+				<div data-role="content" id="hint">
+					<p>
+						您真的要删除这条数据吗？
+					</p>
+					<a data-rel="back" data-ajax="false" data-role="button" data-inline="true" type="true" class="ui-dialog">确定</a>
+					<a data-rel="back" data-ajax="false" data-role="button" data-inline="true" type="false" class="ui-dialog">取消</a>
+				</div>
+			</nav>  
+	
+		</body>
+	</html>

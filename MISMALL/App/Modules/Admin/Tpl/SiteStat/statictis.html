@@ -1,0 +1,108 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div>
+    	<div class="btn-group" id="search-data" style="margin-left:2em;">
+            <a class="btn <eq name="dt" value="week">active</eq>" data-type="week" href="?dt=week">近一周</a>
+            <a class="btn <eq name="dt" value="month">active</eq>" data-type="month" href="?dt=month">近一月</a>
+            <a class="btn <eq name="dt" value="year">active</eq>" data-type="year" href="?dt=year">近一年</a>
+        </div>
+		<div id="container" style="min-width: 800px; height: 500px; margin: 20px 2em 0"></div>
+		<div style="clear:both;overflow:hidden;margin:2em;">
+			<volist name="series" id="vo">
+				{$vo.name} : <span style="color:#f00">{$vo.total}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			</volist>
+		</div>
+                        <div style="clear:both;overflow:hidden;margin:2em;">
+                            <volist name="series" id="vo">
+                                {$vo.all_name} : <span style="color:#f00">{$vo.all_total}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </volist>
+                        </div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/Highcharts/js/highcharts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/Highcharts/js/modules/exporting.js"></script>
+    <script type="text/javascript">
+    var chart;
+    $(document).ready(function() {
+         chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',          //放置图表的容器
+                defaultSeriesType: 'line',    //图表类型line, spline, area, areaspline, column, bar, pie , scatter
+                //zoomType: 'x',                  //放大
+                inverted: false                  //左右显示，默认上下正向
+            },
+            title: {                            
+                text: '数据统计',        //图标的标题
+                style:{}                        //标题样式
+            },
+           // subtitle: {                         
+           //     text: '按中心统计'              //图标的副标题
+          //  },
+            xAxis: {                            
+                categories: {$daysList}, //X轴的坐标值
+                labels: {
+                    rotation: -45,
+                    align: 'right',
+                    style: {font: 'normal 13px 宋体'}
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {text: '数量（每周/个数）'}  //Y轴坐标标题  labels:纵柱标尺
+            },
+            legend: {                               //【图例】位置样式
+                layout: 'horizontal',               //【图例】显示的样式：水平（horizontal）/垂直（vertical）
+                backgroundColor: '#FFFFFF',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                align: 'center',
+                verticalAlign: 'top',
+                enabled:true,
+                //x: 100,
+                y: 50,
+                //floating: true,
+                shadow: true
+            },
+            //loading: {  需要配合chart.showLoading();使用
+            //    hideDuration: 10000,
+            //    showDuration: 10000
+            //},
+            tooltip: {
+                formatter: function() {                 //当鼠标悬置数据点时的格式化提示
+                    return '<b>'+ this.x +'</b><br/>'+ this.series.name + ': '+ Highcharts.numberFormat(this.y, 1);
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,  //图表柱形的
+                    borderWidth: 0      //图表柱形的粗细 
+					//pointWidth:15    你想显示的宽度(number型）
+
+                },bar: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            series:[
+              <php>
+              foreach($series as $k => $v){
+					if($k >0)echo ',';
+					echo '{name : "' . $v['name'] . '",' . PHP_EOL;
+					echo 'data : ' . $v['data'] . '}'. PHP_EOL;
+              }
+              </php>
+            ]
+        });
+        
+        //chart.showLoading();
+    });
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:U('SiteStat/index')}"]').closest('li').addClass('current');
+    </script>
+</block>

@@ -1,0 +1,67 @@
+<include file="Public:header_query" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/App/Qywx/Query/Css/externalInterface.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" />
+<script src="__PUBLIC__/Js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="__PUBLIC__/Js/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="__PUBLIC__/Js/ezCommon.js"></script>
+<script src="__PUBLIC__/App/Qywx/Query/Js/dataFilter.js"></script>
+</head>
+<body>
+	<div id = "eIheader" class = "externalInterface-to-menu-bar">
+		<div class = "externalInterface-menuWrap">
+			<span> 设置数据接口 </span>
+			<span id="exitToEditor"> 退出 </span>
+		</div>
+	</div>
+	<div id = "eImain">
+		<div class = "eImainLeft">
+			<div class = "eImainLeftlist interfaceListsTitle">
+				接口列表
+				<ul></ul>
+			</div>
+			<div class = "eImainLeftlist UserInformationTitle" >
+				用户信息
+				<ul></ul>
+			</div>
+			<div class = "eImainLeftlist applicationListsTitle" >
+				应用列表
+				<ul></ul>
+			</div>
+		</div>
+		<div class = "eImainRight">
+			<div class = "eImainRight-top">
+				<span class = "eImainRight-top-title">接口地址</span>
+				<input class="eImainRight-content form-control" type="text" placeholder="请输入接口地址(请加上http://)">
+				<span class = "check">检测</span>
+				<span class = "SpecificationsHelp">规格帮助</span>
+			</div>
+			<hr>
+			<div class = "eImainRight-center">
+				<table border="1">
+					<tbody>
+						<tr>
+							<td>姓名</td>
+							<td>年龄</td>
+							<td>性别</td>
+						</tr>
+						<tr>
+							<td>皮振华</td>
+							<td>25</td>
+							<td>男</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<span class="remarkExternalI">*以上最多显示五条测试数据 </span>
+				<span class="saveExternalI">保存</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

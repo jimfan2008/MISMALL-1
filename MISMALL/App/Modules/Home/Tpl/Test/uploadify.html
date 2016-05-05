@@ -1,0 +1,35 @@
+<extend name="base" />
+<block name="body">
+	
+
+	<div class="controls">
+		<input type="file" id="upload_file_pdf">
+		<input type="hidden" name="pdf" value=""/>
+		<div class="upload-img-box">
+
+		</div>
+	</div>
+	
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Js/uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript">
+	//上传图片
+	    /* 初始化上传插件 */
+	$("#upload_file_pdf").uploadify({
+	        "height"          : 30,
+	        "swf"             : "__PUBLIC__/Js/uploadify/uploadify.swf",
+	        "fileObjName"     : "download",
+	        "buttonText"      : "上传附件",
+	        "uploader"        : "{:U('Test/qiniu',array('session_id'=>session_id()))}",
+	        "width"           : 120,
+	        'removeTimeout'	  : 1,
+	        "onUploadSuccess" : uploadFilepdf
+	    });
+	function uploadFilepdf(file, data){
+		//var data = $.parseJSON(data);
+	     	console.log(file);
+	     	console.log(data);
+	    }
+	</script>
+</block>

@@ -1,0 +1,63 @@
+<html lang="gbk">
+  <head>
+    <meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>微信管理</title>
+
+	<!-- 为了让html5shiv生效，请将所有的CSS都添加到此处 -->
+	<link href="__PUBLIC__/Js/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="__PUBLIC__/App/Forum/js/ext/toastr/toastr.min.css" rel="stylesheet"/>
+	<link href="__PUBLIC__/App/Wechat/css/wechat.css" rel="stylesheet"/>
+	<block name="style"></block>
+	<!-- jQuery库 -->
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.10.2.min.js"></script>
+	<![endif]--><!--[if gte IE 9]><!-->
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-2.0.3.min.js"></script>
+	<!--<![endif]-->
+	<!-- Bootstrap库 -->
+	<script type="text/javascript" src="__PUBLIC__/Js/bootstrap/js/bootstrap.min.js"></script>
+	<!-- 增强IE兼容性 -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="__PUBLIC__/Js/bootstrap/js/html5shiv.js"></script>
+	<script src="__PUBLIC__/Js/bootstrap/js/respond.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="container">
+    	<block name="header"></block>
+        <div class="row" style="margin:0">
+            <block name="body"></block>
+        </div>
+    </div>
+	<!-- /主体 -->
+	
+	<!-- 底部-->
+	<footer>
+	  <div class="container"></div>
+	</footer>
+	
+	<div class="hidden">
+	    <block name="hidden"></block>
+	</div>
+	
+	<script type="text/javascript">
+	(function(){
+		window.Think = {
+			"ROOT"   : "__ROOT__", //当前网站地址
+			"APP"    : "__GROUP__", //当前项目地址
+			"PUBLIC" : "__PUBLIC__", //项目公共目录地址
+			"DEEP"   : "{:C('URL_PATHINFO_DEPR')}", //PATHINFO分割符
+			"MODEL"  : ["{:C('URL_MODEL')}", "{:C('URL_CASE_INSENSITIVE')}", "{:C('URL_HTML_SUFFIX')}"],
+			"VAR"    : ["{:C('VAR_GROUP')}", "{:C('VAR_MODULE')}", "{:C('VAR_ACTION')}"]
+		}
+	})();
+	</script>
+	<script type="text/javascript" src="__PUBLIC__/App/Forum/js/ext/toastr/toastr.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/App/Wechat/js/core.js"></script>
+	<block name="script"></block> <!-- 用于加载js代码 -->
+	
+</body>
+</html>

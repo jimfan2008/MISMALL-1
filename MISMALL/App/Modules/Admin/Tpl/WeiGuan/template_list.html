@@ -1,0 +1,266 @@
+<extend name="Public/base" />
+
+<block name="style">
+
+</block>
+
+<block name="body">
+	<style>
+	.list li{
+	width:100px;
+	height:45px;
+}
+.data-table  th {
+    background-color: #353535;
+    color: #fff;
+}
+.data-table tr{
+	height :40px;
+}
+	
+	</style>
+
+<div class="main-title">
+		<h2>模板列表管理</h2>
+		<div class="auth-botton" style="float:left;margin-left:20px;">
+        <a id="add-group" class="btn" href="{:U('WeiGuan/templateAdd')}">新 增</a>
+    </div>
+	</div>
+<div class="cf">
+	<div class="search-form">
+			<div class="sleft">
+
+				
+				<div class="search-title fl">模板颜色:
+					<select name="color" id="color-sort-txt">
+					<option value="">所有</option>
+					<volist name="template_color_list" id="color">
+						<option value="{$color['id']}" <eq name="color" value="$color['id']">selected</eq>>{$color.name}</option>
+						 </volist>
+					</select>
+				</div>
+				
+				<!--<div class="drop-down">
+					<span data="" class="sort-txt" id="color-sort-txt">所有</span>
+					<i class="arrow arrow-down"></i>
+					<ul class="nav-list hidden" id="template-color-menu">
+						<li><a value="" href="javascript:;">所有</a></li>
+						<volist name="template_color_list" id="color">
+							<li><a href="{:U('?type='.$color['id'])}">{$color.name}</a></li>
+						 </volist>
+					</ul>
+				</div>
+				--><input type="text" placeholder="请输入模板名称或者编号" value="{$title|default=''}" class="search-input" name="title">
+				<a url="{:U('')}" id="search" href="javascript:;" class="sch-btn"><i class="btn-search"></i></a>
+			</div>
+       
+		</div>	
+</div>
+	<!-- 模板列表 -->
+	<div class="template_list">
+		
+			<div class="data-table">
+				<table style="text-align: center;">
+					<tr><th class="row-selected row-selected">
+						<input class="check-all" type="checkbox">
+						</th>
+						<th>ID</th>
+						
+						<th>模板名称</th>
+						<th>使用人数</th>
+						<th>是否禁用</th>
+						<th>操作</th>
+					</tr>
+
+	
+	<volist name="templateList"  id="tpl">
+		
+		<tr><td class="row-selected row-selected">
+						<input class="ids" type="checkbox" name="ids[]" value="{$tpl.id}">
+						</td>
+						<td>{$tpl.id}</td>
+						
+						<td>{$tpl.title}</td>
+						<td>{$tpl.count}</td>
+						<td val="{$tpl.status}"><if condition="$tpl.status eq 1">正常<elseif condition="$tpl.status eq 0"  />已禁用 </if></td>
+						<td ids="{$tpl.id}"><a href="#" class="list del">删除</a>&nbsp;&nbsp;<a href="#" class="list fob"><if condition="$tpl.status eq 0">启用<else />禁用 </if>&nbsp;&nbsp;</a><a href="{:U('Admin/WeiGuan/templateAdd')}?id={$tpl.id}" class="list mod">修改&nbsp;&nbsp;</a></td>
+						
+					</tr>
+		
+			</volist>
+	</table>
+	</div>
+	</div>
+	<!-- 分页 -->
+	<div class="page">
+        {$_page}
+    </div>
+
+</block>
+
+<block name="script">
+<link href="__PUBLIC__/Js/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/Js/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+
+
+<script type="text/javascript">
+$(function(){
+	
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var temp_type = $('#temp-sort-txt').val();
+		var site_type = $("#site-sort-txt").val();
+		var tpl_category = $("#category-sort-txt").val();
+		var tpl_color = $("#color-sort-txt").val();
+		var search_query = '';
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+
+        search_query += 'temp_type=' + temp_type + "&";
+		if(site_type != ''){
+			search_query += 'type=' + site_type + "&";
+        }
+		if(tpl_category != ''){
+			search_query += 'cate=' + tpl_category + "&";
+        }
+		if(tpl_color != ''){
+			search_query += 'color=' + tpl_color + "&";
+        }
+        query = search_query + query;
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+	/* 状态搜索子菜单 */
+	/*
+	$(".search-form > .sleft > .drop-down").hover(function(){
+			$(this).children(".nav-list").removeClass("hidden");
+		},function(){
+			$(this).children(".nav-list").addClass("hidden");
+		});
+		
+	$(".search-form > .sleft > .drop-down li").find("a").each(function(){
+		$(this).click(function(){
+			var data_div = $(this).parent().parent().parent().children('.sort-txt');
+			var text = $(this).text();
+			data_div.text(text).attr("data",$(this).attr("value"));
+			$(this).parent().parent().addClass("hidden");
+		})
+	});
+	*/
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+  
+
+    $('.template_list li').hover(function(){
+		$(this).children('.floating').css('display','block');
+        },function(){
+        $(this).children('.floating').css('display','none');
+     });
+
+  //导航高亮
+	//$('.side-sub-menu').find('a[href="{:U('Template/templateList')}"]').closest('li').addClass('current');
+
+})
+
+
+</script>
+<script type="text/javascript">
+	$(function(){
+	$(".template_list").find("a.list").click(function(){
+		var $_this = $(this),
+			id = $_this.parent().attr("ids");
+		//删除
+		//alert($_this.hasClass("fob")==true);
+		
+		if($_this.hasClass("del")===true){
+			if(confirm("确定删除？")){
+				$.ajax({
+					type : "POST",
+					url : Think.APP+"/WeiGuan/delTpl",
+					data : {
+						"id": id,
+						
+					},
+					success : function(r){
+						if(r){
+						$_this.closest("tr").remove();
+						}
+					}
+					
+				});
+			}
+			
+			
+		}
+		if($_this.hasClass("fob")===true){
+			var status = $_this.parent().prev().attr("val");
+				if(status ==1){
+					status = 0
+				}else{
+					status = 1
+				}
+				
+				$.ajax({
+					type : "POST",
+					url : Think.APP+"/WeiGuan/modTplStauts",
+					data : {
+						"id": id,
+						"status" : status
+					},
+					success : function(r){
+						if(r){
+							
+							if(status=="1"){
+								$_this.text("禁用    ");
+								var txt = "正常";
+							}else{
+								$_this.text("启用    ");
+								var txt = "已禁用";
+							}
+							
+							
+							
+						}
+						
+						$_this.parent().prev().attr("val",status);
+						$_this.parent().prev().text(txt);
+					}
+					
+				})
+			
+		}
+		if($_this.hasClass("mod")===true){
+			
+				$.ajax({
+					type : "POST",
+					url : Think.APP+"/WeiGuan/getTplList",
+					data : {
+						"id": id,
+						
+					},
+					success : function(r){
+						if(r){
+							console.log(r);
+						}
+					}
+					
+				})
+		}
+		
+		});
+	})
+</script>
+
+</block>
