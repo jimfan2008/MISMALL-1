@@ -77,8 +77,8 @@ return array(
 	//上传文件驱动配置
 	'FILE_UPLOAD_TYPE' => 'oss',
 	'UPLOAD_TYPE_CONFIG' => array(
-		'access_id' => '5i4QfVSrnQkUHdKP', //阿里云Access Key ID
-		'access_key' => '9KOVM8eybDmxxFAq7GYLkKluVV3iRs', //阿里云Access Key Secret
+		'access_id' => 'xxxxxxxxx', //阿里云Access Key ID
+		'access_key' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', //阿里云Access Key Secret
 		'bucket' => 'qjwd', //空间名称
 		'endpoint' => 'oss-cn-shenzhen.aliyuncs.com', //OSS域名节点网地址
 		'timeout' => 90, //超时时间
